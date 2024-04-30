@@ -1,0 +1,25 @@
+{
+  "variantId": "omm_sesarma_personnel",
+  "hullId": "omm_sesarma",
+  "displayName": "Personnel",
+  "goalVariant": true,
+  "fluxCapacitors": 10,
+  "fluxVents": 12,
+  "quality": 1,
+  "permaMods": [],
+  "hullMods": [
+    "additional_berthing",
+    "insulatedengine"
+  ],
+  "weaponGroups": [
+    {
+      "autofire": false,
+      "mode": "LINKED",
+      "weapons": {
+        "pdslot": "lrpdlaser"
+      }
+    }
+  ],
+  "modules": [],
+  "wings": []
+}

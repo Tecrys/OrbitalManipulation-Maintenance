@@ -1,0 +1,25 @@
+{
+  "variantId": "omm_sesarma_freighter",
+  "hullId": "omm_sesarma",
+  "displayName": "Cargo",
+  "goalVariant": true,
+  "fluxCapacitors": 10,
+  "fluxVents": 12,
+  "quality": 1,
+  "permaMods": [],
+  "hullMods": [
+    "expanded_cargo_holds",
+    "insulatedengine"
+  ],
+  "weaponGroups": [
+    {
+      "autofire": false,
+      "mode": "LINKED",
+      "weapons": {
+        "pdslot": "lrpdlaser"
+      }
+    }
+  ],
+  "modules": [],
+  "wings": []
+}

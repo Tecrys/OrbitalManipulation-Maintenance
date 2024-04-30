@@ -1,0 +1,27 @@
+{
+  "variantId": "omm_sandhopper_militarized",
+  "hullId": "omm_sandhopper",
+  "displayName": "militarized",
+  "goalVariant": true,
+  "fluxCapacitors": 20,
+  "fluxVents": 17,
+  "quality": 1,
+  "permaMods": [],
+  "hullMods": [
+    "hardenedshieldemitter",
+    "targetingunit",
+    "reinforcedhull"
+  ],
+  "weaponGroups": [
+    {
+      "autofire": false,
+      "mode": "LINKED",
+      "weapons": {
+        "compositeslot": "jackhammer",
+        "smlmissileslot": "annihilator"
+      }
+    }
+  ],
+  "modules": [],
+  "wings": []
+}

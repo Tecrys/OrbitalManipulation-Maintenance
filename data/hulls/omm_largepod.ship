@@ -1,0 +1,81 @@
+{
+  "hullName": "Large Pod",
+  "hullId": "omm_largepod",
+  "hullSize": "FIGHTER",
+  "spriteName": "graphics/ships/Fighters/omm_largedrone.png",
+  "style": "FREITAG_CORP_TECH",
+  "height": 86,
+  "width": 65,
+  "center": [32.5, 40.5],
+  "collisionRadius": 55,
+  "shieldCenter": [0, -0],
+  "shieldRadius": 69.5,
+  "viewOffset": 0,
+  "builtInMods": [
+    "autorepair",
+    "shield_always_on",
+    #"do_not_back_off",
+    #"fluxshunt",
+    "omm_mainframelink",
+    "omm_largepodai"
+  ],
+  "builtInWeapons": {
+    "omm_laser": "omm_targeting_laser",
+    "shield": "FreitagCorporation_ShieldEffect_wpn"
+  },
+  "weaponSlots": [
+    {
+      "id": "largeslot",
+      "size": "LARGE",
+      "type": "HYBRID",
+      "mount": "HARDPOINT",
+      "arc": 15,
+      "angle": 0,
+      "locations": [26.5, -0]
+    },
+    {
+      "id": "shield",
+      "size": "SMALL",
+      "type": "DECORATIVE",
+      "mount": "TURRET",
+      "arc": 90,
+      "angle": 0,
+      "locations": [-15.5, -0.5]
+    },
+    {
+      "id": "omm_laser",
+      "size": "SMALL",
+      "type": "DECORATIVE",
+      "mount": "TURRET",
+      "arc": 15,
+      "angle": 0,
+      "locations": [26.5, -0]
+    }
+  ],
+  "engineSlots": [
+    {
+      "location": [-38, -16],
+      "length": 34.5,
+      "width": 16,
+      "angle": 180,
+      "contrailSize": 16,
+      "style": "FreitagCorporation_Engine"
+    },
+    {
+      "location": [-38, 16],
+      "length": 34.5,
+      "width": 16,
+      "angle": -180,
+      "contrailSize": 16,
+      "style": "FreitagCorporation_Engine"
+    }
+  ],
+  "bounds": [
+    -35.5, 17.5,
+    -20, 30,
+    33.5, 18.5,
+    33.5, -18.5,
+    -20, -30,
+    -35.5, -17.5
+  ]
+}

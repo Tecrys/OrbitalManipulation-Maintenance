@@ -1,0 +1,17 @@
+Template: Snrasha
+
+Original Art: ships Till Freitag https://www.artstation.com/imrahil, Portraits Wenjuinn Png https://www.artstation.com/wenjuinn
+
+Coding: Lord_Dalton, Snrasha, briansd9, tomatopaste, DeCell
+
+Original Repair Drone code by Ed (Ed Shpiyard author)
+
+Original drone weapon swap code from Arma Armatura by Shoi
+
+Drone positioning/PID controller code originally made by ruddygreat
+
+Fighters transfer flux to mothership code from Modern Carriers by Sutopia
+
+Proofreading Finn
+
+Everyone on the unoffial Starsector Discord for their invaluable advice

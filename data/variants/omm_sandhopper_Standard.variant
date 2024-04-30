@@ -1,0 +1,28 @@
+{
+  "variantId": "omm_sandhopper_Standard",
+  "hullId": "omm_sandhopper",
+  "displayName": "Standard",
+  "goalVariant": true,
+  "fluxCapacitors": 18,
+  "fluxVents": 17,
+  "quality": 1,
+  "permaMods": [],
+  "hullMods": [
+    "hardenedshieldemitter",
+    "auxiliarythrusters",
+    "insulatedengine",
+    "efficiency_overhaul"
+  ],
+  "weaponGroups": [
+    {
+      "autofire": false,
+      "mode": "LINKED",
+      "weapons": {
+        "compositeslot": "jackhammer",
+        "smlmissileslot": "annihilator"
+      }
+    }
+  ],
+  "modules": [],
+  "wings": []
+}

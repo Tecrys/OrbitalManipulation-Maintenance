@@ -1,0 +1,24 @@
+{
+  "variantId": "omm_macrocheira_militarized",
+  "hullId": "omm_macrocheira",
+  "displayName": "Militarized",
+  "goalVariant": false,
+  "fluxCapacitors": 40,
+  "fluxVents": 40,
+  "quality": 1,
+  "permaMods": [],
+  "hullMods": [
+    "militarized_subsystems"
+  ],
+  "weaponGroups": [
+    {
+      "autofire": false,
+      "mode": "LINKED",
+      "weapons": {
+        "pdslot": "lrpdlaser"
+      }
+    }
+  ],
+  "modules": [],
+  "wings": []
+}

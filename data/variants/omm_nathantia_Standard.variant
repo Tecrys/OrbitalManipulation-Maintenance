@@ -1,0 +1,30 @@
+{
+  "variantId": "omm_nathantia_Standard",
+  "hullId": "omm_nathantia",
+  "displayName": "Standard",
+  "goalVariant": true,
+  "fluxCapacitors": 37,
+  "fluxVents": 42,
+  "quality": 1,
+  "permaMods": [],
+  "hullMods": [
+    "autorepair",
+    "blast_doors",
+    "insulatedengine",
+    "operations_center"
+  ],
+  "weaponGroups": [
+    {
+      "autofire": false,
+      "mode": "LINKED",
+      "weapons": {
+        "ballisticslot": "miningblaster",
+        "compositeslot": "jackhammer",
+        "largeslot": "hil",
+        "pdslot": "irpulse"
+      }
+    }
+  ],
+  "modules": [],
+  "wings": []
+}
