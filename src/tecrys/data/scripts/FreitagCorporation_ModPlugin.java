@@ -8,9 +8,12 @@ import com.fs.starfarer.api.campaign.econ.MarketAPI;
 import com.fs.starfarer.api.combat.ShipAIPlugin;
 import com.fs.starfarer.api.combat.ShipAPI;
 import com.fs.starfarer.api.fleet.FleetMemberAPI;
+import lunalib.lunaSettings.LunaSettings;
 import tecrys.data.scripts.world.ommGen;
 import tecrys.data.scripts.ai.repairdroneai;
 import exerelin.campaign.SectorManager;
+import tecrys.data.utils.OMMSettings;
+
 
 public class FreitagCorporation_ModPlugin extends BaseModPlugin {
 
@@ -25,6 +28,7 @@ public class FreitagCorporation_ModPlugin extends BaseModPlugin {
         }
         isExerelin = foundExerelin;
     }
+
   public PluginPick<ShipAIPlugin> pickShipAI(FleetMemberAPI member, ShipAPI ship) {
     switch (ship.getHullSpec().getHullId()) {
       case "omm_nanodrone":
@@ -34,6 +38,11 @@ public class FreitagCorporation_ModPlugin extends BaseModPlugin {
 //      return new PluginPick(new WurgandalModuleShipAI(ship), CampaignPlugin.PickPriority.MOD_GENERAL); 
     return super.pickShipAI(member, ship);
   }
+    public void onApplicationLoad(){
+
+        LunaSettings.addSettingsListener(new OMMSettings());
+    }
+
     @Override
     public void onNewGame() {
         boolean haveNexerelin = Global.getSettings().getModManager().isModEnabled("nexerelin");

@@ -10,6 +10,8 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import static com.fs.starfarer.api.combat.ShipHullSpecAPI.ShipTypeHints.UNBOARDABLE;
+
 public class omm_drone implements EveryFrameCombatPlugin {
 
     @Override
@@ -34,6 +36,11 @@ public class omm_drone implements EveryFrameCombatPlugin {
         for (ShipAPI ship : engine.getShips()) {
             if (!ship.isAlive() || !ship.getHullSpec().getHullId().startsWith("omm_")) {
                 continue;
+            }
+            if (ship.getOriginalOwner() == 1) {
+                ship.getFleetMember().getVariant().getHints().add(UNBOARDABLE);
+            } else {
+                ship.getFleetMember().getVariant().getHints().remove(UNBOARDABLE);
             }
 
             for (WeaponAPI weap : ship.getAllWeapons()) {

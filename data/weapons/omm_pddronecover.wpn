@@ -4,7 +4,7 @@
   "type": "DECORATIVE",
   "size": "SMALL",
   "collisionClass": "RAY",
-  	"everyFrameEffect":"tecrys.data.scripts.weapons.omm_pddrone",
+  	#"everyFrameEffect":"tecrys.data.scripts.weapons.omm_pddrone",
   "collisionClassByFighter": "RAY_FIGHTER",
   "turretSprite": "graphics/ships/Fighters/omm_hopperdrone.png",
   "hardpointSprite": "graphics/ships/Fighters/omm_hopperdrone.png",

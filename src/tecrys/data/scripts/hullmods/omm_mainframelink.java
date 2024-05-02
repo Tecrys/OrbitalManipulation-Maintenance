@@ -1,16 +1,21 @@
 package tecrys.data.scripts.hullmods;
 
 import com.fs.starfarer.api.Global;
-import com.fs.starfarer.api.combat.BaseHullMod;
-import com.fs.starfarer.api.combat.CombatEngineAPI;
-import com.fs.starfarer.api.combat.FighterWingAPI;
-import com.fs.starfarer.api.combat.ShipAPI;
+import com.fs.starfarer.api.combat.*;
+
 import java.util.ArrayList;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 
+
+import static com.fs.starfarer.api.combat.ShipHullSpecAPI.ShipTypeHints.UNBOARDABLE;
+import static com.fs.starfarer.api.impl.campaign.ids.Tags.VARIANT_UNBOARDABLE;
+
 public class omm_mainframelink extends BaseHullMod {
+
+
+
 
 //    public static float FLUX_FRACTION = 0.5F;
 //

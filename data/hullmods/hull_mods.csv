@@ -2,11 +2,12 @@ name,id,tier,rarity,tech/manufacturer,tags,uiTags,base value,unlocked,hidden,hid
 Wing Range Increase,omm_wing_range_increase,,,,,,,,,TRUE,0,0,0,0,tecrys.data.scripts.hullmods.omm_drone_weaponry,Increases Wing Range,Reduces ordnance point cost for drones.,graphics/hullmods/DroneHullmod.png
 Modular Container Clamps,FreitagCorporation_Storage,,,,,,,,TRUE,,0,0,0,0,tecrys.data.scripts.hullmods.FreitagCorporation_Storage,"Increases maximum fuel, cargo or crew capacity %s,%s,%s depending on the first logistic hullmod installed on the ship. (Auxiliary Fuel Tanks, Expanded Cargo Holds or Additional Berthing)
 The maximum number of logistic hullmods is increased by one.",Increases maximum capacity,graphics/hullmods/omm_clamps.png
-Mainframe Uplink,omm_mainframelink,,,,,,,,TRUE,,0,0,0,0,tecrys.data.scripts.hullmods.FreitagCorporation_Storage,"A unique drone control suite enabling the ship's drones to be equipped individually. Flux and range increasing hullmods are shared between mothership and drones.
+Freitag Control Suite,omm_mainframelink,,,,,,,,TRUE,,0,0,0,0,tecrys.data.scripts.hullmods.FreitagCorporation_Storage,"Proprietary asset protection measures that come pre-installed on Freitag ships to avoid recovery by opposing forces.
 
-If chosen as flagship the captain is able to control all drones manually similar to normal weapon mounts. 
+This system also works as an advanced drone C3 system, allowing for drones to be equipped individually. Flux affecting and range increasing hullmods are shared between mothership and drones.
 
-Unfortunately no weapon groups can be set up. Missiles are fired by middle mouse button, all other weapons on left click.",Drone equipment and data interface.,graphics/hullmods/DroneHullmod.png
+Manually controlled, the drones will aim towards the current position of the cursor much like a normal ship. 
+However, the system does not allow for the grouping of weapons, only discriminating between missile and non-missile weapons, which are fired with middle mouse and left click respectively.",Drone equipment and data interface.,graphics/hullmods/DroneHullmod.png
 Mobile Algae Farm,omm_algaefarm,,,,,,,,TRUE,,0,0,0,0,tecrys.data.scripts.hullmods.omm_algaefarm,"Pods of condensed algae flourish due to the abundance of ambient solar radiation. Produces 1/3/6/10 supplies and 1/2/3/6 fuel every day.
 Stops prduction if fleet is in hyperspace or if the current system has no normal star. 
 Black holes and neutron stars are not considered normal.",,graphics/hullmods/omm_algae_hullmod.png
@@ -22,3 +23,5 @@ Composite Pod AI,omm_compositepodai,,,,,,,,TRUE,TRUE,0,0,0,0,tecrys.data.fighter
 Large Pod AI,omm_largepodai,,,,,,,,TRUE,TRUE,0,0,0,0,tecrys.data.fighters.large_pod.largepodHullmod,Controls the AI for the Weapons drone,,
 Small Pod AI,omm_smallpodai,,,,,,,,TRUE,TRUE,0,0,0,0,tecrys.data.fighters.small_pod.smallpodHullmod,Controls the AI for the Weapons drone,,
 Ballistic Pod AI,omm_ballisticpodai,,,,,,,,TRUE,TRUE,0,0,0,0,tecrys.data.fighters.ballistic_pod.ballisticpodHullmod,Controls the AI for the Weapons drone,,
+PD Pod AI,omm_pddroneai,,,,,,,,TRUE,TRUE,0,0,0,0,tecrys.data.fighters.pddrone_pod.pddronepodHullmod,Controls the AI for the Weapons drone,,
+,,,,,,,,,,,,,,,,,,

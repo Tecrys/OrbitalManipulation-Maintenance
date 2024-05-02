@@ -21,13 +21,14 @@ import java.util.List;
 import org.lwjgl.input.Keyboard;
 import static org.lwjgl.input.Keyboard.KEY_R;
 import org.lwjgl.input.Mouse;
+import tecrys.data.utils.OMMSettings;
 
 public class compositepodManager implements AdvanceableListener {
 
     public final ShipAPI mothership;
     private boolean isWeaponSwappedcomposite = false;
 
-    public IntervalUtil timer = new IntervalUtil(3F, 20F);
+    public IntervalUtil timer = new IntervalUtil(0F, 5F);
     public final ArrayList<ShipAPI> dronescomposite = new ArrayList<>(); //list of all drones
     public final ArrayList<FighterWingAPI> relevantWings = new ArrayList<>(); //the list of sarissa wings
 
@@ -50,8 +51,6 @@ public class compositepodManager implements AdvanceableListener {
     //each wing groups up into a triangle
     //odd no. of wings has one in center + 2 on each side, even no. of wings has non in center & all on sides
     //if in engage mode, stick closer to shield & rotate to face shield facing
-    //todo need to give the sprite for these guys a second look, too bright vs the xyphos equivalent
-    //todo need to do something for if the index per wing goes over 3 lol
     public Vector2f getDesiredPosition(ShipAPI drone) {
 
         int wingIndex = relevantWings.indexOf(drone.getWing());
@@ -64,7 +63,11 @@ public class compositepodManager implements AdvanceableListener {
             distBetweenClusters = 62f;
             distFromClusterCenterToDrone = 30f;
         }
-
+        if (mothership.getHullSpec().getHullId().startsWith("omm_nathantia")) {
+            angleFromBasepos = 130f;
+            distBetweenClusters = 140f;
+            distFromClusterCenterToDrone = 30f;
+        }
         List<WeaponGroupAPI> weapons = this.mothership.getWeaponGroupsCopy();
         List<WeaponAPI> list = this.mothership.getAllWeapons();
         List<FighterWingAPI> dronewings = this.mothership.getAllWings();
@@ -121,9 +124,12 @@ public class compositepodManager implements AdvanceableListener {
                             if (Keyboard.isKeyDown(KEY_R)) {
                                 drone.setShipTarget(this.mothership.getShipTarget());           //clicky left drone shooty
                             }
-                            if (Mouse.isButtonDown(2) && !player.getFluxTracker().isOverloadedOrVenting() && (dronewep.getType() == MISSILE) && dronewep.getSlot().getId().equals("compositeslot")) {
+                            if ( OMMSettings.missile_key == 0 && Mouse.isButtonDown(2) && !player.getFluxTracker().isOverloadedOrVenting() && (dronewep.getType() == MISSILE) && dronewep.getSlot().getId().equals("compositeslot")) {
                                 drone.giveCommand(ShipCommand.FIRE, mousepos, 0);           //clicky left drone shooty
                             }
+                                else if (Keyboard.isKeyDown(OMMSettings.missile_key) && !player.getFluxTracker().isOverloadedOrVenting() && (dronewep.getType() == MISSILE) && dronewep.getSlot().getId().equals("compositeslot")) {
+                                    drone.giveCommand(ShipCommand.FIRE, mousepos, 0);
+                                }
                         }
                         if (this.mothership.getFluxTracker().isOverloaded()) {
                             float OverloadTime = this.mothership.getFluxTracker().getOverloadTimeRemaining();
@@ -222,53 +228,76 @@ public class compositepodManager implements AdvanceableListener {
     //remove drones if they're dead or otherwise gone
     @Override
     public void advance(float amount) {
-        deadDroneInterval.advance(amount);
-        if (deadDroneInterval.intervalElapsed()) {
-            for (ShipAPI drone : new ArrayList<>(dronescomposite)) {
-                //Global.getCombatEngine().addFloatingText(drone.getLocation(), drone.getWing().getWingMembers().indexOf(drone) + ", " + drone.getWing().getSourceShip().getAllWings().indexOf(drone.getWing()), 20f, Color.BLUE, drone, 1f, 1f);
-                if (!drone.isAlive() || drone.isHulk() || !Global.getCombatEngine().isEntityInPlay(drone)) {
-                    dronescomposite.remove(drone);
-                }
-                this.timer.randomize();                                                        //randomize interval to stagger drone refit
+        ShipAPI ship = this.mothership;
+        //CombatEngineAPI engine = Global.getCombatEngine();
+        WeaponAPI wep = null;
+        for (WeaponAPI w : ship.getAllWeapons()) {
+            if (w.getSlot().getId().equals("compositeslot"))
+                wep = w;
+        }
 
-                this.timer.advance(amount);
-                if (!this.timer.intervalElapsed()) {
-                    return;
-                }
-                if (this.isWeaponSwappedcomposite) {
-                    drone.setShipAI(null);
-                    return;
-                }
-                if (!this.isWeaponSwappedcomposite) {
 
-                    if (this.mothership != null) {
-                        List<FighterWingAPI> list1 = this.mothership.getAllWings();
-                        for (FighterWingAPI fighterWingAPI : list1) {
-                            if (!fighterWingAPI.getWingId().equals("omm_compositepod_wing")) {
-                                continue;
-                            }
+        if (ship.isAlive() && wep != null) {
+            //CombatEngineAPI engine = Global.getCombatEngine();
+            List<FighterWingAPI> wings = relevantWings;
 
-                            {
-                                drone = fighterWingAPI.getLeader();
-                                drone.resetDefaultAI();
-                                MutableShipStatsAPI mutableShipStatsAPI = drone.getMutableStats();
-                                ShipVariantAPI shipVariantAPI = mutableShipStatsAPI.getVariant().clone();
-                                drone.getFleetMember().setVariant(shipVariantAPI, false, true);
-                                mutableShipStatsAPI.getVariant().clearSlot("compositeslot");
-                                if (this.mothership.getVariant().getWeaponSpec("compositeslot") != null) {
-                                    mutableShipStatsAPI.getVariant().addWeapon("compositeslot", this.mothership.getVariant().getWeaponId("compositeslot"));
-                                    mutableShipStatsAPI.getVariant().getWeaponSpec("compositeslot").addTag("FIRE_WHEN_INEFFICIENT");
-                                    fighterWingAPI.orderReturn(drone);
+            for (FighterWingAPI wing : wings) {
+                if (wing == null || wing.getWingMembers() == null || wing.getWingMembers().isEmpty())
+                    continue;
 
-                                    this.isWeaponSwappedcomposite = true;
+                ShipAPI fighter = wing.getLeader();
+                if (fighter == null)
+                    continue;
 
+                for (int i = 0; i < wing.getWingMembers().size(); i++) {
+                    fighter = wing.getWingMembers().get(i);
+                    if (fighter == null)
+                        continue;
+                    if (fighter.getAllWeapons().isEmpty())
+                        continue;
+                    if (!wing.getWingId().equals("omm_compositepod_wing")) {
+                        continue;
+                    }
+                    MutableShipStatsAPI stats = fighter.getMutableStats();
+                    ShipVariantAPI OGVariant = stats.getVariant().clone();
+                    ShipVariantAPI newVariant = stats.getVariant().clone();
+                    CombatEngineAPI engine = Global.getCombatEngine();
+
+                    String str = (String) Global.getCombatEngine().getCustomData().get("omm_compositedroneWeaponId" + this.mothership.getId());
+                    if (str == null)
+                        str = "No weapon";
+
+                    if (engine.getPlayerShip() == ship)
+                        //Global.getCombatEngine().maintainStatusForPlayerShip("SynergyDrones", "graphics/ui/icons/icon_repair_refit.png", "Drone Weaponry", str + " installed. ", true);
+                        if (!fighter.getAllWeapons().get(0).getId().equals(str)) {
+                            fighter.resetDefaultAI();
+                            if (ship.getVariant().getWeaponSpec("compositeslot") != null) {
+                                Global.getCombatEngine().getCustomData().put("omm_compositedroneWeaponId" + this.mothership.getId(), this.mothership.getVariant().getWeaponId("compositeslot"));
+                                stats.getVariant().setOriginalVariant(null);
+                                fighter.getFleetMember().setVariant(newVariant, true, true);
+                                wep.disable(true);
+
+                                this.timer.randomize();                                                        //randomize interval to stagger drone refit
+
+                                this.timer.advance(amount);
+                                if (!this.timer.intervalElapsed()) {
+                                    return;
                                 }
+                                stats.getVariant().clearSlot("compositeslot");
+                                stats.getVariant().addWeapon("compositeslot", this.mothership.getVariant().getWeaponId("compositeslot"));
+                                stats.getVariant().getWeaponSpec("compositeslot").addTag("FIRE_WHEN_INEFFICIENT");
+                                ship.removeWeaponFromGroups(wep);
+
+
+                                wing.orderReturn(fighter);
+                                //isWeaponSwapped = true;
 
                             }
                         }
-                    }
-                }
+                }//
+
             }
         }
     }
+
 }

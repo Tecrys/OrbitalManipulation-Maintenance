@@ -148,7 +148,11 @@ tasks {
     			"id": "MagicLib",
     			"name": "MagicLib",
     			#"version": "0.32rc2" # If a specific version is NOT required, comment out this line
-    		}
+    		},
+    	{
+    		"id": "lunalib",
+    		"name": "LunaLib",
+    	},
     ],
                     }
                 """.trimIndent()

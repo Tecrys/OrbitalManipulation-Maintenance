@@ -1,17 +1,33 @@
-package tecrys.data.scripts.weapons;
+package tecrys.data.fighters.pddrone_pod;
 
 import com.fs.starfarer.api.Global;
 import com.fs.starfarer.api.combat.*;
+import com.fs.starfarer.api.combat.listeners.AdvanceableListener;
 import com.fs.starfarer.api.util.IntervalUtil;
+
 import java.awt.Color;
+import java.util.ArrayList;
 import java.util.List;
 
-public class omm_pddrone implements EveryFrameWeaponEffectPlugin {
+public class pddroneManager implements AdvanceableListener {
 
 
+    public final ShipAPI mothership;
 
+    public IntervalUtil timer = new IntervalUtil(0F, 5F);
     private boolean isWeaponSwapped = false;
 
+    public final ArrayList<ShipAPI> drones = new ArrayList<>(); //list of all drones
+    public final ArrayList<FighterWingAPI> relevantWings = new ArrayList<>(); //the list of sarissa wings
+    public pddroneManager(ShipAPI mothership) {
+        this.mothership = mothership;
+
+        for (FighterWingAPI wing : mothership.getAllWings()) {
+            if (wing.getSpec().getId().equals("omm_pddrone_wing")) {
+                relevantWings.add(wing);
+            }
+        }
+    }
     public boolean isBattling ()
     {
         boolean check = false;
@@ -25,30 +41,22 @@ public class omm_pddrone implements EveryFrameWeaponEffectPlugin {
         return check;
     }
 
+
     @Override
-    public void advance ( float amount, CombatEngineAPI engine, WeaponAPI weapon)
+    public void advance(float amount)
     {
-        ShipAPI ship = weapon.getShip();
+        ShipAPI ship = this.mothership;
         //CombatEngineAPI engine = Global.getCombatEngine();
         WeaponAPI wep = null;
         for (WeaponAPI w : ship.getAllWeapons()) {
             if (w.getSlot().getId().equals("pdslot"))
                 wep = w;
         }
-        //Refit screen check
-        if (ship.getOriginalOwner() == -1) {
-            weapon.getSprite().setColor(new Color(255, 255, 255, 255));
-            if (weapon.getBarrelSpriteAPI() != null)
-                weapon.getBarrelSpriteAPI().setColor(new Color(255, 255, 255, 255));
-        } else {
 
-            if (weapon != null)
-                weapon.getSprite().setColor(new Color(255, 255, 255, 0));
-        }
 
         if (ship.isAlive() && wep != null) {
             //CombatEngineAPI engine = Global.getCombatEngine();
-            List<FighterWingAPI> wings = ship.getAllWings();
+            List<FighterWingAPI> wings = relevantWings;
 
             for (FighterWingAPI wing : wings) {
                 if (wing == null || wing.getWingMembers() == null || wing.getWingMembers().isEmpty())
@@ -70,22 +78,29 @@ public class omm_pddrone implements EveryFrameWeaponEffectPlugin {
                     MutableShipStatsAPI stats = fighter.getMutableStats();
                     ShipVariantAPI OGVariant = stats.getVariant().clone();
                     ShipVariantAPI newVariant = stats.getVariant().clone();
+                    CombatEngineAPI engine = Global.getCombatEngine();
 
-                    String str = (String) Global.getCombatEngine().getCustomData().get("omm_pddroneWeaponId" + ship.getId());
+                    String str = (String) Global.getCombatEngine().getCustomData().get("omm_pddroneWeaponId" + this.mothership.getId());
                     if (str == null)
                         str = "No weapon";
+
                     if (engine.getPlayerShip() == ship)
-                        Global.getCombatEngine().maintainStatusForPlayerShip("PDDrone", "graphics/ui/icons/icon_repair_refit.png", "PDDrone Weapon", str + " installed. ", true);
-                    if (!fighter.getAllWeapons().get(0).getId().equals(str)) {
+                        //Global.getCombatEngine().maintainStatusForPlayerShip("PDDrones", "graphics/ui/icons/icon_repair_refit.png", "Drone Weaponry", str + " installed. ", true);
+                    if (!fighter.getAllWeapons().get(2).getId().equals(str)) {
                         if (ship.getVariant().getWeaponSpec("pdslot") != null) {
-                            Global.getCombatEngine().getCustomData().put("omm_pddroneWeaponId" + ship.getId(), ship.getVariant().getWeaponId("pdslot"));
-                            //stats.getVariant().setOriginalVariant(null);
+                            Global.getCombatEngine().getCustomData().put("omm_pddroneWeaponId" + this.mothership.getId(), this.mothership.getVariant().getWeaponId("pdslot"));
+                            stats.getVariant().setOriginalVariant(null);
                             fighter.getFleetMember().setVariant(newVariant, true, true);
                             wep.disable(true);
 
+                            this.timer.randomize();                                                        //randomize interval to stagger drone refit
 
+                            this.timer.advance(amount);
+                            if (!this.timer.intervalElapsed()) {
+                                return;
+                            }
                             stats.getVariant().clearSlot("pdslot");
-                            stats.getVariant().addWeapon("pdslot", ship.getVariant().getWeaponId("pdslot"));
+                            stats.getVariant().addWeapon("pdslot", this.mothership.getVariant().getWeaponId("pdslot"));
                             stats.getVariant().getWeaponSpec("pdslot").addTag("FIRE_WHEN_INEFFICIENT");
                             ship.removeWeaponFromGroups(wep);
 
@@ -100,6 +115,10 @@ public class omm_pddrone implements EveryFrameWeaponEffectPlugin {
             }
         }
     }
+
+
+
+
 }
 
 

@@ -21,12 +21,13 @@ import java.util.List;
 import org.lwjgl.input.Keyboard;
 import static org.lwjgl.input.Keyboard.KEY_R;
 import org.lwjgl.input.Mouse;
+import tecrys.data.utils.OMMSettings;
 
 public class smallpodManager implements AdvanceableListener {
 
     public final ShipAPI mothership;
     private boolean isWeaponSwappedsmall = false;
-    public IntervalUtil timer = new IntervalUtil(3F, 20F);
+    public IntervalUtil timer = new IntervalUtil(0F, 5F);
     public final ArrayList<ShipAPI> drones = new ArrayList<>(); //list of all drones
     public final ArrayList<FighterWingAPI> relevantWings = new ArrayList<>(); //the list of sarissa wings
 
@@ -120,8 +121,11 @@ public class smallpodManager implements AdvanceableListener {
                             if (Keyboard.isKeyDown(KEY_R)) {
                                 drone.setShipTarget(this.mothership.getShipTarget());           //clicky left drone shooty
                             }
-                            if (Mouse.isButtonDown(2) && !player.getFluxTracker().isOverloadedOrVenting() && (dronewep.getType() == MISSILE) && dronewep.getSlot().getId().equals("smlhybridslot")) {
+                            if ( OMMSettings.missile_key == 0 && Mouse.isButtonDown(2) && !player.getFluxTracker().isOverloadedOrVenting() && (dronewep.getType() == MISSILE) && dronewep.getSlot().getId().equals("smlhybridslot")) {
                                 drone.giveCommand(ShipCommand.FIRE, mousepos, 0);           //clicky left drone shooty
+                            }
+                            else if (Keyboard.isKeyDown(OMMSettings.missile_key) && !player.getFluxTracker().isOverloadedOrVenting() && (dronewep.getType() == MISSILE) && dronewep.getSlot().getId().equals("smlhybridslot")) {
+                                drone.giveCommand(ShipCommand.FIRE, mousepos, 0);
                             }
                         }
                         if (this.mothership.getFluxTracker().isOverloaded()) {
@@ -221,52 +225,74 @@ public class smallpodManager implements AdvanceableListener {
     //remove drones if they're dead or otherwise gone
     @Override
     public void advance(float amount) {
-        deadDroneInterval.advance(amount);
-        if (deadDroneInterval.intervalElapsed()) {
-            for (ShipAPI drone : new ArrayList<>(drones)) {
-                //Global.getCombatEngine().addFloatingText(drone.getLocation(), drone.getWing().getWingMembers().indexOf(drone) + ", " + drone.getWing().getSourceShip().getAllWings().indexOf(drone.getWing()), 20f, Color.BLUE, drone, 1f, 1f);
-                if (!drone.isAlive() || drone.isHulk() || !Global.getCombatEngine().isEntityInPlay(drone)) {
-                    drones.remove(drone);
-                }
-                this.timer.randomize();                                                        //randomize interval to stagger drone refit
+        ShipAPI ship = this.mothership;
+        //CombatEngineAPI engine = Global.getCombatEngine();
+        WeaponAPI wep = null;
+        for (WeaponAPI w : ship.getAllWeapons()) {
+            if (w.getSlot().getId().equals("smlhybridslot"))
+                wep = w;
+        }
 
-                this.timer.advance(amount);
-                if (!this.timer.intervalElapsed()) {
-                    return;
-                }
-                if (this.isWeaponSwappedsmall) {
-                    drone.setShipAI(null);
-                    return;
-                }
-                if (!this.isWeaponSwappedsmall) {
 
-                    if (this.mothership != null) {
-                        List<FighterWingAPI> list1 = this.mothership.getAllWings();
-                        for (FighterWingAPI fighterWingAPI : list1) {
-                            if (!fighterWingAPI.getWingId().equals("omm_smallpod_wing")) {
-                                continue;
+        if (ship.isAlive() && wep != null) {
+            //CombatEngineAPI engine = Global.getCombatEngine();
+            List<FighterWingAPI> wings = relevantWings;
+
+            for (FighterWingAPI wing : wings) {
+                if (wing == null || wing.getWingMembers() == null || wing.getWingMembers().isEmpty())
+                    continue;
+
+                ShipAPI fighter = wing.getLeader();
+                if (fighter == null)
+                    continue;
+
+                for (int i = 0; i < wing.getWingMembers().size(); i++) {
+                    fighter = wing.getWingMembers().get(i);
+                    if (fighter == null)
+                        continue;
+                    if (fighter.getAllWeapons().isEmpty())
+                        continue;
+                    if (!wing.getWingId().equals("omm_smallpod_wing")) {
+                        continue;
+                    }
+                    MutableShipStatsAPI stats = fighter.getMutableStats();
+                    ShipVariantAPI OGVariant = stats.getVariant().clone();
+                    ShipVariantAPI newVariant = stats.getVariant().clone();
+                    CombatEngineAPI engine = Global.getCombatEngine();
+
+                    String str = (String) Global.getCombatEngine().getCustomData().get("omm_smlhybriddroneWeaponId" + this.mothership.getId());
+                    if (str == null)
+                        str = "No weapon";
+
+                    if (engine.getPlayerShip() == ship)
+                        //Global.getCombatEngine().maintainStatusForPlayerShip("HybridDrones", "graphics/ui/icons/icon_repair_refit.png", "Drone Weaponry", str + " installed. ", true);
+                    if (!fighter.getAllWeapons().get(0).getId().equals(str)) {
+                        fighter.resetDefaultAI();
+                        if (ship.getVariant().getWeaponSpec("smlhybridslot") != null) {
+                            Global.getCombatEngine().getCustomData().put("omm_smlhybriddroneWeaponId" + this.mothership.getId(), this.mothership.getVariant().getWeaponId("smlhybridslot"));
+                            stats.getVariant().setOriginalVariant(null);
+                            fighter.getFleetMember().setVariant(newVariant, true, true);
+                            wep.disable(true);
+
+                            this.timer.randomize();                                                        //randomize interval to stagger drone refit
+
+                            this.timer.advance(amount);
+                            if (!this.timer.intervalElapsed()) {
+                                return;
                             }
+                            stats.getVariant().clearSlot("smlhybridslot");
+                            stats.getVariant().addWeapon("smlhybridslot", this.mothership.getVariant().getWeaponId("smlhybridslot"));
+                            stats.getVariant().getWeaponSpec("smlhybridslot").addTag("FIRE_WHEN_INEFFICIENT");
+                            ship.removeWeaponFromGroups(wep);
 
-                            {
-                                drone = fighterWingAPI.getLeader();
-                                drone.resetDefaultAI();
-                                MutableShipStatsAPI mutableShipStatsAPI = drone.getMutableStats();
-                                ShipVariantAPI shipVariantAPI = mutableShipStatsAPI.getVariant().clone();
-                                drone.getFleetMember().setVariant(shipVariantAPI, false, true);
-                                mutableShipStatsAPI.getVariant().clearSlot("smlhybridslot");
-                                if (this.mothership.getVariant().getWeaponSpec("smlhybridslot") != null) {
-                                    mutableShipStatsAPI.getVariant().addWeapon("smlhybridslot", this.mothership.getVariant().getWeaponId("smlhybridslot"));
-                                    mutableShipStatsAPI.getVariant().getWeaponSpec("smlhybridslot").addTag("FIRE_WHEN_INEFFICIENT");
-                                    fighterWingAPI.orderReturn(drone);
 
-                                    this.isWeaponSwappedsmall = true;
+                            wing.orderReturn(fighter);
+                            //isWeaponSwapped = true;
 
-                                }
-
-                            }
                         }
                     }
-                }
+                }//
+
             }
         }
     }

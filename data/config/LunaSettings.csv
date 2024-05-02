@@ -1,0 +1,3 @@
+fieldID,fieldName,fieldType,defaultValue,secondaryValue,fieldDescription,minValue,maxValue,tab
+omm_missile_key,Missile Hotkey,Keycode,0,,"Hotkey for firing all missiles. The hotkey for them can be set here, if the setting is not changed, it will default to [middle click] instead. Keys used by other parts of the game might not work correctly.",,,Controls
+,,,,,,,,
