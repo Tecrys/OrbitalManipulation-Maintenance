@@ -84,7 +84,7 @@ public class pddroneManager implements AdvanceableListener {
                     if (str == null)
                         str = "No weapon";
 
-                    if (engine.getPlayerShip() == ship)
+                    //if (engine.getPlayerShip() == ship)
                         //Global.getCombatEngine().maintainStatusForPlayerShip("PDDrones", "graphics/ui/icons/icon_repair_refit.png", "Drone Weaponry", str + " installed. ", true);
                     if (!fighter.getAllWeapons().get(2).getId().equals(str)) {
                         if (ship.getVariant().getWeaponSpec("pdslot") != null) {

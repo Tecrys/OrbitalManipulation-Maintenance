@@ -78,19 +78,25 @@ public class smallpodManager implements AdvanceableListener {
                 drone = fighterWingAPI.getLeader();
                 List<WeaponAPI> droneweps = drone.getAllWeapons();
                 Vector2f dronepos = drone.getLocation();
+                WeaponAPI smlwep = null;
                 float angle = VectorUtils.getAngle(dronepos, mousepos);
 
                 for (WeaponAPI dronewep : droneweps) {
                     if (dronewep.getSlot().getId().equals("smlhybridslot") || dronewep.getSlot().getId().equals("omm_laser")) {
-
+                        {
+                            if (dronewep.getSlot().getId().equals("smlhybridslot"))
+                                smlwep = dronewep;
+                        }
 //                        WeaponGroupAPI Group = FIGHTER.getWeaponGroupFor(weapon);
                         ShipAPI player = Global.getCombatEngine().getPlayerShip();
                         CombatEngineAPI engine = Global.getCombatEngine();
                         {
 
-                            if (player == this.mothership && !drone.isLanding() && !drone.isLiftingOff() && dronewep.getSlot().getId().equals("omm_laser") 
+                            if (player == this.mothership && !drone.isLanding() && !drone.isLiftingOff() && dronewep.getSlot().getId().equals("omm_laser") && smlwep != null
                                     ) {
                                 dronewep.getAnimation().setFrame(01);
+                                dronewep.getSprite().setHeight(smlwep.getRange()*2);
+                                dronewep.getSprite().setCenterY(smlwep.getRange());
 
                                 //MagicRender.singleframe(sprite, dronewep.getLocation(), size, dronewep.getCurrAngle(), Color.WHITE, false, CombatEngineLayers.FIGHTERS_LAYER);
                             }
@@ -264,7 +270,7 @@ public class smallpodManager implements AdvanceableListener {
                     if (str == null)
                         str = "No weapon";
 
-                    if (engine.getPlayerShip() == ship)
+                    //if (engine.getPlayerShip() == ship)
                         //Global.getCombatEngine().maintainStatusForPlayerShip("HybridDrones", "graphics/ui/icons/icon_repair_refit.png", "Drone Weaponry", str + " installed. ", true);
                     if (!fighter.getAllWeapons().get(0).getId().equals(str)) {
                         fighter.resetDefaultAI();

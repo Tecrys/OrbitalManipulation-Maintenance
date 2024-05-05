@@ -88,9 +88,10 @@ public class ballisticpodManager implements AdvanceableListener {
                         CombatEngineAPI engine = Global.getCombatEngine();
                         {
 
-                            if (player == this.mothership && !drone.isLanding() && !drone.isLiftingOff() && dronewep.getSlot().getId().equals("omm_laser") 
+                            if (player == this.mothership && !drone.isLanding() && !drone.isLiftingOff() && dronewep.getSlot().getId().equals("omm_laser")
                                     ) {
                                 dronewep.getAnimation().setFrame(01);
+
 
                                 //MagicRender.singleframe(sprite, dronewep.getLocation(), size, dronewep.getCurrAngle(), Color.WHITE, false, CombatEngineLayers.FIGHTERS_LAYER);
                             }
@@ -265,7 +266,7 @@ public class ballisticpodManager implements AdvanceableListener {
                     if (str == null)
                         str = "No weapon";
 
-                    if (engine.getPlayerShip() == ship)
+                    //if (engine.getPlayerShip() == ship)
                         //Global.getCombatEngine().maintainStatusForPlayerShip("SynergyDrones", "graphics/ui/icons/icon_repair_refit.png", "Drone Weaponry", str + " installed. ", true);
                         if (!fighter.getAllWeapons().get(2).getId().equals(str)) {
                             fighter.resetDefaultAI();
