@@ -290,7 +290,7 @@ public class missilepodManager implements AdvanceableListener {
                                 //isWeaponSwapped = true;
 
                             }
-                        }
+                        } else fighter.setShipAI(null);
                 }//
 
             }

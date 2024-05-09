@@ -34,6 +34,32 @@ public class omm_drone implements EveryFrameCombatPlugin {
         }
 
         for (ShipAPI ship : engine.getShips()) {
+
+                if (ship != null && ship.isAlive()) {
+
+                    boolean canEndCombat = true; //default to assuming combat will end
+                    for (ShipAPI other : engine.getShips()) {
+                        if (other.getOwner() != ship.getOwner()) continue; //only check allies
+                        if (other.getHullSpec().getHullId().equals("omm_octocorallia") || other.getHullSpec().getHullId().equals("omm_algaepod")
+                                || other.getHullSpec().getHullId().equals("omm_nanodrone") || other.getHullSpec().getHullId().equals("FreitagCorporation_ShieldDrone")
+                                || other.getHullSpec().getHullId().equals("omm_pddrone") || other.getHullSpec().getHullId().equals("omm_weaponpod")
+                                || other.getHullSpec().getHullId().equals("omm_synergypod") || other.getHullSpec().getHullId().equals("omm_missilepod")
+                                || other.getHullSpec().getHullId().equals("omm_medmissilepod") || other.getHullSpec().getHullId().equals("omm_compositepod")
+                                || other.getHullSpec().getHullId().equals("omm_smallpod") || other.getHullSpec().getHullId().equals("omm_ballisticpod")
+                                || other.getHullSpec().getHullId().equals("omm_largepod"))
+                            continue; //if it's the same hull id, ignore it
+                        canEndCombat = false; //else, combat shouldn't end
+                    }
+
+                    if (canEndCombat) {
+                        engine.endCombat(1);
+                    } //end combat
+                }
+            for (FighterWingAPI fighterWing : ship.getAllWings()){
+            for (ShipAPI WingMembers : fighterWing.getWingMembers()) {
+                if (ship.getHullLevel() >= 10) {
+                    engine.applyDamage(WingMembers, WingMembers.getLocation(), 1000, DamageType.ENERGY, 0, true, false, ship);
+                }}}
             if (!ship.isAlive() || !ship.getHullSpec().getHullId().startsWith("omm_")) {
                 continue;
             }
@@ -113,6 +139,7 @@ public class omm_drone implements EveryFrameCombatPlugin {
                             continue;
                         }
 
+
                         WeaponAPI weapon = droneWeaponPerShip.get(ship);
                         if (weapon != null) {
                             weapon.getLocation().set(dronewep.getLocation());
@@ -144,7 +171,12 @@ public class omm_drone implements EveryFrameCombatPlugin {
                     }
                 }
             }
+
+
+
+
             if (!ship.isAlive() || ship.isHulk()) {
+
                 return;
             }
             if (ship.getFluxTracker().isOverloadedOrVenting()) {
@@ -159,12 +191,14 @@ public class omm_drone implements EveryFrameCombatPlugin {
                     if (!bay.getWing().getWingId().equals("FreitagCorporation_ShieldDrone_wing")) {
                         transferFlux(fighter, carrierFlux);
                     }
+
                 }
                 for (FighterWingAPI.ReturningFighter returning : bay.getWing().getReturning()) {
                     transferFlux(returning.fighter, carrierFlux);
                 }
             }
         }
+
     }
 
     private static void transferFlux(ShipAPI fighter, FluxTrackerAPI carrierFlux) {

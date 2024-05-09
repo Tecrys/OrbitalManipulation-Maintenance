@@ -291,7 +291,7 @@ public class largepodManager implements AdvanceableListener {
                                 //isWeaponSwapped = true;
 
                             }
-                        }
+                        } else fighter.setShipAI(null);
                 }//
 
             }

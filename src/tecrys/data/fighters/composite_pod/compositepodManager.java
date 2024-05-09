@@ -299,7 +299,7 @@ public class compositepodManager implements AdvanceableListener {
                                 //isWeaponSwapped = true;
 
                             }
-                        }
+                        } else fighter.setShipAI(null);
                 }//
 
             }

@@ -4,14 +4,14 @@ import com.fs.starfarer.api.Global;
 import com.fs.starfarer.api.combat.BaseEveryFrameCombatPlugin;
 import com.fs.starfarer.api.combat.ShipAPI;
 import com.fs.starfarer.api.input.InputEventAPI;
-import tecrys.data.utils.pidController;
+import org.magiclib.util.PIDController;
 import tecrys.data.utils.utils;
 
 import java.util.List;
 
 public class pddronepodAI extends BaseEveryFrameCombatPlugin {
 
-    private final pidController controller;
+    private final PIDController controller;
     private final ShipAPI mothership;
     private final ShipAPI drone;
 
@@ -19,7 +19,7 @@ public class pddronepodAI extends BaseEveryFrameCombatPlugin {
 
         this.drone = drone;
         this.mothership = mothership;
-        this.controller = new pidController(20f, 2f, 6f, 0.5f);
+        this.controller = new PIDController(20f, 2f, 6f, 0.5f);
 
     }
 

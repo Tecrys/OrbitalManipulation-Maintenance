@@ -15,6 +15,9 @@ import static com.fs.starfarer.api.impl.campaign.ids.Tags.VARIANT_UNBOARDABLE;
 public class omm_mainframelink extends BaseHullMod {
 
 
+    public void applyEffectsBeforeShipCreation(MutableShipStatsAPI stats, String id) {
+        stats.getDynamic().getMod("act_as_combat_ship").modifyFlat(id, 1.0F);
+    }
 
 
 //    public static float FLUX_FRACTION = 0.5F;

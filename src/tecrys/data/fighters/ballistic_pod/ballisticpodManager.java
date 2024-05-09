@@ -1,15 +1,10 @@
 package tecrys.data.fighters.ballistic_pod;
 
 import com.fs.starfarer.api.Global;
-import com.fs.starfarer.api.combat.CombatEngineAPI;
-import com.fs.starfarer.api.combat.FighterWingAPI;
-import com.fs.starfarer.api.combat.MutableShipStatsAPI;
-import com.fs.starfarer.api.combat.ShipAPI;
-import com.fs.starfarer.api.combat.ShipCommand;
-import com.fs.starfarer.api.combat.ShipVariantAPI;
-import com.fs.starfarer.api.combat.WeaponAPI;
+import com.fs.starfarer.api.combat.*;
+
 import static com.fs.starfarer.api.combat.WeaponAPI.WeaponType.MISSILE;
-import com.fs.starfarer.api.combat.WeaponGroupAPI;
+
 import com.fs.starfarer.api.combat.listeners.AdvanceableListener;
 import com.fs.starfarer.api.util.IntervalUtil;
 import org.lazywizard.lazylib.MathUtils;
@@ -28,7 +23,7 @@ public class ballisticpodManager implements AdvanceableListener {
     public final ShipAPI mothership;
     private boolean isWeaponSwappedballistic = false;
 
-    public IntervalUtil timer = new IntervalUtil(3F, 20F);
+    public IntervalUtil timer = new IntervalUtil(0F, 5F);
     public final ArrayList<ShipAPI> drones = new ArrayList<>(); //list of all drones
     public final ArrayList<FighterWingAPI> relevantWings = new ArrayList<>(); //the list of sarissa wings
 
@@ -234,10 +229,14 @@ public class ballisticpodManager implements AdvanceableListener {
             if (w.getSlot().getId().equals("ballisticslot"))
                 wep = w;
         }
+        CombatEngineAPI engine = Global.getCombatEngine();
+        if ((!ship.isAlive() || ship.isHulk()) && ship.getWing() != null){
+            for (ShipAPI WingMembers : ship.getWing().getWingMembers()) {
 
-
+                engine.applyDamage(WingMembers, WingMembers.getLocation(), 1000, DamageType.ENERGY, 0, true, false, ship);
+            }}
         if (ship.isAlive() && wep != null) {
-            //CombatEngineAPI engine = Global.getCombatEngine();
+
             List<FighterWingAPI> wings = relevantWings;
 
             for (FighterWingAPI wing : wings) {
@@ -260,7 +259,7 @@ public class ballisticpodManager implements AdvanceableListener {
                     MutableShipStatsAPI stats = fighter.getMutableStats();
                     ShipVariantAPI OGVariant = stats.getVariant().clone();
                     ShipVariantAPI newVariant = stats.getVariant().clone();
-                    CombatEngineAPI engine = Global.getCombatEngine();
+                    //CombatEngineAPI engine = Global.getCombatEngine();
 
                     String str = (String) Global.getCombatEngine().getCustomData().get("omm_ballisticdroneWeaponId" + this.mothership.getId());
                     if (str == null)
@@ -292,7 +291,7 @@ public class ballisticpodManager implements AdvanceableListener {
                                 //isWeaponSwapped = true;
 
                             }
-                        }
+                        } else fighter.setShipAI(null);
                 }//
 
             }

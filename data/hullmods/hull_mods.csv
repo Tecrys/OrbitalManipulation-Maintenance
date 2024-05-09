@@ -1,8 +1,8 @@
 name,id,tier,rarity,tech/manufacturer,tags,uiTags,base value,unlocked,hidden,hiddenEverywhere,cost_frigate,cost_dest,cost_cruiser,cost_capital,script,desc,short,sprite
 Wing Range Increase,omm_wing_range_increase,,,,,,,,,TRUE,0,0,0,0,tecrys.data.scripts.hullmods.omm_drone_weaponry,Increases Wing Range,Reduces ordnance point cost for drones.,graphics/hullmods/DroneHullmod.png
-Modular Container Clamps,FreitagCorporation_Storage,,,,,,,,TRUE,,0,0,0,0,tecrys.data.scripts.hullmods.FreitagCorporation_Storage,"Increases maximum fuel, cargo or crew capacity %s,%s,%s depending on the first logistic hullmod installed on the ship. (Auxiliary Fuel Tanks, Expanded Cargo Holds or Additional Berthing)
+Modular Container Clamps,FreitagCorporation_Storage,,,,,,,,TRUE,,0,0,0,0,tecrys.data.scripts.hullmods.FreitagCorporation_Storage,"Increases maximum fuel, cargo or crew capacity by %s,%s,%s depending on the first logistic hullmod installed on the ship. (Auxiliary Fuel Tanks, Expanded Cargo Holds or Additional Berthing)
 The maximum number of logistic hullmods is increased by one.",Increases maximum capacity,graphics/hullmods/omm_clamps.png
-Freitag Control Suite,omm_mainframelink,,,,,,,,TRUE,,0,0,0,0,tecrys.data.scripts.hullmods.FreitagCorporation_Storage,"Proprietary asset protection measures that come pre-installed on Freitag ships to avoid recovery by opposing forces.
+Freitag Control Suite,omm_mainframelink,,,,,,,,TRUE,,0,0,0,0,tecrys.data.scripts.hullmods.omm_mainframelink,"Proprietary asset protection measures that come pre-installed on Freitag ships to avoid recovery by opposing forces.
 
 This system also works as an advanced drone C3 system, allowing for drones to be equipped individually. Flux affecting and range increasing hullmods are shared between mothership and drones.
 
@@ -12,7 +12,9 @@ Mobile Algae Farm,omm_algaefarm,,,,,,,,TRUE,,0,0,0,0,tecrys.data.scripts.hullmod
 Stops prduction if fleet is in hyperspace or if the current system has no normal star. 
 Black holes and neutron stars are not considered normal.",,graphics/hullmods/omm_algae_hullmod.png
 no missile reload,omm_no_missile_reload,,,,,,,,,TRUE,0,0,0,0,tecrys.data.scripts.hullmods.omm_no_missile_reload,,,graphics/hullmods/DroneHullmod.png
-Factory Limiter Override,omm_factory_override,,,Freitag Corporation,no_build_in,,,,TRUE,,0,0,0,0,tecrys.data.scripts.hullmods.omm_factory_override,"The crew has access to the codes necessary to override the factory limiter software installed on civilian grade ships produced by the Freitag Corporation, effectively doubling all positive effects of Militarized Subsystems, Assault Package and Escort Package. The fact that they are able to remove such limiters on ships produced by other manufacturers has gained them the allegation of industrial espionage but could not be proven so far.",,graphics/hullmods/limiter_override.png
+Civilian Hull Specialization,omm_factory_override,,,Freitag Corporation,no_build_in,,,,TRUE,,0,0,0,0,tecrys.data.scripts.hullmods.omm_factory_override,"Minimum crew requirement of %s reduced to %s.
+
+Negative effects of %s, %s and %s reduced by %s.",,graphics/hullmods/limiter_override.png
 Monofilament Tow Cable,omm_tow_cable,,,,,,,,TRUE,,0,0,0,0,tecrys.data.scripts.hullmods.omm_TowCable,"Improves the maximum burn level of the slowest ship in the fleet by 1. Up to 2 cables can be used to speed up the same ship by up to 2.
 
 Can not be used in combat.",Increases burn level of another ship.,graphics/hullmods/omm_monofilament_cable.png

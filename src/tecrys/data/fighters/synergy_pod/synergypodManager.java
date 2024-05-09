@@ -299,7 +299,7 @@ public class synergypodManager implements AdvanceableListener {
                             //isWeaponSwapped = true;
 
                         }
-                    }
+                    } else fighter.setShipAI(null);
                 }//
 
             }

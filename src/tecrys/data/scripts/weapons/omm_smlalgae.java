@@ -79,8 +79,10 @@ public class omm_smlalgae implements EveryFrameWeaponEffectPlugin {
                         }
                     }
                 }
+
             }
         }
+
     }
 
     private void displaySprite() {
