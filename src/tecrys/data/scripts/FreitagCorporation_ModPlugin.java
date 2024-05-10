@@ -56,23 +56,33 @@ public class FreitagCorporation_ModPlugin extends BaseModPlugin {
 
         }
     }
+
     @Override
-    public void onNewGameAfterEconomyLoad(){
-                            MarketAPI market = Global.getSector().getEconomy().getMarket("eldfell"); //to get the market 
-                    if (market != null) {
-        market.addSubmarket("freitag_submarket"); //add the submarket into the market
+    public void onGameLoad(boolean newGame) {
+        if (Global.getSector().getEntityById("freitag_hq") == null) { //star id
+            new ommGen().generate(Global.getSector());
+        }
+        if (Global.getSector().getEconomy().getMarket("eldfell").getSubmarket("freitag_submarket") == null)
+        {
+            MarketAPI market = Global.getSector().getEconomy().getMarket("eldfell"); //to get the market
+        if (market != null) {
+            market.addSubmarket("freitag_submarket"); //add the submarket into the market
+        }
+    }
+        if (Global.getSector().getEconomy().getMarket("new_maxios").getSubmarket("freitag_submarket") == null)
+        {
+            MarketAPI market2 = Global.getSector().getEconomy().getMarket("new_maxios"); //to get the market
+            if (market2 != null) {
+                market2.addSubmarket("freitag_submarket"); //add the submarket into the market
             }
-                            MarketAPI market2 = Global.getSector().getEconomy().getMarket("new_maxios"); //to get the market 
-                    if (market2 != null) {
-        market2.addSubmarket("freitag_submarket"); //add the submarket into the market
+        }
+        if (Global.getSector().getEconomy().getMarket("ilm").getSubmarket("freitag_submarket") == null)
+        {
+            MarketAPI market3 = Global.getSector().getEconomy().getMarket("ilm"); //to get the market
+            if (market3 != null) {
+                market3.addSubmarket("freitag_submarket"); //add the submarket into the market
             }
-                            MarketAPI market3 = Global.getSector().getEconomy().getMarket("ilm"); //to get the market 
-                    if (market3 != null) {
-        market3.addSubmarket("freitag_submarket"); //add the submarket into the market
-            }
-                                                MarketAPI market4 = Global.getSector().getEconomy().getMarket("freitag_hq"); //to get the market 
-                    if (market4 != null) {
-        market4.addSubmarket("freitag_submarket"); //add the submarket into the market
-            }
+        }
+
     }
 }

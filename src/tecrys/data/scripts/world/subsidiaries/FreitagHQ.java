@@ -38,7 +38,7 @@ public class FreitagHQ {
         )),
                 new ArrayList<>(Arrays.asList( //list of submarkets for this method to iterate through and add to the market. if a military base industry was added to this market, it would be consistent to add a military submarket too
                         "freitag_submarket",
-                        "freitag_military",//add a default open market
+                       // "freitag_military",//add a default open market
                         Submarkets.SUBMARKET_STORAGE, //add a player storage market
                         "omm_black_market" //add a black market
                 )),
