@@ -13,6 +13,13 @@
       "autofire": false,
       "mode": "LINKED",
       "weapons": {
+        "omm_laser": "omm_targeting_laser"
+      }
+    },
+    {
+      "autofire": false,
+      "mode": "LINKED",
+      "weapons": {
         "synergyslot": "miningblaster"
       }
     }

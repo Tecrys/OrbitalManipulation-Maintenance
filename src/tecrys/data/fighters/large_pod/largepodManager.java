@@ -74,6 +74,7 @@ public class largepodManager implements AdvanceableListener {
                 List<WeaponAPI> droneweps = drone.getAllWeapons();
                 Vector2f dronepos = drone.getLocation();
                 WeaponAPI lrgwep = null;
+                WeaponAPI laswep = null;
                 float angle = VectorUtils.getAngle(dronepos, mousepos);
 
                 for (WeaponAPI dronewep : droneweps) {
@@ -81,6 +82,9 @@ public class largepodManager implements AdvanceableListener {
                         {
                             if (dronewep.getSlot().getId().equals("largeslot"))
                                 lrgwep = dronewep;
+                        }  {
+                            if (dronewep.getSlot().getId().equals("omm_laser"))
+                                laswep = dronewep;
                         }
 //                        WeaponGroupAPI Group = FIGHTER.getWeaponGroupFor(weapon);
                         ShipAPI player = Global.getCombatEngine().getPlayerShip();
@@ -89,12 +93,12 @@ public class largepodManager implements AdvanceableListener {
 
                             if (player == this.mothership && !drone.isLanding() && !drone.isLiftingOff() && dronewep.getSlot().getId().equals("omm_laser") && lrgwep != null
                                     ) {
-                                dronewep.getAnimation().setFrame(01);
-                                dronewep.getSprite().setHeight(lrgwep.getRange()*2);
-                                dronewep.getSprite().setCenterY(lrgwep.getRange());
-
-                                //MagicRender.singleframe(sprite, dronewep.getLocation(), size, dronewep.getCurrAngle(), Color.WHITE, false, CombatEngineLayers.FIGHTERS_LAYER);
-                            }
+                                //dronewep.getAnimation().setFrame(01);
+                                // dronewep.getSprite().setHeight(synwep.getRange()*2);
+                                // dronewep.getSprite().setCenterY(synwep.getRange());
+                                laswep.setForceFireOneFrame(true);
+                                laswep.ensureClonedSpec();
+                                laswep.getSpec().setMaxRange(lrgwep.getRange()-((lrgwep.getRange()/100)*20));  }
                             if (dronewep.getAnimation() != null && !engine.isUIAutopilotOn()){
                                 dronewep.getAnimation().setFrame(00);}
                         }
@@ -117,16 +121,16 @@ public class largepodManager implements AdvanceableListener {
                             diffdrone = MathUtils.clamp(diffdrone, -maxVeldrone, maxVeldrone);
                             drone.setFacing(diffdrone + drone.getFacing());        //sets facing of the drone
                             if (Mouse.isButtonDown(0) && !player.getFluxTracker().isOverloadedOrVenting() && (dronewep.getType() != MISSILE) && dronewep.getSlot().getId().equals("largeslot")) {
-                                drone.giveCommand(ShipCommand.FIRE, mousepos, 0);           //clicky left drone shooty
+                                lrgwep.setForceFireOneFrame(true);           //clicky left drone shooty
                             }
                             if (Keyboard.isKeyDown(KEY_R)) {
                                 drone.setShipTarget(this.mothership.getShipTarget());           //clicky left drone shooty
                             }
                             if ( OMMSettings.missile_key == 0 && Mouse.isButtonDown(2) && !player.getFluxTracker().isOverloadedOrVenting() && (dronewep.getType() == MISSILE) && dronewep.getSlot().getId().equals("largeslot")) {
-                                drone.giveCommand(ShipCommand.FIRE, mousepos, 0);           //clicky left drone shooty
+                                lrgwep.setForceFireOneFrame(true);          //clicky left drone shooty
                             }
                             else if (Keyboard.isKeyDown(OMMSettings.missile_key) && !player.getFluxTracker().isOverloadedOrVenting() && (dronewep.getType() == MISSILE) && dronewep.getSlot().getId().equals("largeslot")) {
-                                drone.giveCommand(ShipCommand.FIRE, mousepos, 0);
+                                lrgwep.setForceFireOneFrame(true);
                             }
                         }
                         if (this.mothership.getFluxTracker().isOverloaded()) {

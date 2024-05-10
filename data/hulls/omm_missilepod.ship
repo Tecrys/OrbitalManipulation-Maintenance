@@ -14,15 +14,13 @@
   "builtInMods": [
     "autorepair",
     "shield_always_on",
-    #"do_not_back_off",
-    #"fluxshunt",
     "missile_reload",
     "omm_mainframelink",
     "omm_missilepodai"
   ],
   "builtInWeapons": {
     "cover": "omm_dronecover",
-    "omm_laser": "omm_targeting_laser",
+    "omm_laser": "omm_targeting_laser_new",
     "shield": "FreitagCorporation_ShieldEffect_wpn"
   },
   "weaponSlots": [
@@ -57,11 +55,11 @@
     {
       "id": "omm_laser",
       "size": "SMALL",
-      "type": "DECORATIVE",
-      "mount": "TURRET",
-      "arc": 15,
+      "type": "BUILT_IN",
+      "mount": "HIDDEN",
+      "arc": 90,
       "angle": 0,
-      "locations": [6.5, -0]
+      "locations": [6.5, 0]
     }
   ],
   "engineSlots": [

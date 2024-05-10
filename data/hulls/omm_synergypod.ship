@@ -19,7 +19,7 @@
     "omm_synergypodai"
   ],
   "builtInWeapons": {
-    "omm_laser": "omm_targeting_laser",
+    "omm_laser": "omm_targeting_laser_new",
     "shield": "FreitagCorporation_ShieldEffect_wpn"
   },
   "weaponSlots": [
@@ -44,11 +44,11 @@
     {
       "id": "omm_laser",
       "size": "SMALL",
-      "type": "DECORATIVE",
-      "mount": "TURRET",
-      "arc": 15,
+      "type": "BUILT_IN",
+      "mount": "HIDDEN",
+      "arc": 60,
       "angle": 0,
-      "locations": [15.5, -0]
+      "locations": [15.5, 0]
     }
   ],
   "engineSlots": [

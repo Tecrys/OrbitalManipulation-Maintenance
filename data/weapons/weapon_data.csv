@@ -87,7 +87,8 @@ Mining Laser,FreitagCorporation_triple_mininglaser,,,100,500,150,,,0,20,0,,,,ENE
 ,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
 right Blinker,omm_greenblinker,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,SYSTEM,,,,,,,,,,,,,,,
 left Blinker,omm_redblinker,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,SYSTEM,,,,,,,,,,,,,,,
-Targeting Laser,omm_targeting_laser,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,SYSTEM,,,,,,,,,,,,,,,
+,omm_targeting_laser,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,SYSTEM,,,,,,,,,,,,,,,
+Targeting Laser,omm_targeting_laser_new,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,SYSTEM,,,,,,,,,,,,,,,
 ,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
 Chaff Launcher,omm_chafflauncher,1,,1000,70,,1,,2,40,8,,,,FRAGMENTATION,5,,0,1,1,,0,10,2,10,,700,,,30,,,"STRIKE, PD_ALSO, USE_VS_FRIGATES, FIRE_WHEN_INEFFICIENT","pd13, SR, no_drop, no_drop_salvage",,,,Anti Shield,,,,,,,,,,4
 ,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,

@@ -14,13 +14,11 @@
   "builtInMods": [
     "autorepair",
     "shield_always_on",
-    #"do_not_back_off",
-    #"fluxshunt",
     "omm_mainframelink",
     "omm_largepodai"
   ],
   "builtInWeapons": {
-    "omm_laser": "omm_targeting_laser",
+    "omm_laser": "omm_targeting_laser_new",
     "shield": "FreitagCorporation_ShieldEffect_wpn"
   },
   "weaponSlots": [
@@ -45,8 +43,8 @@
     {
       "id": "omm_laser",
       "size": "SMALL",
-      "type": "DECORATIVE",
-      "mount": "TURRET",
+      "type": "BUILT_IN",
+      "mount": "HIDDEN",
       "arc": 15,
       "angle": 0,
       "locations": [26.5, -0]
