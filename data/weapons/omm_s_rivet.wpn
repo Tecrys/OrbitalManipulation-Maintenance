@@ -1,0 +1,57 @@
+{
+  "id": "omm_s_rivet",
+  "specClass": "projectile",
+  "projectileSpecId": "omm_rivet_shot",
+  "type": "BALLISTIC",
+  "size": "SMALL",
+  "turretSprite": "graphics/weapons/omm_s_rivet_tu_barrel.png",
+  "turretGunSprite": "graphics/weapons/omm_s_rivet_tu.png",
+  "hardpointSprite": "graphics/weapons/omm_s_rivet_hp_barrel.png",
+  "hardpointGunSprite": "graphics/weapons/omm_s_rivet_hp.png",
+  "visualRecoil": 4,
+  "renderHints": [
+    "RENDER_BARREL_BELOW"
+  ],
+  "turretOffsets": [
+    11.5,
+    1.5,
+    11.5,
+    4.5
+  ],
+  "turretAngleOffsets": [
+    0,
+    0
+  ],
+  "hardpointOffsets": [
+    16.5,
+    0.5,
+    16.5,
+    3.5
+  ],
+  "hardpointAngleOffsets": [
+    0,
+    0
+  ],
+  "barrelMode": "DUAL",
+  "animationType": "SMOKE",
+  "autocharge": true,
+  "smokeSpec": {
+    "particleSizeMin": 1,
+    "particleSizeRange": 6,
+    "cloudParticleCount": 3,
+    "cloudDuration": 2,
+    "cloudRadius": 10,
+    "blowbackParticleCount": 5,
+    "blowbackDuration": 2,
+    "blowbackLength": 30,
+    "blowbackSpread": 10,
+    "particleColor": [
+      255,
+      255,
+      255,
+      255
+    ]
+  },
+  "fireSoundOne": "omm-klaaa",
+  "fireSoundTwo": "omm_pffft"
+}

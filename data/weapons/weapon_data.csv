@@ -1,4 +1,20 @@
 name,id,tier,rarity,base value,range,damage/second,damage/shot,emp,impact,turn rate,OPs,ammo,ammo/sec,reload size,type,energy/shot,energy/second,chargeup,chargedown,burst size,burst delay,min spread,max spread,spread/shot,spread decay/sec,beam speed,proj speed,launch speed,flight time,proj hitpoints,autofireAccBonus,extraArcForAI,hints,tags,groupTag,tech/manufacturer,for weapon tooltip>>,primaryRoleStr,speedStr,trackingStr,turnRateStr,accuracyStr,customPrimary,customPrimaryHL,customAncillary,customAncillaryHL,noDPSInTooltip,number
+Rivet Gun,omm_s_rivet,1,0.3,800,600,,100,,5,20,4,,,,KINETIC,60,,.3,2.5,1,0.05,0.5,6,2,2,,2400,,,10,,,PD,"pd6, kinetic3, SR, merc, ind",,,,Construction,,,,,,,,,,3.65
+Rivet Battery,omm_m_rivet,1,0.3,800,600,,100,,5,20,11,,,,KINETIC,60,,.3,0.7,1,0.05,0.5,6,2,2,,2400,,,10,,,PD,"pd6, kinetic3, SR, merc, ind",,,,Construction,,,,,,,,,,3.65
+,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
 ,FreitagCorporation_ShieldEffect_wpn,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,SYSTEM,,,,,,,,,,,,,,,
 Mining Laser,FreitagCorporation_mininglaser,,,100,600,50,,,0,20,0,,,,ENERGY,,10,0.25,0.25,,,,,,,2400,,,,,,,SYSTEM,"beam0, energy0",,,,General,,,,,,,,,,
 Mining Laser,FreitagCorporation_triple_mininglaser,,,100,500,150,,,0,20,0,,,,ENERGY,,30,0.25,0.25,,,,,,,2400,,,,,,,SYSTEM,"beam0, energy0",,,,General,,,,,,,,,,
@@ -88,7 +104,7 @@ Mining Laser,FreitagCorporation_triple_mininglaser,,,100,500,150,,,0,20,0,,,,ENE
 right Blinker,omm_greenblinker,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,SYSTEM,,,,,,,,,,,,,,,
 left Blinker,omm_redblinker,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,SYSTEM,,,,,,,,,,,,,,,
 ,omm_targeting_laser,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,SYSTEM,,,,,,,,,,,,,,,
-Targeting Laser,omm_targeting_laser_new,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,SYSTEM,,,,,,,,,,,,,,,
+Targeting Laser,omm_targeting_laser_new,,,,,,,,,,,,,,,,,,,,,,,,,10000,,,,,,,SYSTEM,,,,,,,,,,,,,,,
 ,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
 Chaff Launcher,omm_chafflauncher,1,,1000,70,,1,,2,40,8,,,,FRAGMENTATION,5,,0,1,1,,0,10,2,10,,700,,,30,,,"STRIKE, PD_ALSO, USE_VS_FRIGATES, FIRE_WHEN_INEFFICIENT","pd13, SR, no_drop, no_drop_salvage",,,,Anti Shield,,,,,,,,,,4
 ,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,

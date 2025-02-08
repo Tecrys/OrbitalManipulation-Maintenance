@@ -15,7 +15,13 @@
 		"music_omm_encounter_hostile":[
 			{"file":"OMM_encounter_hostile.ogg","source":"sounds/music","volume":0.52,"randomStart":true},
 		],
-	}
+	},
+
+			"omm-klaaa":[{"file":"sounds/omm-klaaa.ogg","pitch":1,"volume":0.1}],
+			"omm_pffft":[{"file":"sounds/omm_pffft.ogg","pitch":1,"volume":0.1}],			
+			
+
+	
 }
 
 
