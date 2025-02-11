@@ -1,0 +1,8 @@
+<component name="ArtifactManager">
+  <artifact type="jar" name="OrbitalManipulation&amp;Maintenance:jar">
+    <output-path>$PROJECT_DIR$/jar</output-path>
+    <root id="archive" name="OrbitalManipulationAndMaintenance.jar">
+      <element id="module-output" name="OrbitalManipulationAndMaintenance" />
+    </root>
+  </artifact>
+</component>
