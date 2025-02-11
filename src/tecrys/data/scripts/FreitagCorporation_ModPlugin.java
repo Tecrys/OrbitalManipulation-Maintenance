@@ -47,42 +47,44 @@ public class FreitagCorporation_ModPlugin extends BaseModPlugin {
     public void onNewGame() {
         boolean haveNexerelin = Global.getSettings().getModManager().isModEnabled("nexerelin");
 
-        if (!haveNexerelin || SectorManager.getCorvusMode()) {
+        if (!haveNexerelin || SectorManager.getManager().isCorvusMode()) {
                     if (Global.getSector() == null) {
             return;
         }
             new ommGen().generate(Global.getSector());
-            
-
         }
     }
 
     @Override
     public void onGameLoad(boolean newGame) {
-        if (Global.getSector().getEntityById("freitag_hq") == null) { //star id
-            new ommGen().generate(Global.getSector());
-        }
-        if (Global.getSector().getEconomy().getMarket("eldfell").getSubmarket("freitag_submarket") == null)
-        {
-            MarketAPI market = Global.getSector().getEconomy().getMarket("eldfell"); //to get the market
-        if (market != null) {
-            market.addSubmarket("freitag_submarket"); //add the submarket into the market
-        }
-    }
-        if (Global.getSector().getEconomy().getMarket("new_maxios").getSubmarket("freitag_submarket") == null)
-        {
-            MarketAPI market2 = Global.getSector().getEconomy().getMarket("new_maxios"); //to get the market
-            if (market2 != null) {
-                market2.addSubmarket("freitag_submarket"); //add the submarket into the market
-            }
-        }
-        if (Global.getSector().getEconomy().getMarket("ilm").getSubmarket("freitag_submarket") == null)
-        {
-            MarketAPI market3 = Global.getSector().getEconomy().getMarket("ilm"); //to get the market
-            if (market3 != null) {
-                market3.addSubmarket("freitag_submarket"); //add the submarket into the market
-            }
-        }
+        //if we are in random sector, none of this code is run
+        boolean haveNexerelin = Global.getSettings().getModManager().isModEnabled("nexerelin");
+        if(!haveNexerelin || SectorManager.getManager().isCorvusMode()){
 
+            if (Global.getSector().getEntityById("freitag_hq") == null) { //star id
+                new ommGen().generate(Global.getSector());
+            }
+            if (Global.getSector().getEconomy().getMarket("eldfell").getSubmarket("freitag_submarket") == null)
+            {
+                MarketAPI market = Global.getSector().getEconomy().getMarket("eldfell"); //to get the market
+                if (market != null) {
+                    market.addSubmarket("freitag_submarket"); //add the submarket into the market
+                }
+            }
+            if (Global.getSector().getEconomy().getMarket("new_maxios").getSubmarket("freitag_submarket") == null)
+            {
+                MarketAPI market2 = Global.getSector().getEconomy().getMarket("new_maxios"); //to get the market
+                if (market2 != null) {
+                    market2.addSubmarket("freitag_submarket"); //add the submarket into the market
+                }
+            }
+            if (Global.getSector().getEconomy().getMarket("ilm").getSubmarket("freitag_submarket") == null)
+            {
+                MarketAPI market3 = Global.getSector().getEconomy().getMarket("ilm"); //to get the market
+                if (market3 != null) {
+                    market3.addSubmarket("freitag_submarket"); //add the submarket into the market
+                }
+            }
+        }
     }
 }

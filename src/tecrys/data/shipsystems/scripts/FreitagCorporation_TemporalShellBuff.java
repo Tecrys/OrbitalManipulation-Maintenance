@@ -23,6 +23,8 @@ import org.lwjgl.util.vector.Vector2f;
 
 public class FreitagCorporation_TemporalShellBuff extends BaseShipSystemScript {
 
+    private static boolean graphicsLibEnabled = Global.getSettings().getModManager().isModEnabled("shaderLib");
+
     public static final float MAX_TIME_MULT = 10f;
 
     protected static float TEMPORAL_SHELL_RANGE = 1500f;
@@ -258,13 +260,15 @@ public class FreitagCorporation_TemporalShellBuff extends BaseShipSystemScript {
 
                 jitterLevel = (float) Math.sqrt(jitterLevel);
           float targetRadius = target.getShieldRadiusEvenIfNoShield();
-                          WaveDistortion wave = new WaveDistortion(target.getLocation(), target.getVelocity());
-          wave.setSize(targetRadius * 3.5F);
-          wave.setIntensity(targetRadius*2);
-          wave.setArcAttenuationWidth(150);
-          wave.fadeInSize(0.75F);
-          wave.fadeOutIntensity(0.5F);
-          DistortionShader.addDistortion((DistortionAPI)wave);
+          if(graphicsLibEnabled) {
+              WaveDistortion wave = new WaveDistortion(target.getLocation(), target.getVelocity());
+              wave.setSize(targetRadius * 3.5F);
+            wave.setIntensity(targetRadius*2);
+            wave.setArcAttenuationWidth(150);
+            wave.fadeInSize(0.75F);
+            wave.fadeOutIntensity(0.5F);
+              DistortionShader.addDistortion((DistortionAPI) wave);
+          }
                 target.setJitter(this, JITTER_COLOR, jitterLevel, 3, 0, 0 + jitterRangeBonus);
                 target.setJitterUnder(this, JITTER_UNDER_COLOR, jitterLevel, 25, 0f, 7f + jitterRangeBonus);
 

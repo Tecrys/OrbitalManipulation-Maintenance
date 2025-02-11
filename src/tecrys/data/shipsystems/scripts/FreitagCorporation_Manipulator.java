@@ -21,6 +21,7 @@ import org.lwjgl.util.vector.Vector2f;
 
 public class FreitagCorporation_Manipulator extends BaseShipSystemScript {
 
+    private static boolean graphicsLibEnabled = Global.getSettings().getModManager().isModEnabled("shaderLib");
     private static Map mag = new HashMap();
 
     static {
@@ -95,8 +96,9 @@ public class FreitagCorporation_Manipulator extends BaseShipSystemScript {
             for (int i = 0; i < 5; i++) {
                 Global.getCombatEngine().spawnEmpArcVisual(positionRepulse, null, MathUtils.getRandomPointOnCircumference(positionRepulse, 10), null, 10, Color.cyan, Color.BLUE);
             }
-
-            CustomRippleDistortion(positionRepulse, new Vector2f(0, 0), 200, 3f, false, 0f, 360f, 0.5f, 0f, 0.5f, 0.5f, 1f, 0f);
+            if(graphicsLibEnabled) {
+                CustomRippleDistortion(positionRepulse, new Vector2f(0, 0), 200, 3f, false, 0f, 360f, 0.5f, 0f, 0.5f, 0.5f, 1f, 0f);
+            }
             if (ship.getSystem().getState().equals(ACTIVE))//ship.getSystem().setCooldownRemaining(0.1f);
             {
                 ship.getSystem().deactivate();

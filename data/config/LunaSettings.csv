@@ -1,3 +1,4 @@
 fieldID,fieldName,fieldType,defaultValue,secondaryValue,fieldDescription,minValue,maxValue,tab
 omm_missile_key,Missile Hotkey,Keycode,0,,"Hotkey for firing all missiles. The hotkey for them can be set here, if the setting is not changed, it will default to [middle click] instead. Keys used by other parts of the game might not work correctly.",,,Controls
-,,,,,,,,
+omm_faction,Freitag Faction,Boolean,TRUE,,Setting for if the Freitag Corporation are an independent faction or part of the independents. Does not work with random sector.,,,Faction
+omm_indie_tech_share,Freitag Tech Share with Independents,Boolean,FALSE,,Independents faction has access to Freitag blueprints,,,Faction

@@ -6,7 +6,7 @@
   	"showDamageWhenDecorative":true,
   "collisionClass": "RAY",
   "collisionClassByFighter": "RAY_FIGHTER",
-  "turretSprite": "graphics/ships/Koura/omm_Koura.png",
+  "turretSprite": "graphics/ships/Koura/omm_koura.png",
   "hardpointSprite": "",
   "glowColor": [
     255,
