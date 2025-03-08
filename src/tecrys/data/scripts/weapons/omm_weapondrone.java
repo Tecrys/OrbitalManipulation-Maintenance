@@ -97,8 +97,8 @@ public class omm_weapondrone implements EveryFrameWeaponEffectPlugin {
                             }
                             for (int i = 0; i < weapons.size(); i++) {
                                 if (weaponAPI.getSlot().getId().equals("droneslot")) {
-                                    weaponAPI.disable(true);
-                                    this.SHIP.removeWeaponFromGroups(weaponAPI);                   //removes the weapons swap "interface" from weapon groups
+                            //       weaponAPI.disable(true);
+                                    //this.SHIP.removeWeaponFromGroups(weaponAPI);                   //removes the weapons swap "interface" from weapon groups
                                 }
                             }
 //                if (weaponAPI.getBarrelSpriteAPI() != null) {

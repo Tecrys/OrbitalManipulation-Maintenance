@@ -8,10 +8,11 @@ import com.fs.starfarer.api.campaign.econ.MarketAPI;
 import com.fs.starfarer.api.combat.ShipAIPlugin;
 import com.fs.starfarer.api.combat.ShipAPI;
 import com.fs.starfarer.api.fleet.FleetMemberAPI;
+import exerelin.campaign.SectorManager;
 import lunalib.lunaSettings.LunaSettings;
 import tecrys.data.scripts.world.ommGen;
 import tecrys.data.scripts.ai.repairdroneai;
-import exerelin.campaign.SectorManager;
+
 import tecrys.data.utils.OMMSettings;
 
 

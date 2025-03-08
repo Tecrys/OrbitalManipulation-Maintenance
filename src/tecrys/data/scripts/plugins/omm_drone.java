@@ -98,8 +98,8 @@ public class omm_drone implements EveryFrameCombatPlugin {
 
                     weap.getSprite().setSize(0, 0);
 
-                    weap.disable(true);
-                    ship.removeWeaponFromGroups(weap);                           //removes the weapons swap "interface" from weapon groups
+                   // weap.disable(true);
+                    //ship.removeWeaponFromGroups(weap);                           //removes the weapons swap "interface" from weapon groups
 
                     if (weap.getUnderSpriteAPI() != null) {
                         weap.getUnderSpriteAPI().setSize(0, 0);

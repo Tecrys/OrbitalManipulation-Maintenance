@@ -11,6 +11,7 @@ import com.fs.starfarer.api.combat.WeaponAPI;
 import static com.fs.starfarer.api.combat.WeaponAPI.WeaponType.MISSILE;
 import com.fs.starfarer.api.combat.WeaponGroupAPI;
 import com.fs.starfarer.api.combat.listeners.AdvanceableListener;
+import com.fs.starfarer.api.loading.WeaponSpecAPI;
 import com.fs.starfarer.api.util.IntervalUtil;
 import org.lazywizard.lazylib.MathUtils;
 import org.lazywizard.lazylib.VectorUtils;
@@ -90,7 +91,8 @@ public class compositepodManager implements AdvanceableListener {
                         {
                             if (dronewep.getSlot().getId().equals("compositeslot"))
                                 comwep = dronewep;
-                        } {
+                        }
+                        {
                             if (dronewep.getSlot().getId().equals("omm_laser"))
                                 laswep = dronewep;
                         }
@@ -100,15 +102,17 @@ public class compositepodManager implements AdvanceableListener {
                         {
 
                             if (player == this.mothership && !drone.isLanding() && !drone.isLiftingOff() && dronewep.getSlot().getId().equals("omm_laser") && comwep != null
-                                    ) {
+                            ) {
                                 //dronewep.getAnimation().setFrame(01);
                                 // dronewep.getSprite().setHeight(synwep.getRange()*2);
                                 // dronewep.getSprite().setCenterY(synwep.getRange());
                                 laswep.setForceFireOneFrame(true);
                                 laswep.ensureClonedSpec();
-                                laswep.getSpec().setMaxRange(comwep.getRange()-((comwep.getRange()/100)*20));  }
-                            if (dronewep.getAnimation() != null && !engine.isUIAutopilotOn()){
-                                dronewep.getAnimation().setFrame(00);}
+                                laswep.getSpec().setMaxRange(comwep.getRange() - ((comwep.getRange() / 100) * 20));
+                            }
+                            if (dronewep.getAnimation() != null && !engine.isUIAutopilotOn()) {
+                                dronewep.getAnimation().setFrame(00);
+                            }
                         }
                         for (WeaponGroupAPI group : drone.getWeaponGroupsCopy()) {
                             if ((!group.isAutofiring() && player != this.mothership) || (!group.isAutofiring() && this.mothership.equals(player) && !engine.isUIAutopilotOn())) {
@@ -117,7 +121,14 @@ public class compositepodManager implements AdvanceableListener {
                                 drone.giveCommand(ShipCommand.TOGGLE_AUTOFIRE, null, drone.getWeaponGroupsCopy().indexOf(group));
                             }
                         }
-                        if (this.mothership.equals(player) &&  engine.isUIAutopilotOn()) {
+                        WeaponGroupAPI activegroup = this.mothership.getSelectedGroupAPI();
+                        if (this.mothership.equals(player) && engine.isUIAutopilotOn() && (activegroup != null)) {
+
+                            List<WeaponAPI> activeWeapon = activegroup.getWeaponsCopy();
+                            for (WeaponAPI weapon : activeWeapon) {
+                                weapon.ensureClonedSpec();
+                                WeaponSpecAPI spec = weapon.getSpec();
+                                spec.setMaxRange(0);
                             drone.getVariant().assignUnassignedWeapons();
                             float diff = MathUtils.getShortestRotation(dronewep.getCurrAngle(), angle);
                             float maxVel = dronewep.getTurnRate();
@@ -128,24 +139,24 @@ public class compositepodManager implements AdvanceableListener {
                             float maxVeldrone = drone.getMaxTurnRate();
                             diffdrone = MathUtils.clamp(diffdrone, -maxVeldrone, maxVeldrone);
                             drone.setFacing(diffdrone + drone.getFacing());        //sets facing of the drone
-                            if (Mouse.isButtonDown(0) && !player.getFluxTracker().isOverloadedOrVenting() && (dronewep.getType() != MISSILE) && dronewep.getSlot().getId().equals("compositeslot")) {
+                            if (Mouse.isButtonDown(0) && !player.getFluxTracker().isOverloadedOrVenting() && (dronewep.getType() != MISSILE) && dronewep.getSlot().getId().equals("compositeslot")
+                                    && weapon.getSlot().getId().equals("compositeslot")) {
                                 comwep.setForceFireOneFrame(true);           //clicky left drone shooty
                             }
                             if (Keyboard.isKeyDown(KEY_R)) {
                                 drone.setShipTarget(this.mothership.getShipTarget());           //clicky left drone shooty
                             }
-                            if ( OMMSettings.missile_key == 0 && Mouse.isButtonDown(2) && !player.getFluxTracker().isOverloadedOrVenting() && (dronewep.getType() == MISSILE) && dronewep.getSlot().getId().equals("compositeslot")) {
+                            if (OMMSettings.missile_key == 0 && Mouse.isButtonDown(2) && !player.getFluxTracker().isOverloadedOrVenting() && (dronewep.getType() == MISSILE) && dronewep.getSlot().getId().equals("compositeslot")) {
                                 comwep.setForceFireOneFrame(true);            //clicky left drone shooty
-                            }
-                                else if (Keyboard.isKeyDown(OMMSettings.missile_key) && !player.getFluxTracker().isOverloadedOrVenting() && (dronewep.getType() == MISSILE) && dronewep.getSlot().getId().equals("compositeslot")) {
+                            } else if (Keyboard.isKeyDown(OMMSettings.missile_key) && !player.getFluxTracker().isOverloadedOrVenting() && (dronewep.getType() == MISSILE) && dronewep.getSlot().getId().equals("compositeslot")) {
                                 comwep.setForceFireOneFrame(true);
                             }
+                        }
                         }
                         if (this.mothership.getFluxTracker().isOverloaded()) {
                             float OverloadTime = this.mothership.getFluxTracker().getOverloadTimeRemaining();
                             drone.getFluxTracker().forceOverload(OverloadTime);
-                        }
-                                                else if (!this.mothership.getFluxTracker().isOverloaded()){
+                        } else if (!this.mothership.getFluxTracker().isOverloaded()) {
                             drone.getFluxTracker().stopOverload();
                         }
                         if (player != this.mothership) {
@@ -165,8 +176,8 @@ public class compositepodManager implements AdvanceableListener {
                             }
                             for (int i = 0; i < weapons.size(); i++) {
                                 if (weaponAPI.getSlot().getId().equals("compositeslot")) {
-                                    weaponAPI.disable(true);
-                                    this.mothership.removeWeaponFromGroups(weaponAPI);                   //removes the weapons swap "interface" from weapon groups
+                                    //    weaponAPI.disable(true);
+                                    // this.mothership.removeWeaponFromGroups(weaponAPI);                   //removes the weapons swap "interface" from weapon groups
                                 }
                             }
 //                if (weaponAPI.getBarrelSpriteAPI() != null) {
@@ -296,7 +307,7 @@ public class compositepodManager implements AdvanceableListener {
                                 stats.getVariant().clearSlot("compositeslot");
                                 stats.getVariant().addWeapon("compositeslot", this.mothership.getVariant().getWeaponId("compositeslot"));
                                 stats.getVariant().getWeaponSpec("compositeslot").addTag("FIRE_WHEN_INEFFICIENT");
-                                ship.removeWeaponFromGroups(wep);
+                              //  ship.removeWeaponFromGroups(wep);
 
 
                                 wing.orderReturn(fighter);

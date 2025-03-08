@@ -152,7 +152,7 @@
       "size": "MEDIUM",
       "type": "HYBRID",
       "mount": "TURRET",
-      "arc": 360,
+      "arc": 0,
       "angle": 0,
       "locations": [92, 146],
       "renderOrderMod": 3
@@ -162,7 +162,7 @@
       "size": "SMALL",
       "type": "ENERGY",
       "mount": "TURRET",
-      "arc": 360,
+      "arc": 0,
       "angle": 0,
       "locations": [147, 147.5],
       "renderOrderMod": 3
@@ -219,7 +219,7 @@
       "size": "SMALL",
       "type": "SYNERGY",
       "mount": "HARDPOINT",
-      "arc": 360,
+      "arc": 0,
       "angle": 0,
       "locations": [156.5, 102]
     },

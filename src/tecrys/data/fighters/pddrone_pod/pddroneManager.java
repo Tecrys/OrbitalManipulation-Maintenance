@@ -102,7 +102,7 @@ public class pddroneManager implements AdvanceableListener {
                             stats.getVariant().clearSlot("pdslot");
                             stats.getVariant().addWeapon("pdslot", this.mothership.getVariant().getWeaponId("pdslot"));
                             stats.getVariant().getWeaponSpec("pdslot").addTag("FIRE_WHEN_INEFFICIENT");
-                            ship.removeWeaponFromGroups(wep);
+                            //ship.removeWeaponFromGroups(wep);
 
 
                             wing.orderReturn(fighter);

@@ -1,0 +1,1354 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<module external.linked.project.id="OrbitalManipulation&amp;amp;Maintenance:main" external.linked.project.path="$MODULE_DIR$/../../../../OrbitalManipulation&amp;amp;Maintenance" external.root.project.path="$MODULE_DIR$/../../../../OrbitalManipulation&amp;amp;Maintenance" external.system.id="GRADLE" external.system.module.group="" external.system.module.type="sourceSet" external.system.module.version="0.8.1" type="JAVA_MODULE" version="4">
+  <component name="FacetManager">
+    <facet external-system-id="GRADLE" type="kotlin-language" name="Kotlin">
+      <configuration version="5" platform="JVM 1.6" allPlatforms="JVM [1.6]" useProjectSettings="false">
+        <compilerSettings>
+          <option name="additionalArguments" value="-Xallow-no-source-files" />
+        </compilerSettings>
+        <compilerArguments>
+          <flagArguments>
+            <flagArg name="noReflect" arg="true" />
+            <flagArg name="noStdlib" arg="true" />
+          </flagArguments>
+          <stringArguments>
+            <stringArg name="classpath">
+              <args>
+                <arg>$MODULE_DIR$/../../../../AdvancedGunneryControl-1.18.0/jars/agc/AdvancedGunneryControl/1.18.0/AdvancedGunneryControl-1.18.0-javadoc.jar</arg>
+                <arg>$MODULE_DIR$/../../../../AdvancedGunneryControl-1.18.0/jars/agc/AdvancedGunneryControl/1.18.0/AdvancedGunneryControl-1.18.0-sources.jar</arg>
+                <arg>$MODULE_DIR$/../../../../AdvancedGunneryControl-1.18.0/jars/agc/AdvancedGunneryControl/1.18.0/AdvancedGunneryControl-1.18.0.jar</arg>
+                <arg>$MODULE_DIR$/../../../../Anubis-1.0/jars/ANUBIS.jar</arg>
+                <arg>$MODULE_DIR$/../../../../AoTD- Vaults of Knowledge-3.1.6/jars/Vok.jar</arg>
+                <arg>$MODULE_DIR$/../../../../Arma Armatura-3.1.4/jars/armaa.jar</arg>
+                <arg>$MODULE_DIR$/../../../../ArthrsShipsNShit/ArthrsShipsNShit.jar</arg>
+                <arg>$MODULE_DIR$/../../../../Ashes of  The Domain- Vaults of Knowledge/jars/Vok.jar</arg>
+                <arg>$MODULE_DIR$/../../../../Ashlib-1.1.5/jars/ashlib.jar</arg>
+                <arg>$MODULE_DIR$/../../../../Autosave/jars/lw_Autosave.jar</arg>
+                <arg>$MODULE_DIR$/../../../../A_S-F/jars/ASF.jar</arg>
+                <arg>$MODULE_DIR$/../../../../bananaFactory/jars/bananaFactory.jar</arg>
+                <arg>$MODULE_DIR$/../../../../bananaLib/jars/bananaLib.jar</arg>
+                <arg>$MODULE_DIR$/../../../../better_combat-main/bcom.jar</arg>
+                <arg>$MODULE_DIR$/../../../../Bionic Alteration-0.2.2/jars/bionicalteration.jar</arg>
+                <arg>$MODULE_DIR$/../../../../Bionic-Alteration-main/jars/bionicalteration.jar</arg>
+                <arg>$MODULE_DIR$/../../../../Bird's Collection/jars/birds.jar</arg>
+                <arg>$MODULE_DIR$/../../../../Blackrock Drive Yards/jars/BR.jar</arg>
+                <arg>$MODULE_DIR$/../../../../Building Menu Overhaul-1.1.4/jars/bmo.jar</arg>
+                <arg>$MODULE_DIR$/../../../../Bultach Coalition/jars/ORKS.jar</arg>
+                <arg>$MODULE_DIR$/../../../../CaptainsLog/CaptainsLog.jar</arg>
+                <arg>$MODULE_DIR$/../../../../Combat Chatter/jars/CombatChatter.jar</arg>
+                <arg>$MODULE_DIR$/../../../../Combat Chatter-1.14.2/jars/CombatChatter.jar</arg>
+                <arg>$MODULE_DIR$/../../../../Combat Radar/jars/lw_Radar.jar</arg>
+                <arg>$MODULE_DIR$/../../../../CombatBackgroundEnhanced/jars/CombatBackgroundEnhanced.jar</arg>
+                <arg>$MODULE_DIR$/../../../../Commissioned Crews/jar/CommissionedCrews.jar</arg>
+                <arg>$MODULE_DIR$/../../../../Console Commands/jars/lw_Console.jar</arg>
+                <arg>$MODULE_DIR$/../../../../DakkaHolics/jars/DakkaHolics.jar</arg>
+                <arg>$MODULE_DIR$/../../../../Dassault-Mikoyan Engineering/jars/DME.jar</arg>
+                <arg>$MODULE_DIR$/../../../../DemtoShipPack/jars/DemtoShippack.jar</arg>
+                <arg>$MODULE_DIR$/../../../../Detailed Combat Results-5.4.1/jars/StarSectorDetailedCombatResults.jar</arg>
+                <arg>$MODULE_DIR$/../../../../DetailedCombatResults/jars/StarSectorDetailedCombatResults.jar</arg>
+                <arg>$MODULE_DIR$/../../../../Diable Avionics - Seal balance patch/jars/Diable_Avionics_SealPatch.jar</arg>
+                <arg>$MODULE_DIR$/../../../../Diable Avionics - Seal ed/jars/Diable_Avionics.jar</arg>
+                <arg>$MODULE_DIR$/../../../../DynamicTariffs/jars/DynamicTariffs.jar</arg>
+                <arg>$MODULE_DIR$/../../../../ElvenSector/jars/es.jar</arg>
+                <arg>$MODULE_DIR$/../../../../Exotica-Technologies-v1.8.5/jars/Exotica-Technologies.jar</arg>
+                <arg>$MODULE_DIR$/../../../../Experimental Hull Modifications-0.8.7HF/jars/lyr_ehm.jar</arg>
+                <arg>$MODULE_DIR$/../../../../fleethistory/jars/fleethistory.jar</arg>
+                <arg>$MODULE_DIR$/../../../../FleetSizeByDP/FleetSizeByDP.jar</arg>
+                <arg>$MODULE_DIR$/../../../../Flux Reticle/jars/FluxReticle.jar</arg>
+                <arg>$MODULE_DIR$/../../../../FSF_MilitaryCorporation/jars/FSF_MilitaryCorporation.jar</arg>
+                <arg>$MODULE_DIR$/../../../../Goat_Aviation_Bureau/jars/Goat_Aviation_Bureau_ss.jar</arg>
+                <arg>$MODULE_DIR$/../../../../GraphicsLib/jars/Graphics.jar</arg>
+                <arg>$MODULE_DIR$/../../../../HMI/jars/HMI.jar</arg>
+                <arg>$MODULE_DIR$/../../../../HMI_brighton/jars/HMI_brighton.jar</arg>
+                <arg>$MODULE_DIR$/../../../../HMI_Supervillains/jars/HMI_Supervillains.jar</arg>
+                <arg>$MODULE_DIR$/../../../../holy_covenant_of_kemet/jars/holy_covenant_of_kemet.jar</arg>
+                <arg>$MODULE_DIR$/../../../../Hyperdrive/jars/Hyperdrive.jar</arg>
+                <arg>$MODULE_DIR$/../../../../Iron Shell 1.183ak/jars/EternalIronShell.jar</arg>
+                <arg>$MODULE_DIR$/../../../../Knights of Ludd/jars/KnightsOfSelkie.jar</arg>
+                <arg>$MODULE_DIR$/../../../../Knights of Ludd-1.3.6/jars/KnightsOfSelkie.jar</arg>
+                <arg>$MODULE_DIR$/../../../../Konturga - XIII Mostly Vanilla Ships/jars/KPF2.jar</arg>
+                <arg>$MODULE_DIR$/../../../../Konturga - XIII Ships/jars/KPF2.jar</arg>
+                <arg>$MODULE_DIR$/../../../../Kyeltziv Technocracy/jars/kyeltziv.jar</arg>
+                <arg>$MODULE_DIR$/../../../../LazyLib/jars/LazyLib-Console.jar</arg>
+                <arg>$MODULE_DIR$/../../../../LazyLib/jars/LazyLib-Kotlin.jar</arg>
+                <arg>$MODULE_DIR$/../../../../LazyLib/jars/LazyLib.jar</arg>
+                <arg>$MODULE_DIR$/../../../../Leading Pip/jars/LeadingPip.jar</arg>
+                <arg>$MODULE_DIR$/../../../../LOST_SECTOR-v.0.6.2d/jars/LOST_SECTOR.jar</arg>
+                <arg>$MODULE_DIR$/../../../../Luddic_Enhancement/jars/Luddic_Enhancement.jar</arg>
+                <arg>$MODULE_DIR$/../../../../LunaLib/jars/LunaLib-Kotlin.jar</arg>
+                <arg>$MODULE_DIR$/../../../../LunaLib/jars/LunaLib.jar</arg>
+                <arg>$MODULE_DIR$/../../../../LunaLib-1.8.7/jars/LunaLib-Kotlin.jar</arg>
+                <arg>$MODULE_DIR$/../../../../LunaLib-1.8.7/jars/LunaLib.jar</arg>
+                <arg>$MODULE_DIR$/../../../../Magellan Protectorate 1.5.a/jars/Magellans.jar</arg>
+                <arg>$MODULE_DIR$/../../../../MagicLib/jars/MagicLib-Kotlin.jar</arg>
+                <arg>$MODULE_DIR$/../../../../MagicLib/jars/MagicLib.jar</arg>
+                <arg>$MODULE_DIR$/../../../../MagicLib-1.4.6/jars/MagicLib-Kotlin.jar</arg>
+                <arg>$MODULE_DIR$/../../../../MagicLib-1.4.6/jars/MagicLib.jar</arg>
+                <arg>$MODULE_DIR$/../../../../MnemonicUtils-0.4.1/jars/MnemonicUtils.jar</arg>
+                <arg>$MODULE_DIR$/../../../../MnemonicUtils-v0.3.0/jars/MnemonicSensors.jar</arg>
+                <arg>$MODULE_DIR$/../../../../MnemonicUtils-v0.3.0/jars/MnemonicUtils.jar</arg>
+                <arg>$MODULE_DIR$/../../../../More.Combat.Terrain.Effects/jars/niko_MCTE.jar</arg>
+                <arg>$MODULE_DIR$/../../../../Neoteric Advent - 0.4.2.1/jars/neoteric.jar</arg>
+                <arg>$MODULE_DIR$/../../../../New Beginnings/jars/NewBeginnings.jar</arg>
+                <arg>$MODULE_DIR$/../../../../Nexerelin-0.11.3c/jars/ExerelinCore.jar</arg>
+                <arg>$MODULE_DIR$/../../../../Nomadic Survival/jars/NomadicSurvival.jar</arg>
+                <arg>$MODULE_DIR$/../../../../Nomadic Survival-1.4.1/jars/NomadicSurvival.jar</arg>
+                <arg>$MODULE_DIR$/../../../gradle/wrapper/gradle-wrapper.jar</arg>
+                <arg>$MODULE_DIR$/../../../jar/FreitagCorporation - Copy.jar</arg>
+                <arg>$MODULE_DIR$/../../../jar/FreitagCorporation.jar</arg>
+                <arg>$MODULE_DIR$/../../../../PAGSM v1.14.1/jars/SFC.jar</arg>
+                <arg>$MODULE_DIR$/../../../../PearsonExotronics/jars/PearsonExotronics.jar</arg>
+                <arg>$MODULE_DIR$/../../../../Perilous Expanse/jars/NomadicSurvival.jar</arg>
+                <arg>$MODULE_DIR$/../../../../PMMM/jars/PMMM.jar</arg>
+                <arg>$MODULE_DIR$/../../../../PMMM-1.7.6/jars/PMMM.jar</arg>
+                <arg>$MODULE_DIR$/../../../../prv Agni/jar/prvagni.jar</arg>
+                <arg>$MODULE_DIR$/../../../../prv Extraworks/jar/prvextra.jar</arg>
+                <arg>$MODULE_DIR$/../../../../prv Library/jar/prvlib.jar</arg>
+                <arg>$MODULE_DIR$/../../../../prv Rust Belt/jar/prvrb.jar</arg>
+                <arg>$MODULE_DIR$/../../../../prv Starworks/jar/prv.jar</arg>
+                <arg>$MODULE_DIR$/../../../../Quality Captains/jars/Captains.jar</arg>
+                <arg>$MODULE_DIR$/../../../../Random Assortment of Things-2.5.12/jars/RandomAssortmentofThings.jar</arg>
+                <arg>$MODULE_DIR$/../../../../Random-Assortment-of-Things/jars/RandomAssortmentofThings.jar</arg>
+                <arg>$MODULE_DIR$/../../../../RotcesRats/jars/Rotcesrats.jar</arg>
+                <arg>$MODULE_DIR$/../../../../San-Iris0.9.91-1/jars/Sikr-Iris.jar</arg>
+                <arg>$MODULE_DIR$/../../../../Scy Nation/jars/SCY_code.jar</arg>
+                <arg>$MODULE_DIR$/../../../../Scy Nation-1.8.4/jars/SCY_code.jar</arg>
+                <arg>$MODULE_DIR$/../../../../Secrets of the Frontier Prerelease 14/jars/secretsofthefrontier.jar</arg>
+                <arg>$MODULE_DIR$/../../../../Shadowyards_Wisp/jars/SHI.jar</arg>
+                <arg>$MODULE_DIR$/../../../../Ship and Weapon Pack/jars/SWP.jar</arg>
+                <arg>$MODULE_DIR$/../../../../sidebarLib/jars/sidebarLib.jar</arg>
+                <arg>$MODULE_DIR$/../../../../SS-armaa-3.0.6/jars/armaa.jar</arg>
+                <arg>$MODULE_DIR$/../../../../starsector-symbiotic-void-creatures-main/gradle/wrapper/gradle-wrapper.jar</arg>
+                <arg>$MODULE_DIR$/../../../../starsector-symbiotic-void-creatures-main/jars/SymbioticVoidCreatures.jar</arg>
+                <arg>$MODULE_DIR$/../../../../Starship Legends/jars/StarshipLegends.jar</arg>
+                <arg>$MODULE_DIR$/../../../../Starship Legends-2.5.3/jars/StarshipLegends.jar</arg>
+                <arg>$MODULE_DIR$/../../../../Substance.Abuse 1.1.a/jars/alcoholism.jar</arg>
+                <arg>$MODULE_DIR$/../../../../svc_hatchery/jars/bugsegg.jar</arg>
+                <arg>$MODULE_DIR$/../../../../System_Marker/jars/System_Marker.jar</arg>
+                <arg>$MODULE_DIR$/../../../../tahlan-shipworks-1.2.7/jars/TahlanShipworks.jar</arg>
+                <arg>$MODULE_DIR$/../../../../TakeNoPrisoners-v0.16.1/jars/TakeNoPrisoners.jar</arg>
+                <arg>$MODULE_DIR$/../../../../terraformer/jars/terraformer.jar</arg>
+                <arg>$MODULE_DIR$/../../../../Terraforming and Station Construction/jar/BoggledTerraformingAndStationConstruction.jar</arg>
+                <arg>$MODULE_DIR$/../../../../Terraforming and Station Construction/libraries/illustrated_entities.jar</arg>
+                <arg>$MODULE_DIR$/../../../../The Nomads/jars/TheNomads.jar</arg>
+                <arg>$MODULE_DIR$/../../../../Torchships/jar/TORCHSHIPS.jar</arg>
+                <arg>$MODULE_DIR$/../../../../Unknown Skies/jars/US.jar</arg>
+                <arg>$MODULE_DIR$/../../../../Unknown Skies-2.0.2/jars/US.jar</arg>
+                <arg>$MODULE_DIR$/../../../../Unthemed Weapons Collection-0.6.7/jars/UnthemedWeaponsCollection.jar</arg>
+                <arg>$MODULE_DIR$/../../../../Unthemed Weapons Utilities/jars/UnthemedWeaponsCollection.jar</arg>
+                <arg>$MODULE_DIR$/../../../../VIC/jars/VIC.jar</arg>
+                <arg>$MODULE_DIR$/../../../../WeaponArcs/jars/WeaponArcs.jar</arg>
+                <arg>$MODULE_DIR$/../../../../WhichMod/jars/WhichMod.jar</arg>
+                <arg>$MODULE_DIR$/../../../../XhanEmpire/jars/XhanEmpire.jar</arg>
+                <arg>$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.jetbrains.kotlin/kotlin-stdlib-jdk7/1.5.31/77e0f2568912e45d26c31fd417a332458508acdf/kotlin-stdlib-jdk7-1.5.31.jar</arg>
+                <arg>$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.jetbrains.kotlin/kotlin-stdlib/1.5.31/6628d61d0f5603568e72d2d5915d2c034b4f1c55/kotlin-stdlib-1.5.31.jar</arg>
+                <arg>$USER_HOME$/.gradle/caches/modules-2/files-2.1/com.thoughtworks.xstream/xstream/1.4.10/dfecae23647abc9d9fd0416629a4213a3882b101/xstream-1.4.10.jar</arg>
+                <arg>$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.lwjgl.lwjgl/lwjgl_util/2.9.3/751f06b62424da056954c67288fd5c494431e350/lwjgl_util-2.9.3.jar</arg>
+                <arg>$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.lwjgl.lwjgl/lwjgl/2.9.3/3df168ac74e4a8c96562cdff24ad352e255bf89c/lwjgl-2.9.3.jar</arg>
+                <arg>$USER_HOME$/.gradle/caches/modules-2/files-2.1/log4j/log4j/1.2.9/55856d711ab8b88f8c7b04fd85ff1643ffbfde7c/log4j-1.2.9.jar</arg>
+                <arg>$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.json/json/20090211/c183aa3a2a6250293808bba12262c8920ce5a51c/json-20090211.jar</arg>
+                <arg>$USER_HOME$/.gradle/caches/modules-2/files-2.1/net.java.jinput/jinput/2.0.7/7795d3dbbcfecd03e3d2bf964b04c0cd042415f7/jinput-2.0.7.jar</arg>
+                <arg>$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.codehaus.janino/janino/3.0.7/1942d938c8f005b563b82d2b282d37bb50ac2bb5/janino-3.0.7.jar</arg>
+                <arg>$MODULE_DIR$/../../../libs/starfarer/starfarer-api/1.0.0/starfarer-api-1.0.0.jar</arg>
+                <arg>$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.jetbrains/annotations/13.0/919f0dfe192fb4e063e7dacadee7f8bb9a2672a9/annotations-13.0.jar</arg>
+                <arg>$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.jetbrains.kotlin/kotlin-stdlib-common/1.5.31/43331609c7de811fed085e0dfd150874b157c32/kotlin-stdlib-common-1.5.31.jar</arg>
+                <arg>$USER_HOME$/.gradle/caches/modules-2/files-2.1/xmlpull/xmlpull/1.1.3.1/2b8e230d2ab644e4ecaa94db7cdedbc40c805dfa/xmlpull-1.1.3.1.jar</arg>
+                <arg>$USER_HOME$/.gradle/caches/modules-2/files-2.1/xpp3/xpp3_min/1.1.4c/19d4e90b43059058f6e056f794f0ea4030d60b86/xpp3_min-1.1.4c.jar</arg>
+                <arg>$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.lwjgl.lwjgl/lwjgl-platform/2.9.3/fbc2afb3e288578e9942578decb6291a490549a0/lwjgl-platform-2.9.3-natives-windows.jar</arg>
+                <arg>$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.lwjgl.lwjgl/lwjgl-platform/2.9.3/b1eafe80093381c56415731e1d64279e6140bcd0/lwjgl-platform-2.9.3-natives-linux.jar</arg>
+                <arg>$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.lwjgl.lwjgl/lwjgl-platform/2.9.3/6686cf6ddaa20b4290aa6599a09bc0d17369be05/lwjgl-platform-2.9.3-natives-osx.jar</arg>
+                <arg>$USER_HOME$/.gradle/caches/modules-2/files-2.1/net.java.jutils/jutils/1.0.0/e12fe1fda814bd348c1579329c86943d2cd3c6a6/jutils-1.0.0.jar</arg>
+                <arg>$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.codehaus.janino/commons-compiler/3.0.7/6a51f1dfd496a3be7eea1678e592a9d379352f80/commons-compiler-3.0.7.jar</arg>
+              </args>
+            </stringArg>
+            <stringArg name="destination" arg="$MODULE_DIR$/../../../build/classes/kotlin/main" />
+            <stringArg name="jvmTarget" arg="1.6" />
+            <stringArg name="moduleName" arg="OrbitalManipulation&amp;Maintenance" />
+            <stringArg name="apiVersion" arg="1.5" />
+            <stringArg name="languageVersion" arg="1.5" />
+          </stringArguments>
+          <arrayArguments>
+            <arrayArg name="friendPaths" />
+            <arrayArg name="pluginClasspaths">
+              <args>
+                <arg>$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.jetbrains.kotlin/kotlin-script-runtime/1.5.0/a2d66828077376fc1851a6fdbf25865935f4101d/kotlin-script-runtime-1.5.0.jar</arg>
+                <arg>$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.jetbrains.kotlin/kotlin-scripting-common/1.5.0/5b78b9cc03552532e8e689a002f1149ab43e44f0/kotlin-scripting-common-1.5.0.jar</arg>
+                <arg>$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.jetbrains.kotlin/kotlin-scripting-jvm/1.5.0/6f2bbad9181cff63b847ac0526cf3d11e5f02f93/kotlin-scripting-jvm-1.5.0.jar</arg>
+                <arg>$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.jetbrains.kotlin/kotlin-stdlib-common/1.5.0/4080d69efca5e39e9b4972f125e40f1607bd6460/kotlin-stdlib-common-1.5.0.jar</arg>
+                <arg>$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.jetbrains.kotlin/kotlin-stdlib/1.5.0/29dae2501ca094416d15af0e21470cb634780444/kotlin-stdlib-1.5.0.jar</arg>
+                <arg>$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.jetbrains.kotlinx/kotlinx-coroutines-core/1.3.8/f62be6d4cbf27781c2969867b4ed952f38378492/kotlinx-coroutines-core-1.3.8.jar</arg>
+                <arg>$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.jetbrains/annotations/13.0/919f0dfe192fb4e063e7dacadee7f8bb9a2672a9/annotations-13.0.jar</arg>
+              </args>
+            </arrayArg>
+            <arrayArg name="pluginOptions" />
+          </arrayArguments>
+        </compilerArguments>
+      </configuration>
+    </facet>
+  </component>
+  <component name="NewModuleRootManager">
+    <output url="file://$MODULE_DIR$/../../../build/classes/java/main" />
+    <exclude-output />
+    <content url="file://$MODULE_DIR$/../../../src">
+      <sourceFolder url="file://$MODULE_DIR$/../../../src" isTestSource="false" />
+    </content>
+    <orderEntry type="inheritedJdk" />
+    <orderEntry type="sourceFolder" forTests="false" />
+    <orderEntry type="module-library" scope="PROVIDED">
+      <library>
+        <CLASSES>
+          <root url="jar://$MODULE_DIR$/../../../../AdvancedGunneryControl-1.18.0/jars/agc/AdvancedGunneryControl/1.18.0/AdvancedGunneryControl-1.18.0-javadoc.jar!/" />
+        </CLASSES>
+        <JAVADOC />
+        <SOURCES />
+      </library>
+    </orderEntry>
+    <orderEntry type="module-library" scope="PROVIDED">
+      <library>
+        <CLASSES>
+          <root url="jar://$MODULE_DIR$/../../../../AdvancedGunneryControl-1.18.0/jars/agc/AdvancedGunneryControl/1.18.0/AdvancedGunneryControl-1.18.0-sources.jar!/" />
+        </CLASSES>
+        <JAVADOC />
+        <SOURCES />
+      </library>
+    </orderEntry>
+    <orderEntry type="module-library" scope="PROVIDED">
+      <library>
+        <CLASSES>
+          <root url="jar://$MODULE_DIR$/../../../../AdvancedGunneryControl-1.18.0/jars/agc/AdvancedGunneryControl/1.18.0/AdvancedGunneryControl-1.18.0.jar!/" />
+        </CLASSES>
+        <JAVADOC />
+        <SOURCES />
+      </library>
+    </orderEntry>
+    <orderEntry type="module-library" scope="PROVIDED">
+      <library>
+        <CLASSES>
+          <root url="jar://$MODULE_DIR$/../../../../Anubis-1.0/jars/ANUBIS.jar!/" />
+        </CLASSES>
+        <JAVADOC />
+        <SOURCES />
+      </library>
+    </orderEntry>
+    <orderEntry type="module-library" scope="PROVIDED">
+      <library>
+        <CLASSES>
+          <root url="jar://$MODULE_DIR$/../../../../AoTD- Vaults of Knowledge-3.1.6/jars/Vok.jar!/" />
+        </CLASSES>
+        <JAVADOC />
+        <SOURCES />
+      </library>
+    </orderEntry>
+    <orderEntry type="module-library" scope="PROVIDED">
+      <library>
+        <CLASSES>
+          <root url="jar://$MODULE_DIR$/../../../../Arma Armatura-3.1.4/jars/armaa.jar!/" />
+        </CLASSES>
+        <JAVADOC />
+        <SOURCES />
+      </library>
+    </orderEntry>
+    <orderEntry type="module-library" scope="PROVIDED">
+      <library>
+        <CLASSES>
+          <root url="jar://$MODULE_DIR$/../../../../ArthrsShipsNShit/ArthrsShipsNShit.jar!/" />
+        </CLASSES>
+        <JAVADOC />
+        <SOURCES />
+      </library>
+    </orderEntry>
+    <orderEntry type="module-library" scope="PROVIDED">
+      <library>
+        <CLASSES>
+          <root url="jar://$MODULE_DIR$/../../../../Ashes of  The Domain- Vaults of Knowledge/jars/Vok.jar!/" />
+        </CLASSES>
+        <JAVADOC />
+        <SOURCES />
+      </library>
+    </orderEntry>
+    <orderEntry type="module-library" scope="PROVIDED">
+      <library>
+        <CLASSES>
+          <root url="jar://$MODULE_DIR$/../../../../Ashlib-1.1.5/jars/ashlib.jar!/" />
+        </CLASSES>
+        <JAVADOC />
+        <SOURCES />
+      </library>
+    </orderEntry>
+    <orderEntry type="module-library" scope="PROVIDED">
+      <library>
+        <CLASSES>
+          <root url="jar://$MODULE_DIR$/../../../../Autosave/jars/lw_Autosave.jar!/" />
+        </CLASSES>
+        <JAVADOC />
+        <SOURCES />
+      </library>
+    </orderEntry>
+    <orderEntry type="module-library" scope="PROVIDED">
+      <library>
+        <CLASSES>
+          <root url="jar://$MODULE_DIR$/../../../../A_S-F/jars/ASF.jar!/" />
+        </CLASSES>
+        <JAVADOC />
+        <SOURCES />
+      </library>
+    </orderEntry>
+    <orderEntry type="module-library" scope="PROVIDED">
+      <library>
+        <CLASSES>
+          <root url="jar://$MODULE_DIR$/../../../../bananaFactory/jars/bananaFactory.jar!/" />
+        </CLASSES>
+        <JAVADOC />
+        <SOURCES />
+      </library>
+    </orderEntry>
+    <orderEntry type="module-library" scope="PROVIDED">
+      <library>
+        <CLASSES>
+          <root url="jar://$MODULE_DIR$/../../../../bananaLib/jars/bananaLib.jar!/" />
+        </CLASSES>
+        <JAVADOC />
+        <SOURCES />
+      </library>
+    </orderEntry>
+    <orderEntry type="module-library" scope="PROVIDED">
+      <library>
+        <CLASSES>
+          <root url="jar://$MODULE_DIR$/../../../../better_combat-main/bcom.jar!/" />
+        </CLASSES>
+        <JAVADOC />
+        <SOURCES />
+      </library>
+    </orderEntry>
+    <orderEntry type="module-library" scope="PROVIDED">
+      <library>
+        <CLASSES>
+          <root url="jar://$MODULE_DIR$/../../../../Bionic Alteration-0.2.2/jars/bionicalteration.jar!/" />
+        </CLASSES>
+        <JAVADOC />
+        <SOURCES />
+      </library>
+    </orderEntry>
+    <orderEntry type="module-library" scope="PROVIDED">
+      <library>
+        <CLASSES>
+          <root url="jar://$MODULE_DIR$/../../../../Bionic-Alteration-main/jars/bionicalteration.jar!/" />
+        </CLASSES>
+        <JAVADOC />
+        <SOURCES />
+      </library>
+    </orderEntry>
+    <orderEntry type="module-library" scope="PROVIDED">
+      <library>
+        <CLASSES>
+          <root url="jar://$MODULE_DIR$/../../../../Bird's Collection/jars/birds.jar!/" />
+        </CLASSES>
+        <JAVADOC />
+        <SOURCES />
+      </library>
+    </orderEntry>
+    <orderEntry type="module-library" scope="PROVIDED">
+      <library>
+        <CLASSES>
+          <root url="jar://$MODULE_DIR$/../../../../Blackrock Drive Yards/jars/BR.jar!/" />
+        </CLASSES>
+        <JAVADOC />
+        <SOURCES />
+      </library>
+    </orderEntry>
+    <orderEntry type="module-library" scope="PROVIDED">
+      <library>
+        <CLASSES>
+          <root url="jar://$MODULE_DIR$/../../../../Building Menu Overhaul-1.1.4/jars/bmo.jar!/" />
+        </CLASSES>
+        <JAVADOC />
+        <SOURCES />
+      </library>
+    </orderEntry>
+    <orderEntry type="module-library" scope="PROVIDED">
+      <library>
+        <CLASSES>
+          <root url="jar://$MODULE_DIR$/../../../../Bultach Coalition/jars/ORKS.jar!/" />
+        </CLASSES>
+        <JAVADOC />
+        <SOURCES />
+      </library>
+    </orderEntry>
+    <orderEntry type="module-library" scope="PROVIDED">
+      <library>
+        <CLASSES>
+          <root url="jar://$MODULE_DIR$/../../../../CaptainsLog/CaptainsLog.jar!/" />
+        </CLASSES>
+        <JAVADOC />
+        <SOURCES />
+      </library>
+    </orderEntry>
+    <orderEntry type="module-library" scope="PROVIDED">
+      <library>
+        <CLASSES>
+          <root url="jar://$MODULE_DIR$/../../../../Combat Chatter/jars/CombatChatter.jar!/" />
+        </CLASSES>
+        <JAVADOC />
+        <SOURCES />
+      </library>
+    </orderEntry>
+    <orderEntry type="module-library" scope="PROVIDED">
+      <library>
+        <CLASSES>
+          <root url="jar://$MODULE_DIR$/../../../../Combat Chatter-1.14.2/jars/CombatChatter.jar!/" />
+        </CLASSES>
+        <JAVADOC />
+        <SOURCES />
+      </library>
+    </orderEntry>
+    <orderEntry type="module-library" scope="PROVIDED">
+      <library>
+        <CLASSES>
+          <root url="jar://$MODULE_DIR$/../../../../Combat Radar/jars/lw_Radar.jar!/" />
+        </CLASSES>
+        <JAVADOC />
+        <SOURCES />
+      </library>
+    </orderEntry>
+    <orderEntry type="module-library" scope="PROVIDED">
+      <library>
+        <CLASSES>
+          <root url="jar://$MODULE_DIR$/../../../../CombatBackgroundEnhanced/jars/CombatBackgroundEnhanced.jar!/" />
+        </CLASSES>
+        <JAVADOC />
+        <SOURCES />
+      </library>
+    </orderEntry>
+    <orderEntry type="module-library" scope="PROVIDED">
+      <library>
+        <CLASSES>
+          <root url="jar://$MODULE_DIR$/../../../../Commissioned Crews/jar/CommissionedCrews.jar!/" />
+        </CLASSES>
+        <JAVADOC />
+        <SOURCES />
+      </library>
+    </orderEntry>
+    <orderEntry type="module-library" scope="PROVIDED">
+      <library>
+        <CLASSES>
+          <root url="jar://$MODULE_DIR$/../../../../Console Commands/jars/lw_Console.jar!/" />
+        </CLASSES>
+        <JAVADOC />
+        <SOURCES />
+      </library>
+    </orderEntry>
+    <orderEntry type="module-library" scope="PROVIDED">
+      <library>
+        <CLASSES>
+          <root url="jar://$MODULE_DIR$/../../../../DakkaHolics/jars/DakkaHolics.jar!/" />
+        </CLASSES>
+        <JAVADOC />
+        <SOURCES />
+      </library>
+    </orderEntry>
+    <orderEntry type="module-library" scope="PROVIDED">
+      <library>
+        <CLASSES>
+          <root url="jar://$MODULE_DIR$/../../../../Dassault-Mikoyan Engineering/jars/DME.jar!/" />
+        </CLASSES>
+        <JAVADOC />
+        <SOURCES />
+      </library>
+    </orderEntry>
+    <orderEntry type="module-library" scope="PROVIDED">
+      <library>
+        <CLASSES>
+          <root url="jar://$MODULE_DIR$/../../../../DemtoShipPack/jars/DemtoShippack.jar!/" />
+        </CLASSES>
+        <JAVADOC />
+        <SOURCES />
+      </library>
+    </orderEntry>
+    <orderEntry type="module-library" scope="PROVIDED">
+      <library>
+        <CLASSES>
+          <root url="jar://$MODULE_DIR$/../../../../Detailed Combat Results-5.4.1/jars/StarSectorDetailedCombatResults.jar!/" />
+        </CLASSES>
+        <JAVADOC />
+        <SOURCES />
+      </library>
+    </orderEntry>
+    <orderEntry type="module-library" scope="PROVIDED">
+      <library>
+        <CLASSES>
+          <root url="jar://$MODULE_DIR$/../../../../DetailedCombatResults/jars/StarSectorDetailedCombatResults.jar!/" />
+        </CLASSES>
+        <JAVADOC />
+        <SOURCES />
+      </library>
+    </orderEntry>
+    <orderEntry type="module-library" scope="PROVIDED">
+      <library>
+        <CLASSES>
+          <root url="jar://$MODULE_DIR$/../../../../Diable Avionics - Seal balance patch/jars/Diable_Avionics_SealPatch.jar!/" />
+        </CLASSES>
+        <JAVADOC />
+        <SOURCES />
+      </library>
+    </orderEntry>
+    <orderEntry type="module-library" scope="PROVIDED">
+      <library>
+        <CLASSES>
+          <root url="jar://$MODULE_DIR$/../../../../Diable Avionics - Seal ed/jars/Diable_Avionics.jar!/" />
+        </CLASSES>
+        <JAVADOC />
+        <SOURCES />
+      </library>
+    </orderEntry>
+    <orderEntry type="module-library" scope="PROVIDED">
+      <library>
+        <CLASSES>
+          <root url="jar://$MODULE_DIR$/../../../../DynamicTariffs/jars/DynamicTariffs.jar!/" />
+        </CLASSES>
+        <JAVADOC />
+        <SOURCES />
+      </library>
+    </orderEntry>
+    <orderEntry type="module-library" scope="PROVIDED">
+      <library>
+        <CLASSES>
+          <root url="jar://$MODULE_DIR$/../../../../ElvenSector/jars/es.jar!/" />
+        </CLASSES>
+        <JAVADOC />
+        <SOURCES />
+      </library>
+    </orderEntry>
+    <orderEntry type="module-library" scope="PROVIDED">
+      <library>
+        <CLASSES>
+          <root url="jar://$MODULE_DIR$/../../../../Exotica-Technologies-v1.8.5/jars/Exotica-Technologies.jar!/" />
+        </CLASSES>
+        <JAVADOC />
+        <SOURCES />
+      </library>
+    </orderEntry>
+    <orderEntry type="module-library" scope="PROVIDED">
+      <library>
+        <CLASSES>
+          <root url="jar://$MODULE_DIR$/../../../../Experimental Hull Modifications-0.8.7HF/jars/lyr_ehm.jar!/" />
+        </CLASSES>
+        <JAVADOC />
+        <SOURCES />
+      </library>
+    </orderEntry>
+    <orderEntry type="module-library" scope="PROVIDED">
+      <library>
+        <CLASSES>
+          <root url="jar://$MODULE_DIR$/../../../../fleethistory/jars/fleethistory.jar!/" />
+        </CLASSES>
+        <JAVADOC />
+        <SOURCES />
+      </library>
+    </orderEntry>
+    <orderEntry type="module-library" scope="PROVIDED">
+      <library>
+        <CLASSES>
+          <root url="jar://$MODULE_DIR$/../../../../FleetSizeByDP/FleetSizeByDP.jar!/" />
+        </CLASSES>
+        <JAVADOC />
+        <SOURCES />
+      </library>
+    </orderEntry>
+    <orderEntry type="module-library" scope="PROVIDED">
+      <library>
+        <CLASSES>
+          <root url="jar://$MODULE_DIR$/../../../../Flux Reticle/jars/FluxReticle.jar!/" />
+        </CLASSES>
+        <JAVADOC />
+        <SOURCES />
+      </library>
+    </orderEntry>
+    <orderEntry type="module-library" scope="PROVIDED">
+      <library>
+        <CLASSES>
+          <root url="jar://$MODULE_DIR$/../../../../FSF_MilitaryCorporation/jars/FSF_MilitaryCorporation.jar!/" />
+        </CLASSES>
+        <JAVADOC />
+        <SOURCES />
+      </library>
+    </orderEntry>
+    <orderEntry type="module-library" scope="PROVIDED">
+      <library>
+        <CLASSES>
+          <root url="jar://$MODULE_DIR$/../../../../Goat_Aviation_Bureau/jars/Goat_Aviation_Bureau_ss.jar!/" />
+        </CLASSES>
+        <JAVADOC />
+        <SOURCES />
+      </library>
+    </orderEntry>
+    <orderEntry type="module-library" scope="PROVIDED">
+      <library>
+        <CLASSES>
+          <root url="jar://$MODULE_DIR$/../../../../GraphicsLib/jars/Graphics.jar!/" />
+        </CLASSES>
+        <JAVADOC />
+        <SOURCES />
+      </library>
+    </orderEntry>
+    <orderEntry type="module-library" scope="PROVIDED">
+      <library>
+        <CLASSES>
+          <root url="jar://$MODULE_DIR$/../../../../HMI/jars/HMI.jar!/" />
+        </CLASSES>
+        <JAVADOC />
+        <SOURCES />
+      </library>
+    </orderEntry>
+    <orderEntry type="module-library" scope="PROVIDED">
+      <library>
+        <CLASSES>
+          <root url="jar://$MODULE_DIR$/../../../../HMI_brighton/jars/HMI_brighton.jar!/" />
+        </CLASSES>
+        <JAVADOC />
+        <SOURCES />
+      </library>
+    </orderEntry>
+    <orderEntry type="module-library" scope="PROVIDED">
+      <library>
+        <CLASSES>
+          <root url="jar://$MODULE_DIR$/../../../../HMI_Supervillains/jars/HMI_Supervillains.jar!/" />
+        </CLASSES>
+        <JAVADOC />
+        <SOURCES />
+      </library>
+    </orderEntry>
+    <orderEntry type="module-library" scope="PROVIDED">
+      <library>
+        <CLASSES>
+          <root url="jar://$MODULE_DIR$/../../../../holy_covenant_of_kemet/jars/holy_covenant_of_kemet.jar!/" />
+        </CLASSES>
+        <JAVADOC />
+        <SOURCES />
+      </library>
+    </orderEntry>
+    <orderEntry type="module-library" scope="PROVIDED">
+      <library>
+        <CLASSES>
+          <root url="jar://$MODULE_DIR$/../../../../Hyperdrive/jars/Hyperdrive.jar!/" />
+        </CLASSES>
+        <JAVADOC />
+        <SOURCES />
+      </library>
+    </orderEntry>
+    <orderEntry type="module-library" scope="PROVIDED">
+      <library>
+        <CLASSES>
+          <root url="jar://$MODULE_DIR$/../../../../Iron Shell 1.183ak/jars/EternalIronShell.jar!/" />
+        </CLASSES>
+        <JAVADOC />
+        <SOURCES />
+      </library>
+    </orderEntry>
+    <orderEntry type="module-library" scope="PROVIDED">
+      <library>
+        <CLASSES>
+          <root url="jar://$MODULE_DIR$/../../../../Knights of Ludd/jars/KnightsOfSelkie.jar!/" />
+        </CLASSES>
+        <JAVADOC />
+        <SOURCES />
+      </library>
+    </orderEntry>
+    <orderEntry type="module-library" scope="PROVIDED">
+      <library>
+        <CLASSES>
+          <root url="jar://$MODULE_DIR$/../../../../Knights of Ludd-1.3.6/jars/KnightsOfSelkie.jar!/" />
+        </CLASSES>
+        <JAVADOC />
+        <SOURCES />
+      </library>
+    </orderEntry>
+    <orderEntry type="module-library" scope="PROVIDED">
+      <library>
+        <CLASSES>
+          <root url="jar://$MODULE_DIR$/../../../../Konturga - XIII Mostly Vanilla Ships/jars/KPF2.jar!/" />
+        </CLASSES>
+        <JAVADOC />
+        <SOURCES />
+      </library>
+    </orderEntry>
+    <orderEntry type="module-library" scope="PROVIDED">
+      <library>
+        <CLASSES>
+          <root url="jar://$MODULE_DIR$/../../../../Konturga - XIII Ships/jars/KPF2.jar!/" />
+        </CLASSES>
+        <JAVADOC />
+        <SOURCES />
+      </library>
+    </orderEntry>
+    <orderEntry type="module-library" scope="PROVIDED">
+      <library>
+        <CLASSES>
+          <root url="jar://$MODULE_DIR$/../../../../Kyeltziv Technocracy/jars/kyeltziv.jar!/" />
+        </CLASSES>
+        <JAVADOC />
+        <SOURCES />
+      </library>
+    </orderEntry>
+    <orderEntry type="module-library" scope="PROVIDED">
+      <library>
+        <CLASSES>
+          <root url="jar://$MODULE_DIR$/../../../../LazyLib/jars/LazyLib-Console.jar!/" />
+        </CLASSES>
+        <JAVADOC />
+        <SOURCES />
+      </library>
+    </orderEntry>
+    <orderEntry type="module-library" scope="PROVIDED">
+      <library>
+        <CLASSES>
+          <root url="jar://$MODULE_DIR$/../../../../LazyLib/jars/LazyLib-Kotlin.jar!/" />
+        </CLASSES>
+        <JAVADOC />
+        <SOURCES />
+      </library>
+    </orderEntry>
+    <orderEntry type="module-library" scope="PROVIDED">
+      <library>
+        <CLASSES>
+          <root url="jar://$MODULE_DIR$/../../../../LazyLib/jars/LazyLib.jar!/" />
+        </CLASSES>
+        <JAVADOC />
+        <SOURCES />
+      </library>
+    </orderEntry>
+    <orderEntry type="module-library" scope="PROVIDED">
+      <library>
+        <CLASSES>
+          <root url="jar://$MODULE_DIR$/../../../../Leading Pip/jars/LeadingPip.jar!/" />
+        </CLASSES>
+        <JAVADOC />
+        <SOURCES />
+      </library>
+    </orderEntry>
+    <orderEntry type="module-library" scope="PROVIDED">
+      <library>
+        <CLASSES>
+          <root url="jar://$MODULE_DIR$/../../../../LOST_SECTOR-v.0.6.2d/jars/LOST_SECTOR.jar!/" />
+        </CLASSES>
+        <JAVADOC />
+        <SOURCES />
+      </library>
+    </orderEntry>
+    <orderEntry type="module-library" scope="PROVIDED">
+      <library>
+        <CLASSES>
+          <root url="jar://$MODULE_DIR$/../../../../Luddic_Enhancement/jars/Luddic_Enhancement.jar!/" />
+        </CLASSES>
+        <JAVADOC />
+        <SOURCES />
+      </library>
+    </orderEntry>
+    <orderEntry type="module-library" scope="PROVIDED">
+      <library>
+        <CLASSES>
+          <root url="jar://$MODULE_DIR$/../../../../LunaLib/jars/LunaLib-Kotlin.jar!/" />
+        </CLASSES>
+        <JAVADOC />
+        <SOURCES />
+      </library>
+    </orderEntry>
+    <orderEntry type="module-library" scope="PROVIDED">
+      <library>
+        <CLASSES>
+          <root url="jar://$MODULE_DIR$/../../../../LunaLib/jars/LunaLib.jar!/" />
+        </CLASSES>
+        <JAVADOC />
+        <SOURCES />
+      </library>
+    </orderEntry>
+    <orderEntry type="module-library" scope="PROVIDED">
+      <library>
+        <CLASSES>
+          <root url="jar://$MODULE_DIR$/../../../../LunaLib-1.8.7/jars/LunaLib-Kotlin.jar!/" />
+        </CLASSES>
+        <JAVADOC />
+        <SOURCES />
+      </library>
+    </orderEntry>
+    <orderEntry type="module-library" scope="PROVIDED">
+      <library>
+        <CLASSES>
+          <root url="jar://$MODULE_DIR$/../../../../LunaLib-1.8.7/jars/LunaLib.jar!/" />
+        </CLASSES>
+        <JAVADOC />
+        <SOURCES />
+      </library>
+    </orderEntry>
+    <orderEntry type="module-library" scope="PROVIDED">
+      <library>
+        <CLASSES>
+          <root url="jar://$MODULE_DIR$/../../../../Magellan Protectorate 1.5.a/jars/Magellans.jar!/" />
+        </CLASSES>
+        <JAVADOC />
+        <SOURCES />
+      </library>
+    </orderEntry>
+    <orderEntry type="module-library" scope="PROVIDED">
+      <library>
+        <CLASSES>
+          <root url="jar://$MODULE_DIR$/../../../../MagicLib/jars/MagicLib-Kotlin.jar!/" />
+        </CLASSES>
+        <JAVADOC />
+        <SOURCES />
+      </library>
+    </orderEntry>
+    <orderEntry type="module-library" scope="PROVIDED">
+      <library>
+        <CLASSES>
+          <root url="jar://$MODULE_DIR$/../../../../MagicLib/jars/MagicLib.jar!/" />
+        </CLASSES>
+        <JAVADOC />
+        <SOURCES />
+      </library>
+    </orderEntry>
+    <orderEntry type="module-library" scope="PROVIDED">
+      <library>
+        <CLASSES>
+          <root url="jar://$MODULE_DIR$/../../../../MagicLib-1.4.6/jars/MagicLib-Kotlin.jar!/" />
+        </CLASSES>
+        <JAVADOC />
+        <SOURCES />
+      </library>
+    </orderEntry>
+    <orderEntry type="module-library" scope="PROVIDED">
+      <library>
+        <CLASSES>
+          <root url="jar://$MODULE_DIR$/../../../../MagicLib-1.4.6/jars/MagicLib.jar!/" />
+        </CLASSES>
+        <JAVADOC />
+        <SOURCES />
+      </library>
+    </orderEntry>
+    <orderEntry type="module-library" scope="PROVIDED">
+      <library>
+        <CLASSES>
+          <root url="jar://$MODULE_DIR$/../../../../MnemonicUtils-0.4.1/jars/MnemonicUtils.jar!/" />
+        </CLASSES>
+        <JAVADOC />
+        <SOURCES />
+      </library>
+    </orderEntry>
+    <orderEntry type="module-library" scope="PROVIDED">
+      <library>
+        <CLASSES>
+          <root url="jar://$MODULE_DIR$/../../../../MnemonicUtils-v0.3.0/jars/MnemonicSensors.jar!/" />
+        </CLASSES>
+        <JAVADOC />
+        <SOURCES />
+      </library>
+    </orderEntry>
+    <orderEntry type="module-library" scope="PROVIDED">
+      <library>
+        <CLASSES>
+          <root url="jar://$MODULE_DIR$/../../../../MnemonicUtils-v0.3.0/jars/MnemonicUtils.jar!/" />
+        </CLASSES>
+        <JAVADOC />
+        <SOURCES />
+      </library>
+    </orderEntry>
+    <orderEntry type="module-library" scope="PROVIDED">
+      <library>
+        <CLASSES>
+          <root url="jar://$MODULE_DIR$/../../../../More.Combat.Terrain.Effects/jars/niko_MCTE.jar!/" />
+        </CLASSES>
+        <JAVADOC />
+        <SOURCES />
+      </library>
+    </orderEntry>
+    <orderEntry type="module-library" scope="PROVIDED">
+      <library>
+        <CLASSES>
+          <root url="jar://$MODULE_DIR$/../../../../Neoteric Advent - 0.4.2.1/jars/neoteric.jar!/" />
+        </CLASSES>
+        <JAVADOC />
+        <SOURCES />
+      </library>
+    </orderEntry>
+    <orderEntry type="module-library" scope="PROVIDED">
+      <library>
+        <CLASSES>
+          <root url="jar://$MODULE_DIR$/../../../../New Beginnings/jars/NewBeginnings.jar!/" />
+        </CLASSES>
+        <JAVADOC />
+        <SOURCES />
+      </library>
+    </orderEntry>
+    <orderEntry type="module-library" scope="PROVIDED">
+      <library>
+        <CLASSES>
+          <root url="jar://$MODULE_DIR$/../../../../Nexerelin-0.11.3c/jars/ExerelinCore.jar!/" />
+        </CLASSES>
+        <JAVADOC />
+        <SOURCES />
+      </library>
+    </orderEntry>
+    <orderEntry type="module-library" scope="PROVIDED">
+      <library>
+        <CLASSES>
+          <root url="jar://$MODULE_DIR$/../../../../Nomadic Survival/jars/NomadicSurvival.jar!/" />
+        </CLASSES>
+        <JAVADOC />
+        <SOURCES />
+      </library>
+    </orderEntry>
+    <orderEntry type="module-library" scope="PROVIDED">
+      <library>
+        <CLASSES>
+          <root url="jar://$MODULE_DIR$/../../../../Nomadic Survival-1.4.1/jars/NomadicSurvival.jar!/" />
+        </CLASSES>
+        <JAVADOC />
+        <SOURCES />
+      </library>
+    </orderEntry>
+    <orderEntry type="module-library" scope="PROVIDED">
+      <library>
+        <CLASSES>
+          <root url="jar://$MODULE_DIR$/../../../gradle/wrapper/gradle-wrapper.jar!/" />
+        </CLASSES>
+        <JAVADOC />
+        <SOURCES />
+      </library>
+    </orderEntry>
+    <orderEntry type="module-library" scope="PROVIDED">
+      <library>
+        <CLASSES>
+          <root url="jar://$MODULE_DIR$/../../../jar/FreitagCorporation - Copy.jar!/" />
+        </CLASSES>
+        <JAVADOC />
+        <SOURCES />
+      </library>
+    </orderEntry>
+    <orderEntry type="module-library" scope="PROVIDED">
+      <library>
+        <CLASSES>
+          <root url="jar://$MODULE_DIR$/../../../jar/FreitagCorporation.jar!/" />
+        </CLASSES>
+        <JAVADOC />
+        <SOURCES />
+      </library>
+    </orderEntry>
+    <orderEntry type="module-library" scope="PROVIDED">
+      <library>
+        <CLASSES>
+          <root url="jar://$MODULE_DIR$/../../../../PAGSM v1.14.1/jars/SFC.jar!/" />
+        </CLASSES>
+        <JAVADOC />
+        <SOURCES />
+      </library>
+    </orderEntry>
+    <orderEntry type="module-library" scope="PROVIDED">
+      <library>
+        <CLASSES>
+          <root url="jar://$MODULE_DIR$/../../../../PearsonExotronics/jars/PearsonExotronics.jar!/" />
+        </CLASSES>
+        <JAVADOC />
+        <SOURCES />
+      </library>
+    </orderEntry>
+    <orderEntry type="module-library" scope="PROVIDED">
+      <library>
+        <CLASSES>
+          <root url="jar://$MODULE_DIR$/../../../../Perilous Expanse/jars/NomadicSurvival.jar!/" />
+        </CLASSES>
+        <JAVADOC />
+        <SOURCES />
+      </library>
+    </orderEntry>
+    <orderEntry type="module-library" scope="PROVIDED">
+      <library>
+        <CLASSES>
+          <root url="jar://$MODULE_DIR$/../../../../PMMM/jars/PMMM.jar!/" />
+        </CLASSES>
+        <JAVADOC />
+        <SOURCES />
+      </library>
+    </orderEntry>
+    <orderEntry type="module-library" scope="PROVIDED">
+      <library>
+        <CLASSES>
+          <root url="jar://$MODULE_DIR$/../../../../PMMM-1.7.6/jars/PMMM.jar!/" />
+        </CLASSES>
+        <JAVADOC />
+        <SOURCES />
+      </library>
+    </orderEntry>
+    <orderEntry type="module-library" scope="PROVIDED">
+      <library>
+        <CLASSES>
+          <root url="jar://$MODULE_DIR$/../../../../prv Agni/jar/prvagni.jar!/" />
+        </CLASSES>
+        <JAVADOC />
+        <SOURCES />
+      </library>
+    </orderEntry>
+    <orderEntry type="module-library" scope="PROVIDED">
+      <library>
+        <CLASSES>
+          <root url="jar://$MODULE_DIR$/../../../../prv Extraworks/jar/prvextra.jar!/" />
+        </CLASSES>
+        <JAVADOC />
+        <SOURCES />
+      </library>
+    </orderEntry>
+    <orderEntry type="module-library" scope="PROVIDED">
+      <library>
+        <CLASSES>
+          <root url="jar://$MODULE_DIR$/../../../../prv Library/jar/prvlib.jar!/" />
+        </CLASSES>
+        <JAVADOC />
+        <SOURCES />
+      </library>
+    </orderEntry>
+    <orderEntry type="module-library" scope="PROVIDED">
+      <library>
+        <CLASSES>
+          <root url="jar://$MODULE_DIR$/../../../../prv Rust Belt/jar/prvrb.jar!/" />
+        </CLASSES>
+        <JAVADOC />
+        <SOURCES />
+      </library>
+    </orderEntry>
+    <orderEntry type="module-library" scope="PROVIDED">
+      <library>
+        <CLASSES>
+          <root url="jar://$MODULE_DIR$/../../../../prv Starworks/jar/prv.jar!/" />
+        </CLASSES>
+        <JAVADOC />
+        <SOURCES />
+      </library>
+    </orderEntry>
+    <orderEntry type="module-library" scope="PROVIDED">
+      <library>
+        <CLASSES>
+          <root url="jar://$MODULE_DIR$/../../../../Quality Captains/jars/Captains.jar!/" />
+        </CLASSES>
+        <JAVADOC />
+        <SOURCES />
+      </library>
+    </orderEntry>
+    <orderEntry type="module-library" scope="PROVIDED">
+      <library>
+        <CLASSES>
+          <root url="jar://$MODULE_DIR$/../../../../Random Assortment of Things-2.5.12/jars/RandomAssortmentofThings.jar!/" />
+        </CLASSES>
+        <JAVADOC />
+        <SOURCES />
+      </library>
+    </orderEntry>
+    <orderEntry type="module-library" scope="PROVIDED">
+      <library>
+        <CLASSES>
+          <root url="jar://$MODULE_DIR$/../../../../Random-Assortment-of-Things/jars/RandomAssortmentofThings.jar!/" />
+        </CLASSES>
+        <JAVADOC />
+        <SOURCES />
+      </library>
+    </orderEntry>
+    <orderEntry type="module-library" scope="PROVIDED">
+      <library>
+        <CLASSES>
+          <root url="jar://$MODULE_DIR$/../../../../RotcesRats/jars/Rotcesrats.jar!/" />
+        </CLASSES>
+        <JAVADOC />
+        <SOURCES />
+      </library>
+    </orderEntry>
+    <orderEntry type="module-library" scope="PROVIDED">
+      <library>
+        <CLASSES>
+          <root url="jar://$MODULE_DIR$/../../../../San-Iris0.9.91-1/jars/Sikr-Iris.jar!/" />
+        </CLASSES>
+        <JAVADOC />
+        <SOURCES />
+      </library>
+    </orderEntry>
+    <orderEntry type="module-library" scope="PROVIDED">
+      <library>
+        <CLASSES>
+          <root url="jar://$MODULE_DIR$/../../../../Scy Nation/jars/SCY_code.jar!/" />
+        </CLASSES>
+        <JAVADOC />
+        <SOURCES />
+      </library>
+    </orderEntry>
+    <orderEntry type="module-library" scope="PROVIDED">
+      <library>
+        <CLASSES>
+          <root url="jar://$MODULE_DIR$/../../../../Scy Nation-1.8.4/jars/SCY_code.jar!/" />
+        </CLASSES>
+        <JAVADOC />
+        <SOURCES />
+      </library>
+    </orderEntry>
+    <orderEntry type="module-library" scope="PROVIDED">
+      <library>
+        <CLASSES>
+          <root url="jar://$MODULE_DIR$/../../../../Secrets of the Frontier Prerelease 14/jars/secretsofthefrontier.jar!/" />
+        </CLASSES>
+        <JAVADOC />
+        <SOURCES />
+      </library>
+    </orderEntry>
+    <orderEntry type="module-library" scope="PROVIDED">
+      <library>
+        <CLASSES>
+          <root url="jar://$MODULE_DIR$/../../../../Shadowyards_Wisp/jars/SHI.jar!/" />
+        </CLASSES>
+        <JAVADOC />
+        <SOURCES />
+      </library>
+    </orderEntry>
+    <orderEntry type="module-library" scope="PROVIDED">
+      <library>
+        <CLASSES>
+          <root url="jar://$MODULE_DIR$/../../../../Ship and Weapon Pack/jars/SWP.jar!/" />
+        </CLASSES>
+        <JAVADOC />
+        <SOURCES />
+      </library>
+    </orderEntry>
+    <orderEntry type="module-library" scope="PROVIDED">
+      <library>
+        <CLASSES>
+          <root url="jar://$MODULE_DIR$/../../../../sidebarLib/jars/sidebarLib.jar!/" />
+        </CLASSES>
+        <JAVADOC />
+        <SOURCES />
+      </library>
+    </orderEntry>
+    <orderEntry type="module-library" scope="PROVIDED">
+      <library>
+        <CLASSES>
+          <root url="jar://$MODULE_DIR$/../../../../SS-armaa-3.0.6/jars/armaa.jar!/" />
+        </CLASSES>
+        <JAVADOC />
+        <SOURCES />
+      </library>
+    </orderEntry>
+    <orderEntry type="module-library" scope="PROVIDED">
+      <library>
+        <CLASSES>
+          <root url="jar://$MODULE_DIR$/../../../../starsector-symbiotic-void-creatures-main/gradle/wrapper/gradle-wrapper.jar!/" />
+        </CLASSES>
+        <JAVADOC />
+        <SOURCES />
+      </library>
+    </orderEntry>
+    <orderEntry type="module-library" scope="PROVIDED">
+      <library>
+        <CLASSES>
+          <root url="jar://$MODULE_DIR$/../../../../starsector-symbiotic-void-creatures-main/jars/SymbioticVoidCreatures.jar!/" />
+        </CLASSES>
+        <JAVADOC />
+        <SOURCES />
+      </library>
+    </orderEntry>
+    <orderEntry type="module-library" scope="PROVIDED">
+      <library>
+        <CLASSES>
+          <root url="jar://$MODULE_DIR$/../../../../Starship Legends/jars/StarshipLegends.jar!/" />
+        </CLASSES>
+        <JAVADOC />
+        <SOURCES />
+      </library>
+    </orderEntry>
+    <orderEntry type="module-library" scope="PROVIDED">
+      <library>
+        <CLASSES>
+          <root url="jar://$MODULE_DIR$/../../../../Starship Legends-2.5.3/jars/StarshipLegends.jar!/" />
+        </CLASSES>
+        <JAVADOC />
+        <SOURCES />
+      </library>
+    </orderEntry>
+    <orderEntry type="module-library" scope="PROVIDED">
+      <library>
+        <CLASSES>
+          <root url="jar://$MODULE_DIR$/../../../../Substance.Abuse 1.1.a/jars/alcoholism.jar!/" />
+        </CLASSES>
+        <JAVADOC />
+        <SOURCES />
+      </library>
+    </orderEntry>
+    <orderEntry type="module-library" scope="PROVIDED">
+      <library>
+        <CLASSES>
+          <root url="jar://$MODULE_DIR$/../../../../svc_hatchery/jars/bugsegg.jar!/" />
+        </CLASSES>
+        <JAVADOC />
+        <SOURCES />
+      </library>
+    </orderEntry>
+    <orderEntry type="module-library" scope="PROVIDED">
+      <library>
+        <CLASSES>
+          <root url="jar://$MODULE_DIR$/../../../../System_Marker/jars/System_Marker.jar!/" />
+        </CLASSES>
+        <JAVADOC />
+        <SOURCES />
+      </library>
+    </orderEntry>
+    <orderEntry type="module-library" scope="PROVIDED">
+      <library>
+        <CLASSES>
+          <root url="jar://$MODULE_DIR$/../../../../tahlan-shipworks-1.2.7/jars/TahlanShipworks.jar!/" />
+        </CLASSES>
+        <JAVADOC />
+        <SOURCES />
+      </library>
+    </orderEntry>
+    <orderEntry type="module-library" scope="PROVIDED">
+      <library>
+        <CLASSES>
+          <root url="jar://$MODULE_DIR$/../../../../TakeNoPrisoners-v0.16.1/jars/TakeNoPrisoners.jar!/" />
+        </CLASSES>
+        <JAVADOC />
+        <SOURCES />
+      </library>
+    </orderEntry>
+    <orderEntry type="module-library" scope="PROVIDED">
+      <library>
+        <CLASSES>
+          <root url="jar://$MODULE_DIR$/../../../../terraformer/jars/terraformer.jar!/" />
+        </CLASSES>
+        <JAVADOC />
+        <SOURCES />
+      </library>
+    </orderEntry>
+    <orderEntry type="module-library" scope="PROVIDED">
+      <library>
+        <CLASSES>
+          <root url="jar://$MODULE_DIR$/../../../../Terraforming and Station Construction/jar/BoggledTerraformingAndStationConstruction.jar!/" />
+        </CLASSES>
+        <JAVADOC />
+        <SOURCES />
+      </library>
+    </orderEntry>
+    <orderEntry type="module-library" scope="PROVIDED">
+      <library>
+        <CLASSES>
+          <root url="jar://$MODULE_DIR$/../../../../Terraforming and Station Construction/libraries/illustrated_entities.jar!/" />
+        </CLASSES>
+        <JAVADOC />
+        <SOURCES />
+      </library>
+    </orderEntry>
+    <orderEntry type="module-library" scope="PROVIDED">
+      <library>
+        <CLASSES>
+          <root url="jar://$MODULE_DIR$/../../../../The Nomads/jars/TheNomads.jar!/" />
+        </CLASSES>
+        <JAVADOC />
+        <SOURCES />
+      </library>
+    </orderEntry>
+    <orderEntry type="module-library" scope="PROVIDED">
+      <library>
+        <CLASSES>
+          <root url="jar://$MODULE_DIR$/../../../../Torchships/jar/TORCHSHIPS.jar!/" />
+        </CLASSES>
+        <JAVADOC />
+        <SOURCES />
+      </library>
+    </orderEntry>
+    <orderEntry type="module-library" scope="PROVIDED">
+      <library>
+        <CLASSES>
+          <root url="jar://$MODULE_DIR$/../../../../Unknown Skies/jars/US.jar!/" />
+        </CLASSES>
+        <JAVADOC />
+        <SOURCES />
+      </library>
+    </orderEntry>
+    <orderEntry type="module-library" scope="PROVIDED">
+      <library>
+        <CLASSES>
+          <root url="jar://$MODULE_DIR$/../../../../Unknown Skies-2.0.2/jars/US.jar!/" />
+        </CLASSES>
+        <JAVADOC />
+        <SOURCES />
+      </library>
+    </orderEntry>
+    <orderEntry type="module-library" scope="PROVIDED">
+      <library>
+        <CLASSES>
+          <root url="jar://$MODULE_DIR$/../../../../Unthemed Weapons Collection-0.6.7/jars/UnthemedWeaponsCollection.jar!/" />
+        </CLASSES>
+        <JAVADOC />
+        <SOURCES />
+      </library>
+    </orderEntry>
+    <orderEntry type="module-library" scope="PROVIDED">
+      <library>
+        <CLASSES>
+          <root url="jar://$MODULE_DIR$/../../../../Unthemed Weapons Utilities/jars/UnthemedWeaponsCollection.jar!/" />
+        </CLASSES>
+        <JAVADOC />
+        <SOURCES />
+      </library>
+    </orderEntry>
+    <orderEntry type="module-library" scope="PROVIDED">
+      <library>
+        <CLASSES>
+          <root url="jar://$MODULE_DIR$/../../../../VIC/jars/VIC.jar!/" />
+        </CLASSES>
+        <JAVADOC />
+        <SOURCES />
+      </library>
+    </orderEntry>
+    <orderEntry type="module-library" scope="PROVIDED">
+      <library>
+        <CLASSES>
+          <root url="jar://$MODULE_DIR$/../../../../WeaponArcs/jars/WeaponArcs.jar!/" />
+        </CLASSES>
+        <JAVADOC />
+        <SOURCES />
+      </library>
+    </orderEntry>
+    <orderEntry type="module-library" scope="PROVIDED">
+      <library>
+        <CLASSES>
+          <root url="jar://$MODULE_DIR$/../../../../WhichMod/jars/WhichMod.jar!/" />
+        </CLASSES>
+        <JAVADOC />
+        <SOURCES />
+      </library>
+    </orderEntry>
+    <orderEntry type="module-library" scope="PROVIDED">
+      <library>
+        <CLASSES>
+          <root url="jar://$MODULE_DIR$/../../../../XhanEmpire/jars/XhanEmpire.jar!/" />
+        </CLASSES>
+        <JAVADOC />
+        <SOURCES />
+      </library>
+    </orderEntry>
+    <orderEntry type="library" scope="PROVIDED" name="Gradle: org.jetbrains.kotlin:kotlin-stdlib-jdk7:1.5.31" level="project" />
+    <orderEntry type="library" scope="PROVIDED" name="Gradle: org.jetbrains.kotlin:kotlin-stdlib:1.5.31" level="project" />
+    <orderEntry type="library" name="Gradle: com.thoughtworks.xstream:xstream:1.4.10" level="project" />
+    <orderEntry type="library" name="Gradle: org.lwjgl.lwjgl:lwjgl_util:2.9.3" level="project" />
+    <orderEntry type="library" name="Gradle: org.lwjgl.lwjgl:lwjgl:2.9.3" level="project" />
+    <orderEntry type="library" name="Gradle: log4j:log4j:1.2.9" level="project" />
+    <orderEntry type="library" name="Gradle: org.json:json:20090211" level="project" />
+    <orderEntry type="library" name="Gradle: net.java.jinput:jinput:2.0.7" level="project" />
+    <orderEntry type="library" name="Gradle: org.codehaus.janino:janino:3.0.7" level="project" />
+    <orderEntry type="library" name="Gradle: starfarer:starfarer-api:1.0.0" level="project" />
+    <orderEntry type="library" scope="PROVIDED" name="Gradle: org.jetbrains:annotations:13.0" level="project" />
+    <orderEntry type="library" scope="PROVIDED" name="Gradle: org.jetbrains.kotlin:kotlin-stdlib-common:1.5.31" level="project" />
+    <orderEntry type="library" name="Gradle: xmlpull:xmlpull:1.1.3.1" level="project" />
+    <orderEntry type="library" name="Gradle: xpp3:xpp3_min:1.1.4c" level="project" />
+    <orderEntry type="library" name="Gradle: org.lwjgl.lwjgl:lwjgl-platform:natives-linux:2.9.3" level="project" />
+    <orderEntry type="library" name="Gradle: org.lwjgl.lwjgl:lwjgl-platform:natives-osx:2.9.3" level="project" />
+    <orderEntry type="library" name="Gradle: org.lwjgl.lwjgl:lwjgl-platform:natives-windows:2.9.3" level="project" />
+    <orderEntry type="library" name="Gradle: net.java.jutils:jutils:1.0.0" level="project" />
+    <orderEntry type="library" name="Gradle: org.codehaus.janino:commons-compiler:3.0.7" level="project" />
+    <orderEntry type="library" scope="RUNTIME" name="Gradle: net.java.jinput:jinput-platform:natives-linux:2.0.7" level="project" />
+    <orderEntry type="library" scope="RUNTIME" name="Gradle: net.java.jinput:jinput-platform:natives-osx:2.0.7" level="project" />
+    <orderEntry type="library" scope="RUNTIME" name="Gradle: net.java.jinput:jinput-platform:natives-windows:2.0.7" level="project" />
+  </component>
+</module>
