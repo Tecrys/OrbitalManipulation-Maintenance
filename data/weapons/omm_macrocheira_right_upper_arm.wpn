@@ -6,7 +6,7 @@
   "collisionClass": "RAY",
   "collisionClassByFighter": "RAY_FIGHTER",
   "turretSprite": "graphics/ships/Macrocheira/omm_macrocheira_upper_arm_right.png",
-    "everyFrameEffect":"tecrys.data.scripts.weapons.macroupperrighteveryframe",
+    #"everyFrameEffect":"tecrys.data.scripts.weapons.macroupperrighteveryframe",
   "hardpointSprite": "",
   "glowColor": [
     255,

@@ -1,7 +1,10 @@
 package tecrys.data.scripts.hullmods;
 
 import com.fs.starfarer.api.Global;
+import com.fs.starfarer.api.campaign.CoreUITabId;
 import com.fs.starfarer.api.combat.*;
+import com.fs.starfarer.api.impl.campaign.ids.HullMods;
+import com.fs.starfarer.api.impl.campaign.ids.Personalities;
 
 import java.util.ArrayList;
 import java.util.LinkedHashMap;
@@ -15,11 +18,62 @@ import static com.fs.starfarer.api.impl.campaign.ids.Tags.VARIANT_UNBOARDABLE;
 public class omm_mainframelink extends BaseHullMod {
 
 
-    public void applyEffectsBeforeShipCreation(MutableShipStatsAPI stats, String id) {
+    private float slotX;
+    private float slotY;
+
+    public void applyEffectsBeforeShipCreation(ShipAPI.HullSize hullSize, MutableShipStatsAPI stats, String id) {
         stats.getDynamic().getMod("act_as_combat_ship").modifyFlat(id, 1.0F);
     }
 
+    public void advanceInCombat(ShipAPI ship, Float amount) {
 
+
+        if (ship.getShipAI() != null && ship.getShipAI().getConfig() != null) {
+            ShipAIConfig config = ship.getShipAI().getConfig();
+
+            config.alwaysStrafeOffensively = true;
+            config.backingOffWhileNotVentingAllowed = false;
+            config.turnToFaceWithUndamagedArmor = true;
+
+            ship.getAIFlags().setFlag(ShipwideAIFlags.AIFlags.MANEUVER_TARGET);
+            ship.getAIFlags().setFlag(ShipwideAIFlags.AIFlags.DO_NOT_BACK_OFF_EVEN_WHILE_VENTING);
+            if (ship.getHullSize() == ship.getHullSize().FRIGATE) {
+                ship.getAIFlags().setFlag(ShipwideAIFlags.AIFlags.HARASS_MOVE_IN);
+            }
+
+            if (ship.getFleetMember() == null)
+                return;
+
+            if (ship.getFleetMember().isFrigate() || ship.getFleetMember().isDestroyer()) {
+                ship.getAIFlags().setFlag(ShipwideAIFlags.AIFlags.CARRIER_FIGHTER_TARGET);
+                ship.getAIFlags().setFlag(ShipwideAIFlags.AIFlags.ESCORT_OTHER_SHIP);
+            }
+
+        }
+    }
+    public void applyEffectsAfterShipCreation(ShipAPI ship, String id) {
+//
+//        List<WeaponAPI> decos = ship.getAllWeapons();
+//        for (WeaponAPI weap : decos) {
+//            if ((weap.getSlot().getId().equals("droneslot")//slot has same name as on drone !important!
+//                    || weap.getSlot().getId().equals("pdslot")
+//                    || weap.getSlot().getId().equals("smlhybridslot")
+//                    || weap.getSlot().getId().equals("synergyslot")
+//                    || weap.getSlot().getId().equals("smlmissileslot")
+//                    || weap.getSlot().getId().equals("compositeslot")
+//                    || weap.getSlot().getId().equals("largeslot")
+//                    || weap.getSlot().getId().equals("ballisticslot"))) {
+//
+//
+//
+//slotX = weap.getSlot().getLocation().getX();
+//slotY = weap.getSlot().getLocation().getY();
+//                    if (ship.getOriginalOwner() == -1) {
+//                        weap.getSlot().getLocation().set(slotX, slotY);
+//                    }
+//        }
+//
+//    }
 //    public static float FLUX_FRACTION = 0.5F;
 //
 //    public static float HARD_FLUX_FRACTION = 0.2F;
@@ -104,4 +158,4 @@ public class omm_mainframelink extends BaseHullMod {
 //        }
 //        return null;
 //    }
-}
+}}

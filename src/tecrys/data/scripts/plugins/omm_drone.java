@@ -2,7 +2,9 @@ package tecrys.data.scripts.plugins;
 
 import com.fs.starfarer.api.Global;
 import com.fs.starfarer.api.combat.*;
+import com.fs.starfarer.api.impl.campaign.ids.HullMods;
 import com.fs.starfarer.api.input.InputEventAPI;
+import org.joml.Vector2f;
 import org.lazywizard.lazylib.combat.AIUtils;
 
 import java.awt.*;
@@ -13,6 +15,9 @@ import java.util.Map;
 import static com.fs.starfarer.api.combat.ShipHullSpecAPI.ShipTypeHints.UNBOARDABLE;
 
 public class omm_drone implements EveryFrameCombatPlugin {
+
+    private float slotX;
+    private float slotY;
 
     @Override
     public void processInputPreCoreControls(float amount, List<InputEventAPI> events) {
@@ -55,11 +60,13 @@ public class omm_drone implements EveryFrameCombatPlugin {
                         engine.endCombat(1);
                     } //end combat
                 }
+
             for (FighterWingAPI fighterWing : ship.getAllWings()){
             for (ShipAPI WingMembers : fighterWing.getWingMembers()) {
-                if (ship.getHullLevel() >= 10) {
-                    engine.applyDamage(WingMembers, WingMembers.getLocation(), 1000, DamageType.ENERGY, 0, true, false, ship);
-                }}}
+//                if (ship.getHullLevel() >= 10) {
+//                    engine.applyDamage(WingMembers, WingMembers.getLocation(), 1000, DamageType.ENERGY, 0, true, false, ship);
+//                }
+                }}
             if (!ship.isAlive() || !ship.getHullSpec().getHullId().startsWith("omm_")) {
                 continue;
             }
@@ -86,19 +93,38 @@ public class omm_drone implements EveryFrameCombatPlugin {
                         || weap.getId().equals("omm_ballisticpoddeco")) {
 
                     weap.getSprite().setSize(0, 0);
+
+                    if (weap.getUnderSpriteAPI() != null) {
+                        weap.getUnderSpriteAPI().setSize(0, 0);
+                    }
+                    if (weap.getBarrelSpriteAPI() != null) {
+                        weap.getBarrelSpriteAPI().setSize(0, 0);
+                    }
                 }
-                if (weap.getSlot().getId().equals("droneslot") //slot has same name as on drone !important!
+                if ((weap.getSlot().getId().equals("droneslot")//slot has same name as on drone !important!
                         || weap.getSlot().getId().equals("pdslot")
                         || weap.getSlot().getId().equals("smlhybridslot")
                         || weap.getSlot().getId().equals("synergyslot")
                         || weap.getSlot().getId().equals("smlmissileslot")
                         || weap.getSlot().getId().equals("compositeslot")
                         || weap.getSlot().getId().equals("largeslot")
-                        || weap.getSlot().getId().equals("ballisticslot")) {
+                        || weap.getSlot().getId().equals("ballisticslot"))) {
+
 
                     weap.getSprite().setSize(0, 0);
+//                    slotX = weap.getSlot().getLocation().getX();
+//                    slotY = weap.getSlot().getLocation().getY();
+//                    if (ship.getOriginalOwner() != -1) {
+//                        weap.getSlot().getLocation().set(99999, 99999);
+//                    } else if (ship.getOriginalOwner() != -1){
+//                        weap.getSlot().getLocation().set(slotX, slotY);
+//                    }
 
-                   // weap.disable(true);
+                    weap.setMaxAmmo(0);
+                    weap.setAmmo(0);
+                    weap.setForceNoFireOneFrame(true);
+//                    weap.getSpec().setMaxRange(0f);
+//                   weap.disable(true);
                     //ship.removeWeaponFromGroups(weap);                           //removes the weapons swap "interface" from weapon groups
 
                     if (weap.getUnderSpriteAPI() != null) {
@@ -107,6 +133,7 @@ public class omm_drone implements EveryFrameCombatPlugin {
                     if (weap.getBarrelSpriteAPI() != null) {
                         weap.getBarrelSpriteAPI().setSize(0, 0);
                     }
+                    if (weap.getSlot().getId().equals("pdslot")) {ship.removeWeaponFromGroups(weap); }
                 }
 
                 //Weapon Stuff, swapping and such
@@ -155,7 +182,7 @@ public class omm_drone implements EveryFrameCombatPlugin {
                                 group.removeWeapon(0);
 
                                 fighter.getWeaponGroupFor(dronewep).addWeaponAPI(weapon);
-                                fighter.getVariant().assignUnassignedWeapons();
+                               // fighter.getVariant().assignUnassignedWeapons();
                             }
                         }
 
@@ -188,7 +215,7 @@ public class omm_drone implements EveryFrameCombatPlugin {
                     continue;
                 }
                 for (ShipAPI fighter : bay.getWing().getWingMembers()) {
-                    if (!bay.getWing().getWingId().equals("FreitagCorporation_ShieldDrone_wing")) {
+                    if (!bay.getWing().getWingId().equals("FreitagCorporation_ShieldDrone_wing") && !bay.getWing().getWingId().equals("omm_nanodrone_wing")) {
                         transferFlux(fighter, carrierFlux);
                     }
 

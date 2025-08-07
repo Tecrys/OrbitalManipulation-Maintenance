@@ -8,7 +8,7 @@ import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
  * The name of your mod. Used to create a mod folder name (and the name of your mod, if using auto-updated mod_info.json).
  * Defaults to the name of the mod's folder.
  */
-val modName = "OrbitalManipulation&Maintenance"
+val modName = "OrbitalManipulationMaintenance"
 
 /**
  * Where your Starsector game is installed to.
@@ -25,13 +25,13 @@ val modFolderName = modName.replace(" ", "-")
 /** Set below to `true` to automatically create mod_info.json and Version Checker files. */
 val shouldAutomaticallyCreateMetadataFiles = true
 // Then, if above is set to true, update the rest of the information below in SECTION B.
-val modVersion = "0.8.1"
+val modVersion = "0.9.0"
 val jarFileName = "${modName.replace(" ", "-")}.jar"
 val modId = "OMM"
 val modAuthor = "Tecrys"
 val modDescription = "Ships and Game Mechanics for the Civilian Sector as well as luxury brand manufacturer Freitag Corporation. Credits: Lord_Dalton, Snrasha, briansd9, tomatopaste, Shoi, Sutopia, Finn."
-val gameVersion = "0.97a"
-val jars = arrayOf("jar/OrbitalManipulation&Maintenance.jar")
+val gameVersion = "0.98a"
+val jars = arrayOf("jar/OrbitalManipulationMaintenance.jar")
 val modPlugin = "tecrys.data.scripts.FreitagCorporation_ModPlugin"
 val isUtilityMod = false
 val masterVersionFile = "https://github.com/Tecrys/OrbitalManipulation-Maintenance.git"
@@ -59,14 +59,19 @@ val modInModsFolder = File("$starsectorModDirectory/${modFolderName}")
 dependencies {
     //////////////////////////////////////////
     // SECTION D.1: VANILLA STARSECTOR JARS AND VANILLA DEPENDENCIES
-    implementation("com.thoughtworks.xstream:xstream:1.4.10")
-    implementation("org.lwjgl.lwjgl:lwjgl:2.9.3")
-    implementation("org.lwjgl.lwjgl:lwjgl_util:2.9.3")
-    implementation("log4j:log4j:1.2.9")
-    implementation("org.json:json:20090211")
-    implementation("net.java.jinput:jinput:2.0.7")
-    implementation("org.codehaus.janino:janino:3.0.7")
-    implementation("starfarer:starfarer-api:1.0.0") // This grabs local files from the /libs folder, see `repositories` block.
+    implementation(fileTree(starsectorCoreDirectory) {
+        include(
+            "starfarer.api.jar",
+            //"starfarer.api-sources.jar",
+            "starfarer_obf.jar",
+            "fs.common_obf.jar",
+            "json.jar",
+            "xstream-1.4.10.jar",
+            "log4j-1.2.9.jar",
+            "lwjgl.jar",
+            "lwjgl_util.jar"
+        )
+    }) // This grabs local files from the /libs folder, see `repositories` block.
 
     // If the above fails, uncomment this line to use the dependencies in starsector-core instead of getting them from The Internet.
     // compileOnly(fileTree(starsectorCoreDirectory) { include("**/*.jar") })
@@ -93,7 +98,7 @@ dependencies {
     //////////////////////////////////////////
     // SECTION D.3: KOTLIN DEPENDENCIES
     // Shouldn't need to change anything in SECTION D below here
-    val kotlinVersionInLazyLib = "1.5.31"
+    val kotlinVersionInLazyLib = "2.1.20"
     // Get kotlin sdk from LazyLib during runtime, only use it here during compile time
     compileOnly("org.jetbrains.kotlin:kotlin-stdlib:$kotlinVersionInLazyLib")
     compileOnly("org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlinVersionInLazyLib")
@@ -116,7 +121,7 @@ tasks {
     //////////////////////////////////////////
     // SECTION E.2: CREATES & UPDATES METADATA (MOD_INFO.JSON AND VERSION CHECKER) FILES
     register("create-metadata-files") {
-        val version = modVersion.split(".").let { javaslang.Tuple3(it[0], it[1], it[2]) }
+        val version = modVersion.split(".")
         System.setProperty("line.separator", "\n") // Use LF instead of CRLF like a normal person
 
         if (shouldAutomaticallyCreateMetadataFiles) {
@@ -130,7 +135,7 @@ tasks {
                         "name": "${modName}",
                         "author": "${modAuthor}",
                         "utility": "${isUtilityMod}",
-                        "version": { "major":"${version._1}", "minor": "${version._2}", "patch": "${version._3}" },
+                        "version": { "major":"${version[0]}", "minor": "${version[1]}", "patch": "${version[2]}" },
                         "description": "${modDescription}",
                         "gameVersion": "${gameVersion}",
                         "jars":[${jars.joinToString() { "\"$it\"" }}],
@@ -182,9 +187,9 @@ tasks {
                         "modThreadId":${modThreadId},
                         "modVersion":
                         {
-                            "major":${version._1},
-                            "minor":${version._2},
-                            "patch":${version._3}
+                            "major":${version[0]},
+                            "minor":${version[1]},
+                            "patch":${version[2]}
                         }
                     }
                 """.trimIndent()
@@ -240,7 +245,7 @@ kotlin.sourceSets.main {
 // ==== DANGER ====
 // -----DON'T TOUCH STUFF BELOW THIS LINE UNLESS YOU KNOW WHAT YOU'RE DOING  -------------------
 plugins {
-    kotlin("jvm") version "1.5.0"
+    kotlin("jvm") version "2.1.20"
     java
 }
 
@@ -253,8 +258,8 @@ repositories {
 
 // Compile Kotlin to Java 6 bytecode so that Starsector can use it (options are only 6 or 8)
 tasks.withType<KotlinCompile> {
-    kotlinOptions.jvmTarget = "1.6"
+    kotlinOptions.jvmTarget = "17"
 }
 // Compile Java to Java 7 bytecode so that Starsector can use it
-java.sourceCompatibility = JavaVersion.VERSION_1_7
-java.targetCompatibility = JavaVersion.VERSION_1_7
+java.sourceCompatibility = JavaVersion.VERSION_17
+java.targetCompatibility = JavaVersion.VERSION_17

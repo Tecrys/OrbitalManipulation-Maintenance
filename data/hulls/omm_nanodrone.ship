@@ -1,6 +1,6 @@
 {
-  "hullName": "Algae Tender",
-  "hullId": "omm_nanodrone",
+  "hullName": "Shield Drone",
+  "hullId": "FreitagCorporation_ShieldDrone",
   "hullSize": "FIGHTER",
   "spriteName": "graphics/ships/Fighters/omm_repair.png",
   "style": "FREITAG_CORP_TECH",
@@ -9,16 +9,38 @@
   "center": [35, 24.5],
   "collisionRadius": 34.5,
   "shieldCenter": [0, -0],
-  "shieldRadius": 35,
+  "shieldRadius": 66,
   "viewOffset": 0,
   "builtInMods": [
     "autorepair",
     "fluxshunt",
-    "omm_mainframelink",
+	    "shield_always_on",
     "no_weapon_flux",
-    "do_not_back_off"
+    "do_not_back_off",
+		"omm_wing_range_increase",
   ],
-  "weaponSlots": [],
+    "builtInWeapons": {
+    "AIHelp":"omm_chafflauncher",
+    "WS0002": "FreitagCorporation_ShieldEffect_wpn",
+  },
+  "weaponSlots": [    {
+      "id": "AIHelp",
+      "size": "SMALL",
+      "type": "BUILT_IN",
+      "mount": "HIDDEN",
+      "arc": 62,
+      "angle": 0,
+      "locations": [5, 1.5]
+    },
+    {
+      "id": "WS0002",
+      "size": "SMALL",
+      "type": "DECORATIVE",
+      "mount": "HIDDEN",
+      "arc": 0,
+      "angle": 0,
+      "locations": [-15, 1.5]
+    },],
   "engineSlots": [
     {
       "location": [-23, -11],

@@ -13,18 +13,25 @@
     "fluxdistributor"
   ],
   "weaponGroups": [
+                {
+      "autofire": false,
+      "mode": "LINKED",
+      "weapons": {
+	          "AIHelp": "omm_chafflauncher",
+	  }
+    },
     {
       "autofire": false,
       "mode": "LINKED",
       "weapons": {
         "smlhybridslot": "amblaster",
-        "synergyslot": "heavymauler"
+
       }
     },
     {
       "autofire": true,
       "mode": "LINKED",
-      "weapons": {}
+      "weapons": {        "synergyslot": "heavymauler"}
     },
     {
       "autofire": false,

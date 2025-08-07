@@ -14,15 +14,31 @@
     "efficiency_overhaul"
   ],
   "weaponGroups": [
-    {
+              {
+      "autofire": false,
+      "mode": "LINKED",
+      "weapons": {
+	          "AIHelp": "omm_chafflauncher",
+	  }
+    },
+	    {
       "autofire": false,
       "mode": "LINKED",
       "weapons": {
         "compositeslot": "jackhammer",
+      }
+    },
+    {
+      "autofire": false,
+      "mode": "LINKED",
+      "weapons": {
         "smlmissileslot": "annihilator"
       }
     }
   ],
-  "modules": [],
+	"modules": [
+
+		{"moduleslot": "omm_octocorallia_Standard"},
+	],
   "wings": []
 }

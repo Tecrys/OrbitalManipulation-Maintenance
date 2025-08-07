@@ -1,6 +1,6 @@
 name,id,tier,rarity,base value,range,damage/second,damage/shot,emp,impact,turn rate,OPs,ammo,ammo/sec,reload size,type,energy/shot,energy/second,chargeup,chargedown,burst size,burst delay,min spread,max spread,spread/shot,spread decay/sec,beam speed,proj speed,launch speed,flight time,proj hitpoints,autofireAccBonus,extraArcForAI,hints,tags,groupTag,tech/manufacturer,for weapon tooltip>>,primaryRoleStr,speedStr,trackingStr,turnRateStr,accuracyStr,customPrimary,customPrimaryHL,customAncillary,customAncillaryHL,noDPSInTooltip,number
-Rivet Gun,omm_s_rivet,1,0.3,800,600,,100,,5,20,4,,,,KINETIC,60,,.3,2.5,1,0.05,0.5,6,2,2,,2400,,,10,,,PD,"pd6, kinetic3, SR, merc, ind",,,,Construction,,,,,,,,,,3.65
-Rivet Battery,omm_m_rivet,1,0.3,800,600,,100,,5,20,11,,,,KINETIC,60,,.3,0.7,1,0.05,0.5,6,2,2,,2400,,,10,,,PD,"pd6, kinetic3, SR, merc, ind",,,,Construction,,,,,,,,,,3.65
+Rivet Gun,omm_s_rivet,1,0.3,800,600,,35,,5,20,4,,,,KINETIC,60,,.3,3,3,0.05,0.5,6,2,2,,2400,,,10,,,PD,"pd6, kinetic3, SR, merc, ind",,,,Construction,,,,,,,,,,3.65
+Rivet Battery,omm_m_rivet,1,0.3,800,600,,35,,5,20,10,,,,KINETIC,60,,.3,0.7,2,0.03,0.5,6,2,2,,2400,,,10,,,PD,"pd6, kinetic3, SR, merc, ind",,,,Construction,,,,,,,,,,3.65
 ,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
 ,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
 ,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,

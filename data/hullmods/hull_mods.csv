@@ -26,4 +26,5 @@ Large Pod AI,omm_largepodai,,,,,,,,TRUE,TRUE,0,0,0,0,tecrys.data.fighters.large_
 Small Pod AI,omm_smallpodai,,,,,,,,TRUE,TRUE,0,0,0,0,tecrys.data.fighters.small_pod.smallpodHullmod,Controls the AI for the Weapons drone,,
 Ballistic Pod AI,omm_ballisticpodai,,,,,,,,TRUE,TRUE,0,0,0,0,tecrys.data.fighters.ballistic_pod.ballisticpodHullmod,Controls the AI for the Weapons drone,,
 PD Pod AI,omm_pddroneai,,,,,,,,TRUE,TRUE,0,0,0,0,tecrys.data.fighters.pddrone_pod.pddronepodHullmod,Controls the AI for the Weapons drone,,
-,,,,,,,,,,,,,,,,,,
+MacroArmLeft,omm_macroupperleftarmhm,,,,,,,,TRUE,TRUE,0,0,0,0,tecrys.data.scripts.hullmods.macroupperleftarmhm,Controls the AI for the Weapons drone,,
+MacroArmRight,omm_macroupperrightarmhm,,,,,,,,TRUE,TRUE,0,0,0,0,tecrys.data.scripts.hullmods.macroupperrightarmhm,Controls the AI for the Weapons drone,,

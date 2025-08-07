@@ -71,7 +71,7 @@
       "mount": "TURRET",
       "arc": 15,
       "angle": 128.5,
-      "locations": [55.5, 41]
+      "locations": [49, 38]
     },
     {
       "id": "WS0002",
@@ -80,7 +80,7 @@
       "mount": "TURRET",
       "arc": 15,
       "angle": -128.5,
-      "locations": [55.5, -41]
+      "locations": [49, -38]
     },
     {
       "id": "shield",

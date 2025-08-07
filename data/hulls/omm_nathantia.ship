@@ -18,8 +18,8 @@
     "hiressensors"
   ],
   "builtInWings": [
-    "omm_ballisticpod_wing",
-    "omm_ballisticpod_wing",
+   "omm_synergypod_wing",
+    "omm_synergypod_wing",
     "omm_compositepod_wing",
     "omm_compositepod_wing",
     "omm_largepod_wing",
@@ -32,7 +32,7 @@
     "COMPMODULAR": "omm_compositepoddeco",
     "LRGMODULAR": "omm_largepoddeco",
     "MODULARPD": "omm_pddronedeco",
-    "WS0001": "omm_ballisticpoddeco",
+    "WS0001": "omm_synergypoddeco",
     "frontcover": "omm_nathantia_frontcover",
     "leftarm": "omm_nathantia_left_arm",
     "leftblinkerfront": "omm_redblinker",
@@ -181,16 +181,16 @@
       "mount": "TURRET",
       "arc": 0,
       "angle": 0,
-      "locations": [123.5, 232]
+      "locations": [121, 233.5]
     },
     {
-      "id": "ballisticslot",
+      "id": "synergyslot",
       "size": "MEDIUM",
       "type": "BALLISTIC",
-      "mount": "TURRET",
+      "mount": "HARDPOINT",
       "arc": 360,
       "angle": 0,
-      "locations": [125, 205.5]
+      "locations": [131.5, 205.5]
     },
     {
       "id": "largeslot",

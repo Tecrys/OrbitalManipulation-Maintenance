@@ -18,6 +18,7 @@
   ],
   "builtInWings": [
     "FreitagCorporation_ShieldDrone_wing",
+    "omm_smallpod_wing",
     "omm_smallpod_wing"
   ],
   "builtInWeapons": {

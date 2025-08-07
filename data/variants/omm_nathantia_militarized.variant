@@ -13,16 +13,41 @@
     "targetingunit"
   ],
   "weaponGroups": [
-    {
+          {
       "autofire": false,
       "mode": "LINKED",
       "weapons": {
-        "ballisticslot": "heavyneedler",
-        "compositeslot": "salamanderpod",
+	          "AIHelp": "omm_chafflauncher",
+	  }
+    },
+    {
+      "autofire": true,
+      "mode": "LINKED",
+      "weapons": {
+        "synergyslot": "heavyneedler",
+      }
+    },
+	    {
+      "autofire": true,
+      "mode": "LINKED",
+      "weapons": {
         "largeslot": "autopulse",
+      }
+    },
+	    {
+      "autofire": false,
+      "mode": "LINKED",
+      "weapons": {
+        "compositeslot": "salamanderpod",
+      }
+    },
+		    {
+      "autofire": true,
+      "mode": "LINKED",
+      "weapons": {
         "pdslot": "pdburst"
       }
-    }
+    },
   ],
   "modules": [],
   "wings": []

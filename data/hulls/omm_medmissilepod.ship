@@ -14,8 +14,7 @@
   "builtInMods": [
     "autorepair",
     "shield_always_on",
-    "missile_reload",
-    "omm_mainframelink"
+    "missile_reload"
   ],
   "builtInWeapons": {
     "omm_laser": "omm_targeting_laser_new",

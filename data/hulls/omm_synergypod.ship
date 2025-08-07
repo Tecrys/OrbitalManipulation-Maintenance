@@ -15,7 +15,6 @@
     "autorepair",
     "shield_always_on",
     "missile_reload",
-    "omm_mainframelink",
     "omm_synergypodai"
   ],
   "builtInWeapons": {

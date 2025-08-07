@@ -14,16 +14,42 @@
     "operations_center"
   ],
   "weaponGroups": [
-    {
+            {
       "autofire": false,
       "mode": "LINKED",
       "weapons": {
-        "ballisticslot": "miningblaster",
-        "compositeslot": "jackhammer",
+	          "AIHelp": "omm_chafflauncher",
+	  }
+    },
+    {
+      "autofire": true,
+      "mode": "LINKED",
+      "weapons": {
+        "synergyslot": "miningblaster",
+      }
+    },
+	    {
+      "autofire": true,
+      "mode": "LINKED",
+      "weapons": {
         "largeslot": "hil",
+      }
+    },
+	    {
+      "autofire": false,
+      "mode": "LINKED",
+      "weapons": {
+        "compositeslot": "jackhammer",
+      }
+    },
+		    {
+      "autofire": true,
+      "mode": "LINKED",
+      "weapons": {
         "pdslot": "irpulse"
       }
-    }
+    },
+
   ],
   "modules": [],
   "wings": []

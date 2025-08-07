@@ -13,6 +13,13 @@
     "hardened_subsystems"
   ],
   "weaponGroups": [
+        {
+      "autofire": false,
+      "mode": "LINKED",
+      "weapons": {
+	          "AIHelp": "omm_chafflauncher",
+	  }
+    },
     {
       "autofire": false,
       "mode": "LINKED",

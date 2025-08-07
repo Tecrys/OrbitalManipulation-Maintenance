@@ -13,29 +13,34 @@
     "assault_package"
   ],
   "weaponGroups": [
+      {
+      "autofire": false,
+      "mode": "LINKED",
+      "weapons": {
+	          "AIHelp": "omm_chafflauncher",
+	  }
+    },
     {
       "autofire": false,
       "mode": "LINKED",
       "weapons": {
-        "pdslot": "pdburst",
+
         "smlmissileslot": "sabot",
-        "synergyslot": "heavyneedler"
+ 
       }
     },
+
     {
-      "autofire": false,
+      "autofire": true,
       "mode": "LINKED",
-      "weapons": {}
+      "weapons": {       "synergyslot": "heavyneedler"}
     },
     {
       "autofire": false,
       "mode": "LINKED",
-      "weapons": {}
-    },
-    {
-      "autofire": false,
-      "mode": "LINKED",
-      "weapons": {}
+      "weapons": {
+	          "pdslot": "pdburst",
+			  }
     },
     {
       "autofire": false,

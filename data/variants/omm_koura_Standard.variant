@@ -13,18 +13,25 @@
     "fluxdistributor"
   ],
   "weaponGroups": [
-    {
+                {
       "autofire": false,
       "mode": "LINKED",
       "weapons": {
-        "smlhybridslot": "ioncannon",
-        "synergyslot": "breachpod"
-      }
+	          "AIHelp": "omm_chafflauncher",
+	  }
     },
     {
       "autofire": true,
       "mode": "LINKED",
-      "weapons": {}
+      "weapons": {
+        "smlhybridslot": "ioncannon",
+
+      }
+    },
+    {
+      "autofire": false,
+      "mode": "LINKED",
+      "weapons": {        "synergyslot": "breachpod"}
     },
     {
       "autofire": false,

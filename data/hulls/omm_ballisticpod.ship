@@ -14,7 +14,6 @@
   "builtInMods": [
     "autorepair",
     "shield_always_on",
-    "omm_mainframelink",
     "omm_ballisticpodai"
   ],
   "builtInWeapons": {

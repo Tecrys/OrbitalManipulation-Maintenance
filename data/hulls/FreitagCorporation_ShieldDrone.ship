@@ -1,6 +1,6 @@
 {
-  "hullName": "Shield Drone",
-  "hullId": "FreitagCorporation_ShieldDrone",
+  "hullName": "Algae Tender",
+  "hullId": "omm_nanodrone",
   "hullSize": "FIGHTER",
   "spriteName": "graphics/ships/Fighters/omm_shielddrone.png",
   "style": "FREITAG_CORP_TECH",
@@ -13,11 +13,10 @@
   "viewOffset": 0,
   "builtInMods": [
     "autorepair",
-    "shield_always_on",
     "do_not_back_off",
     "fluxshunt",
     "omm_mainframelink",
-	"omm_wing_range_increase",
+
   ],
   "builtInWeapons": {
     "AIHelp":"omm_chafflauncher",

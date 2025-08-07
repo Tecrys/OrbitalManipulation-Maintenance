@@ -15,8 +15,7 @@
     "autorepair",
     "shield_always_on",
     #"do_not_back_off",
-    #"fluxshunt",
-    "omm_mainframelink"
+    #"fluxshunt"
   ],
   "builtInWeapons": {
     "omm_laser": "omm_targeting_laser",

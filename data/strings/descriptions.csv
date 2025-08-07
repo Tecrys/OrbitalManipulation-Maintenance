@@ -31,7 +31,9 @@ Since the Sand Hopper-class is armored rather lightly the Freitag Corporation eq
 While active the ship makes a huge leap forward and it can use that to catapult itself over other ships.
 Unfortunately this system requires quite a bit of time to cycle its capacitors until it can be used again. More often then not the system is used in emergency situations to quickly disengage from battle and leave all defenses behind as disposable rearguard.
  
-For most of the Sand Hopper-class's employers salvage is all that counts and so this light destroyer is the embodyment of the philosophy ""Live to fight another day"".",,,
+For most of the Sand Hopper-class's employers salvage is all that counts and so this light destroyer is the embodyment of the philosophy ""Live to fight another day"".
+
+The Octocorallia defense platform and its Orchestria carrier need to be repaired at port before the platform can be deployed again.",,,
 omm_sesarma,SHIP,"The Sesarma-class is a versatile courier craft, intended to be one of the more affordable ship designs in their cataloque, contrary to most other vessels produced by the Freitag Corporation.
 Still more expensive than comparable ships with a similar role, it boasts a modular clamp system to make up for the increased price with a system designed to more efficiently facilitate cargo loading and unloading.
 While other cargo holds can only be filled tediously as the ship is stuck in a loading bay, for the Sasarma-class modular containers can be pre-loaded even before it has arrived on site. It only needs to pick up the container, fuel tank or passenger cabin it is supposed to transport and it can be on its way again. This allows for rapid transport of goods, and as an aside also permits the Freitag Corporation to sell their specialized containers to increase efficiency even further.
@@ -135,7 +137,7 @@ Data recorded during tests showed that the time dilation could be used to collec
 
 The design has been rushed into production to bolster sales without even removing its testbed status.",,,
 ,,,,,
-omm_octocorallia,SHIP,Automated Defense platform deployed by the Sandhopper-class. Is automatically deployed if within 300 SU of a capture point or 30 seconds after combat has started.,,,
+omm_octocorallia,SHIP,Automated Defense platform deployed by the Sandhopper-class. Is automatically deployed if within 300 SU of a capture point or 30 seconds after combat has started. The Octocorallia defense platform and its Orchestria carrier need to be repaired at port before the platform can be deployed again.,,,
 ,,,,,
 FreitagCorporation_Manipulator,SHIP_SYSTEM,Activate to gain a significant speed boost and shield damage resistance. If the ship collides with an enemy it pushes it away. Heavier ships are pushed less far. Does not deal damage apart from possible collisions that might occur.,Movement,Activate to gain a sicnificant speed boost and shield damage resistance. If the ship collides with an enemy it pushes it away. Heavier ships are pushed less far. Does not deal damage apart from possible collisions that might occur.,
 FreitagCorporation_FluxEater,SHIP_SYSTEM,"Channels flux over 3 seconds from allied ships near the cursor to the Euphausia up to 1500 SU away. Influenced by flux dissipation rate, can sometimes affect more than 1 ship if they are close to one another.",Special,"Channels flux over 3 seconds from allied ships near the cursor to the Euphausia up to 1500 SU away. Influenced by flux dissipation rate, can sometimes affect more than 1 ship if they are close to one another.",
