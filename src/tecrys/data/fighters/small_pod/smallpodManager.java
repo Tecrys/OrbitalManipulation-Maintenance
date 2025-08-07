@@ -179,9 +179,9 @@ public class smallpodManager implements AdvanceableListener {
                                         if (Keyboard.isKeyDown(KEY_R)) {
                                             drone.setShipTarget(this.mothership.getShipTarget());           //clicky left drone shooty
                                         }
-                                        if (OMMSettings.missile_key == 0 && Mouse.isButtonDown(2) && !player.getFluxTracker().isOverloadedOrVenting() && (dronewep.getType() == MISSILE) && dronewep.getSlot().getId().equals("smlhybridslot")) {
+                                        if ((OMMSettings.missile_key == 0 && Mouse.isButtonDown(2) || Mouse.isButtonDown(0)) && !player.getFluxTracker().isOverloadedOrVenting() && (dronewep.getType() == MISSILE) && dronewep.getSlot().getId().equals("smlhybridslot")) {
                                             smlwep.setForceFireOneFrame(true);           //clicky left drone shooty
-                                        } else if (Keyboard.isKeyDown(OMMSettings.missile_key) && !player.getFluxTracker().isOverloadedOrVenting() && (dronewep.getType() == MISSILE) && dronewep.getSlot().getId().equals("smlhybridslot")) {
+                                        } else if ((Keyboard.isKeyDown(OMMSettings.missile_key) || Mouse.isButtonDown(0)) && !player.getFluxTracker().isOverloadedOrVenting() && (dronewep.getType() == MISSILE) && dronewep.getSlot().getId().equals("smlhybridslot")) {
                                             smlwep.setForceFireOneFrame(true);
                                         }
                                     }

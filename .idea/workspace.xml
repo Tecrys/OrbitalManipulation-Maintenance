@@ -5,78 +5,17 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="ab26a4c7-b187-47b8-97aa-f29af88e4e7a" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/.idea/jarRepositories.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/kotlinc.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/OrbitalManipulationAndMaintenance/.idea/modules/Games.Starsector0.97a.mods.OrbitalManipulation&amp;Maintenance.main~1.iml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/OrbitalManipulationAndMaintenance/.idea/modules/Games.Starsector0.97a.mods.OrbitalManipulation&amp;Maintenance.test~1.iml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/OrbitalManipulationAndMaintenance/.idea/modules/OrbitalManipulation&amp;Maintenance.main~1.iml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/OrbitalManipulationAndMaintenance/.idea/modules/OrbitalManipulation&amp;Maintenance.test~1.iml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/tecrys/data/scripts/hullmods/macroupperleftarmhm.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/tecrys/data/scripts/hullmods/macroupperrightarmhm.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.github/workflows/mod-folder-name.txt" beforeDir="false" afterPath="$PROJECT_DIR$/.github/workflows/mod-folder-name.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/FreitagCorporation.version" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/OMM.version" beforeDir="false" afterPath="$PROJECT_DIR$/OMM.version" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/OrbitalManipulationAndMaintenance/.idea/kotlinc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/OrbitalManipulationAndMaintenance/.idea/kotlinc.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/OrbitalManipulationAndMaintenance/.idea/modules.xml" beforeDir="false" afterPath="$PROJECT_DIR$/OrbitalManipulationAndMaintenance/.idea/modules.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/OrbitalManipulationAndMaintenance/.idea/modules/OrbitalManipulation&amp;Maintenance.iml" beforeDir="false" afterPath="$PROJECT_DIR$/OrbitalManipulationAndMaintenance/.idea/modules/OrbitalManipulation&amp;Maintenance.iml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/OrbitalManipulationAndMaintenance/.idea/modules/OrbitalManipulation&amp;Maintenance.main.iml" beforeDir="false" afterPath="$PROJECT_DIR$/OrbitalManipulationAndMaintenance/.idea/modules/OrbitalManipulation&amp;Maintenance.main.iml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/OrbitalManipulationAndMaintenance/.idea/modules/mods.OrbitalManipulation&amp;Maintenance.main.iml" beforeDir="false" afterPath="$PROJECT_DIR$/OrbitalManipulationAndMaintenance/.idea/modules/mods.OrbitalManipulation&amp;Maintenance.main.iml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/OrbitalManipulationAndMaintenance/.idea/modules/mods.OrbitalManipulation&amp;Maintenance.test.iml" beforeDir="false" afterPath="$PROJECT_DIR$/OrbitalManipulationAndMaintenance/.idea/modules/mods.OrbitalManipulation&amp;Maintenance.test.iml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/build.gradle.kts" beforeDir="false" afterPath="$PROJECT_DIR$/build.gradle.kts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/data/hullmods/hull_mods.csv" beforeDir="false" afterPath="$PROJECT_DIR$/data/hullmods/hull_mods.csv" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/data/hulls/FreitagCorporation_ShieldDrone.ship" beforeDir="false" afterPath="$PROJECT_DIR$/data/hulls/FreitagCorporation_ShieldDrone.ship" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/data/hulls/omm_ballisticpod.ship" beforeDir="false" afterPath="$PROJECT_DIR$/data/hulls/omm_ballisticpod.ship" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/data/hulls/omm_compositepod.ship" beforeDir="false" afterPath="$PROJECT_DIR$/data/hulls/omm_compositepod.ship" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/data/hulls/omm_crevette.ship" beforeDir="false" afterPath="$PROJECT_DIR$/data/hulls/omm_crevette.ship" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/data/hulls/omm_euphausia.ship" beforeDir="false" afterPath="$PROJECT_DIR$/data/hulls/omm_euphausia.ship" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/data/hulls/omm_largepod.ship" beforeDir="false" afterPath="$PROJECT_DIR$/data/hulls/omm_largepod.ship" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/data/hulls/omm_macrocheira.ship" beforeDir="false" afterPath="$PROJECT_DIR$/data/hulls/omm_macrocheira.ship" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/data/hulls/omm_medmissilepod.ship" beforeDir="false" afterPath="$PROJECT_DIR$/data/hulls/omm_medmissilepod.ship" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/data/hulls/omm_missilepod.ship" beforeDir="false" afterPath="$PROJECT_DIR$/data/hulls/omm_missilepod.ship" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/data/hulls/omm_nanodrone.ship" beforeDir="false" afterPath="$PROJECT_DIR$/data/hulls/omm_nanodrone.ship" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/data/hulls/omm_nathantia.ship" beforeDir="false" afterPath="$PROJECT_DIR$/data/hulls/omm_nathantia.ship" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/data/hulls/omm_octocorallia.ship" beforeDir="false" afterPath="$PROJECT_DIR$/data/hulls/omm_octocorallia.ship" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/data/hulls/omm_pddrone.ship" beforeDir="false" afterPath="$PROJECT_DIR$/data/hulls/omm_pddrone.ship" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/data/hulls/omm_sandhopper.ship" beforeDir="false" afterPath="$PROJECT_DIR$/data/hulls/omm_sandhopper.ship" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/data/hulls/omm_smallpod.ship" beforeDir="false" afterPath="$PROJECT_DIR$/data/hulls/omm_smallpod.ship" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/data/hulls/omm_synergypod.ship" beforeDir="false" afterPath="$PROJECT_DIR$/data/hulls/omm_synergypod.ship" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/data/hulls/omm_weaponpod.ship" beforeDir="false" afterPath="$PROJECT_DIR$/data/hulls/omm_weaponpod.ship" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/data/hulls/ship_data.csv" beforeDir="false" afterPath="$PROJECT_DIR$/data/hulls/ship_data.csv" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/data/hulls/wing_data.csv" beforeDir="false" afterPath="$PROJECT_DIR$/data/hulls/wing_data.csv" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/data/variants/omm_crevette_Standard.variant" beforeDir="false" afterPath="$PROJECT_DIR$/data/variants/omm_crevette_Standard.variant" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/data/variants/omm_crevette_militarized.variant" beforeDir="false" afterPath="$PROJECT_DIR$/data/variants/omm_crevette_militarized.variant" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/data/variants/omm_euphausia_Standard.variant" beforeDir="false" afterPath="$PROJECT_DIR$/data/variants/omm_euphausia_Standard.variant" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/data/variants/omm_euphausia_militarized.variant" beforeDir="false" afterPath="$PROJECT_DIR$/data/variants/omm_euphausia_militarized.variant" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/data/variants/omm_koura_Standard.variant" beforeDir="false" afterPath="$PROJECT_DIR$/data/variants/omm_koura_Standard.variant" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/data/variants/omm_koura_strike.variant" beforeDir="false" afterPath="$PROJECT_DIR$/data/variants/omm_koura_strike.variant" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/data/variants/omm_nathantia_Standard.variant" beforeDir="false" afterPath="$PROJECT_DIR$/data/variants/omm_nathantia_Standard.variant" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/data/variants/omm_nathantia_militarized.variant" beforeDir="false" afterPath="$PROJECT_DIR$/data/variants/omm_nathantia_militarized.variant" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/data/variants/omm_sandhopper_Standard.variant" beforeDir="false" afterPath="$PROJECT_DIR$/data/variants/omm_sandhopper_Standard.variant" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/data/variants/omm_sandhopper_militarized.variant" beforeDir="false" afterPath="$PROJECT_DIR$/data/variants/omm_sandhopper_militarized.variant" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/data/weapons/omm_macrocheira_left_upper_arm2.wpn" beforeDir="false" afterPath="$PROJECT_DIR$/data/weapons/omm_macrocheira_left_upper_arm2.wpn" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/data/weapons/omm_macrocheira_right_upper_arm.wpn" beforeDir="false" afterPath="$PROJECT_DIR$/data/weapons/omm_macrocheira_right_upper_arm.wpn" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/data/weapons/weapon_data.csv" beforeDir="false" afterPath="$PROJECT_DIR$/data/weapons/weapon_data.csv" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/graphics/ships/Ecrevisse/omm_ecrevisse.png" beforeDir="false" afterPath="$PROJECT_DIR$/graphics/ships/Ecrevisse/omm_ecrevisse.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/graphics/ships/Euphausia/omm_euphausia.png" beforeDir="false" afterPath="$PROJECT_DIR$/graphics/ships/Euphausia/omm_euphausia.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/jar/FreitagCorporation - Copy.jar" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/jar/FreitagCorporation.jar" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/jar/OrbitalManipulation&amp;Maintenance.jar" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/mod_info.json" beforeDir="false" afterPath="$PROJECT_DIR$/mod_info.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/config/sounds.json" beforeDir="false" afterPath="$PROJECT_DIR$/data/config/sounds.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/jar/OrbitalManipulationMaintenance.jar" beforeDir="false" afterPath="$PROJECT_DIR$/jar/OrbitalManipulationMaintenance.jar" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/tecrys/data/fighters/ballistic_pod/ballisticpodManager.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/tecrys/data/fighters/ballistic_pod/ballisticpodManager.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/tecrys/data/fighters/composite_pod/compositepodManager.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/tecrys/data/fighters/composite_pod/compositepodManager.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/tecrys/data/fighters/large_pod/largepodManager.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/tecrys/data/fighters/large_pod/largepodManager.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/tecrys/data/fighters/missile_pod/missilepodManager.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/tecrys/data/fighters/missile_pod/missilepodManager.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/tecrys/data/fighters/pddrone_pod/pddroneManager.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/tecrys/data/fighters/pddrone_pod/pddroneManager.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/tecrys/data/fighters/small_pod/smallpodManager.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/tecrys/data/fighters/small_pod/smallpodManager.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/tecrys/data/fighters/synergy_pod/synergypodAI.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/tecrys/data/fighters/synergy_pod/synergypodAI.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/tecrys/data/fighters/synergy_pod/synergypodManager.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/tecrys/data/fighters/synergy_pod/synergypodManager.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/tecrys/data/scripts/ai/repairdroneai.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/tecrys/data/scripts/ai/repairdroneai.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/tecrys/data/scripts/hullmods/FreitagCorporation_Storage.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/tecrys/data/scripts/hullmods/FreitagCorporation_Storage.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/tecrys/data/scripts/hullmods/omm_mainframelink.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/tecrys/data/scripts/hullmods/omm_mainframelink.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/tecrys/data/scripts/plugins/omm_drone.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/tecrys/data/scripts/plugins/omm_drone.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/tecrys/data/scripts/weapons/FreitagCorporation_Sand_Hopper_DefPlatform.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/tecrys/data/scripts/weapons/FreitagCorporation_Sand_Hopper_DefPlatform.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />

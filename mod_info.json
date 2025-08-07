@@ -4,7 +4,7 @@
                     "name": "OrbitalManipulationMaintenance",
                     "author": "Tecrys",
                     "utility": "false",
-                    "version": { "major":"0", "minor": "9", "patch": "0" },
+                    "version": { "major":"0", "minor": "9", "patch": "0a" },
                     "description": "Ships and Game Mechanics for the Civilian Sector as well as luxury brand manufacturer Freitag Corporation. Credits: Lord_Dalton, Snrasha, briansd9, tomatopaste, Shoi, Sutopia, Finn.",
                     "gameVersion": "0.98a",
                     "jars":["jar/OrbitalManipulationMaintenance.jar"],

@@ -71,6 +71,9 @@ public class repairdroneai extends BaseShipAI {
 
   boolean spark = false;
 
+  boolean teleported = false;
+
+
   float targetFacingOffset = Float.MIN_VALUE;
 
   float range = 4000.0F;
@@ -93,6 +96,10 @@ public class repairdroneai extends BaseShipAI {
 //        return;
 //      }
 //    }
+    if (!this.ship.getWing().isReturning(this.carrier) && teleported){
+      this.ship.getLocation().set(this.carrier.getLocation().getX(), this.carrier.getLocation().getY());
+      teleported = false;
+    }
     if ((chooseTarget() == this.carrier
             && !this.shouldRepair &&
             (StolenUtils.getArmorPercent(this.target) >= 0.99F || this.target.getHullLevel() > 0.98F))
@@ -111,7 +118,9 @@ public class repairdroneai extends BaseShipAI {
 //            && !this.ship.isLanding()
            && MathUtils.getDistance((CombatEntityAPI)this.ship, (CombatEntityAPI)this.carrier) < this.carrier.getCollisionRadius() / 3.0F
     ) {
-     this.ship.getWing().getSource().land(this.ship);
+//     this.ship.getWing().getSource().land(this.ship);
+this.ship.getLocation().set(99999, 99999);
+      teleported = true;
     }
     this.interval.advance(amount);
     if (this.interval.intervalElapsed()) {
@@ -188,7 +197,7 @@ public class repairdroneai extends BaseShipAI {
       bonus = 2.0F;
     }
     if (this.target.getHullLevel() < 0.99F) {
-      totalHullRepaired = 3.0F * bonus;
+      totalHullRepaired = 4.0F * bonus;
       this.target.setHitpoints(this.target.getHitpoints() + totalHullRepaired);
       float overage = this.target.getHitpoints() - this.target.getMaxHitpoints();
       if (overage > 0.0F) {

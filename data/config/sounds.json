@@ -20,7 +20,10 @@
 			"omm-klaaa":[{"file":"sounds/omm-klaaa.ogg","pitch":1,"volume":0.1}],
 			"omm_pffft":[{"file":"sounds/omm_pffft.ogg","pitch":1,"volume":0.1}],			
 			
-
+	"fighter_takeoff":
+	[
+		{"file":"sounds/sfx_wpn_missiles/sabot_srm_fire_01.ogg","pitch":00,"volume":0},
+	],
 	
 }
 
