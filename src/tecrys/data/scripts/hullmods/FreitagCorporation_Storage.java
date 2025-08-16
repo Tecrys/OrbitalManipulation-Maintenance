@@ -20,11 +20,11 @@ public class FreitagCorporation_Storage extends BaseHullMod {
             if (stats.getVariant().hasHullMod("auxiliary_fuel_tanks")) {
                 stats.getFuelMod().modifyFlat(id, STORAGE_AUXILIARY_FUEL_TANKS);
                 stats.getDynamic().getMod(Stats.MAX_LOGISTICS_HULLMODS_MOD).modifyFlat(id, 1);
-            } else if (stats.getVariant().hasHullMod("additional_berthing")) {
+            } else if (stats.getVariant().hasHullMod("expanded_cargo_holds")) {
                 stats.getCargoMod().modifyFlat(id, STORAGE_EXPANDED_CARGO_HOLDS);
                 stats.getDynamic().getMod(Stats.MAX_LOGISTICS_HULLMODS_MOD).modifyFlat(id, 1);
 
-            } else if (stats.getVariant().hasHullMod("expanded_cargo_holds")) {
+            } else if (stats.getVariant().hasHullMod("additional_berthing")) {
                 stats.getMaxCrewMod().modifyFlat(id, STORAGE_ADDITIONAL_BERTHING);
                 stats.getDynamic().getMod(Stats.MAX_LOGISTICS_HULLMODS_MOD).modifyFlat(id, 1);
 
