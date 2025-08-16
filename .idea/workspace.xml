@@ -5,67 +5,13 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="ab26a4c7-b187-47b8-97aa-f29af88e4e7a" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/src/tecrys/data/scripts/weapons/ai/omm_laser_mirv_autofire.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/tecrys/data/scripts/weapons/omm_chaff_flak.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/tecrys/data/scripts/weapons/omm_demolition_rocket_pod.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/tecrys/data/scripts/weapons/omm_laser_aimer.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/tecrys/data/scripts/weapons/omm_laser_mirv.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/tecrys/data/scripts/weapons/omm_laserweb_beam_effect.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/tecrys/data/scripts/weapons/omm_plasmacutter_anim.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/tecrys/data/scripts/weapons/omm_rotary_saw.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/tecrys/data/scripts/weapons/omm_rotary_saw_sub.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/tecrys/data/scripts/weapons/omm_stasisOnHitEffect.kt" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/tecrys/data/scripts/weapons/omm_trapdoor.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/tecrys/data/scripts/weapons/omm_trapdoor_missile.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/tecrys/data/scripts/weapons/omm_welder_onhit.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/tecrys/data/shipsystems/scripts/omm_laserwebmirv.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.run/Run Starsector.run.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.run/Run Starsector.run.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/OMM.version" beforeDir="false" afterPath="$PROJECT_DIR$/OMM.version" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build.gradle.kts" beforeDir="false" afterPath="$PROJECT_DIR$/build.gradle.kts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/data/config/settings.json" beforeDir="false" afterPath="$PROJECT_DIR$/data/config/settings.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/data/hullmods/hull_mods.csv" beforeDir="false" afterPath="$PROJECT_DIR$/data/hullmods/hull_mods.csv" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/data/hulls/omm_ballisticpod.ship" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/data/hulls/ship_data.csv" beforeDir="false" afterPath="$PROJECT_DIR$/data/hulls/ship_data.csv" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/data/hulls/wing_data.csv" beforeDir="false" afterPath="$PROJECT_DIR$/data/hulls/wing_data.csv" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/data/shipsystems/ship_systems.csv" beforeDir="false" afterPath="$PROJECT_DIR$/data/shipsystems/ship_systems.csv" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/data/variants/omm_ballisticpod_standard.variant" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/data/weapons/weapon_data.csv" beforeDir="false" afterPath="$PROJECT_DIR$/data/weapons/weapon_data.csv" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/graphics/missiles/omm_rebar_shot.png" beforeDir="false" afterPath="$PROJECT_DIR$/graphics/missiles/omm_rebar_shot.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/graphics/ships/Limnopilos/omm_limnopilos.png" beforeDir="false" afterPath="$PROJECT_DIR$/graphics/ships/Limnopilos/omm_limnopilos.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/graphics/ships/Nathantia/omm_Nathantia.png" beforeDir="false" afterPath="$PROJECT_DIR$/graphics/ships/Nathantia/omm_Nathantia.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/graphics/weapons/omm_plasmacutter_hp00.png" beforeDir="false" afterPath="$PROJECT_DIR$/graphics/weapons/omm_plasmacutter_hp00.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/graphics/weapons/omm_plasmacutter_hp01.png" beforeDir="false" afterPath="$PROJECT_DIR$/graphics/weapons/omm_plasmacutter_hp01.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/graphics/weapons/omm_plasmacutter_hp02.png" beforeDir="false" afterPath="$PROJECT_DIR$/graphics/weapons/omm_plasmacutter_hp02.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/graphics/weapons/omm_plasmacutter_hp03.png" beforeDir="false" afterPath="$PROJECT_DIR$/graphics/weapons/omm_plasmacutter_hp03.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/graphics/weapons/omm_plasmacutter_hp04.png" beforeDir="false" afterPath="$PROJECT_DIR$/graphics/weapons/omm_plasmacutter_hp04.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/graphics/weapons/omm_plasmacutter_hp05.png" beforeDir="false" afterPath="$PROJECT_DIR$/graphics/weapons/omm_plasmacutter_hp05.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/graphics/weapons/omm_plasmacutter_hp06.png" beforeDir="false" afterPath="$PROJECT_DIR$/graphics/weapons/omm_plasmacutter_hp06.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/graphics/weapons/omm_plasmacutter_tu00.png" beforeDir="false" afterPath="$PROJECT_DIR$/graphics/weapons/omm_plasmacutter_tu00.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/graphics/weapons/omm_plasmacutter_tu01.png" beforeDir="false" afterPath="$PROJECT_DIR$/graphics/weapons/omm_plasmacutter_tu01.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/graphics/weapons/omm_plasmacutter_tu02.png" beforeDir="false" afterPath="$PROJECT_DIR$/graphics/weapons/omm_plasmacutter_tu02.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/graphics/weapons/omm_plasmacutter_tu03.png" beforeDir="false" afterPath="$PROJECT_DIR$/graphics/weapons/omm_plasmacutter_tu03.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/graphics/weapons/omm_plasmacutter_tu04.png" beforeDir="false" afterPath="$PROJECT_DIR$/graphics/weapons/omm_plasmacutter_tu04.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/graphics/weapons/omm_plasmacutter_tu05.png" beforeDir="false" afterPath="$PROJECT_DIR$/graphics/weapons/omm_plasmacutter_tu05.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/graphics/weapons/omm_plasmacutter_tu06.png" beforeDir="false" afterPath="$PROJECT_DIR$/graphics/weapons/omm_plasmacutter_tu06.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/graphics/weapons/omm_rebar_hp.png" beforeDir="false" afterPath="$PROJECT_DIR$/graphics/weapons/omm_rebar_hp.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/graphics/weapons/omm_rebar_tu.png" beforeDir="false" afterPath="$PROJECT_DIR$/graphics/weapons/omm_rebar_tu.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/graphics/weapons/omm_stasisgun_hp_barrel.png" beforeDir="false" afterPath="$PROJECT_DIR$/graphics/weapons/omm_stasisgun_hp_barrel.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/graphics/weapons/omm_stasisgun_tu_barrel.png" beforeDir="false" afterPath="$PROJECT_DIR$/graphics/weapons/omm_stasisgun_tu_barrel.png" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/jar/OrbitalManipulationMaintenance.jar" beforeDir="false" afterPath="$PROJECT_DIR$/jar/OrbitalManipulationMaintenance.jar" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/mod_info.json" beforeDir="false" afterPath="$PROJECT_DIR$/mod_info.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/tecrys/data/fighters/ballistic_pod/ballisticpodAI.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/tecrys/data/fighters/ballistic_pod/ballisticpodAI.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/tecrys/data/fighters/ballistic_pod/ballisticpodHullmod.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/tecrys/data/fighters/ballistic_pod/ballisticpodHullmod.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/tecrys/data/fighters/ballistic_pod/ballisticpodManager.java" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/src/tecrys/data/fighters/composite_pod/compositepodManager.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/tecrys/data/fighters/composite_pod/compositepodManager.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/tecrys/data/fighters/large_pod/largepodManager.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/tecrys/data/fighters/large_pod/largepodManager.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/tecrys/data/fighters/missile_pod/missilepodManager.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/tecrys/data/fighters/missile_pod/missilepodManager.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/tecrys/data/fighters/pddrone_pod/pddroneManager.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/tecrys/data/fighters/pddrone_pod/pddroneManager.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/tecrys/data/fighters/small_pod/smallpodManager.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/tecrys/data/fighters/small_pod/smallpodManager.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/tecrys/data/fighters/synergy_pod/synergypodManager.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/tecrys/data/fighters/synergy_pod/synergypodManager.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/tecrys/data/scripts/FreitagCorporation_ModPlugin.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/tecrys/data/scripts/FreitagCorporation_ModPlugin.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/tecrys/data/scripts/hullmods/omm_TowCable.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/tecrys/data/scripts/hullmods/omm_TowCable.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/tecrys/data/scripts/plugins/omm_drone.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/tecrys/data/scripts/plugins/omm_drone.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -133,25 +79,25 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent">{
-  &quot;keyToString&quot;: {
-    &quot;Application.Run Starsector.executor&quot;: &quot;Debug&quot;,
-    &quot;Gradle.Build OrbitalManipulationMaintenance.executor&quot;: &quot;Run&quot;,
-    &quot;Gradle.OrbitalManipulationMaintenance [build].executor&quot;: &quot;Run&quot;,
-    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.git.unshallow&quot;: &quot;true&quot;,
-    &quot;SHARE_PROJECT_CONFIGURATION_FILES&quot;: &quot;true&quot;,
-    &quot;git-widget-placeholder&quot;: &quot;master&quot;,
-    &quot;ignore.virus.scanning.warn.message&quot;: &quot;true&quot;,
-    &quot;kotlin-language-version-configured&quot;: &quot;true&quot;,
-    &quot;last_opened_file_path&quot;: &quot;C:/Games/Starsector0.98a/mods/OrbitalManipulationMaintenance&quot;,
-    &quot;project.structure.last.edited&quot;: &quot;Modules&quot;,
-    &quot;project.structure.proportion&quot;: &quot;0.15&quot;,
-    &quot;project.structure.side.proportion&quot;: &quot;0.2&quot;,
-    &quot;settings.editor.selected.configurable&quot;: &quot;reference.settingsdialog.project.gradle&quot;
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "Application.Run Starsector.executor": "Debug",
+    "Gradle.Build OrbitalManipulationMaintenance.executor": "Run",
+    "Gradle.OrbitalManipulationMaintenance [build].executor": "Debug",
+    "RunOnceActivity.OpenProjectViewOnStart": "true",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "RunOnceActivity.git.unshallow": "true",
+    "SHARE_PROJECT_CONFIGURATION_FILES": "true",
+    "git-widget-placeholder": "master",
+    "ignore.virus.scanning.warn.message": "true",
+    "kotlin-language-version-configured": "true",
+    "last_opened_file_path": "C:/Games/Starsector0.98a/mods/OrbitalManipulationMaintenance",
+    "project.structure.last.edited": "Modules",
+    "project.structure.proportion": "0.15",
+    "project.structure.side.proportion": "0.2",
+    "settings.editor.selected.configurable": "reference.settingsdialog.project.gradle"
   }
-}</component>
+}]]></component>
   <component name="RecentsManager">
     <key name="CopyKotlinDeclarationDialog.RECENTS_KEY">
       <recent name="tecrys.data.scripts.weapons" />

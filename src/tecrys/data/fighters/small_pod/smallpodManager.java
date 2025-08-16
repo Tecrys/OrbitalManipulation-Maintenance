@@ -15,6 +15,7 @@ import com.fs.starfarer.api.loading.WeaponSpecAPI;
 import com.fs.starfarer.api.util.IntervalUtil;
 import org.lazywizard.lazylib.MathUtils;
 import org.lazywizard.lazylib.VectorUtils;
+import org.lazywizard.lazylib.combat.AIUtils;
 import org.lwjgl.util.vector.Vector2f;
 
 import java.util.ArrayList;
@@ -85,7 +86,7 @@ public class smallpodManager implements AdvanceableListener {
                 WeaponAPI laswep = null;
                 float angle = VectorUtils.getAngle(dronepos, mousepos);
 
-
+                // setting up variables:
                 for (WeaponAPI dronewep : droneweps) {
                     if (dronewep.getSlot().getId().equals("smlhybridslot") || dronewep.getSlot().getId().equals("omm_laser")) {
                         {
@@ -112,19 +113,31 @@ public class smallpodManager implements AdvanceableListener {
                         WeaponGroupAPI smlgroup = this.mothership.getWeaponGroupFor(wep);
                         WeaponGroupAPI lasgroup = drone.getWeaponGroupFor(laswep);
 
-
-                        if (smldrogroup != null && smlgroup != null)
-                        { if (smlgroup.isAutofiring() && !smldrogroup.isAutofiring() && smlgroup != activegroup) {
-                            drone.giveCommand(ShipCommand.TOGGLE_AUTOFIRE, null, drone.getWeaponGroupsCopy().indexOf(smldrogroup));
-                        }
-                            if (!smlgroup.isAutofiring() && smldrogroup.isAutofiring() && smlgroup != activegroup) {
-                                drone.giveCommand(ShipCommand.TOGGLE_AUTOFIRE, null, drone.getWeaponGroupsCopy().indexOf(smldrogroup));
-                            }
+                        // Weapon group controls:
+                        if (smldrogroup != null && smlgroup != null) {
 
                             if ((!smldrogroup.isAutofiring() && player != this.mothership) || (!smldrogroup.isAutofiring() && this.mothership.equals(player) && !engine.isUIAutopilotOn())) {
                                 drone.giveCommand(ShipCommand.TOGGLE_AUTOFIRE, null, drone.getWeaponGroupsCopy().indexOf(smldrogroup));
 //                            } else if (group.isAutofiring() && this.mothership.equals(player) && engine.isUIAutopilotOn()) {
 //                                drone.giveCommand(ShipCommand.TOGGLE_AUTOFIRE, null, drone.getWeaponGroupsCopy().indexOf(group));
+                            }
+                            if (smldrogroup.isAutofiring()
+                                    && player == this.mothership && engine.isUIAutopilotOn() && smlgroup == activegroup
+                            )
+                            {
+                                drone.giveCommand(ShipCommand.TOGGLE_AUTOFIRE, null, drone.getWeaponGroupsCopy().indexOf(smldrogroup));
+                            }
+                            else if (       (smlgroup.isAutofiring() && !smldrogroup.isAutofiring()
+                                    && player == this.mothership && engine.isUIAutopilotOn() && smlgroup != activegroup)
+                            )
+                            {
+                                drone.giveCommand(ShipCommand.TOGGLE_AUTOFIRE, null, drone.getWeaponGroupsCopy().indexOf(smldrogroup));
+                            }
+                            else if (       (!smlgroup.isAutofiring() && smldrogroup.isAutofiring()
+                                    && player == this.mothership && engine.isUIAutopilotOn() && smlgroup != activegroup)
+                            )
+                            {
+                                drone.giveCommand(ShipCommand.TOGGLE_AUTOFIRE, null, drone.getWeaponGroupsCopy().indexOf(smldrogroup));
                             }
                         }
 
@@ -134,11 +147,15 @@ public class smallpodManager implements AdvanceableListener {
                                     && engine.isUIAutopilotOn()
 //                                && (activegroup != null)
 //                                && (Objects.equals(activegroup.getActiveWeapon().getId(), smlwep.getId()))
-//                                    && !activegroup.isAutofiring()
+//                                && !activegroup.isAutofiring()
                             ) {
 
+                                // Weapon group controls for player piloted ships & targeting laser control:
                                 List<WeaponAPI> activeWeapon = activegroup.getWeaponsCopy();
                                 for (WeaponAPI weapon : activeWeapon) {
+
+
+
                                     if (Objects.equals(weapon.getId(), smlwep.getId()) && smlgroup == activegroup) {
                                         weapon.beginSelectionFlash();
                                         weapon.ensureClonedSpec();
@@ -148,17 +165,17 @@ public class smallpodManager implements AdvanceableListener {
                                         float diff = MathUtils.getShortestRotation(dronewep.getCurrAngle(), angle);
                                         float maxVel = dronewep.getTurnRate();
                                         diff = MathUtils.clamp(diff, -maxVel, maxVel);
-                                        dronewep.setCurrAngle(diff + dronewep.getCurrAngle());     //aims the drone weapon
+                                        if(dronewep != null)    {
+                                            dronewep.setCurrAngle(diff + dronewep.getCurrAngle());}     //aims the drone weapon towards cursor
+
 
                                         float diffdrone = MathUtils.getShortestRotation(drone.getFacing(), angle);
                                         float maxVeldrone = drone.getMaxTurnRate();
                                         diffdrone = MathUtils.clamp(diffdrone, -maxVeldrone, maxVeldrone);
-                                        drone.setFacing(diffdrone + drone.getFacing());        //sets facing of the drone
+                                        //drone.setFacing(diffdrone + drone.getFacing());        //sets facing of the drone
 
-                                        {
-                                            if (smlgroup.isAutofiring() && smldrogroup.isAutofiring() && smlgroup == activegroup) {
-                                                drone.giveCommand(ShipCommand.TOGGLE_AUTOFIRE, null, drone.getWeaponGroupsCopy().indexOf(smldrogroup));
-                                            }
+                                        {                 // make sure player-selected weapon group has autofire turned off:
+
                                             if (player == this.mothership && !drone.isLanding() && !drone.isLiftingOff() && dronewep.getSlot().getId().equals("omm_laser") && smlwep != null
                                                     && engine.isUIAutopilotOn()
                                             ) {
@@ -179,25 +196,38 @@ public class smallpodManager implements AdvanceableListener {
                                             smlwep.setForceFireOneFrame(true);           //clicky left drone shooty
                                         }
                                         if (Keyboard.isKeyDown(KEY_R)) {
-                                            drone.setShipTarget(this.mothership.getShipTarget());           //clicky left drone shooty
+                                            drone.setShipTarget(this.mothership.getShipTarget());           //share ship target with drones
                                         }
-                                        if ((OMMSettings.missile_key == 0 && Mouse.isButtonDown(2) || Mouse.isButtonDown(0)) && !player.getFluxTracker().isOverloadedOrVenting() && (dronewep.getType() == MISSILE) && dronewep.getSlot().getId().equals("smlhybridslot")) {
-                                            smlwep.setForceFireOneFrame(true);           //clicky left drone shooty
-                                        } else if ((Keyboard.isKeyDown(OMMSettings.missile_key) || Mouse.isButtonDown(0)) && !player.getFluxTracker().isOverloadedOrVenting() && (dronewep.getType() == MISSILE) && dronewep.getSlot().getId().equals("smlhybridslot")) {
+
+                                        // missile firing controls:
+                                        if ((OMMSettings.missile_key == 0 && Mouse.isButtonDown(2) || Mouse.isButtonDown(0))&& !player.getFluxTracker().isOverloadedOrVenting() && (dronewep.getType() == MISSILE) && dronewep.getSlot().getId().equals("smlhybridslot")) {
+                                            smlwep.setForceFireOneFrame(true);
+                                        } else if ((Keyboard.isKeyDown(OMMSettings.missile_key) || Mouse.isButtonDown(0) )&& !player.getFluxTracker().isOverloadedOrVenting() && (dronewep.getType() == MISSILE) && dronewep.getSlot().getId().equals("smlhybridslot")) {
                                             smlwep.setForceFireOneFrame(true);
                                         }
                                     }
                                     else if (!Objects.equals(weapon.getId(), smlwep.getId())) {}
                                 }
-                            }}
+                            }
+                            if(laswep != null)    {
+                                laswep.setCurrAngle(smlwep.getCurrAngle());}       //aims the targeting laser towards cursor
+                        }
+
+                        // prevents drones from firing if mothership is overloaded:
                         if (this.mothership.getFluxTracker().isOverloaded()) {
                             float OverloadTime = this.mothership.getFluxTracker().getOverloadTimeRemaining();
                             drone.getFluxTracker().forceOverload(OverloadTime);
                         } else if (!this.mothership.getFluxTracker().isOverloaded()) {
                             drone.getFluxTracker().stopOverload();
                         }
+                        if (this.mothership.getFluxTracker().isVenting()) {
+                            float VentTime = this.mothership.getFluxTracker().getTimeToVent();
+                            dronewep.setForceNoFireOneFrame(true);
+                        }
+
+                        // old unused code scraps:
                         if (player != this.mothership) {
-//                            for (WeaponGroupAPI group : FIGHTER.getWeaponGroupsCopy()){
+                            //                            for (WeaponGroupAPI group : FIGHTER.getWeaponGroupsCopy()){
 //                            this.FIGHTER.giveCommand(ShipCommand.TOGGLE_AUTOFIRE, null, FIGHTER.getWeaponGroupsCopy().indexOf(group));
 //                            }
                             if (dronewep.getAnimation() != null) {
@@ -226,9 +256,11 @@ public class smallpodManager implements AdvanceableListener {
                     }
                 }
 
-            }
+            } // end of unused scrap
         }
         //todo better idea for defensive formation?
+        // PID controller settings
+        // original code by ruddygreat:
         if (mothership.isPullBackFighters()) {//defensive formation
             Vector2f basePos = MathUtils.getPointOnCircumference(mothership.getShieldCenterEvenIfNoShield(), mothership.getShieldRadiusEvenIfNoShield(), mothership.getFacing());
             if (oddOrEvenNoOfWings == 0) { //even number of wings, have none in the center
@@ -275,16 +307,27 @@ public class smallpodManager implements AdvanceableListener {
         }
     }
 
+    // Drone Facing controls
     public float getDesiredFacing(ShipAPI drone) {
-
-        if (mothership.isPullBackFighters()) {//defensive formation
-            return mothership.getFacing();
-        } else { //offsenive formation
-            return VectorUtils.getAngle(mothership.getShieldCenterEvenIfNoShield(), mothership.getMouseTarget());
-        }
+        if (Global.getCombatEngine() != null)
+        {
+            if (AIUtils.getNearbyEnemies(mothership, 1000f) != null
+                    && mothership.isPullBackFighters())
+            {
+                for (ShipAPI enemy : AIUtils.getNearbyEnemies(mothership, 1000f))
+                {
+                    if (!enemy.getHullSize().equals(ShipAPI.HullSize.FIGHTER))
+                    {
+                        {
+                            return VectorUtils.getAngle(mothership.getShieldCenterEvenIfNoShield(), enemy.getLocation());
+                        }
+                    }
+                }
+            }
+        }  return VectorUtils.getAngle(mothership.getShieldCenterEvenIfNoShield(), mothership.getMouseTarget());
     }
 
-    //remove drones if they're dead or otherwise gone
+    //dynamic drone weapon swapping code:
     @Override
     public void advance(float amount) {
         ShipAPI ship = this.mothership;
