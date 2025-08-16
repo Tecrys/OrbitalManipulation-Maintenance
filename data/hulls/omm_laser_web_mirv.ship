@@ -1,0 +1,61 @@
+{
+  "hullName": "Sensor Drone",
+  "hullId": "omm_laser_web_mirv",
+  "hullSize": "FIGHTER",
+  "spriteName": "graphics/ships/drones/drone_com.png",
+  "style": "HIGH_TECH",
+  "height": 13,
+  "width": 20,
+  "center": [10, 6],
+  "collisionRadius": 0,
+  "shieldCenter": [0, 0],
+  "shieldRadius": 15,
+  "viewOffset": 0,
+  "builtInWeapons": {
+    "WS0001": "omm_moddropper",
+    "laser_web_slot": "omm_mirvlaser_long",
+    "laser_web_slot2": "omm_mirvlaser_long"
+  },
+  "weaponSlots": [
+    {
+      "id": "laser_web_slot",
+      "size": "SMALL",
+      "type": "BUILT_IN",
+      "mount": "HIDDEN",
+      "arc": 360,
+      "angle": 147.5,
+      "locations": [0, 0]
+    },
+    {
+      "id": "laser_web_slot2",
+      "size": "SMALL",
+      "type": "BUILT_IN",
+      "mount": "HIDDEN",
+      "arc": 360,
+      "angle": -104.5,
+      "locations": [0, -0]
+    },
+    {
+      "id": "WS0001",
+      "size": "SMALL",
+      "type": "DECORATIVE",
+      "mount": "HIDDEN",
+      "arc": 360,
+      "angle": 147.5,
+      "locations": [0, -0]
+    }
+  ],
+  "engineSlots": [
+    {
+      "location": [-6, 0],
+      "length": 12,
+      "width": 5,
+      "angle": 180,
+      "contrailSize": 64,
+      "style": "HIGH_TECH"
+    }
+  ],
+  "bounds": [
+    -4, 0
+  ]
+}

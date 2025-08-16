@@ -1,0 +1,30 @@
+{
+	"id":"omm_rebar",
+	"specClass":"missile",
+	"missileType":"ROCKET",
+	"sprite":"graphics/missiles/omm_rebar_shot.png",
+			"glowSprite":"graphics/missiles/omm_rebar_shot_glow.png",
+	"size":[20,68],	
+	"center":[10,36],
+	#"size":[10,21],	
+	#"center":[5,10.5],
+	"collisionRadius":12,
+	"collisionClass":"MISSILE_FF",
+	"glowColor":[255, 110, 0, 200],
+	#"glowRadius":5,
+	"explosionColor":[0,0,0,0],  # purely visual, will get a white additively blended core on top of this color
+	"explosionRadius":0, # purely visual
+	"flameoutTime":1, # total time from flameout to full fadeout
+	"noEngineGlowTime":0.5, # time spent without the engine glow being rendered
+	"fadeTime":0.5, # fadeout duration	
+	"engineSpec":{"turnAcc":0,
+				  "turnRate":0,
+				  "acc":400,
+				  "dec":0},
+
+				    "width":4.0,
+				    "length":30.0,
+				    "angle":180.0}]
+}
+
+			

@@ -1,6 +1,6 @@
 {
-  "variantId": "omm_ballisticpod_standard",
-  "hullId": "omm_ballisticpod",
+  "variantId": "omm_demolition_rocket_pod_fighter_standard",
+  "hullId": "omm_demolition_rocket_pod_fighter",
   "displayName": "Standard",
   "goalVariant": true,
   "fluxCapacitors": 0,
@@ -13,10 +13,16 @@
       "autofire": false,
       "mode": "LINKED",
       "weapons": {
-        "ballisticslot": "miningblaster"
+        "omm_laser": "omm_targeting_laser_new"
       }
     },
-
+    {
+      "autofire": false,
+      "mode": "LINKED",
+      "weapons": {
+        "ballisticslot": "jackhammer"
+      }
+    }
   ],
   "modules": [],
   "wings": []

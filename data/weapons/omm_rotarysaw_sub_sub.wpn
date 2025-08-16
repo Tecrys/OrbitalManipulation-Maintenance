@@ -1,0 +1,35 @@
+{
+	"id":"omm_rotarysaw_sub_sub",  # this id must match what's in the spreadsheet
+	"specClass":"projectile",
+	"type":"BALLISTIC",
+	"size":"MEDIUM",
+	"turretSprite":"graphics/weapons/flechette_heavy_turret_base.png",
+	"turretGunSprite":"graphics/weapons/flechette_heavy_turret_recoil.png",
+	"hardpointSprite":"graphics/weapons/flechette_heavy_hardpoint_base.png",
+	"hardpointGunSprite":"graphics/weapons/flechette_heavy_hardpoint_recoil.png",	
+	"visualRecoil":3.0,  # the gun sprites are only used if this is non-0
+	"renderHints":["RENDER_BARREL_BELOW"],
+	"turretOffsets":[17, -3, 17, 3],
+	"turretAngleOffsets":[0],
+	"hardpointOffsets":[24, -3, 24, 3],
+	"hardpointAngleOffsets":[0],
+
+	"barrelMode":"ALTERNATING", # or LINKED.  whether barrels fire at the same time or alternate.
+	#"separateRecoilForLinkedBarrels":true,
+	"animationType":"SMOKE",  # NONE, GLOW, MUZZLE_FLASH, SMOKE
+  "smokeSpec": {
+    "particleSizeMin": 1,
+    "particleSizeRange": 3,
+    "cloudParticleCount": 0,
+    "cloudDuration": 0.4,
+    "cloudRadius": 0,
+    "blowbackParticleCount": 12,
+    "blowbackDuration": 0.3,
+    "blowbackLength": 80,
+    "blowbackSpread": 10,
+    "particleColor": [
+39, 245, 241,255
+    ]},
+	"projectileSpecId":"omm_rotarysaw_sub_sub_shot",  # projectile that will be fired
+	"fireSoundTwo":"needler_fire",
+}

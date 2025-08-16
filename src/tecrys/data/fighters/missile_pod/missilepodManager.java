@@ -102,21 +102,21 @@ public class missilepodManager implements AdvanceableListener {
                                 wep = w;
                         }
 
-                        WeaponGroupAPI drogroup = drone.getWeaponGroupFor(miswep);
+                        WeaponGroupAPI misdrogroup = drone.getWeaponGroupFor(miswep);
                         WeaponGroupAPI misgroup = this.mothership.getWeaponGroupFor(wep);
                         WeaponGroupAPI lasgroup = drone.getWeaponGroupFor(laswep);
 
 
-                        if (drogroup != null && misgroup != null)
-                        { if (misgroup.isAutofiring() && !drogroup.isAutofiring()) {
-                            drone.giveCommand(ShipCommand.TOGGLE_AUTOFIRE, null, drone.getWeaponGroupsCopy().indexOf(drogroup));
+                        if (misdrogroup != null && misgroup != null)
+                        { if (misgroup.isAutofiring() && !misdrogroup.isAutofiring() && misgroup != activegroup) {
+                            drone.giveCommand(ShipCommand.TOGGLE_AUTOFIRE, null, drone.getWeaponGroupsCopy().indexOf(misdrogroup));
                         }
-                            if (!misgroup.isAutofiring() && drogroup.isAutofiring()) {
-                                drone.giveCommand(ShipCommand.TOGGLE_AUTOFIRE, null, drone.getWeaponGroupsCopy().indexOf(drogroup));
+                            if (!misgroup.isAutofiring() && misdrogroup.isAutofiring() && misgroup != activegroup) {
+                                drone.giveCommand(ShipCommand.TOGGLE_AUTOFIRE, null, drone.getWeaponGroupsCopy().indexOf(misdrogroup));
                             }
 
-                            if ((!drogroup.isAutofiring() && player != this.mothership) || (!drogroup.isAutofiring() && this.mothership.equals(player) && !engine.isUIAutopilotOn())) {
-                                drone.giveCommand(ShipCommand.TOGGLE_AUTOFIRE, null, drone.getWeaponGroupsCopy().indexOf(drogroup));
+                            if ((!misdrogroup.isAutofiring() && player != this.mothership) || (!misdrogroup.isAutofiring() && this.mothership.equals(player) && !engine.isUIAutopilotOn())) {
+                                drone.giveCommand(ShipCommand.TOGGLE_AUTOFIRE, null, drone.getWeaponGroupsCopy().indexOf(misdrogroup));
 //                            } else if (group.isAutofiring() && this.mothership.equals(player) && engine.isUIAutopilotOn()) {
 //                                drone.giveCommand(ShipCommand.TOGGLE_AUTOFIRE, null, drone.getWeaponGroupsCopy().indexOf(group));
                             }
@@ -128,12 +128,12 @@ public class missilepodManager implements AdvanceableListener {
                                     && engine.isUIAutopilotOn()
 //                                && (activegroup != null)
 //                                && (Objects.equals(activegroup.getActiveWeapon().getId(), miswep.getId()))
-                                    && !activegroup.isAutofiring()
+//                                    && !activegroup.isAutofiring()
                             ) {
 
                                 List<WeaponAPI> activeWeapon = activegroup.getWeaponsCopy();
                                 for (WeaponAPI weapon : activeWeapon) {
-                                    if (Objects.equals(weapon.getId(), miswep.getId())) {
+                                    if (Objects.equals(weapon.getId(), miswep.getId()) && misgroup == activegroup) {
                                         weapon.beginSelectionFlash();
                                         weapon.ensureClonedSpec();
                                         WeaponSpecAPI spec = weapon.getSpec();
@@ -150,7 +150,9 @@ public class missilepodManager implements AdvanceableListener {
                                         drone.setFacing(diffdrone + drone.getFacing());        //sets facing of the drone
 
                                         {
-
+                                            if (misgroup.isAutofiring() && misdrogroup.isAutofiring() && misgroup == activegroup) {
+                                                drone.giveCommand(ShipCommand.TOGGLE_AUTOFIRE, null, drone.getWeaponGroupsCopy().indexOf(misdrogroup));
+                                            }
                                             if (player == this.mothership && !drone.isLanding() && !drone.isLiftingOff() && dronewep.getSlot().getId().equals("omm_laser") && miswep != null
                                                     && engine.isUIAutopilotOn()
                                             ) {

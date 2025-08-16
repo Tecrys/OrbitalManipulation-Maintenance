@@ -4,6 +4,7 @@ import com.fs.starfarer.api.Global;
 import com.fs.starfarer.api.combat.*;
 import com.fs.starfarer.api.impl.campaign.ids.HullMods;
 import com.fs.starfarer.api.input.InputEventAPI;
+import com.fs.starfarer.api.util.IntervalUtil;
 import org.joml.Vector2f;
 import org.lazywizard.lazylib.combat.AIUtils;
 
@@ -15,9 +16,10 @@ import java.util.Map;
 import static com.fs.starfarer.api.combat.ShipHullSpecAPI.ShipTypeHints.UNBOARDABLE;
 
 public class omm_drone implements EveryFrameCombatPlugin {
-
+    private IntervalUtil MIRVRecallInterval = new IntervalUtil(0.8f, 0.8f);
     private float slotX;
     private float slotY;
+    private boolean isSystemActivated = false;
 
     @Override
     public void processInputPreCoreControls(float amount, List<InputEventAPI> events) {
@@ -37,45 +39,66 @@ public class omm_drone implements EveryFrameCombatPlugin {
         if (engine.isPaused()) {
             return;
         }
-
+        this.MIRVRecallInterval.advance(amount);
         for (ShipAPI ship : engine.getShips()) {
 
-                if (ship != null && ship.isAlive()) {
+            if (ship != null && ship.isAlive()) {
 
-                    boolean canEndCombat = true; //default to assuming combat will end
-                    for (ShipAPI other : engine.getShips()) {
-                        if (other.getOwner() != ship.getOwner()) continue; //only check allies
-                        if (other.getHullSpec().getHullId().equals("omm_octocorallia") || other.getHullSpec().getHullId().equals("omm_algaepod")
-                                || other.getHullSpec().getHullId().equals("omm_nanodrone") || other.getHullSpec().getHullId().equals("FreitagCorporation_ShieldDrone")
-                                || other.getHullSpec().getHullId().equals("omm_pddrone") || other.getHullSpec().getHullId().equals("omm_weaponpod")
-                                || other.getHullSpec().getHullId().equals("omm_synergypod") || other.getHullSpec().getHullId().equals("omm_missilepod")
-                                || other.getHullSpec().getHullId().equals("omm_medmissilepod") || other.getHullSpec().getHullId().equals("omm_compositepod")
-                                || other.getHullSpec().getHullId().equals("omm_smallpod") || other.getHullSpec().getHullId().equals("omm_ballisticpod")
-                                || other.getHullSpec().getHullId().equals("omm_largepod"))
-                            continue; //if it's the same hull id, ignore it
-                        canEndCombat = false; //else, combat shouldn't end
-                    }
+                boolean canEndCombat = true; //default to assuming combat will end
+                for (ShipAPI other : engine.getShips()) {
+//                    if (!MIRVRecallInterval.intervalElapsed()){other.blockCommandForOneFrame(ShipCommand.USE_SYSTEM);}
+//                    if (MIRVRecallInterval.intervalElapsed() && !isSystemActivated) {
+//                        if (other.getHullSpec().getHullId().equals("omm_laser_mirv_proxy")){
+//                            other.useSystem();
+//
+//                        }}
+                    if (other.getOwner() != ship.getOwner()) continue; //only check allies
+                    if (other.getHullSpec().getHullId().equals("omm_octocorallia") || other.getHullSpec().getHullId().equals("omm_algaepod")
+                            || other.getHullSpec().getHullId().equals("omm_nanodrone") || other.getHullSpec().getHullId().equals("FreitagCorporation_ShieldDrone")
+                            || other.getHullSpec().getHullId().equals("omm_pddrone") || other.getHullSpec().getHullId().equals("omm_weaponpod")
+                            || other.getHullSpec().getHullId().equals("omm_synergypod") || other.getHullSpec().getHullId().equals("omm_missilepod")
+                            || other.getHullSpec().getHullId().equals("omm_medmissilepod") || other.getHullSpec().getHullId().equals("omm_compositepod")
+                            || other.getHullSpec().getHullId().equals("omm_smallpod") || other.getHullSpec().getHullId().equals("omm_ballisticpod")
+                            || other.getHullSpec().getHullId().equals("omm_largepod") || other.getHullSpec().getHullId().equals("omm_laser_mirv_proxy"))
+                        continue; //if it's the same hull id, ignore it
+                    canEndCombat = false; //else, combat shouldn't end
 
-                    if (canEndCombat) {
-                        engine.endCombat(1);
-                    } //end combat
                 }
 
-            for (FighterWingAPI fighterWing : ship.getAllWings()){
-            for (ShipAPI WingMembers : fighterWing.getWingMembers()) {
+                if (canEndCombat) {
+                    engine.endCombat(1);
+                } //end combat
+
+//                if (ship.getDeployedDrones() != null){
+//                for (ShipAPI alwaysfiredrones : ship.getDeployedDrones()) {
+//                    if (alwaysfiredrones.getHullSpec().getHullId().equals("omm_laser_web_mirv")){
+//                        for (WeaponAPI alwaysfireweapon : alwaysfiredrones.getAllWeapons()) {
+//                            if (alwaysfireweapon.getSlot().getId().equals("laser_web_slot")
+//                            || alwaysfireweapon.getSlot().getId().equals("laser_web_slot2"))
+//                                alwaysfireweapon.setForceFireOneFrame(true);
+//                        }
+//                    }
+//                }}
+            }
+
+
+            for (FighterWingAPI fighterWing : ship.getAllWings()) {
+                for (ShipAPI WingMembers : fighterWing.getWingMembers()) {
 //                if (ship.getHullLevel() >= 10) {
 //                    engine.applyDamage(WingMembers, WingMembers.getLocation(), 1000, DamageType.ENERGY, 0, true, false, ship);
 //                }
-                }}
+                }
+            }
             if (!ship.isAlive() || !ship.getHullSpec().getHullId().startsWith("omm_")) {
                 continue;
             }
-            if (ship.getOriginalOwner() == 1) {
-                ship.getFleetMember().getVariant().getHints().add(UNBOARDABLE);
-            } else {
-                ship.getFleetMember().getVariant().getHints().remove(UNBOARDABLE);
-            }
-
+            if (ship.getFleetMember() != null){
+                if (ship.getOriginalOwner() == 1) {
+                    ship.getFleetMember().getVariant().getHints().add(UNBOARDABLE);
+                } else {
+                    ship.getFleetMember().getVariant().getHints().remove(UNBOARDABLE);
+                }
+        }
             for (WeaponAPI weap : ship.getAllWeapons()) {
                 if (ship.isFighter()) {
                     break;

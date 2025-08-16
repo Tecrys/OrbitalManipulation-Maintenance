@@ -1,0 +1,39 @@
+{
+  "id": "omm_rotarysaw",
+  "specClass": "beam",
+  "type": "BALLISTIC",
+  "size": "MEDIUM",
+  "everyFrameEffect": "tecrys.data.scripts.weapons.omm_rotary_saw",
+	"collisionClass":"RAY",
+	"collisionClassByFighter":"RAY_FIGHTER",
+  "turretSprite": "graphics/weapons/omm_remotesaw_tu.png",
+  "hardpointSprite": "graphics/weapons/omm_remotesaw_hp.png",
+ #   "hitGlowRadius": 0,
+  "turretOffsets": [
+    6,
+    0.5
+  ],
+  "turretAngleOffsets": [
+    0
+  ],
+  "hardpointOffsets": [
+    10.5,
+    0.5
+  ],
+  "hardpointAngleOffsets": [
+    0
+  ],
+	"fringeColor":[40, 234, 238,255],
+	"coreColor":[255,255,255,255],
+	"glowColor":[40, 234, 238,255],
+	"width":2.0,
+	"textureType":ROUGH,
+	"textureScrollSpeed":64.0,
+	"pixelsPerTexel":5.0,
+  "pierceSet": [
+    PROJECTILE_FF,
+    PROJECTILE_NO_FF,
+    PROJECTILE_FIGHTER
+  ],
+  "fireSoundTwo": "ir_autolance_loop"
+}

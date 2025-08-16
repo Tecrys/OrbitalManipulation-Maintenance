@@ -1,0 +1,64 @@
+{
+  "id": "omm_mirvlaser_long",
+  "specClass": "beam",
+  "type": "ENERGY",
+  "size": "SMALL",
+  "collisionClass": "RAY",
+ "collisionClassByFighter": "RAY_FIGHTER",
+  	"beamEffect":"tecrys.data.scripts.weapons.omm_laserweb_beam_effect",
+  "turretSprite": "graphics/weapons/tactical_laser_turret.png",
+  "turretGlowSprite": "graphics/weapons/tactical_laser_turret_glow.png",
+  "hardpointSprite": "graphics/weapons/tactical_laser_hardpoint.png",
+  "hardpointGlowSprite": "graphics/weapons/tactical_laser_hardpoint_glow.png",
+  "glowColor": [
+    125,
+    215,
+    255,
+    255
+  ],
+  "hitGlowRadius": 5,
+  "turretOffsets": [
+    9.5,
+    -9,
+    9.5,
+    9
+  ],
+  "turretAngleOffsets": [
+    0,
+    0
+  ],
+  "hardpointOffsets": [
+    15.5,
+    9,
+    15.5,
+    -9
+  ],
+  "hardpointAngleOffsets": [
+    0,
+    0
+  ],
+  "fringeColor": [
+    39,
+    245,
+    39,
+    55
+  ],
+  "coreColor": [
+    255,
+    255,
+    255,
+    55
+  ],
+  "convergeOnPoint": true,
+  "width": 3,
+  "textureType": LASER,
+  "textureScrollSpeed": 128,
+  "pixelsPerTexel": 5,
+  "pierceSet": [
+    SHIP,
+    MISSILE_NO_FF,
+    ASTEROID
+  ],
+  "fireSoundOne": "laser_intro",
+  "fireSoundTwo": "laser_loop"
+}

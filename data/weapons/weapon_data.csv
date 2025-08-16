@@ -1,19 +1,19 @@
 name,id,tier,rarity,base value,range,damage/second,damage/shot,emp,impact,turn rate,OPs,ammo,ammo/sec,reload size,type,energy/shot,energy/second,chargeup,chargedown,burst size,burst delay,min spread,max spread,spread/shot,spread decay/sec,beam speed,proj speed,launch speed,flight time,proj hitpoints,autofireAccBonus,extraArcForAI,hints,tags,groupTag,tech/manufacturer,for weapon tooltip>>,primaryRoleStr,speedStr,trackingStr,turnRateStr,accuracyStr,customPrimary,customPrimaryHL,customAncillary,customAncillaryHL,noDPSInTooltip,number
 Rivet Gun,omm_s_rivet,1,0.3,800,600,,35,,5,20,4,,,,KINETIC,60,,.3,3,3,0.05,0.5,6,2,2,,2400,,,10,,,PD,"pd6, kinetic3, SR, merc, ind",,,,Construction,,,,,,,,,,3.65
 Rivet Battery,omm_m_rivet,1,0.3,800,600,,35,,5,20,10,,,,KINETIC,60,,.3,0.7,2,0.03,0.5,6,2,2,,2400,,,10,,,PD,"pd6, kinetic3, SR, merc, ind",,,,Construction,,,,,,,,,,3.65
-,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
-,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
-,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
-,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
-,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
-,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
-,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
-,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
-,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
-,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
-,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
-,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
-,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+Remote Rotary Saw,omm_rotarysaw,1,,1200,500,1,,,0,50,8,400,20,100,KINETIC,,150,0.1,0.2,,,,,,,600,,,,,,,,,,,,General,,,,,,,,,,21.5
+omm_rotarysaw_sub,omm_rotarysaw_sub,3,0.3,2500,5,,20,,1,15,15,,,,KINETIC,40,,0,4.55,1,0.05,1,10,0.5,5,,50,,,10,,,,,,,,Anti Shield,,,,,,,,,,5.75
+omm_rotarysaw_sub_sub,omm_rotarysaw_sub_sub,3,0.3,2500,500,,100,,1,15,15,,,,KINETIC,40,,0,4.55,1,0.05,1,10,0.5,5,,600,,,10,,,,,,,,Anti Shield,,,,,,,,,,5.75
+omm_saw_flak,omm_saw_flak,1,,1000,500,,1,,10,40,8,,,,FRAGMENTATION,50,,0,1,1,,0,10,2,10,,700,,,30,,,PD,"pd13, SR, lowtech_bp, merc, ind",,,,Point Defense (Area),,,,,,,,,,4
+Rebar Launcher,omm_rebar_launcher,0,,150,1500,,900,300,5,30,6,2,0.2,1,KINETIC,0,,0.1,5,1,0.2,0,0,0,0,,400,1200,3.75,50,,,"DO_NOT_CONSERVE, DIRECT_AIM, ","rocket7, kinetic11, merc, ind",,,,,,,,,,,,,,11
+Deployable Demolition Rocket Pod,omm_demolition_rocket_pod,1,0.8,3500,4000,,500,,5,0,16,9,0.03333333333,1,HIGH_EXPLOSIVE,0,,0.5,10,3,0.5,20,60,20,20,,250,350,8,1600,,,"DO_NOT_AIM, GUIDED_POOR, DO_NOT_CONSERVE","rocket7, strike0, missile_bp, merc, ind",,,,,,,,,,,,,,11
+Stasis Beam,omm_stasisgun,3,,7500,1000,,1,,,30,16,,,,FRAGMENTATION,10,,1,1,100,0.045,,,,,,1000,,,,,,NO_TURN_RATE_BOOST_WHEN_IDLE,,,,,,,,,,,,,,,23
+Long MIRV Laser,omm_mirvlaser_long,1,,,3000,30,0,10,0,20,4,,,,FRAGMENTATION,,60,0.1,0.1,,,,,,,10000,,,,,,,"PD_ONLY,","beam9, LR, hightech_bp, midline_bp, merc, ind",,,,General,,,,,,,,,,18
+Short MIRV Laser,omm_mirvlaser_short,1,,200,3000,200,50,,0,20,4,,,,FRAGMENTATION,,60,0.1,0.1,,,,,,,10000,,,,,,,"PD_ONLY,","beam9, LR, hightech_bp, midline_bp, merc, ind",,,,General,,,,,,,,,,18
+Laser Web MIRV,omm_lasermirv,2,,5000,2500,,30,10,50,10,20,15,,,ENERGY,,,0,10,1,,0,0,0,0,,300,75,7,400,,,"DO_NOT_AIM, CONSERVE_5","missile18, strike10, rare_bp, merc, damage_special, damage_soft_flux",,,,General,Medium,Excellent,,,The missile splits into %s submunitions which try to flank the target. Each one then fires a high-powered laser dealing approximately %s energy damage in a short burst. This damage is affected by missile damage modifiers and not energy weapon ones.,6 | 500,,,TRUE,16.05
+Welding Beam,omm_welder_med,2,0.5,5000,600,700,,,0,75,8,300,8,100,ENERGY,,150,0,0,0.04,0.04,,,,,1000000,,,,,,,"PD, ANTI_FTR","pd19, beam15, rare_bp, merc, ind",,,,Point Defense,,,,,"When all sub-beams impact a target in close proximity to each other, the spalling effect produces an explosion that deals up to 100 points of fragmentation damage to other nearby targets.",100 | fragmentation,,,,26
+Plasma Cutter,omm_plasma_cutter,2,0.6,2250,500,,90,600,0,60,11,5,1,10,ENERGY,100,,0.3,,,,,,,,10000,,,,,,,NO_TURN_RATE_BOOST_WHEN_IDLE,"energy13, rare_bp, merc, ind",,,,Suppression,,,,,"Hits on hull or armor have a %s chance to arc to weapons and engines, dealing extra damage equal to the original hit.",25%,,,,22.75
+Chaff Flak,omm_chaff_launcher,1,,1000,500,,20,100,10,40,8,1,0.13,1,FRAGMENTATION,50,,0,1,1,,0,10,2,10,,700,,,30,,,PD,"pd13, SR, lowtech_bp, merc, ind",,,,Point Defense (Area),,,,,,,,,,4
 ,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
 ,FreitagCorporation_ShieldEffect_wpn,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,SYSTEM,,,,,,,,,,,,,,,
 Mining Laser,FreitagCorporation_mininglaser,,,100,600,50,,,0,20,0,,,,ENERGY,,10,0.25,0.25,,,,,,,2400,,,,,,,SYSTEM,"beam0, energy0",,,,General,,,,,,,,,,
@@ -101,10 +101,11 @@ Mining Laser,FreitagCorporation_triple_mininglaser,,,100,500,150,,,0,20,0,,,,ENE
 ,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
 ,omm_sesarma_deco,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,SYSTEM,,,,,,,,,,,,,,,
 ,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+,omm_moddropper,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,SYSTEM,,,,,,,,,,,,,,,
 right Blinker,omm_greenblinker,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,SYSTEM,,,,,,,,,,,,,,,
 left Blinker,omm_redblinker,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,SYSTEM,,,,,,,,,,,,,,,
 ,omm_targeting_laser,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,SYSTEM,,,,,,,,,,,,,,,
 Targeting Laser,omm_targeting_laser_new,,,,,,,,,,,,,,,,,,,,,,,,,10000,,,,,,,SYSTEM,,,,,,,,,,,,,,,
 ,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
-Chaff Launcher,omm_chafflauncher,1,,1000,70,,1,,2,40,8,,,,FRAGMENTATION,5,,0,1,1,,0,10,2,10,,700,,,30,,,"STRIKE, PD_ALSO, USE_VS_FRIGATES, FIRE_WHEN_INEFFICIENT","pd13, SR, no_drop, no_drop_salvage",,,,Anti Shield,,,,,,,,,,4
+Range Finder,omm_chafflauncher,1,,1000,70,,1,,2,40,8,,,,FRAGMENTATION,5,,0,1,1,,0,10,2,10,,700,,,30,,,"STRIKE, PD_ALSO, USE_VS_FRIGATES, FIRE_WHEN_INEFFICIENT","pd13, SR, no_drop, no_drop_salvage",,,,Anti Shield,,,,,,,,,,4
 ,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,

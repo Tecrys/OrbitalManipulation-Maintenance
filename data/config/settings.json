@@ -15,6 +15,10 @@
   "FreitagCorporation_DefensePlatformGraphic":"graphics/ships/omm_octocorallia.png",
   "omm_algaepod_graphic":"graphics/ships/Limnopilos/omm_limnopilos_pods_graphic.png",  
   "omm_aiming_laser":"graphics/ships/Fighters/omm_aiming_laser.png",  
+    "omm_rotarysaw":"graphics/missiles/omm_saw_shot.png",  
+  "omm_stasis":"graphics/fx/omm_stasis.png",  
+  "omm_plasma_cutter_hardpoint":"graphics/weapons/omm_plasmacutter_hp_barrel.png",
+   "omm_plasma_cutter_turret":"graphics/weapons/omm_plasmacutter_tu_barrel.png",
 },
         }
 }

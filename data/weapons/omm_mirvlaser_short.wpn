@@ -1,0 +1,44 @@
+{
+	"specClass":"beam",
+	#"beamEffect":"com.fs.starfarer.api.impl.combat.IonBeamEffect",
+	"id":"omm_mirvlaser_short",
+	"type":"ENERGY",
+	"size":"SMALL",
+		"collisionClass":"RAY",
+	"collisionClassByFighter":"RAY_FIGHTER",
+	"turretSprite":"graphics/weapons/tactical_laser_turret.png",
+	"turretGlowSprite":"graphics/weapons/tactical_laser_turret_glow.png",
+	"hardpointSprite":"graphics/weapons/tactical_laser_hardpoint.png",
+	"hardpointGlowSprite":"graphics/weapons/tactical_laser_hardpoint_glow.png",
+	"turretOffsets":[10, 0],
+	"turretAngleOffsets":[0],
+	"hardpointOffsets":[15, 0],
+	"hardpointAngleOffsets":[0],
+	  "glowColor": [
+    125,
+    215,
+    255,
+    255
+  ],
+  "hitGlowRadius": 5,
+  "fringeColor": [
+    39,
+    245,
+    39,
+    55
+  ],
+  "coreColor": [
+    255,
+    255,
+    255,
+    55
+  ],
+  "width": 3,
+  "textureType": LASER,
+  "textureScrollSpeed": 128,
+  "pixelsPerTexel": 5,
+		"convergeOnPoint":true,
+	"pierceSet":[SHIP, FIGHTER, MISSILE_NO_FF, ASTEROID],
+	"fireSoundOne":"laser_intro",
+	"fireSoundTwo":"laser_loop",	
+}

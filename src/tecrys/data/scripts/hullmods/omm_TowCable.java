@@ -10,17 +10,14 @@ import com.fs.starfarer.api.campaign.BuffManagerAPI.Buff;
 import com.fs.starfarer.api.campaign.CampaignUIAPI.CoreUITradeMode;
 import com.fs.starfarer.api.campaign.FleetDataAPI;
 import com.fs.starfarer.api.campaign.econ.MarketAPI;
-import com.fs.starfarer.api.combat.HullModEffect;
-import com.fs.starfarer.api.combat.MutableShipStatsAPI;
-import com.fs.starfarer.api.combat.MutableStat;
+import com.fs.starfarer.api.combat.*;
 import com.fs.starfarer.api.combat.MutableStat.StatMod;
-import com.fs.starfarer.api.combat.ShipAPI;
 import com.fs.starfarer.api.combat.ShipAPI.HullSize;
 import com.fs.starfarer.api.fleet.FleetMemberAPI;
 import com.fs.starfarer.api.loading.HullModSpecAPI;
 import com.fs.starfarer.api.ui.TooltipMakerAPI;
 
-public class omm_TowCable implements HullModEffect {
+public class omm_TowCable extends BaseHullMod {
 	
 	public static final String HULLMOD_ID = "omm_tow_cable";
 	
@@ -221,114 +218,114 @@ public class omm_TowCable implements HullModEffect {
 	}
 	
 
-	public void advanceInCombat(ShipAPI ship, float amount) {
-	}
-	
-	public void applyEffectsAfterShipCreation(ShipAPI ship, String id) {
-	}
-	public void applyEffectsBeforeShipCreation(HullSize hullSize, MutableShipStatsAPI stats, String id) {
-	}
-	public boolean isApplicableToShip(ShipAPI ship) {
-		return true;
-	}
-
-	public String getDescriptionParam(int index, HullSize hullSize) {
-		return null;
-	}
-
-	public String getUnapplicableReason(ShipAPI ship) {
-		return null;
-	}
-
-	public boolean affectsOPCosts() {
-		return false;
-	}
-
-	public String getDescriptionParam(int index, HullSize hullSize, ShipAPI ship) {
-		return getDescriptionParam(index, hullSize);
-	}
-
-	public boolean canBeAddedOrRemovedNow(ShipAPI ship, MarketAPI marketOrNull, CoreUITradeMode mode) {
-		return true;
-	}
-
-	public String getCanNotBeInstalledNowReason(ShipAPI ship, MarketAPI marketOrNull, CoreUITradeMode mode) {
-		return null;
-	}
-
-	public boolean shouldAddDescriptionToTooltip(HullSize hullSize, ShipAPI ship, boolean isForModSpec) {
-		return true;
-	}
-	public void addPostDescriptionSection(TooltipMakerAPI tooltip, HullSize hullSize, ShipAPI ship, float width, boolean isForModSpec) {
-		
-	}
-
-	public void applyEffectsToFighterSpawnedByShip(ShipAPI fighter, ShipAPI ship, String id) {
-		
-	}
-
-	public Color getBorderColor() {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	public Color getNameColor() {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	public int getDisplaySortOrder() {
-		return 100;
-	}
-	
-	public int getDisplayCategoryIndex() {
-		return -1;
-	}
-
-	public boolean hasSModEffectSection(HullSize hullSize, ShipAPI ship, boolean isForModSpec) {
-		return false;
-	}
-
-	public void addSModSection(TooltipMakerAPI tooltip, HullSize hullSize, ShipAPI ship, float width,
-			boolean isForModSpec) {
-		
-	}
-
-	public void addSModEffectSection(TooltipMakerAPI tooltip, HullSize hullSize, ShipAPI ship, float width,
-			boolean isForModSpec, boolean isForBuildInList) {
-		// TODO Auto-generated method stub
-		
-	}
-
-	public void addSModSection(TooltipMakerAPI tooltip, HullSize hullSize, ShipAPI ship, float width,
-			boolean isForModSpec, boolean isForBuildInList) {
-		// TODO Auto-generated method stub
-		
-	}
-
-	public boolean hasSModEffect() {
-		// TODO Auto-generated method stub
-		return false;
-	}
-
-	public String getSModDescriptionParam(int index, HullSize hullSize) {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	public String getSModDescriptionParam(int index, HullSize hullSize, ShipAPI ship) {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	public float getTooltipWidth() {
-		return 300;
-	}
-
-	public boolean isSModEffectAPenalty() {
-		// TODO Auto-generated method stub
-		return false;
-	}
+//	public void advanceInCombat(ShipAPI ship, float amount) {
+//	}
+//
+//	public void applyEffectsAfterShipCreation(ShipAPI ship, String id) {
+//	}
+//	public void applyEffectsBeforeShipCreation(HullSize hullSize, MutableShipStatsAPI stats, String id) {
+//	}
+//	public boolean isApplicableToShip(ShipAPI ship) {
+//		return true;
+//	}
+//
+//	public String getDescriptionParam(int index, HullSize hullSize) {
+//		return null;
+//	}
+//
+//	public String getUnapplicableReason(ShipAPI ship) {
+//		return null;
+//	}
+//
+//	public boolean affectsOPCosts() {
+//		return false;
+//	}
+//
+//	public String getDescriptionParam(int index, HullSize hullSize, ShipAPI ship) {
+//		return getDescriptionParam(index, hullSize);
+//	}
+//
+//	public boolean canBeAddedOrRemovedNow(ShipAPI ship, MarketAPI marketOrNull, CoreUITradeMode mode) {
+//		return true;
+//	}
+//
+//	public String getCanNotBeInstalledNowReason(ShipAPI ship, MarketAPI marketOrNull, CoreUITradeMode mode) {
+//		return null;
+//	}
+//
+//	public boolean shouldAddDescriptionToTooltip(HullSize hullSize, ShipAPI ship, boolean isForModSpec) {
+//		return true;
+//	}
+//	public void addPostDescriptionSection(TooltipMakerAPI tooltip, HullSize hullSize, ShipAPI ship, float width, boolean isForModSpec) {
+//
+//	}
+//
+//	public void applyEffectsToFighterSpawnedByShip(ShipAPI fighter, ShipAPI ship, String id) {
+//
+//	}
+//
+//	public Color getBorderColor() {
+//		// TODO Auto-generated method stub
+//		return null;
+//	}
+//
+//	public Color getNameColor() {
+//		// TODO Auto-generated method stub
+//		return null;
+//	}
+//
+//	public int getDisplaySortOrder() {
+//		return 100;
+//	}
+//
+//	public int getDisplayCategoryIndex() {
+//		return -1;
+//	}
+//
+//	public boolean hasSModEffectSection(HullSize hullSize, ShipAPI ship, boolean isForModSpec) {
+//		return false;
+//	}
+//
+//	public void addSModSection(TooltipMakerAPI tooltip, HullSize hullSize, ShipAPI ship, float width,
+//			boolean isForModSpec) {
+//
+//	}
+//
+//	public void addSModEffectSection(TooltipMakerAPI tooltip, HullSize hullSize, ShipAPI ship, float width,
+//			boolean isForModSpec, boolean isForBuildInList) {
+//		// TODO Auto-generated method stub
+//
+//	}
+//
+//	public void addSModSection(TooltipMakerAPI tooltip, HullSize hullSize, ShipAPI ship, float width,
+//			boolean isForModSpec, boolean isForBuildInList) {
+//		// TODO Auto-generated method stub
+//
+//	}
+//
+//	public boolean hasSModEffect() {
+//		// TODO Auto-generated method stub
+//		return false;
+//	}
+//
+//	public String getSModDescriptionParam(int index, HullSize hullSize) {
+//		// TODO Auto-generated method stub
+//		return null;
+//	}
+//
+//	public String getSModDescriptionParam(int index, HullSize hullSize, ShipAPI ship) {
+//		// TODO Auto-generated method stub
+//		return null;
+//	}
+//
+//	public float getTooltipWidth() {
+//		return 300;
+//	}
+//
+//	public boolean isSModEffectAPenalty() {
+//		// TODO Auto-generated method stub
+//		return false;
+//	}
 
 	public boolean showInRefitScreenModPickerFor(ShipAPI ship) {
 		return true;

@@ -1,0 +1,68 @@
+{
+  "hullName": "Demolition Missile Pod",
+  "hullId": "omm_demolition_rocket_pod_fighter",
+  "hullSize": "FIGHTER",
+  "spriteName": "graphics/weapons/covers/cover_threat_turret_large.png",
+  "style": "FREITAG_CORP_TECH",
+  "height": 34,
+  "width": 34,
+  "center": [17, 17],
+  "collisionRadius": 21,
+  "shieldCenter": [0, -0],
+  "shieldRadius": 18.5,
+  "viewOffset": 0,
+  "builtInMods": [
+    "missleracks",
+	"turretgyros"
+  ],
+  "builtInWeapons": {
+    "ballisticslot": "jackhammer",
+    "omm_laser": "omm_targeting_laser_new",
+    "shield": "omm_moddropper"
+  },
+  "weaponSlots": [
+    {
+      "id": "shield",
+      "size": "SMALL",
+      "type": "DECORATIVE",
+      "mount": "TURRET",
+      "arc": 90,
+      "angle": 0,
+      "locations": [13.5, 0]
+    },
+    {
+      "id": "omm_laser",
+      "size": "SMALL",
+      "type": "BUILT_IN",
+      "mount": "HIDDEN",
+      "arc": 90,
+      "angle": 0,
+      "locations": [-1.5, 0]
+    },
+    {
+      "id": "fightermodule",
+      "size": "SMALL",
+      "type": "STATION_MODULE",
+      "mount": "HARDPOINT",
+      "arc": 90,
+      "angle": 0,
+      "locations": [-1.5, 0]
+    },
+    {
+      "id": "ballisticslot",
+      "size": "MEDIUM",
+      "type": "BUILT_IN",
+      "mount": "TURRET",
+      "arc": 360,
+      "angle": 0,
+      "locations": [-1.5, 0]
+    }
+  ],
+  "engineSlots": [],
+  "bounds": [
+    -12, -15,
+    -12, 15,
+    11, 15,
+    11, -15
+  ]
+}

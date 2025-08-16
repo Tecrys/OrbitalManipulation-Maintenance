@@ -6,6 +6,7 @@ omm_synergypod_wing,omm_synergypod_standard,"stay_in_front_of_ship, no_drop, no_
 omm_missilepod_wing,omm_missilepod_standard,"stay_in_front_of_ship, no_drop, no_sell, auto_fighter, support2",2,,0,0,V,0,500,,1,SUPPORT,Weapon Pod,5,2000,,,,,,,,,,,,,6
 omm_compositepod_wing,omm_compositepod_standard,"stay_in_front_of_ship, no_drop, no_sell, auto_fighter, support2",2,,0,0,BOX,0,500,,1,SUPPORT,Weapon Pod,5,2000,,,,,,,,,,,,,6
 omm_smallpod_wing,omm_smallpod_standard,"stay_in_front_of_ship, no_drop, no_sell, auto_fighter, support2",2,,0,0,BOX,0,500,,1,SUPPORT,Weapon Pod,5,2000,,,,,,,,,,,,,6
-omm_ballisticpod_wing,omm_ballisticpod_standard,"stay_in_front_of_ship, no_drop, no_sell, auto_fighter, support2",2,,0,0,BOX,0,500,,1,SUPPORT,Weapon Pod,5,2000,,,,,,,,,,,,,6
 omm_largepod_wing,omm_largepod_standard,"stay_in_front_of_ship, no_drop, no_sell, auto_fighter, support2",2,,0,0,V,0,500,,1,SUPPORT,Weapon Pod,10,2000,,,,,,,,,,,,,6
 omm_nanodrone_wing,omm_nanodrone_standard,"stay_in_front_of_ship, no_drop, no_sell, auto_fighter, support2",2,,0,0,BOX,4000,800,600,1,SUPPORT,Support Drone,10,2000,,,,,,,,,,,,,2
+omm_demolition_rocket_pod_fighter_wing,omm_demolition_rocket_pod_fighter_standard,"stay_in_front_of_ship, no_drop, no_sell, auto_fighter, support2",2,,0,0,V,0,500,,1,BOMBER,Weapon Pod,10,2000,,,,,,,,,,,,,6
+omm_laser_mirv_proxy_wing,omm_laser_mirv_proxy,"no_drop, no_sell, low",0,,4,0,BOX,2000,500,,1,INTERCEPTOR,Drone,5,1500,,,,,,,,,,,,,18

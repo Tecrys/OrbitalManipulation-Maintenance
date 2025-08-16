@@ -1,0 +1,78 @@
+{
+  "id": "omm_plasma_cutter",
+  "specClass": "beam",
+  "type": "BALLISTIC",
+  "mountTypeOverride": "HYBRID",
+  "size": "MEDIUM",
+  "everyFrameEffect": "tecrys.data.scripts.weapons.omm_plasmacutter_anim",
+  "collisionClass": "RAY",
+  "collisionClassByFighter": "RAY_FIGHTER",
+  "turretSprite": "graphics/weapons/omm_plasmacutter_tu00.png",
+  "hardpointSprite": "graphics/weapons/omm_plasmacutter_hp00.png",
+  "glowColor": [
+    125,
+    215,
+    255,
+    255
+  ],
+  "hitGlowRadius": 5,
+  "renderHints": [
+    RENDER_BARREL_BELOW
+  ],
+  "turretOffsets": [
+    10.5,
+    12,
+    10.5,
+    -12,
+    10.5,
+    0
+  ],
+  "turretAngleOffsets": [
+    0,
+    0,
+    0
+  ],
+  "hardpointOffsets": [
+    17.5,
+    12,
+    17.5,
+    -12,
+    17.5,
+    0
+  ],
+  "hardpointAngleOffsets": [
+    0,
+    0,
+    0
+  ],
+  "numFrames": 7,
+  "frameRate": 7,
+
+  "fringeColor": [
+    39,
+    245,
+    202,
+    55
+  ],
+  "coreColor": [
+    255,
+    255,
+    255,
+    55
+  ],
+  "width": 3,
+  "textureType": LASER,
+  "textureScrollSpeed": 128,
+  "pixelsPerTexel": 5,
+  "pierceSet": [
+    PROJECTILE_FF,
+    PROJECTILE_NO_FF,
+    PROJECTILE_FIGHTER,
+    MISSILE_FF,
+    MISSILE_NO_FF
+  ],
+    #	"autocharge":true,
+  #	"interruptibleBurst":true,
+   "beamFireOnlyOnFullCharge": true, 
+  "fireSoundTwo": "ion_beam_loop"
+}

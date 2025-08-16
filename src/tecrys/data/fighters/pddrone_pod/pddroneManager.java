@@ -22,7 +22,7 @@ public class pddroneManager implements AdvanceableListener {
     public pddroneManager(ShipAPI mothership) {
         this.mothership = mothership;
 
-        for (FighterWingAPI wing : this.mothership.getAllWings()) {
+        for (FighterWingAPI wing : mothership.getAllWings()) {
             if (wing.getSpec().getId().equals("omm_pddrone_wing")) {
                 relevantWings.add(wing);
             }
@@ -79,20 +79,20 @@ public class pddroneManager implements AdvanceableListener {
                     ShipVariantAPI OGVariant = stats.getVariant().clone();
                     ShipVariantAPI newVariant = stats.getVariant().clone();
                     CombatEngineAPI engine = Global.getCombatEngine();
-                    fighter.removeWeaponFromGroups(wep);
+
                     String str = (String) Global.getCombatEngine().getCustomData().get("omm_pddroneWeaponId" + this.mothership.getId());
                     if (str == null)
                         str = "No weapon";
 
                     //if (engine.getPlayerShip() == ship)
-                        //Global.getCombatEngine().maintainStatusForPlayerShip("PDDrones", "graphics/ui/icons/icon_repair_refit.png", "Drone Weaponry", str + " installed. ", true);
+                    //Global.getCombatEngine().maintainStatusForPlayerShip("PDDrones", "graphics/ui/icons/icon_repair_refit.png", "Drone Weaponry", str + " installed. ", true);
                     if (!fighter.getAllWeapons().get(2).getId().equals(str)) {
                         if (ship.getVariant().getWeaponSpec("pdslot") != null) {
                             Global.getCombatEngine().getCustomData().put("omm_pddroneWeaponId" + this.mothership.getId(), this.mothership.getVariant().getWeaponId("pdslot"));
                             stats.getVariant().setOriginalVariant(null);
                             fighter.getFleetMember().setVariant(newVariant, true, true);
 //                            wep.disable(true);
-                            ship.syncWeaponDecalsWithArmorDamage();
+
                             this.timer.randomize();                                                        //randomize interval to stagger drone refit
 
                             this.timer.advance(amount);

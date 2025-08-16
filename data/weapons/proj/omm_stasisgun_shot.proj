@@ -1,0 +1,21 @@
+{
+	"id":"omm_stasisgun_shot",
+	"specClass":"projectile",
+	#"everyFrameEffect":"tecrys.svc.weapons.scripts.Brainhelix",
+		"onHitEffect":"tecrys.data.scripts.weapons.omm_stasisOnHitEffect",
+					"glowSprite":"graphics/missiles/omm_lightning_beam.png.png",
+						"glowColor":[255, 110, 0, 200],
+	"spawnType":"BALLISTIC_AS_BEAM",
+	"collisionClass":"RAY",
+	"collisionClassByFighter":"RAY_FIGHTER",
+	"length":24.0,
+	"width":9.0,
+	"fadeTime":0.25,
+	"fringeColor":[0, 223, 255,255],
+	"coreColor":[0, 223, 255,255],
+	"darkCore": false,
+	#"textureType":"SMOOTH",  # only needed for BEAM spawnType
+	"textureType":["graphics/missiles/omm_lightning_beam.png","graphics/missiles/omm_lightning_beam.png"],
+	"textureScrollSpeed":-56,
+	"pixelsPerTexel":100.0
+}

@@ -19,6 +19,7 @@ Monofilament Tow Cable,omm_tow_cable,,,,,,,,TRUE,,0,0,0,0,tecrys.data.scripts.hu
 
 Can not be used in combat.",Increases burn level of another ship.,graphics/hullmods/omm_monofilament_cable.png
 ,,,,,,,,,,,,,,,,,,
+,,,,,,,,,,,,,,,,,,
 Synergy Pod AI,omm_synergypodai,,,,,,,,TRUE,TRUE,0,0,0,0,tecrys.data.fighters.synergy_pod.synergypodHullmod,Controls the AI for the Weapons drone,,
 Missile Pod AI,omm_missilepodai,,,,,,,,TRUE,TRUE,0,0,0,0,tecrys.data.fighters.missile_pod.missilepodHullmod,Controls the AI for the Weapons drone,,
 Composite Pod AI,omm_compositepodai,,,,,,,,TRUE,TRUE,0,0,0,0,tecrys.data.fighters.composite_pod.compositepodHullmod,Controls the AI for the Weapons drone,,

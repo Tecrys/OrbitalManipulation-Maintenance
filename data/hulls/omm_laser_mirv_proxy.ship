@@ -1,0 +1,32 @@
+{
+  "hullName": "Ballistic Pod",
+  "hullId": "omm_laser_mirv_proxy",
+  "hullSize": "FRIGATE",
+  "spriteName": "",
+  "style": "FREITAG_CORP_TECH",
+  "height": 7,
+  "width": 7,
+  "center": [26.5, 38.5],
+  "collisionRadius": 0,
+  "shieldCenter": [0, -0],
+  "shieldRadius": 9.5,
+  "viewOffset": 0,
+  "builtInWeapons": {
+   # "WS0001": "omm_moddropper"
+  },
+  "weaponSlots": [
+    {
+      "id": "WS0001",
+      "size": "SMALL",
+      "type": "DECORATIVE",
+      "mount": "HIDDEN",
+      "arc": 0,
+      "angle": 0,
+      "locations": [0, -0]
+    }
+  ],
+  "engineSlots": [],
+  "bounds": [
+    1.5, -0.5
+  ]
+}

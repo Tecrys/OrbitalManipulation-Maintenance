@@ -1,0 +1,34 @@
+{
+	"id":"omm_saw_flak",  # this id must match what's in the spreadsheet
+	"specClass":"projectile",
+	"type":"BALLISTIC",
+	"size":"MEDIUM",
+	"displayArcRadius":400,
+	"turretSprite":"graphics/weapons/flak_cannon_turret_base.png",
+	"turretGunSprite":"graphics/weapons/flak_cannon_turret_recoil.png",
+	"hardpointSprite":"graphics/weapons/flak_cannon_hardpoint_base.png",
+	"hardpointGunSprite":"graphics/weapons/flak_cannon_hardpoint_recoil.png",	
+	"visualRecoil":8.0,  # the gun sprites are only used if this is non-0
+	"renderHints":[RENDER_BARREL_BELOW],
+	"turretOffsets":[20, 0],
+	"turretAngleOffsets":[0],
+	"hardpointOffsets":[30, 0],
+	"hardpointAngleOffsets":[0],
+	"barrelMode":"ALTERNATING", # or LINKED.  whether barrels fire at the same time or alternate.
+	"animationType":"SMOKE",  # NONE, GLOW, MUZZLE_FLASH, SMOKE
+  "smokeSpec": {
+    "particleSizeMin": 1,
+    "particleSizeRange": 3,
+    "cloudParticleCount": 0,
+    "cloudDuration": 0.4,
+    "cloudRadius": 0,
+    "blowbackParticleCount": 12,
+    "blowbackDuration": 0.3,
+    "blowbackLength": 80,
+    "blowbackSpread": 10,
+    "particleColor": [
+245, 202, 39,255
+    ]},
+	"projectileSpecId":"omm_saw_flak_shot",  # projectile that will be fired	
+	"fireSoundTwo":"flak_fire",
+}

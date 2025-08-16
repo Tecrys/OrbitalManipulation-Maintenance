@@ -10,44 +10,44 @@ import org.apache.log4j.Logger;
 import tecrys.data.utils.utils;
 
 public class ballisticpodHullmod extends BaseHullMod {
-
-    public static Logger log = Global.getLogger(ballisticpodHullmod.class);
-
-    static {
-        log.setLevel(Level.DEBUG);
-   }
-
-    String key = "RGMD_realAIAssigned";
-
-    @Override
-    public void advanceInCombat(ShipAPI ship, float amount) {
-
-        boolean aiAssigned = ship.getCustomData().containsKey(key);
-
-        if (!aiAssigned) {
-            if (ship.getWing() == null) return;
-            ShipAPI source = ship.getWing().getSourceShip();
-            if (source != null) {
-
-                ballisticpodManager manager = utils.getFirstListenerOfClass(source, ballisticpodManager.class);
-                if (manager == null) {
-                    manager = new ballisticpodManager(source);
-                    source.addListener(manager);
-                }
-
-                manager.drones.add(ship);
-            }
-
-//            for (WeaponGroupAPI group : ship.getWeaponGroupsCopy()) {
- //               if (!group.isAutofiring()) {
- //                   ship.giveCommand(ShipCommand.TOGGLE_AUTOFIRE, null, ship.getWeaponGroupsCopy().indexOf(group));
+//
+//    public static Logger log = Global.getLogger(ballisticpodHullmod.class);
+//
+//    static {
+//        log.setLevel(Level.DEBUG);
+//   }
+//
+//    String key = "RGMD_realAIAssigned";
+//
+//    @Override
+//    public void advanceInCombat(ShipAPI ship, float amount) {
+//
+//        boolean aiAssigned = ship.getCustomData().containsKey(key);
+//
+//        if (!aiAssigned) {
+//            if (ship.getWing() == null) return;
+//            ShipAPI source = ship.getWing().getSourceShip();
+//            if (source != null) {
+//
+//                ballisticpodManager manager = utils.getFirstListenerOfClass(source, ballisticpodManager.class);
+//                if (manager == null) {
+//                    manager = new ballisticpodManager(source);
+//                    source.addListener(manager);
 //                }
- //           }
-            Global.getCombatEngine().addPlugin(new ballisticpodAI(ship, source));
-            ship.setShipAI(null);
-
-            ship.setCustomData(key, true);
-            ship.getCustomData().put(key, true);
-        }
-    }
+//
+//                manager.drones.add(ship);
+//            }
+//
+////            for (WeaponGroupAPI group : ship.getWeaponGroupsCopy()) {
+// //               if (!group.isAutofiring()) {
+// //                   ship.giveCommand(ShipCommand.TOGGLE_AUTOFIRE, null, ship.getWeaponGroupsCopy().indexOf(group));
+////                }
+// //           }
+//            Global.getCombatEngine().addPlugin(new ballisticpodAI(ship, source));
+//            ship.setShipAI(null);
+//
+//            ship.setCustomData(key, true);
+//            ship.getCustomData().put(key, true);
+//        }
+//    }
 }

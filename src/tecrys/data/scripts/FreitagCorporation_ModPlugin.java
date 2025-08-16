@@ -5,11 +5,14 @@ import com.fs.starfarer.api.Global;
 import com.fs.starfarer.api.PluginPick;
 import com.fs.starfarer.api.campaign.CampaignPlugin;
 import com.fs.starfarer.api.campaign.econ.MarketAPI;
+import com.fs.starfarer.api.combat.AutofireAIPlugin;
 import com.fs.starfarer.api.combat.ShipAIPlugin;
 import com.fs.starfarer.api.combat.ShipAPI;
+import com.fs.starfarer.api.combat.WeaponAPI;
 import com.fs.starfarer.api.fleet.FleetMemberAPI;
 import exerelin.campaign.SectorManager;
 import lunalib.lunaSettings.LunaSettings;
+import tecrys.data.scripts.weapons.ai.omm_laser_mirv_autofire;
 import tecrys.data.scripts.world.ommGen;
 import tecrys.data.scripts.ai.repairdroneai;
 
@@ -38,7 +41,21 @@ public class FreitagCorporation_ModPlugin extends BaseModPlugin {
 //    if (ship.getHullSpec().getHullId().startsWith("edshipyard_wurg_"))
 //      return new PluginPick(new WurgandalModuleShipAI(ship), CampaignPlugin.PickPriority.MOD_GENERAL); 
     return super.pickShipAI(member, ship);
-  }
+
+      }
+
+    @Override
+    public PluginPick<AutofireAIPlugin> pickWeaponAutofireAI(WeaponAPI weapon) {
+        if(weapon.getSpec()!= null){
+        if (weapon.getSpec().getWeaponId().equals("omm_mirvlaser_long")
+                || weapon.getSpec().getWeaponId().equals("omm_mirvlaser_short")) {
+            return new PluginPick<AutofireAIPlugin>(new omm_laser_mirv_autofire(weapon),
+                    CampaignPlugin.PickPriority.MOD_SPECIFIC);
+        }
+    }
+        return super.pickWeaponAutofireAI(weapon);
+    }
+
     public void onApplicationLoad(){
 
         LunaSettings.addSettingsListener(new OMMSettings());

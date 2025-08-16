@@ -1,0 +1,36 @@
+{
+  "id": "omm_stasisgun",
+  "specClass": "projectile",
+  "projectileSpecId": "omm_stasisgun_shot",
+  "type": "ENERGY",
+  "size": "MEDIUM",
+  "turretSprite": "graphics/weapons/omm_stasisgun_tu_barrel.png",
+  "turretGunSprite": "graphics/weapons/omm_stasisgun_tu.png",
+  "hardpointSprite": "graphics/weapons/omm_stasisgun_hp_barrel.png",
+  "hardpointGunSprite": "graphics/weapons/omm_stasisgun_hp.png",
+  "glowColor": [
+    140,
+    27,
+    186,
+    255
+  ],
+  "turretOffsets": [
+    28,
+    2.5
+  ],
+  "turretAngleOffsets": [
+    0
+  ],
+  "hardpointOffsets": [
+    32,
+    1.5
+  ],
+  "hardpointAngleOffsets": [
+    0
+  ],
+  "barrelMode": "LINKED",
+  "animationType": "GLOW",
+  "autocharge": true,
+  		"visualRecoil": -0.5,
+ # "fireSoundOne": "svc_chargeup"
+}
