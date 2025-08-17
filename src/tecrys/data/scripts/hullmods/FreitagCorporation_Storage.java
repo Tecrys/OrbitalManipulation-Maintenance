@@ -48,14 +48,14 @@ public class FreitagCorporation_Storage extends BaseHullMod {
                   if (ship.getVariant().hasHullMod(HullMods.EXPANDED_CARGO_HOLDS)) {
                       deco.getAnimation().setFrame(03);
                   }
-                                    if ((!ship.getVariant().hasHullMod(HullMods.AUXILIARY_FUEL_TANKS)
-                                            && !ship.getVariant().hasHullMod(HullMods.ADDITIONAL_BERTHING)
-                                            && !ship.getVariant().hasHullMod(HullMods.EXPANDED_CARGO_HOLDS))) {
-                                        deco.getAnimation().setFrame(00);
-                                    }
-if (ship.isHulk()) {deco.getAnimation().setFrame(00);}
-                                }
-                                }
+                  if ((!ship.getVariant().hasHullMod(HullMods.AUXILIARY_FUEL_TANKS)
+                          && !ship.getVariant().hasHullMod(HullMods.ADDITIONAL_BERTHING)
+                          && !ship.getVariant().hasHullMod(HullMods.EXPANDED_CARGO_HOLDS))) {
+                      deco.getAnimation().setFrame(00);
+                  }
+                  if (ship.isHulk()) {deco.getAnimation().setFrame(00);}
+              }
+          }
                     }
                                 }
 
@@ -67,6 +67,25 @@ if (ship.isHulk()) {deco.getAnimation().setFrame(00);}
                     if (ship.isHulk() || !ship.isAlive()) {
                         deco.getAnimation().setFrame(00);
                     }
+                }
+            }
+            if (deco.getSlot().getId().equals("SesarmaDeco")) {
+                if (ship.getVariant() != null) {
+                    if (ship.getVariant().hasHullMod(HullMods.AUXILIARY_FUEL_TANKS)) {
+                        deco.getAnimation().setFrame(01);
+                    }
+                    if (ship.getVariant().hasHullMod(HullMods.ADDITIONAL_BERTHING)) {
+                        deco.getAnimation().setFrame(02);
+                    }
+                    if (ship.getVariant().hasHullMod(HullMods.EXPANDED_CARGO_HOLDS)) {
+                        deco.getAnimation().setFrame(03);
+                    }
+                    if ((!ship.getVariant().hasHullMod(HullMods.AUXILIARY_FUEL_TANKS)
+                            && !ship.getVariant().hasHullMod(HullMods.ADDITIONAL_BERTHING)
+                            && !ship.getVariant().hasHullMod(HullMods.EXPANDED_CARGO_HOLDS))) {
+                        deco.getAnimation().setFrame(00);
+                    }
+                    if (ship.isHulk()) {deco.getAnimation().setFrame(00);}
                 }
             }
         }

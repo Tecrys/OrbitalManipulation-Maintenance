@@ -41,8 +41,10 @@ public class omm_rotary_saw implements EveryFrameWeaponEffectPlugin {
             beamend = MathUtils.getPointOnCircumference(beam.getRayEndPrevFrame(), 8,weapon.getCurrAngle()+180);
 
 //            beamend = beam.getRayEndPrevFrame();
-
-            if (weapon.isFiring()) {
+            if (weapon.getAmmoTracker().getAmmo() < 1) {
+                weapon.setForceNoFireOneFrame(true);
+            }
+            if (weapon.isFiring() && weapon.getAmmoTracker().getAmmo() > 0) {
                 if (Interval.intervalElapsed()) {
                     projectile = engine.spawnProjectile(
                             beam.getSource(),
@@ -51,6 +53,7 @@ public class omm_rotary_saw implements EveryFrameWeaponEffectPlugin {
                             beamend,
                             beam.getWeapon().getCurrAngle(),
                             null);
+                    weapon.getAmmoTracker().deductOneAmmo();
                 }
 
             MagicRender.singleframe(sprite, // spriteapi
@@ -63,7 +66,9 @@ public class omm_rotary_saw implements EveryFrameWeaponEffectPlugin {
             firing = true;
             bright = beam.getBrightness();}
         }
-        if (!weapon.isFiring() && firing) {
+        if (weapon.getAmmoTracker().getAmmo() < 1) {firing = false;}
+        if ((!weapon.isFiring() && firing)
+        || (weapon.isFiring() && firing && weapon.getAmmoTracker().getAmmo() < 2 && weapon.getAmmoTracker().getAmmo() > 0)) {
             projectile2 = engine.spawnProjectile(
                     weapon.getShip(),
                     weapon,
@@ -71,6 +76,7 @@ public class omm_rotary_saw implements EveryFrameWeaponEffectPlugin {
                     beamend,
                     weapon.getCurrAngle(),
                     null);
+            weapon.getAmmoTracker().deductOneAmmo();
             firing = false;
         }
 

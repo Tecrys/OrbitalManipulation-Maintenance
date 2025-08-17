@@ -1,19 +1,14 @@
 package tecrys.data.scripts.hullmods;
 
-import com.fs.starfarer.api.Global;
-import com.fs.starfarer.api.campaign.CoreUITabId;
+
 import com.fs.starfarer.api.combat.*;
-import com.fs.starfarer.api.impl.campaign.ids.HullMods;
-import com.fs.starfarer.api.impl.campaign.ids.Personalities;
 
-import java.util.ArrayList;
-import java.util.LinkedHashMap;
-import java.util.List;
-import java.util.Map;
+import com.fs.starfarer.api.ui.Alignment;
+import com.fs.starfarer.api.ui.TooltipMakerAPI;
+import com.fs.starfarer.api.util.Misc;
 
+import java.awt.*;
 
-import static com.fs.starfarer.api.combat.ShipHullSpecAPI.ShipTypeHints.UNBOARDABLE;
-import static com.fs.starfarer.api.impl.campaign.ids.Tags.VARIANT_UNBOARDABLE;
 
 public class omm_mainframelink extends BaseHullMod {
 
@@ -52,110 +47,50 @@ public class omm_mainframelink extends BaseHullMod {
         }
     }
     public void applyEffectsAfterShipCreation(ShipAPI ship, String id) {
+
+}
+//    private static final float HULL_RESISTANCE = 10.0f; // Value is an assumption based on the Kotlin code
 //
-//        List<WeaponAPI> decos = ship.getAllWeapons();
-//        for (WeaponAPI weap : decos) {
-//            if ((weap.getSlot().getId().equals("droneslot")//slot has same name as on drone !important!
-//                    || weap.getSlot().getId().equals("pdslot")
-//                    || weap.getSlot().getId().equals("smlhybridslot")
-//                    || weap.getSlot().getId().equals("synergyslot")
-//                    || weap.getSlot().getId().equals("smlmissileslot")
-//                    || weap.getSlot().getId().equals("compositeslot")
-//                    || weap.getSlot().getId().equals("largeslot")
-//                    || weap.getSlot().getId().equals("ballisticslot"))) {
-//
-//
-//
-//slotX = weap.getSlot().getLocation().getX();
-//slotY = weap.getSlot().getLocation().getY();
-//                    if (ship.getOriginalOwner() == -1) {
-//                        weap.getSlot().getLocation().set(slotX, slotY);
-//                    }
-//        }
-//
-//    }
-//    public static float FLUX_FRACTION = 0.5F;
-//
-//    public static float HARD_FLUX_FRACTION = 0.2F;
-//
-//    public static String SINK_DATA_KEY = "core_sink_data_key";
-//
-//    public static class FluxSinkData {
-//
-//        Map<ShipAPI, Float> dissipation = new LinkedHashMap<ShipAPI, Float>();
-//    }
-//
-//    public void advanceInCombat(ShipAPI ship, float amount) {
-//        super.advanceInCombat(ship, amount);
-//        if (!ship.isAlive()) {
-//            return;
-//        }
-//        CombatEngineAPI engine = Global.getCombatEngine();
-//        String key = String.valueOf(SINK_DATA_KEY) + "_" + ship.getId();
-//        FluxSinkData data = (FluxSinkData) engine.getCustomData().get(key);
-//        if (data == null) {
-//            data = new FluxSinkData();
-//            engine.getCustomData().put(key, data);
-//            for (FighterWingAPI wings : ship.getAllWings()) {
-//                ShipAPI fighter = wings.getLeader();
-//                if (!fighter.isAlive()) {
-//                    continue;
-//                }
-//
-//                float d = fighter.getMutableStats().getFluxDissipation().getModifiedValue();
-//                d *= FLUX_FRACTION;
-//                data.dissipation.put(fighter, Float.valueOf(d));
-//            }
-//        }
-//        List<ShipAPI> losses = new ArrayList<ShipAPI>(data.dissipation.keySet());
-//        List<ShipAPI> remaining = new ArrayList<ShipAPI>();
-//        float totalLiveDissipation = 0.0F;
-//            for (FighterWingAPI wings : ship.getAllWings()) {
-//                ShipAPI fighter = wings.getLeader();
-//                if (!fighter.isAlive()) {
-//                    continue;
-//                }
-//            losses.remove(fighter);
-//            remaining.add(fighter);
-//            if (data.dissipation.containsKey(fighter)) {
-//                totalLiveDissipation += ((Float) data.dissipation.get(fighter)).floatValue();
-//            }
-//        }
-//        float extraDissipation = 0.0F;
-//        for (ShipAPI lost : losses) {
-//            if (data.dissipation.containsKey(lost)) {
-//                extraDissipation += ((Float) data.dissipation.get(lost)).floatValue();
-//            }
-//        }
-//        for (ShipAPI fighter : remaining) {
-//            if (!data.dissipation.containsKey(fighter)) {
-//                continue;
-//            }
-//            float currBonus = 0.0F;
-//            if (totalLiveDissipation > 0.0F) {
-//                currBonus = ((Float) data.dissipation.get(fighter)).floatValue();
-//            }
-//            float flux = fighter.getCurrFlux();
-//            float motherflux = ship.getCurrFlux();
-//            float fluxtotal = flux + motherflux;
-//            ship.getFluxTracker().increaseFlux(flux, false);
-//            fighter.getMutableStats().getFluxDissipation().modifyFlat("shared_flux_sink", currBonus);
-//            float hardFluxFraction = 0.0F;
-//            float totalDissipation = fighter.getMutableStats().getFluxDissipation().getModifiedValue();
-//            if (totalDissipation > 0.0F) {
-//                hardFluxFraction = currBonus / totalDissipation * HARD_FLUX_FRACTION;
-//            }
-//            fighter.getMutableStats().getHardFluxDissipationFraction().modifyFlat("shared_flux_sink", hardFluxFraction);
+//    @Override
+//    public String getDescriptionParam(int index, ShipAPI.HullSize hullSize) {
+//        switch (index) {
+//            case 0:
+//                return ((int) HULL_RESISTANCE) + "%";
+//            case 1:
+//                return "Neural Interface";
+//            default:
+//                return null;
 //        }
 //    }
-//
-//    public String getDescriptionParam(int index, ShipAPI.HullSize hullSize, ShipAPI ship) {
-//        if (index == 0) {
-//            return Math.round(FLUX_FRACTION * 100.0F) + "%";
-//        }
-//        if (index == 1) {
-//            return Math.round(HARD_FLUX_FRACTION * 100.0F) + "%";
-//        }
-//        return null;
-//    }
-}}
+
+    @Override
+    public void addPostDescriptionSection(TooltipMakerAPI tooltip, ShipAPI.HullSize hullSize, ShipAPI ship, float width, boolean isForModSpec) {
+        float pad = 3f;
+        float opad = 10f;
+        Color h = Misc.getHighlightColor();
+        Color bad = Misc.getNegativeHighlightColor();
+
+
+        tooltip.addSectionHeading("Proprietary Asset Protection Measures", Alignment.MID, opad);
+        tooltip.addPara(
+                "Freitag Ships cannot be recovered by opposing forces.", opad
+        );
+        tooltip.addSectionHeading("Drone Formations", Alignment.MID, opad);
+        tooltip.addPara(
+                "By pressing %s you can change formation and behaviour of your weapon drones.", opad, h,
+                "Toggle Fighter Engage/Regroup (default Z)"
+        );        tooltip.addPara(
+                "By default drones will face the closest enemy larger than a fighter, in Engage Mode they will change orbit position depending on cursor location.", opad
+        );
+
+        tooltip.addSectionHeading("Drone Weapon Groups", Alignment.MID, opad);
+        tooltip.addPara(
+                "Drones will mirror the autofire selection of your weapon groups." +
+                        "Turning on Autopilot will most likely change this selection." +
+                        "You can toggle autofire in combat by pressing %s.", opad, h,
+                "CTRL + Weapon Group Number"
+        );
+        tooltip.addSectionHeading("Flux affecting and range increasing hullmods", Alignment.MID, opad);
+        tooltip.addSectionHeading("are shared between mothership and drones", Alignment.MID, 0f);
+    }
+}

@@ -2,6 +2,9 @@
   "plugins":{
     "omm_drone":"tecrys.data.scripts.plugins.omm_drone",
   },
+  		"designTypeColors":{
+		"Freitag Corporation":[255, 191, 0,255],
+		},
     	"graphics":{
     		"fx":{
           "FreitagCorporation_shieldsInner256":"graphics/fx/FreitagCorporation_shields256.png",

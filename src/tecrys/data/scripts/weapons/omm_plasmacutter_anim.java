@@ -1,12 +1,15 @@
 package tecrys.data.scripts.weapons;
 
 import com.fs.starfarer.api.AnimationAPI;
+import com.fs.starfarer.api.Global;
 import com.fs.starfarer.api.combat.BeamAPI;
 import com.fs.starfarer.api.combat.CombatEngineAPI;
 import com.fs.starfarer.api.combat.EveryFrameWeaponEffectPlugin;
 import com.fs.starfarer.api.combat.WeaponAPI;
 import com.fs.starfarer.api.util.IntervalUtil;
 import com.thoughtworks.xstream.mapper.Mapper;
+import org.lazywizard.lazylib.CollisionUtils;
+import org.lazywizard.lazylib.VectorUtils;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -53,18 +56,22 @@ public class omm_plasmacutter_anim implements EveryFrameWeaponEffectPlugin {
             return;
         }
 
-        FireRate = weapon.getAmmoTracker().getAmmoPerSecond();
+        FireRate = 1f/weapon.getAmmoTracker().getAmmoPerSecond();
 
         AnimationAPI anim = weapon.getAnimation();
         anim.setFrame(curFrame);
         for (BeamAPI beam : weapon.getBeams()) {
-
+beam.getDamage().setDamage(0f);
             if (this.ShotInterval.intervalElapsed() && weapon.getAmmoTracker().getAmmo() > 0) {
-
+                ;engine.spawnMuzzleFlashOrSmoke(weapon.getShip(),
+                        beam.getFrom(),
+                        Global.getSettings().getWeaponSpec("omm_plasma_cutter_sub"),
+                        weapon.getCurrAngle()
+                );
                 engine.spawnProjectile(
                         weapon.getShip(),
                         weapon,
-                        "miningblaster",
+                        "omm_plasma_cutter_sub",
                         beam.getFrom(),
                         weapon.getCurrAngle(),
                         null);

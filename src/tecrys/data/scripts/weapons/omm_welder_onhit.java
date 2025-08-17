@@ -55,7 +55,7 @@ public class omm_welder_onhit implements BeamEffectPlugin {
                 new Color(255,100,100,75)  // explosionColor
         );
 
-        spec.setDamageType(DamageType.FRAGMENTATION);
+        spec.setDamageType(DamageType.HIGH_EXPLOSIVE);
         spec.setUseDetailedExplosion(false);
         spec.setSoundSetId("explosion_guardian");
         return spec;

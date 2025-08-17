@@ -210,7 +210,7 @@ public class synergypodManager implements AdvanceableListener {
                                 laswep.setCurrAngle(synwep.getCurrAngle());}       //aims the targeting laser towards cursor
                         }
 
-                        // prevents drones from firing if mothership is overloaded:
+                        // prevents drones from firing if mothership is overloaded or venting:
                         if (this.mothership.getFluxTracker().isOverloaded()) {
                             float OverloadTime = this.mothership.getFluxTracker().getOverloadTimeRemaining();
                             drone.getFluxTracker().forceOverload(OverloadTime);

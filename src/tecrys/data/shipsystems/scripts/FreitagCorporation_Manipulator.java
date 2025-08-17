@@ -14,6 +14,7 @@ import java.util.Map;
 import org.dark.shaders.distortion.DistortionShader;
 import org.dark.shaders.distortion.RippleDistortion;
 import org.lazywizard.lazylib.MathUtils;
+import org.lazywizard.lazylib.VectorUtils;
 import org.lazywizard.lazylib.combat.AIUtils;
 import org.lazywizard.lazylib.combat.CombatUtils;
 import org.lazywizard.lazylib.combat.entities.SimpleEntity;
@@ -73,7 +74,7 @@ public class FreitagCorporation_Manipulator extends BaseShipSystemScript {
         }
         //   if (AIUtils.canUseSystemThisFrame(ship)) {
 
-        List<ShipAPI> targetsToRepulse = AIUtils.getNearbyEnemies(ship, 10);
+        List<ShipAPI> targetsToRepulse = AIUtils.getNearbyEnemies(ship, 1);
         boolean containATrueTarget = false;
         for (ShipAPI target : targetsToRepulse) {
             if (!target.isFighter()) {
@@ -90,9 +91,9 @@ public class FreitagCorporation_Manipulator extends BaseShipSystemScript {
             SimpleEntity entity = new SimpleEntity(positionRepulse);
             for (ShipAPI target2 : targetsToRepulse) {
                 Vector2f.sub(target2.getLocation(), positionRepulse, dir);
-                CombatUtils.applyForce(target2, dir, 800 * (1 + ship.getSystem().getChargeActiveDur() - ship.getSystem().getCooldownRemaining()));
+                 CombatUtils.applyForce(target2, dir, 600f + target2.getMass()/5);
             }
-            ship.getVelocity().set(0, 0);
+            //ship.getVelocity().set(0, 0);
             for (int i = 0; i < 5; i++) {
                 Global.getCombatEngine().spawnEmpArcVisual(positionRepulse, null, MathUtils.getRandomPointOnCircumference(positionRepulse, 10), null, 10, Color.cyan, Color.BLUE);
             }

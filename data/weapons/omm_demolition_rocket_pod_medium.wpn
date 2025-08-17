@@ -1,44 +1,32 @@
 {
-  "id": "omm_demolition_rocket_pod",
+  "id": "omm_demolition_rocket_pod_medium",
   "specClass": "projectile",
   "projectileSpecId": "omm_demolition_rocket_pod_projectile",
   "type": "MISSILE",
-  "size": "LARGE",
+  "size": "MEDIUM",
   "everyFrameEffect": "tecrys.data.scripts.weapons.omm_trapdoor_missile",
   "displayArcRadius": 300,
-  "turretSprite": "graphics/weapons/omm_demolition_rocket_pod_tu.png",
-  "turretGunSprite": "graphics/weapons/omm_cover_turret_large.png",
-  "hardpointSprite": "graphics/weapons/omm_demolition_rocket_pod_hp.png",
-  "hardpointGunSprite": "graphics/weapons/omm_cover_hardpoint_large.png",
+  "turretSprite": "graphics/weapons/omm_demolition_rocket_pod_tu_medium.png",
+  "turretGunSprite": "graphics/weapons/omm_cover_turret_medium.png",
+  "hardpointSprite": "graphics/weapons/omm_demolition_rocket_pod_hp_medium.png",
+  "hardpointGunSprite": "graphics/weapons/omm_cover_hardpoint_medium.png",
   "visualRecoil": 2,
   "renderHints": [
     SUSPEND_RECOIL
   ],
   "turretOffsets": [
-    -3,
-    0,
-    -3,
-    -0,
-    -3,
+    -1.5,
     0
   ],
   "turretAngleOffsets": [
-    0,
-    45,
-    -45
+    0
   ],
   "hardpointOffsets": [
-    8,
-    0,
-    8,
-    -0,
-    8,
+    -0.5,
     0
   ],
   "hardpointAngleOffsets": [
-    0,
-    -45,
-    45
+    0
   ],
   "barrelMode": "ALTERNATING",
   "animationType": "SMOKE",

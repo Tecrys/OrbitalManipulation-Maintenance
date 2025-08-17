@@ -29,7 +29,7 @@ class omm_stasisOnHitEffect(): OnHitEffectPlugin {
         damageResult: ApplyDamageResultAPI?,
         engine: CombatEngineAPI?
     ) {
-//        if(shieldHit) return
+        if(shieldHit) return
 
         if (projectile?.didDamage() == true) {
 

@@ -8,7 +8,7 @@
 	"hardpointSprite":"",		
 	"turretGunSprite":"graphics/weapons/omm_chaff_launcher.png",
 	"hardpointGunSprite":"graphics/weapons/omm_chaff_launcher.png",	
-	"visualRecoil":8.0,  # the gun sprites are only used if this is non-0
+	"visualRecoil":4.0,  # the gun sprites are only used if this is non-0
 	"renderHints":[RENDER_BARREL_BELOW],
 	"turretOffsets":[20, 0],
 	"turretAngleOffsets":[0],

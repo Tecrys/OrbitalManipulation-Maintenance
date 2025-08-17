@@ -43,12 +43,12 @@ public class omm_chaff_flak implements ProximityExplosionEffect {
 
         for (ShipAPI Target : Targets) {
             if (Target.getOriginalOwner() != originalProjectile.getOwner()) {
-                Global.getCombatEngine().applyDamage(Target, Target.getLocation(), 0, DamageType.HIGH_EXPLOSIVE, 100f, false, false, explosion);
+                Global.getCombatEngine().applyDamage(Target, Target.getLocation(), 20, DamageType.FRAGMENTATION, 20f, false, false, explosion);
             }
 
             Global.getCombatEngine().addPlugin(new BaseEveryFrameCombatPlugin() {
                 float timer = 0;
-                final float max = 10f + ((float) Math.random());
+                final float max = 5f + ((float) Math.random());
                 final float resistanceTime = 0.05f;
                 private SpriteAPI sprite;
 
