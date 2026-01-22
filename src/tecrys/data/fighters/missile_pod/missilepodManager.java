@@ -166,7 +166,7 @@ public class missilepodManager implements AdvanceableListener {
                                         float diffdrone = MathUtils.getShortestRotation(drone.getFacing(), angle);
                                         float maxVeldrone = drone.getMaxTurnRate();
                                         diffdrone = MathUtils.clamp(diffdrone, -maxVeldrone, maxVeldrone);
-                                        //drone.setFacing(diffdrone + drone.getFacing());        //sets facing of the drone
+                                        drone.setFacing(diffdrone + drone.getFacing());        //sets facing of the drone
 
                                         {                 // make sure player-selected weapon group has autofire turned off:
 

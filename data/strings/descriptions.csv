@@ -144,6 +144,18 @@ FreitagCorporation_FluxEater,SHIP_SYSTEM,"Channels flux over 3 seconds from alli
 FreitagCorporation_TemporalShellBuff,SHIP_SYSTEM,Compresses time for target allied ship near the cursor by a factor of 3 for 3 seconds.,Special,Compresses time for target allied ship near the cursor by a factor of 3 for 3 seconds.,
 omm_jumper,SHIP_SYSTEM,The ship boosts ahead quickly in an arc possibly being able to get behind other ships.,Movement,The ship boosts ahead quickly in an arc possibly being able to get behind other ships.,
 ,,,,,
+freitag_corporation,FACTION,"After the Second AI War with Tri-Tachyon significantly weakened, there were a lot of opportunities in the Persean Sector for smaller enterprises to grow.
+Many parts of the sector lay in ashes and they had to be rebuilt. That's when a small construction firm began its rise to the top. In less than a decade the Freitag Corporation was not only able to expand its field of expertise but also grew into a corporation that quickly outpaced the growth of its competitors.
+
+Soon everything from hover cars to entire station modules displayed the Freitag Corporation logo but it was never quite enough to rival Tri-Tachyon.
+A new strategy was needed to stay in the game and so the Freitag Corporation got rid of a lot of capital in order to rebrand completely.
+Sleek, never before seen designs, the highest quality materials and technology, and a premium price formed the new corporate philosophy.
+The corporation supported this new approach with state-of-the-art R&D departments to branch out towards alternative and more lucrative methods of resource acquisition.
+
+This is where the Freitag Corporation stands today.
+A staple technology of the Corporation is semi-automated zero-g algae farming to fabricate cheap fuel, plastics and foodstuffs sold as high quality products to the unknowing masses in every corner of the Persean Sector.
+Mobile algae farms can extend the duration of expeditions to the outer reaches of the sector by growing enough workable products to sustain more than itself, making a fleet less dependent on nearby infrastructure. Claims that these farms thrive on biological material provided by the Corporation in the form of dead bodies found during salvage operations remain unsubstantiated.",,,
+,,,,,
 freitag_hq,CUSTOM,"A dead titan lies ahead amidst the Valkyries. Buzzing swarms of flies surround it slowly eating away the titans flesh, hollowing out its bones, sucking away the blood still left in its vanes. The corpse eaters home hovers right next to the decaying husk of the once powerful giant, each tiny piece of it's body busily taken to the hive. A rotting cadaver consumed by greed.
 
 This is Anthozoa Station, HQ of the Freitag corporation built in orbit of the wrecked ring once capable of connecting the Persean Sector to any other part of the Domains vast realm, now source and center of the corporations influence and economic power. Here the specialized technology is designed and built with the materials the destroyed gate provides. It is mostly populated by engineers, scientists and contract negotiators who are busy furthering the interests of the corporation.

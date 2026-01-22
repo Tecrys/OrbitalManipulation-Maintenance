@@ -1,0 +1,57 @@
+{
+  "variantId": "omm_station_top_variant",
+  "hullId": "omm_station_top",
+  "displayName": "New Variant",
+  "goalVariant": false,
+  "fluxCapacitors": 0,
+  "fluxVents": 0,
+  "quality": 1,
+  "permaMods": [],
+  "hullMods": [],
+  "weaponGroups": [],
+  "modules": [
+    {
+      "WS 000": "omm_station_bottom_variant"
+    },
+    {
+      "mod_top_right": "omm_station_top_module_top_right"
+    },
+    {
+      "mod_top_left": "omm_station_top_module_top_left"
+    },
+    {
+      "mod_mid_right": "omm_station_top_module_middle_right"
+    },
+    {
+      "mod_mid_left": "omm_station_top_module_middle_left"
+    },
+    {
+      "mod_bot_right": "omm_station_top_module_bottom_left"
+    },
+    {
+      "mod_bot_left": "omm_station_top_module_bottom_right"
+    },
+	      {
+      "left": "omm_station_bottom_module_left"
+    },
+    {
+      "right": "omm_station_bottom_module_right"
+    },
+    {
+      "bottom": "omm_station_bottom_module_middle"
+    },
+      {
+      "left_algae": "omm_station_algae_large_left"
+    },
+    {
+      "right_algae": "omm_station_algae_large_right"
+    },
+    {
+      "bottom_left_algae": "omm_station_algae_small_left"
+    },
+    {
+      "bottom_right_algae": "omm_station_algae_small_right"
+    },	
+  ],
+  "wings": []
+}

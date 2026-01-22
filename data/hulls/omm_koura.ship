@@ -22,7 +22,6 @@
     "omm_smallpod_wing"
   ],
   "builtInWeapons": {
-    "AIHelp": "omm_chafflauncher",
     "MODULAR": "omm_synergypoddeco",
     "MODULARPD": "omm_smallpoddeco"
   },
@@ -62,15 +61,6 @@
       "arc": 0,
       "angle": 0,
       "locations": [-34, 103]
-    },
-    {
-      "id": "AIHelp",
-      "size": "SMALL",
-      "type": "BUILT_IN",
-      "mount": "HIDDEN",
-      "arc": 0,
-      "angle": 0,
-      "locations": [24, -0]
     }
   ],
   "engineSlots": [

@@ -11,15 +11,14 @@
   "shieldCenter": [0, 0],
   "shieldRadius": 144,
   "viewOffset": 0,
+
   "builtInMods": [
-    "pointdefenseai",
-    "axialrotation",
-    "fluxbreakers",
-    "fluxshunt",
+  "auxiliarythrusters",
     "missile_reload",
     "missleracks",
-    "supercomputer",
-    "targetingunit"
+    "fluxbreakers",
+    "fluxshunt",
+    "supercomputer"
   ],
   "builtInWeapons": {
     "shield": "FreitagCorporation_ShieldEffect_wpn"
@@ -109,31 +108,19 @@
   ],
   "engineSlots": [],
   "bounds": [
-    37, 63,
-    88.5, 71.5,
-    97, 63.5,
-    87.5, 56.5,
-    87, 31.5,
-    106.5, 8.5,
-    106.5, -8.5,
-    87, -31.5,
-    87.5, -56.5,
-    97, -63.5,
-    88.5, -71.5,
-    37, -63,
-    39, -56.5,
-    -68, -18,
-    -86.5, -22,
-    -94, -34,
-    -104, -28,
-    -100, -13,
-    -106.5, -7.5,
-    -106.5, 7.5,
-    -100, 13,
-    -104, 28,
-    -94, 34,
-    -86.5, 22,
-    -68, 18,
-    39, 56.5
+    38.5, 38,
+    -58.5, 0,
+    -105.5, 0,
+    -101.5, 31.5,
+    -72, 15,
+    71.5, 69,
+    105.5, 10.5,
+    105.5, -10.5,
+    71.5, -69,
+    -72, -15,
+    -101.5, -31.5,
+    -105.5, -0,
+    -58.5, -0,
+    38.5, -38
   ]
 }

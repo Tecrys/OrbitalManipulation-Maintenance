@@ -1,0 +1,151 @@
+{
+  "hullName": "Anthozoa",
+  "hullId": "omm_station_bottom",
+  "hullSize": "CAPITAL_SHIP",
+  "spriteName": "graphics/ships/stations/omm_station_bottom.png",
+  "style": "FREITAG_CORP_TECH",
+  "height": 490,
+  "width": 602,
+  "center": [301, 206.5],
+  "collisionRadius": 341,
+  "shieldCenter": [0.5, -0],
+  "shieldRadius": 319,
+  "viewOffset": 0,
+  "builtInMods": [
+    "omm_mainframelink",
+    "omm_wing_range_increase",
+    "vastbulk",
+    "omm_anchorrotation",
+    "supercomputer",
+    "shared_flux_sink"
+  ],
+  "builtInWeapons": {
+    "WS0001": "omm_station_top_biosphere",
+    "shadow": "omm_station_top_shadow_top",
+    "shield": "FreitagCorporation_ShieldEffect_wpn"
+  },
+  "weaponSlots": [
+    {
+      "id": "shield",
+      "size": "SMALL",
+      "type": "DECORATIVE",
+      "mount": "TURRET",
+      "arc": 0,
+      "angle": -0,
+      "locations": [-3.5, 101]
+    },
+    {
+      "id": "shadow",
+      "size": "SMALL",
+      "type": "DECORATIVE",
+      "mount": "TURRET",
+      "arc": 360,
+      "angle": 0,
+      "locations": [0, -0]
+    },
+    {
+      "id": "WS 000",
+      "size": "LARGE",
+      "type": "STATION_MODULE",
+      "mount": "HARDPOINT",
+      "arc": 4,
+      "angle": 180,
+      "locations": [0, -0]
+    },
+    {
+      "id": "WS0001",
+      "size": "SMALL",
+      "type": "DECORATIVE",
+      "mount": "TURRET",
+      "arc": 360,
+      "angle": 180,
+      "locations": [0, -0]
+    },
+    {
+      "id": "left",
+      "size": "SMALL",
+      "type": "DECORATIVE",
+      "mount": "HARDPOINT",
+      "arc": 0,
+      "angle": -0,
+      "locations": [93.5, 125]
+    },
+    {
+      "id": "right",
+      "size": "SMALL",
+      "type": "DECORATIVE",
+      "mount": "HARDPOINT",
+      "arc": 0,
+      "angle": 0,
+      "locations": [93.5, -125]
+    },
+    {
+      "id": "bottom",
+      "size": "SMALL",
+      "type": "DECORATIVE",
+      "mount": "HARDPOINT",
+      "arc": 0,
+      "angle": 180,
+      "locations": [-154, -0]
+    },
+    {
+      "id": "right_algae",
+      "size": "LARGE",
+      "type": "DECORATIVE",
+      "mount": "HARDPOINT",
+      "arc": 0,
+      "angle": 0,
+      "locations": [110.5, -189.5]
+    },
+    {
+      "id": "left_algae",
+      "size": "LARGE",
+      "type": "DECORATIVE",
+      "mount": "HARDPOINT",
+      "arc": 0,
+      "angle": -0,
+      "locations": [110.5, 189.5]
+    },
+    {
+      "id": "bottom_right_algae",
+      "size": "LARGE",
+      "type": "DECORATIVE",
+      "mount": "HARDPOINT",
+      "arc": 0,
+      "angle": 0,
+      "locations": [-286.5, -47.5]
+    },
+    {
+      "id": "bottom_left_algae",
+      "size": "LARGE",
+      "type": "DECORATIVE",
+      "mount": "HARDPOINT",
+      "arc": 0,
+      "angle": -0,
+      "locations": [-286.5, 47.5]
+    }
+  ],
+  "engineSlots": [],
+  "bounds": [
+    -190, 31.5,
+    -172.5, 146,
+    -196.5, 162,
+    -188.5, 249,
+    -110, 293,
+    -28.5, 264,
+    -23, 236,
+    126, 177.5,
+    183.5, 103,
+    279.5, 49.5,
+    279.5, -49.5,
+    183.5, -103,
+    126, -177.5,
+    -23, -236,
+    -28.5, -264,
+    -110, -293,
+    -188.5, -249,
+    -196.5, -162,
+    -172.5, -146,
+    -190, -31.5
+  ]
+}

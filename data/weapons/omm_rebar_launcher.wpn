@@ -41,5 +41,5 @@
 					   "particleColor":[255, 120, 0, 100]},	
   	"autocharge":true,
 		"visualRecoil": -10,
-  "fireSoundTwo": "sabot_srm_fire"
+  "fireSoundTwo": "hydra_fire"
 }

@@ -1,0 +1,30 @@
+{
+  "hullName": "Station Structural Spur",
+  "hullId": "omm_station_algae_large_right",
+  "hullSize": "FRIGATE",
+  "spriteName": "graphics/ships/stations/omm_station_algae_large_right.png",
+  "style": "MIDLINE",
+  "height": 214,
+  "width": 215,
+  "center": [97, 97],
+  "collisionRadius": 152,
+  "shieldCenter": [0, -0],
+  "shieldRadius": 148.5,
+  "viewOffset": 0,
+  "moduleAnchor": [
+   310,
+    0
+  ],
+  "builtInMods": [
+    "reduced_explosion",
+    "do_not_fire_through",
+    "omm_anchorrotation"
+  ],
+  "weaponSlots": [],
+  "engineSlots": [],
+  "bounds": [
+    57, 0,
+    -53, 18,
+    -53, -18
+  ]
+}

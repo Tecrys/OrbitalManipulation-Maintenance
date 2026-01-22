@@ -41,7 +41,7 @@
     {
       "id": "pdslot",
       "size": "SMALL",
-      "type": "ENERGY",
+      "type": "HYBRID",
       "mount": "TURRET",
       "arc": 360,
       "angle": 0,

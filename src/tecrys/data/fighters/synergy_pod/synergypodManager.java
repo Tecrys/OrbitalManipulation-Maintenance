@@ -113,26 +113,31 @@ public class synergypodManager implements AdvanceableListener {
                               // Weapon group controls:
                         if (syndrogroup != null && syngroup != null) {
 
-                            if ((!syndrogroup.isAutofiring() && player != this.mothership) || (!syndrogroup.isAutofiring() && this.mothership.equals(player) && !engine.isUIAutopilotOn())) {
+                            if ((!syndrogroup.isAutofiring() && player != this.mothership)
+                                    || (!syndrogroup.isAutofiring()
+                                    && this.mothership.equals(player)
+                                    && !engine.isUIAutopilotOn()
+                            )) {
                                 drone.giveCommand(ShipCommand.TOGGLE_AUTOFIRE, null, drone.getWeaponGroupsCopy().indexOf(syndrogroup));
 //                            } else if (group.isAutofiring() && this.mothership.equals(player) && engine.isUIAutopilotOn()) {
 //                                drone.giveCommand(ShipCommand.TOGGLE_AUTOFIRE, null, drone.getWeaponGroupsCopy().indexOf(group));
                             }
-                            if (syndrogroup.isAutofiring()
-                                    && player == this.mothership && engine.isUIAutopilotOn() && syngroup == activegroup
-                            )
-                            {
-                                drone.giveCommand(ShipCommand.TOGGLE_AUTOFIRE, null, drone.getWeaponGroupsCopy().indexOf(syndrogroup));
-                            }
-                            else if (       (syngroup.isAutofiring() && !syndrogroup.isAutofiring()
-                                    && player == this.mothership && engine.isUIAutopilotOn() && syngroup != activegroup)
-                            )
+
+                            else if (       (syngroup.isAutofiring()
+                                    && !syndrogroup.isAutofiring()
+                                    && player == this.mothership
+                                    && engine.isUIAutopilotOn()
+                                 //   && syngroup != activegroup)
+                            ))
                              {
                                 drone.giveCommand(ShipCommand.TOGGLE_AUTOFIRE, null, drone.getWeaponGroupsCopy().indexOf(syndrogroup));
                             }
-                            else if (       (!syngroup.isAutofiring() && syndrogroup.isAutofiring()
-                                    && player == this.mothership && engine.isUIAutopilotOn() && syngroup != activegroup)
-                            )
+                            else if (       (!syngroup.isAutofiring()
+                                    && syndrogroup.isAutofiring()
+                                    && player == this.mothership
+                                    && engine.isUIAutopilotOn()
+                                  //  && syngroup != activegroup)
+                            ))
                             {
                                 drone.giveCommand(ShipCommand.TOGGLE_AUTOFIRE, null, drone.getWeaponGroupsCopy().indexOf(syndrogroup));
                             }
@@ -153,7 +158,7 @@ public class synergypodManager implements AdvanceableListener {
 
 
 
-                                if (Objects.equals(weapon.getId(), synwep.getId()) && syngroup == activegroup) {
+                                if (Objects.equals(weapon.getId(), synwep.getId()) && syngroup == activegroup && !activegroup.isAutofiring()) {
                                     weapon.beginSelectionFlash();
                                 weapon.ensureClonedSpec();
                                 WeaponSpecAPI spec = weapon.getSpec();
@@ -162,14 +167,13 @@ public class synergypodManager implements AdvanceableListener {
                                 float diff = MathUtils.getShortestRotation(dronewep.getCurrAngle(), angle);
                                 float maxVel = dronewep.getTurnRate();
                                 diff = MathUtils.clamp(diff, -maxVel, maxVel);
-                                if(dronewep != null)    {
-                                dronewep.setCurrAngle(diff + dronewep.getCurrAngle());}     //aims the drone weapon towards cursor
+
 
 
                                     float diffdrone = MathUtils.getShortestRotation(drone.getFacing(), angle);
                                 float maxVeldrone = drone.getMaxTurnRate();
                                 diffdrone = MathUtils.clamp(diffdrone, -maxVeldrone, maxVeldrone);
-                                //drone.setFacing(diffdrone + drone.getFacing());        //sets facing of the drone
+
 
                                     {                 // make sure player-selected weapon group has autofire turned off:
 
@@ -182,6 +186,11 @@ public class synergypodManager implements AdvanceableListener {
                                             laswep.setForceFireOneFrame(true);
                                             laswep.ensureClonedSpec();
                                             laswep.getSpec().setMaxRange(synwep.getSpec().getMaxRange() - ((synwep.getSpec().getMaxRange() / 100) * 20));
+                                            drone.setFacing(diffdrone + drone.getFacing());        //sets facing of the drone
+                                            if(laswep != null)    {
+                                                laswep.setCurrAngle(synwep.getCurrAngle());}       //aims the targeting laser towards cursor
+//                                            if(dronewep != null)    {
+//                                                dronewep.setCurrAngle(diff + dronewep.getCurrAngle());}     //aims the drone weapon towards cursor
                                         }
                                         if (dronewep.getAnimation() != null && !engine.isUIAutopilotOn()) {
                                             dronewep.getAnimation().setFrame(00);
@@ -206,8 +215,7 @@ public class synergypodManager implements AdvanceableListener {
                                else if (!Objects.equals(weapon.getId(), synwep.getId())) {}
                             }
                         }
-                            if(laswep != null)    {
-                                laswep.setCurrAngle(synwep.getCurrAngle());}       //aims the targeting laser towards cursor
+
                         }
 
                         // prevents drones from firing if mothership is overloaded or venting:
@@ -308,20 +316,24 @@ public class synergypodManager implements AdvanceableListener {
      public float getDesiredFacing(ShipAPI drone) {
          if (Global.getCombatEngine() != null)
          {
-             if (AIUtils.getNearbyEnemies(mothership, 1000f) != null
-             && mothership.isPullBackFighters())
+             if (//AIUtils.getNearbyEnemies(mothership, 1200f) != null
+                   mothership.areAnyEnemiesInRange()  && AIUtils.getNearestEnemy(mothership) != null
+             )
              {
-                 for (ShipAPI enemy : AIUtils.getNearbyEnemies(mothership, 1000f))
-                 {
-                     if (!enemy.getHullSize().equals(ShipAPI.HullSize.FIGHTER))
+
+                     if (!AIUtils.getNearestEnemy(mothership).getHullSize().equals(ShipAPI.HullSize.FIGHTER))
                      {
                          {
-                             return VectorUtils.getAngle(mothership.getShieldCenterEvenIfNoShield(), enemy.getLocation());
+                             return VectorUtils.getAngle(mothership.getShieldCenterEvenIfNoShield(), AIUtils.getNearestEnemy(mothership).getLocation());
                         }
                      }
-                 }
+
              }
-         }  return VectorUtils.getAngle(mothership.getShieldCenterEvenIfNoShield(), mothership.getMouseTarget());
+
+         if (mothership.isPullBackFighters() && !mothership.areAnyEnemiesInRange()) {
+             mothership.getFacing();//VectorUtils.getAngle(mothership.getShieldCenterEvenIfNoShield(), mothership.getMouseTarget());
+         }
+         }     return  VectorUtils.getAngle(mothership.getShieldCenterEvenIfNoShield(), mothership.getMouseTarget());
      }
 
     //dynamic drone weapon swapping code:

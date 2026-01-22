@@ -1,0 +1,39 @@
+{
+  "hullName": "Station Structural Spur",
+  "hullId": "omm_station_algae_large_left",
+  "hullSize": "FRIGATE",
+  "spriteName": "graphics/ships/stations/omm_station_algae_large_left.png",
+  "style": "FREITAG_CORP_TECH",
+  "height": 214,
+  "width": 215,
+  "center": [118, 97],
+  "collisionRadius": 152,
+  "shieldCenter": [0, -0],
+  "shieldRadius": 148.5,
+  "viewOffset": 0,
+  "moduleAnchor": [
+    310,
+    0
+  ],
+  "builtInMods": [
+    "reduced_explosion",
+    "do_not_fire_through",
+    "omm_anchorrotation"
+  ],
+  "weaponSlots": [],
+  "engineSlots": [],
+  "bounds": [
+    113.5, 110.5,
+    98.5, 64.5,
+    51.5, 6.5,
+    20.5, -2,
+    -16, -76,
+    -60.5, -90.5,
+    -89.5, 12.5,
+    -31.5, 106,
+    44, 51.5,
+    64, 63.5,
+    74.5, 91.5,
+    114.5, 110.5
+  ]
+}

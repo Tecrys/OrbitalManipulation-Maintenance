@@ -6,7 +6,8 @@
   "fluxCapacitors": 30,
   "fluxVents": 30,
   "quality": 1,
-  "permaMods": [],
+    "permaMods": [    ],
+	      "sMods": ["pointdefenseai",],
   "hullMods": [],
   "weaponGroups": [
     {

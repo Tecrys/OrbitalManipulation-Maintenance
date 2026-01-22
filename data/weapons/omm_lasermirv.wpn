@@ -48,5 +48,5 @@
       200
     ]
   },
-  "fireSoundTwo": "hydra_fire"
+    "fireSoundTwo": "sabot_srm_fire"
 }

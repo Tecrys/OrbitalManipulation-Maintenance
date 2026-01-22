@@ -28,7 +28,6 @@
     "FreitagCorporation_ShieldDrone_wing"
   ],
   "builtInWeapons": {
-    "AIHelp": "omm_chafflauncher",
     "COMPMODULAR": "omm_compositepoddeco",
     "LRGMODULAR": "omm_largepoddeco",
     "MODULARPD": "omm_pddronedeco",
@@ -119,7 +118,7 @@
     {
       "id": "pdslot",
       "size": "SMALL",
-      "type": "ENERGY",
+      "type": "HYBRID",
       "mount": "TURRET",
       "arc": 360,
       "angle": 0,
@@ -219,15 +218,7 @@
       "angle": 0,
       "locations": [62, 205.5]
     },
-    {
-      "id": "AIHelp",
-      "size": "SMALL",
-      "type": "BUILT_IN",
-      "mount": "HIDDEN",
-      "arc": 1,
-      "angle": -0,
-      "locations": [161.5, -0]
-    },
+
     {
       "id": "rightblinkerrear",
       "size": "SMALL",

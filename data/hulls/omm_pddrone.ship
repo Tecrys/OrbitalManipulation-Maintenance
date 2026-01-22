@@ -16,7 +16,6 @@
     "shield_always_on",
     "do_not_back_off",
     "fluxshunt",
-    "pointdefenseai",
     "omm_pddroneai"
   ],
   "builtInWeapons": {

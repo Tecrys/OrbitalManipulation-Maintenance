@@ -1,0 +1,46 @@
+{
+  "hullName": "Attack Module",
+  "hullId": "omm_station_top_module_top_left",
+  "hullSize": "FRIGATE",
+  "spriteName": "graphics/ships/stations/omm_station_top_module_top_left.png",
+  "style": "HIGH_TECH",
+  "height": 294,
+  "width": 164,
+  "center": [88.5, 142],
+  "collisionRadius": 180,
+  "shieldCenter": [0, -0],
+  "shieldRadius": 180,
+  "viewOffset": 0,
+  "moduleAnchor": [
+    110,
+    -44
+  ],
+  "builtInMods": [
+    "supercomputer",
+    "reduced_explosion",
+    "missile_reload"
+  ],
+  "builtInWeapons": {
+
+  },
+  "weaponSlots": [
+
+  ],
+  "engineSlots": [],
+  "bounds": [
+    140, -47.5,
+    109, -73.5,
+    83.5, -45.5,
+    41.5, -38.5,
+    10, -5,
+    -133, -55,
+    -100.5, -27,
+    20.5, 16.5,
+    57.5, 10.5,
+    93.5, 24.5,
+    108, 63,
+    139, 82,
+    147, 11,
+    126.5, -17
+  ]
+}

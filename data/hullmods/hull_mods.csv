@@ -10,6 +10,8 @@ no missile reload,omm_no_missile_reload,,,Freitag Corporation,,,,,,TRUE,0,0,0,0,
 Civilian Hull Specialization,omm_factory_override,,,Freitag Corporation,no_build_in,,,,TRUE,,0,0,0,0,tecrys.data.scripts.hullmods.omm_factory_override,"Minimum crew requirement of %s reduced to %s.
 
 Negative effects of %s, %s and %s reduced by %s.",,graphics/hullmods/limiter_override.png
+Axial Rotation,omm_axialrotationleft,,,,,,,,TRUE,,0,0,0,0,tecrys.data.scripts.hullmods.omm_AxialRotationLeft,This structure constantly rotates around its axis.,,
+Anchor Rotation,omm_anchorrotation,,,,,,,,TRUE,TRUE,0,0,0,0,tecrys.data.scripts.hullmods.omm_anchorrotation,This structure rotates around its anchor attachment point. For station modules only.,,
 Monofilament Tow Cable,omm_tow_cable,,,Freitag Corporation,,,,,TRUE,,0,0,0,0,tecrys.data.scripts.hullmods.omm_TowCable,"Improves the maximum burn level of the slowest ship in the fleet by 1. Up to 2 cables can be used to speed up the same ship by up to 2.
 
 Can not be used in combat.",Increases burn level of another ship.,graphics/hullmods/omm_monofilament_cable.png
