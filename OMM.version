@@ -2,11 +2,11 @@
 {
     "masterVersionFile":"https://github.com/Tecrys/OrbitalManipulation-Maintenance.git",
     "modName":"OrbitalManipulationMaintenance",
-    "modThreadId":00000,
+    "modThreadId":22142,
     "modVersion":
     {
         "major":0,
         "minor":9,
-        "patch":0c
+        "patch":0f
     }
 }
