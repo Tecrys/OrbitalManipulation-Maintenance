@@ -107,22 +107,22 @@ public class omm_rebar_on_hit implements OnHitEffectPlugin {
                 // 1st explosion at 0% (shield impact)
                 engine.spawnExplosion(start, new Vector2f(), color, size, duration);
                 stage = 1;
-            } else if (stage == 1 && elapsed >= 0.12f) {
+            } else if (stage == 1 && elapsed >= 0.07f) {
                 // 2nd explosion at 25% along the path
                 Vector2f pos = new Vector2f(start.x + (end.x - start.x) * 0.25f, start.y + (end.y - start.y) * 0.25f);
                 engine.spawnExplosion(pos, new Vector2f(), color, size, duration);
                 stage = 2;
-            } else if (stage == 2 && elapsed >= 0.24f) {
+            } else if (stage == 2 && elapsed >= 0.12f) {
                 // 3rd explosion at 50% along the path
                 Vector2f pos = new Vector2f(start.x + (end.x - start.x) * 0.5f, start.y + (end.y - start.y) * 0.5f);
                 engine.spawnExplosion(pos, new Vector2f(), color, size, duration);
                 stage = 3;
-            } else if (stage == 3 && elapsed >= 0.36f) {
+            } else if (stage == 3 && elapsed >= 0.24f) {
                 // 4th explosion at 75% along the path
                 Vector2f pos = new Vector2f(start.x + (end.x - start.x) * 0.75f, start.y + (end.y - start.y) * 0.75f);
                 engine.spawnExplosion(pos, new Vector2f(), color, size, duration);
                 stage = 4;
-            } else if (stage == 4 && elapsed >= 0.48f) {
+            } else if (stage == 4 && elapsed >= 0.36f) {
                 // 5th explosion at 100% where the rod attaches to the hull
                 engine.spawnExplosion(end, new Vector2f(), color, size, duration);
                 engine.removePlugin(this);

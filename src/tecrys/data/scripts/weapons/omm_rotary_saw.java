@@ -100,6 +100,7 @@ public class omm_rotary_saw implements EveryFrameWeaponEffectPlugin {
 
         // 2. Check for active beams when firing
         for (BeamAPI beam : weapon.getBeams()) {
+            beam.getDamage().setForceHardFlux(true);
             beamend = MathUtils.getPointOnCircumference(beam.getRayEndPrevFrame(), 8f, weapon.getCurrAngle() + 180f);
 
             if (weapon.getAmmoTracker().getAmmo() < 1) {

@@ -6,11 +6,11 @@
   <component name="ChangeListManager">
     <list default="true" id="ab26a4c7-b187-47b8-97aa-f29af88e4e7a" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/data/weapons/omm_foam_launcher.wpn" beforeDir="false" afterPath="$PROJECT_DIR$/data/weapons/omm_foam_launcher.wpn" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/weapons/omm_rotarysaw.wpn" beforeDir="false" afterPath="$PROJECT_DIR$/data/weapons/omm_rotarysaw.wpn" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/data/weapons/weapon_data.csv" beforeDir="false" afterPath="$PROJECT_DIR$/data/weapons/weapon_data.csv" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/jar/OrbitalManipulationMaintenance.jar" beforeDir="false" afterPath="$PROJECT_DIR$/jar/OrbitalManipulationMaintenance.jar" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/tecrys/data/scripts/hullmods/omm_mainframelink.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/tecrys/data/scripts/hullmods/omm_mainframelink.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/tecrys/data/scripts/weapons/omm_FoamLauncherFireEffect.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/tecrys/data/scripts/weapons/omm_FoamLauncherFireEffect.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/tecrys/data/scripts/weapons/omm_rebar_on_hit.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/tecrys/data/scripts/weapons/omm_rebar_on_hit.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/tecrys/data/scripts/weapons/omm_rotary_saw.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/tecrys/data/scripts/weapons/omm_rotary_saw.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
