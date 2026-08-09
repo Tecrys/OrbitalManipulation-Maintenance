@@ -6,6 +6,7 @@ import java.util.Iterator;
 import java.util.List;
 import java.awt.Color;
 
+import com.fs.starfarer.api.AnimationAPI;
 import org.lwjgl.util.vector.Vector2f;
 
 import com.fs.starfarer.api.Global;
@@ -75,6 +76,44 @@ public class omm_FoamLauncherFireEffect extends BaseCombatLayeredRenderingPlugin
 
     @Override
     public void advance(float amount, CombatEngineAPI engine, WeaponAPI weapon) {
+        if (engine == null || engine.isPaused()) {
+            return;
+        }
+
+        AnimationAPI anim = weapon.getAnimation();
+        if (anim == null) {
+            return;
+        }
+
+        // Freeze standard frame-by-frame auto-playback
+        anim.pause();
+
+        // Safety checks for ammo usage
+        if (!weapon.usesAmmo() || weapon.getMaxAmmo() <= 0) {
+            return;
+        }
+
+        int numFrames = anim.getNumFrames();
+        if (numFrames <= 1) {
+            return;
+        }
+
+        int currentAmmo = weapon.getAmmo();
+        int maxAmmo = weapon.getMaxAmmo();
+
+        // Calculate fraction of ammo consumed (0.0 = full ammo, 1.0 = completely empty)
+        float ammoDepletedRatio = 1.0f - ((float) currentAmmo / (float) maxAmmo);
+
+        // Clamp value between 0.0 and 1.0 to prevent out-of-bounds on ammo boosts/regen
+        ammoDepletedRatio = Math.max(0.0f, Math.min(1.0f, ammoDepletedRatio));
+
+        // Map depleted ratio to frame index [0 to numFrames - 1]
+        int targetFrame = Math.round(ammoDepletedRatio * (numFrames - 1));
+        targetFrame = Math.min(numFrames - 1, Math.max(0, targetFrame));
+
+        // Update current animation frame
+        anim.setFrame(targetFrame);
+
         if (trails == null) return;
 
         Iterator<omm_FoamLauncherFireEffect> iter = trails.iterator();
@@ -167,6 +206,9 @@ public class omm_FoamLauncherFireEffect extends BaseCombatLayeredRenderingPlugin
                 }
             }
         }
+
+
+
     }
 
     @Override

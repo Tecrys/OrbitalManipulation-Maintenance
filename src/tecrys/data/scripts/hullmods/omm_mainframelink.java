@@ -32,6 +32,7 @@ public class omm_mainframelink extends BaseHullMod {
 
             ship.getAIFlags().setFlag(ShipwideAIFlags.AIFlags.MANEUVER_TARGET);
             ship.getAIFlags().setFlag(ShipwideAIFlags.AIFlags.DO_NOT_BACK_OFF_EVEN_WHILE_VENTING);
+            ship.getAIFlags().setFlag(ShipwideAIFlags.AIFlags.DRONE_MOTHERSHIP);
             if (ship.getHullSize() == ship.getHullSize().FRIGATE) {
                 ship.getAIFlags().setFlag(ShipwideAIFlags.AIFlags.HARASS_MOVE_IN);
             }
