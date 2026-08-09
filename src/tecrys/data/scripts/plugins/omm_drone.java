@@ -5,7 +5,6 @@ import com.fs.starfarer.api.combat.*;
 import com.fs.starfarer.api.impl.campaign.ids.HullMods;
 import com.fs.starfarer.api.input.InputEventAPI;
 import com.fs.starfarer.api.util.IntervalUtil;
-import org.joml.Vector2f;
 import org.lazywizard.lazylib.combat.AIUtils;
 
 import java.awt.*;

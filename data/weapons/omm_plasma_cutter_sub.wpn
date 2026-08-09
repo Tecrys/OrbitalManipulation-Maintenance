@@ -15,15 +15,15 @@
 	"hardpointAngleOffsets":[0],
 	"barrelMode":"ALTERNATING", # or LINKED.  whether barrels fire at the same time or alternate.
 	"animationType":"GLOW_AND_FLASH",
-	"muzzleFlashSpec":{"length":25.0,   # only used if animationType = MUZZLE_FLASH
-					   "spread":12.0,
+	"muzzleFlashSpec":{"length":30.0,   # only used if animationType = MUZZLE_FLASH
+					   "spread":18.0,
 					   "particleSizeMin":10.0,
 					   "particleSizeRange":5.0,
 					   "particleDuration":0.12,
-					   "particleCount":12,
+					   "particleCount":16,
 					   "particleColor":[255,230,154,125]},
 	#"autocharge":true,  # whether the weapon will continue charging and fire if the LMB is tapped instead of held
 	#"requiresFullCharge":true,  # for pulse weapons - whether the weapon will fire at a lower strength partial charge
 	"projectileSpecId":"omm_plasma_cutter_sub_shot",  # projectile that will be fired
-	"fireSoundTwo":"mining_blaster_fire",
+    "fireSoundOne": "omm_plasma_cutter_fire"
 }

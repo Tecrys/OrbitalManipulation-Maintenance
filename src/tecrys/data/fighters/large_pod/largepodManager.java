@@ -1,23 +1,20 @@
 package tecrys.data.fighters.large_pod;
 
 import com.fs.starfarer.api.Global;
-import com.fs.starfarer.api.combat.CombatEngineAPI;
-import com.fs.starfarer.api.combat.FighterWingAPI;
-import com.fs.starfarer.api.combat.MutableShipStatsAPI;
-import com.fs.starfarer.api.combat.ShipAPI;
-import com.fs.starfarer.api.combat.ShipCommand;
-import com.fs.starfarer.api.combat.ShipVariantAPI;
-import com.fs.starfarer.api.combat.WeaponAPI;
+import com.fs.starfarer.api.combat.*;
+
 import static com.fs.starfarer.api.combat.WeaponAPI.WeaponType.MISSILE;
-import com.fs.starfarer.api.combat.WeaponGroupAPI;
+
 import com.fs.starfarer.api.combat.listeners.AdvanceableListener;
 import com.fs.starfarer.api.loading.WeaponSpecAPI;
 import com.fs.starfarer.api.util.IntervalUtil;
 import org.lazywizard.lazylib.MathUtils;
 import org.lazywizard.lazylib.VectorUtils;
 import org.lazywizard.lazylib.combat.AIUtils;
+import org.lazywizard.lazylib.combat.CombatUtils;
 import org.lwjgl.util.vector.Vector2f;
 
+import java.awt.Color;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
@@ -33,10 +30,12 @@ public class largepodManager implements AdvanceableListener {
     private boolean isWeaponSwappedlarge = false;
 
     public IntervalUtil timer = new IntervalUtil(0F, 5F);
-    public final ArrayList<ShipAPI> drones = new ArrayList<>(); //list of all drones
-    public final ArrayList<FighterWingAPI> relevantWings = new ArrayList<>(); //the list of sarissa wings
+    public final ArrayList<ShipAPI> drones = new ArrayList<>();
+    public final ArrayList<FighterWingAPI> relevantWings = new ArrayList<>();
 
     private final IntervalUtil deadDroneInterval = new IntervalUtil(0.2f, 0.2f);
+    private boolean wasSelectedLastFrame = false;
+    private boolean firstFrame = true;
 
     public largepodManager(ShipAPI mothership) {
         this.mothership = mothership;
@@ -52,249 +51,58 @@ public class largepodManager implements AdvanceableListener {
     float distBetweenClusters = -320f;
     float distFromClusterCenterToDrone = 60f;
 
-    //each wing groups up into a triangle
-    //odd no. of wings has one in center + 2 on each side, even no. of wings has non in center & all on sides
-    //if in engage mode, stick closer to shield & rotate to face shield facing
-    //todo need to give the sprite for these guys a second look, too bright vs the xyphos equivalent
-    //todo need to do something for if the index per wing goes over 3 lol
     public Vector2f getDesiredPosition(ShipAPI drone) {
-
         int wingIndex = relevantWings.indexOf(drone.getWing());
         int indexInWing = drone.getWing().getWingMembers().indexOf(drone);
         int oddOrEvenNoOfWings = relevantWings.size() % 2;
         float anglebetweenDrones = 360f / drone.getWing().getSpec().getNumFighters();
 
-        List<WeaponGroupAPI> weapons = this.mothership.getWeaponGroupsCopy();
-        List<WeaponAPI> list = this.mothership.getAllWeapons();
-        List<FighterWingAPI> dronewings = this.mothership.getAllWings();
-        if (this.mothership.getOriginalOwner() == 0 || this.mothership.getOriginalOwner() == 1) { //check for refit screen
-
-            for (FighterWingAPI fighterWingAPI : dronewings) {
-                if (!fighterWingAPI.getWingId().equals("omm_largepod_wing")) {   //name is the built-in drone wing
-                    continue;
-                }
-                Vector2f mousepos = this.mothership.getMouseTarget();
-                drone = fighterWingAPI.getLeader();
-                List<WeaponAPI> droneweps = drone.getAllWeapons();
-                Vector2f dronepos = drone.getLocation();
-                WeaponAPI lrgwep = null;
-                WeaponAPI laswep = null;
-                float angle = VectorUtils.getAngle(dronepos, mousepos);
-
-                // setting up variables:
-                for (WeaponAPI dronewep : droneweps) {
-                    if (dronewep.getSlot().getId().equals("largeslot") || dronewep.getSlot().getId().equals("omm_laser")) {
-                        {
-                            if (dronewep.getSlot().getId().equals("largeslot"))
-                                lrgwep = dronewep;
-                        }
-                        {
-                            if (dronewep.getSlot().getId().equals("omm_laser"))
-                                laswep = dronewep;
-                        }
-                        drone.removeWeaponFromGroups(laswep);
-//                        WeaponGroupAPI Group = FIGHTER.getWeaponGroupFor(weapon);
-                        ShipAPI player = Global.getCombatEngine().getPlayerShip();
-                        CombatEngineAPI engine = Global.getCombatEngine();
-
-                        WeaponGroupAPI activegroup = this.mothership.getSelectedGroupAPI();
-                        WeaponAPI wep = null;
-                        for (WeaponAPI w : this.mothership.getAllWeapons()) {
-                            if (w.getSlot().getId().equals("largeslot"))
-                                wep = w;
-                        }
-
-                        WeaponGroupAPI lrgdrogroup = drone.getWeaponGroupFor(lrgwep);
-                        WeaponGroupAPI lrggroup = this.mothership.getWeaponGroupFor(wep);
-                        WeaponGroupAPI lasgroup = drone.getWeaponGroupFor(laswep);
-
-                        // Weapon group controls:
-                        if (lrgdrogroup != null && lrggroup != null) {
-
-                            if ((!lrgdrogroup.isAutofiring() && player != this.mothership) || (!lrgdrogroup.isAutofiring() && this.mothership.equals(player) && !engine.isUIAutopilotOn())) {
-                                drone.giveCommand(ShipCommand.TOGGLE_AUTOFIRE, null, drone.getWeaponGroupsCopy().indexOf(lrgdrogroup));
-//                            } else if (group.isAutofiring() && this.mothership.equals(player) && engine.isUIAutopilotOn()) {
-//                                drone.giveCommand(ShipCommand.TOGGLE_AUTOFIRE, null, drone.getWeaponGroupsCopy().indexOf(group));
-                            }
-                            if (lrgdrogroup.isAutofiring()
-                                    && player == this.mothership && engine.isUIAutopilotOn() && lrggroup == activegroup
-                            )
-                            {
-                                drone.giveCommand(ShipCommand.TOGGLE_AUTOFIRE, null, drone.getWeaponGroupsCopy().indexOf(lrgdrogroup));
-                            }
-                            else if (       (lrggroup.isAutofiring() && !lrgdrogroup.isAutofiring()
-                                    && player == this.mothership && engine.isUIAutopilotOn() && lrggroup != activegroup)
-                            )
-                            {
-                                drone.giveCommand(ShipCommand.TOGGLE_AUTOFIRE, null, drone.getWeaponGroupsCopy().indexOf(lrgdrogroup));
-                            }
-                            else if (       (!lrggroup.isAutofiring() && lrgdrogroup.isAutofiring()
-                                    && player == this.mothership && engine.isUIAutopilotOn() && lrggroup != activegroup)
-                            )
-                            {
-                                drone.giveCommand(ShipCommand.TOGGLE_AUTOFIRE, null, drone.getWeaponGroupsCopy().indexOf(lrgdrogroup));
-                            }
-                        }
-
-
-                        if (activegroup != null) {
-                            if (this.mothership.equals(player)
-                                    && engine.isUIAutopilotOn()
-//                                && (activegroup != null)
-//                                && (Objects.equals(activegroup.getActiveWeapon().getId(), lrgwep.getId()))
-//                                && !activegroup.isAutofiring()
-                            ) {
-
-                                // Weapon group controls for player piloted ships & targeting laser control:
-                                List<WeaponAPI> activeWeapon = activegroup.getWeaponsCopy();
-                                for (WeaponAPI weapon : activeWeapon) {
-
-
-
-                                    if (Objects.equals(weapon.getId(), lrgwep.getId()) && lrggroup == activegroup) {
-                                        weapon.beginSelectionFlash();
-                                        weapon.ensureClonedSpec();
-                                        WeaponSpecAPI spec = weapon.getSpec();
-                                        spec.setMaxRange(0);
-                                        drone.getVariant().assignUnassignedWeapons();
-                                        float diff = MathUtils.getShortestRotation(dronewep.getCurrAngle(), angle);
-                                        float maxVel = dronewep.getTurnRate();
-                                        diff = MathUtils.clamp(diff, -maxVel, maxVel);
-                                        if(dronewep != null)    {
-                                            dronewep.setCurrAngle(diff + dronewep.getCurrAngle());}     //aims the drone weapon towards cursor
-
-
-                                        float diffdrone = MathUtils.getShortestRotation(drone.getFacing(), angle);
-                                        float maxVeldrone = drone.getMaxTurnRate();
-                                        diffdrone = MathUtils.clamp(diffdrone, -maxVeldrone, maxVeldrone);
-                                        drone.setFacing(diffdrone + drone.getFacing());        //sets facing of the drone
-
-                                        {                 // make sure player-selected weapon group has autofire turned off:
-
-                                            if (player == this.mothership && !drone.isLanding() && !drone.isLiftingOff() && dronewep.getSlot().getId().equals("omm_laser") && lrgwep != null
-                                                    && engine.isUIAutopilotOn()
-                                            ) {
-                                                //dronewep.getAnimation().setFrame(01);
-                                                // dronewep.getSprite().setHeight(lrgwep.getRange()*2);
-                                                // dronewep.getSprite().setCenterY(lrgwep.getRange());
-                                                laswep.setForceFireOneFrame(true);
-                                                laswep.ensureClonedSpec();
-                                                laswep.getSpec().setMaxRange(lrgwep.getSpec().getMaxRange() - ((lrgwep.getSpec().getMaxRange() / 100) * 20));
-                                            }
-                                            if (dronewep.getAnimation() != null && !engine.isUIAutopilotOn()) {
-                                                dronewep.getAnimation().setFrame(00);
-                                            }
-                                        }
-
-                                        if (Mouse.isButtonDown(0) && !player.getFluxTracker().isOverloadedOrVenting() && (dronewep.getType() != MISSILE) && dronewep.getSlot().getId().equals("largeslot")
-                                                && weapon.getSlot().getId().equals("largeslot")) {
-                                            lrgwep.setForceFireOneFrame(true);           //clicky left drone shooty
-                                        }
-                                        if (Keyboard.isKeyDown(KEY_R)) {
-                                            drone.setShipTarget(this.mothership.getShipTarget());           //share ship target with drones
-                                        }
-
-                                        // missile firing controls:
-                                        if ((OMMSettings.missile_key == 0 && Mouse.isButtonDown(2) || Mouse.isButtonDown(0))&& !player.getFluxTracker().isOverloadedOrVenting() && (dronewep.getType() == MISSILE) && dronewep.getSlot().getId().equals("largeslot")) {
-                                            lrgwep.setForceFireOneFrame(true);
-                                        } else if ((Keyboard.isKeyDown(OMMSettings.missile_key) || Mouse.isButtonDown(0) )&& !player.getFluxTracker().isOverloadedOrVenting() && (dronewep.getType() == MISSILE) && dronewep.getSlot().getId().equals("largeslot")) {
-                                            lrgwep.setForceFireOneFrame(true);
-                                        }
-                                    }
-                                    else if (!Objects.equals(weapon.getId(), lrgwep.getId())) {}
-                                }
-                            }
-                            if(laswep != null)    {
-                                laswep.setCurrAngle(lrgwep.getCurrAngle());}       //aims the targeting laser towards cursor
-                        }
-
-                        // prevents drones from firing if mothership is overloaded:
-                        if (this.mothership.getFluxTracker().isOverloaded()) {
-                            float OverloadTime = this.mothership.getFluxTracker().getOverloadTimeRemaining();
-                            drone.getFluxTracker().forceOverload(OverloadTime);
-                        } else if (!this.mothership.getFluxTracker().isOverloaded()) {
-                            drone.getFluxTracker().stopOverload();
-                        }
-                        if (this.mothership.getFluxTracker().isVenting()) {
-                            float VentTime = this.mothership.getFluxTracker().getTimeToVent();
-                            dronewep.setForceNoFireOneFrame(true);
-                        }
-
-                        // old unused code scraps:
-                        if (player != this.mothership) {
-                            //                            for (WeaponGroupAPI group : FIGHTER.getWeaponGroupsCopy()){
-//                            this.FIGHTER.giveCommand(ShipCommand.TOGGLE_AUTOFIRE, null, FIGHTER.getWeaponGroupsCopy().indexOf(group));
-//                            }
-                            if (dronewep.getAnimation() != null) {
-                                dronewep.getAnimation().setFrame(00);
-                            }
-                        }
-                        for (WeaponAPI weaponAPI : list) {
-//                if (weaponAPI.getId().equals("omm_weaponpoddeco")) {                  //decorative looks like drone
-//                    weaponAPI.getSprite().setColor(new Color(255, 255, 255, 0));
-//                }
-                            if (weaponAPI.getSlot().getId().equals("largeslot") ) {                //slot has same name as on drone !important!
-//                    weaponAPI.getSprite().setColor(new Color(255, 255, 255, 0));
-//                                weaponAPI.getSpec().setMaxRange(0);
-                            }
-                            for (int i = 0; i < weapons.size(); i++) {
-                                if (weaponAPI.getSlot().getId().equals("largeslot")) {
-                                    //     weaponAPI.disable(true);
-                                    //   this.mothership.removeWeaponFromGroups(weaponAPI);                   //removes the weapons swap "interface" from weapon groups
-                                }
-                            }
-//                if (weaponAPI.getBarrelSpriteAPI() != null) {
-//                    weaponAPI.getBarrelSpriteAPI().setColor(new Color(255, 255, 255, 0));
-//                }
-                        }
-                        continue;
-                    }
-                }
-
-            } // end of unused scrap
+     // Nathantia positioning: Inner wings
+        if (mothership.getHullSpec().getHullId().startsWith("omm_nathantia")) {
+            angleFromBasepos = 135f;
+            distBetweenClusters = 240f;
+            distFromClusterCenterToDrone = 30f;
         }
-        //todo better idea for defensive formation?
-        // PID controller settings
-        // original code by ruddygreat:
-        if (mothership.isPullBackFighters()) {//defensive formation
+
+        if (mothership.isPullBackFighters()) {
             Vector2f basePos = MathUtils.getPointOnCircumference(mothership.getShieldCenterEvenIfNoShield(), mothership.getShieldRadiusEvenIfNoShield(), mothership.getFacing());
-            if (oddOrEvenNoOfWings == 0) { //even number of wings, have none in the center
-                Vector2f clusterCenter;//the center of this wing's cluster
-                if (wingIndex % 2 == 0) { //wing index is even, go to the left
+            if (oddOrEvenNoOfWings == 0) {
+                Vector2f clusterCenter;
+                if (wingIndex % 2 == 0) {
                     clusterCenter = MathUtils.getPointOnCircumference(basePos, distBetweenClusters + (distBetweenClusters * wingIndex), mothership.getFacing() + angleFromBasepos);
-                } else { //else, go to the right
+                } else {
                     clusterCenter = MathUtils.getPointOnCircumference(basePos, distBetweenClusters + (distBetweenClusters * (wingIndex - 1)), mothership.getFacing() - angleFromBasepos);
                 }
                 return MathUtils.getPointOnCircumference(clusterCenter, distFromClusterCenterToDrone, mothership.getFacing() + (indexInWing * anglebetweenDrones));
-            } else { //odd number of wings
-                Vector2f clusterCenter;//the center of this wing's cluster
+            } else {
+                Vector2f clusterCenter;
                 if (wingIndex == 0) {
                     clusterCenter = MathUtils.getPointOnCircumference(basePos, 0, mothership.getFacing() + angleFromBasepos);
-                } else if (wingIndex % 2 == 0) { //wing index is even, go to the left
+                } else if (wingIndex % 2 == 0) {
                     clusterCenter = MathUtils.getPointOnCircumference(basePos, (distBetweenClusters * (wingIndex - 1)) * 2f, mothership.getFacing() + angleFromBasepos);
-                } else { //else, go to the right
+                } else {
                     clusterCenter = MathUtils.getPointOnCircumference(basePos, (distBetweenClusters * wingIndex) * 2f, mothership.getFacing() - angleFromBasepos);
                 }
                 return MathUtils.getPointOnCircumference(clusterCenter, distFromClusterCenterToDrone, mothership.getFacing() + (indexInWing * anglebetweenDrones));
             }
-        } else { //offensive formation
+        } else {
             float desiredFacing = VectorUtils.getAngle(mothership.getShieldCenterEvenIfNoShield(), mothership.getMouseTarget());
             Vector2f basePos = MathUtils.getPointOnCircumference(mothership.getShieldCenterEvenIfNoShield(), mothership.getShieldRadiusEvenIfNoShield(), desiredFacing);
-            if (oddOrEvenNoOfWings == 0) { //even number of wings, have none in the center
-                Vector2f clusterCenter;//the center of this wing's cluster
-                if (wingIndex % 2 == 0) { //wing index is even, go to the left
+            if (oddOrEvenNoOfWings == 0) {
+                Vector2f clusterCenter;
+                if (wingIndex % 2 == 0) {
                     clusterCenter = MathUtils.getPointOnCircumference(basePos, distBetweenClusters + (distBetweenClusters * wingIndex), desiredFacing + angleFromBasepos);
-                } else { //else, go to the right
+                } else {
                     clusterCenter = MathUtils.getPointOnCircumference(basePos, distBetweenClusters + (distBetweenClusters * (wingIndex - 1)), desiredFacing - angleFromBasepos);
                 }
                 return MathUtils.getPointOnCircumference(clusterCenter, distFromClusterCenterToDrone, desiredFacing + (indexInWing * anglebetweenDrones));
-            } else { //odd number of wings
-                Vector2f clusterCenter;//the center of this wing's cluster
+            } else {
+                Vector2f clusterCenter;
                 if (wingIndex == 0) {
                     clusterCenter = MathUtils.getPointOnCircumference(basePos, 0, desiredFacing + angleFromBasepos);
-                } else if (wingIndex % 2 == 0) { //wing index is even, go to the left
+                } else if (wingIndex % 2 == 0) {
                     clusterCenter = MathUtils.getPointOnCircumference(basePos, (distBetweenClusters * (wingIndex - 1)) * 2f, desiredFacing + angleFromBasepos);
-                } else { //else, go to the right
+                } else {
                     clusterCenter = MathUtils.getPointOnCircumference(basePos, (distBetweenClusters * wingIndex) * 2f, desiredFacing - angleFromBasepos);
                 }
                 return MathUtils.getPointOnCircumference(clusterCenter, distFromClusterCenterToDrone, desiredFacing + (indexInWing * anglebetweenDrones));
@@ -302,79 +110,180 @@ public class largepodManager implements AdvanceableListener {
         }
     }
 
-    // Drone Facing controls
     public float getDesiredFacing(ShipAPI drone) {
-        if (Global.getCombatEngine() != null)
-        {
-            if (AIUtils.getNearbyEnemies(mothership, 1000f) != null
-                    && mothership.isPullBackFighters())
-            {
-                for (ShipAPI enemy : AIUtils.getNearbyEnemies(mothership, 1000f))
-                {
-                    if (!enemy.getHullSize().equals(ShipAPI.HullSize.FIGHTER))
-                    {
-                        {
-                            return VectorUtils.getAngle(mothership.getShieldCenterEvenIfNoShield(), enemy.getLocation());
-                        }
-                    }
+        CombatEngineAPI engine = Global.getCombatEngine();
+        if (engine != null) {
+            boolean isPlayerFlagship = (engine.getPlayerShip() == this.mothership);
+            boolean isPlayerControlled = isPlayerFlagship && engine.isUIAutopilotOn();
+
+            WeaponAPI mWep = null;
+            for (WeaponAPI w : mothership.getAllWeapons()) {
+                if (w.getSlot().getId().equals("largeslot")) {
+                    mWep = w;
+                    break;
                 }
             }
-        }  return VectorUtils.getAngle(mothership.getShieldCenterEvenIfNoShield(), mothership.getMouseTarget());
+
+            if (mWep != null) {
+                WeaponGroupAPI mGroup = mothership.getWeaponGroupFor(mWep);
+                boolean isSelected = isPlayerFlagship && (this.mothership.getSelectedGroupAPI() == mGroup);
+
+                if (isPlayerControlled && isSelected) {
+                    return VectorUtils.getAngle(drone.getLocation(), mothership.getMouseTarget());
+                }
+            }
+
+            if (mothership.areAnyEnemiesInRange() && AIUtils.getNearestEnemy(mothership) != null) {
+                if (!AIUtils.getNearestEnemy(mothership).getHullSize().equals(ShipAPI.HullSize.FIGHTER)) {
+                    return VectorUtils.getAngle(drone.getLocation(), AIUtils.getNearestEnemy(mothership).getLocation());
+                }
+            }
+            if (mothership.isPullBackFighters() && !mothership.areAnyEnemiesInRange()) {
+                return mothership.getFacing();
+            }
+        }
+        return VectorUtils.getAngle(drone.getLocation(), mothership.getMouseTarget());
     }
 
-    //dynamic drone weapon swapping code:
     @Override
     public void advance(float amount) {
         ShipAPI ship = this.mothership;
-        //CombatEngineAPI engine = Global.getCombatEngine();
-        WeaponAPI wep = null;
+        CombatEngineAPI engine = Global.getCombatEngine();
+
+        WeaponAPI mothershipWep = null;
         for (WeaponAPI w : ship.getAllWeapons()) {
-            if (w.getSlot().getId().equals("largeslot"))
-                wep = w;
+            if (w.getSlot().getId().equals("largeslot")) {
+                mothershipWep = w;
+                break;
+            }
         }
 
+        if (ship.isAlive() && mothershipWep != null) {
 
-        if (ship.isAlive() && wep != null) {
-            //CombatEngineAPI engine = Global.getCombatEngine();
+            mothershipWep.ensureClonedSpec();
+            mothershipWep.getSpec().setMaxRange(0f);
+            mothershipWep.setForceNoFireOneFrame(true);
+
+            WeaponGroupAPI mothershipGroup = ship.getWeaponGroupFor(mothershipWep);
+            boolean isPlayerFlagship = (engine.getPlayerShip() == this.mothership);
+            boolean isPlayerControlled = isPlayerFlagship && engine.isUIAutopilotOn();
+            boolean isCurrentlySelected = isPlayerFlagship && (this.mothership.getSelectedGroupAPI() == mothershipGroup);
+
+            if (firstFrame) {
+                wasSelectedLastFrame = isCurrentlySelected;
+                firstFrame = false;
+            }
+
             List<FighterWingAPI> wings = relevantWings;
 
             for (FighterWingAPI wing : wings) {
-                if (wing == null || wing.getWingMembers() == null || wing.getWingMembers().isEmpty())
-                    continue;
-
-                ShipAPI fighter = wing.getLeader();
-                if (fighter == null)
-                    continue;
+                if (wing == null || wing.getWingMembers() == null || wing.getWingMembers().isEmpty()) continue;
+                if (!wing.getWingId().equals("omm_largepod_wing")) continue;
 
                 for (int i = 0; i < wing.getWingMembers().size(); i++) {
-                    fighter = wing.getWingMembers().get(i);
-                    if (fighter == null)
-                        continue;
-                    if (fighter.getAllWeapons().isEmpty())
-                        continue;
-                    if (!wing.getWingId().equals("omm_largepod_wing")) {
-                        continue;
+                    ShipAPI fighter = wing.getWingMembers().get(i);
+                    if (fighter == null || !fighter.isAlive() || fighter.getAllWeapons().isEmpty()) continue;
+
+                    WeaponAPI droneWep = null;
+                    WeaponAPI laswep = null;
+                    for (WeaponAPI w : fighter.getAllWeapons()) {
+                        if (w.getSlot().getId().equals("largeslot")) droneWep = w;
+                        if (w.getSlot().getId().equals("omm_laser")) laswep = w;
                     }
+
+                    if (droneWep != null) {
+                        WeaponGroupAPI droneGroup = fighter.getWeaponGroupFor(droneWep);
+
+                        if (mothershipGroup != null && droneGroup != null) {
+
+                            boolean shouldAutofire;
+                            if (isPlayerControlled) {
+                                shouldAutofire = mothershipGroup.isAutofiring() && !isCurrentlySelected;
+                            } else {
+                                shouldAutofire = true;
+                            }
+
+                            if (droneGroup.isAutofiring() != shouldAutofire) {
+                                int groupIndex = fighter.getWeaponGroupsCopy().indexOf(droneGroup);
+                                fighter.giveCommand(ShipCommand.TOGGLE_AUTOFIRE, null, groupIndex);
+                            }
+
+                            if (isCurrentlySelected && !wasSelectedLastFrame) {
+                                droneWep.beginSelectionFlash();
+                                if (laswep != null) laswep.beginSelectionFlash();
+                                fighter.addAfterimage(new Color(255, 255, 255, 175), 0f, 0f, 0f, 0f, 0f, 0f, 0.1f, 0.3f, true, true, true);
+                            }
+
+                            if (isPlayerControlled && isCurrentlySelected && !engine.isPaused()) {
+                                Vector2f mousePos = this.mothership.getMouseTarget();
+                                float angleToMouse = VectorUtils.getAngle(fighter.getLocation(), mousePos);
+
+                                if (laswep != null && !fighter.isLanding() && !fighter.isLiftingOff()) {
+                                    laswep.setForceFireOneFrame(true);
+                                    laswep.setCurrAngle(angleToMouse);
+                                    laswep.ensureClonedSpec();
+
+                                    float actualRange = droneWep.getRange();
+                                    laswep.getSpec().setMaxRange(actualRange);
+                                }
+
+                                float diff = MathUtils.getShortestRotation(fighter.getFacing(), angleToMouse);
+                                float maxTurn = fighter.getMaxTurnRate() * amount;
+                                fighter.setFacing(fighter.getFacing() + MathUtils.clamp(diff, -maxTurn, maxTurn));
+                                droneWep.setCurrAngle(angleToMouse);
+
+                                if (!engine.isUIShowingDialog() && !engine.getCombatUI().isShowingCommandUI()) {
+                                    boolean shouldFire = false;
+
+                                    if (droneWep.getType() == WeaponAPI.WeaponType.MISSILE) {
+                                        if (OMMSettings.missile_key == 0) {
+                                            if (Mouse.isButtonDown(2) || Mouse.isButtonDown(0)) shouldFire = true;
+                                        } else {
+                                            if (Keyboard.isKeyDown(OMMSettings.missile_key) || Mouse.isButtonDown(0)) shouldFire = true;
+                                        }
+                                    } else {
+                                        if (Mouse.isButtonDown(0)) shouldFire = true;
+                                    }
+
+                                    if (shouldFire && !this.mothership.getFluxTracker().isOverloadedOrVenting()) {
+                                        int groupIndex = fighter.getWeaponGroupsCopy().indexOf(droneGroup);
+                                        fighter.giveCommand(ShipCommand.FIRE, mousePos, groupIndex);
+                                        droneWep.setForceFireOneFrame(true);
+                                    }
+                                }
+                            }
+                        }
+                    }
+
+                    if (this.mothership.getFluxTracker().isOverloaded()) {
+                        if (!fighter.getFluxTracker().isOverloaded()) {
+                            fighter.getFluxTracker().forceOverload(this.mothership.getFluxTracker().getOverloadTimeRemaining());
+                        }
+                    } else if (fighter.getFluxTracker().isOverloaded()) {
+                        fighter.getFluxTracker().stopOverload();
+                    }
+
+                    if (this.mothership.getFluxTracker().isVenting() && droneWep != null) {
+                        droneWep.setForceNoFireOneFrame(true);
+                    }
+
                     MutableShipStatsAPI stats = fighter.getMutableStats();
                     ShipVariantAPI OGVariant = stats.getVariant().clone();
                     ShipVariantAPI newVariant = stats.getVariant().clone();
-                    CombatEngineAPI engine = Global.getCombatEngine();
 
-                    String str = (String) Global.getCombatEngine().getCustomData().get("omm_largedroneWeaponId" + this.mothership.getId());
+                    String str = (String) engine.getCustomData().get("omm_largedroneWeaponId" + this.mothership.getId());
                     if (str == null)
                         str = "No weapon";
 
-                    //if (engine.getPlayerShip() == ship)
-                    //Global.getCombatEngine().maintainStatusForPlayerShip("SynergyDrones", "graphics/ui/icons/icon_repair_refit.png", "Drone Weaponry", str + " installed. ", true);
                     if (!fighter.getAllWeapons().get(0).getId().equals(str)) {
                         fighter.resetDefaultAI();
                         if (ship.getVariant().getWeaponSpec("largeslot") != null) {
-                            Global.getCombatEngine().getCustomData().put("omm_largedroneWeaponId" + this.mothership.getId(), this.mothership.getVariant().getWeaponId("largeslot"));
+                            engine.getCustomData().put("omm_largedroneWeaponId" + this.mothership.getId(), this.mothership.getVariant().getWeaponId("largeslot"));
                             stats.getVariant().setOriginalVariant(null);
                             fighter.getFleetMember().setVariant(newVariant, true, true);
-//                            wep.disable(true);
+
                             ship.syncWeaponDecalsWithArmorDamage();
-                            this.timer.randomize();                                                        //randomize interval to stagger drone refit
+                            this.timer.randomize();
 
                             this.timer.advance(amount);
                             if (!this.timer.intervalElapsed()) {
@@ -383,18 +292,16 @@ public class largepodManager implements AdvanceableListener {
                             stats.getVariant().clearSlot("largeslot");
                             stats.getVariant().addWeapon("largeslot", this.mothership.getVariant().getWeaponId("largeslot"));
                             stats.getVariant().getWeaponSpec("largeslot").addTag("FIRE_WHEN_INEFFICIENT");
-                            //ship.removeWeaponFromGroups(wep);
-
 
                             wing.orderReturn(fighter);
-                            //isWeaponSwapped = true;
-
                         }
-                    } else fighter.setShipAI(null);
-                }//
-
+                    } else {
+                        fighter.setShipAI(null);
+                    }
+                }
             }
+
+            wasSelectedLastFrame = isCurrentlySelected;
         }
     }
-
 }

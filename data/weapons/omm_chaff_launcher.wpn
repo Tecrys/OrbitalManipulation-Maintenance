@@ -1,28 +1,57 @@
 {
-	"id":"omm_chaff_launcher",  # this id must match what's in the spreadsheet
-	"specClass":"projectile",
-	"type":"BALLISTIC",
-	"size":"SMALL",
-	"displayArcRadius":300,
-	"turretGunSprite":"",
-	"hardpointGunSprite":"",		
-	"turretSprite":"graphics/weapons/omm_chaff_launcher.png",
-	"hardpointSprite":"graphics/weapons/omm_chaff_launcher.png",	
-	"visualRecoil":4.0,  # the gun sprites are only used if this is non-0
-	"renderHints":[RENDER_BARREL_BELOW],
-	"turretOffsets":[20, 0],
-	"turretAngleOffsets":[0],
-	"hardpointOffsets":[30, 0],
-	"hardpointAngleOffsets":[0],
-	"barrelMode":"ALTERNATING", # or LINKED.  whether barrels fire at the same time or alternate.
-	"animationType":"MUZZLE_FLASH",  # NONE, GLOW, MUZZLE_FLASH, SMOKE
-	"muzzleFlashSpec":{"length":40.0,   # only used if animationType = MUZZLE_FLASH
-					   "spread":30.0,
-					   "particleSizeMin":16.0,
-					   "particleSizeRange":18.0,
-					   "particleDuration":0.3,
-					   "particleCount":46,
-					   "particleColor":[255,155,75,225]},
-	"projectileSpecId":"omm_chaff_shot",  # projectile that will be fired	
-	"fireSoundTwo":"flak_fire",
+  "id": "omm_chaff_launcher",
+  "specClass": "projectile",
+  "projectileSpecId": "omm_chaff_shot",
+  "type": "BALLISTIC",
+  "size": "SMALL",
+  "displayArcRadius": 300,
+  "turretSprite": "graphics/weapons/omm_chaff_launcher.png",
+  "hardpointSprite": "graphics/weapons/omm_chaff_launcher_hp.png",
+  "visualRecoil": 4,
+  "renderHints": [
+    RENDER_BARREL_BELOW
+  ],
+  "turretOffsets": [
+    11.5,
+    0,
+    7,
+    -8.5,
+    7,
+    8.5
+  ],
+  "turretAngleOffsets": [
+    0,
+    -45,
+    45
+  ],
+  "hardpointOffsets": [
+    20,
+    0,
+    15,
+    -8.5,
+    15,
+    8.5
+  ],
+  "hardpointAngleOffsets": [
+    0,
+    -45,
+    45
+  ],
+  "barrelMode": "ALTERNATING",
+  "animationType": "MUZZLE_FLASH",
+  "muzzleFlashSpec": {
+    "length": 40,
+    "spread": 30,
+    "particleSizeMin": 16,
+    "particleSizeRange": 18,
+    "particleDuration": 0.3,
+    "particleCount": 46,
+    "particleColor": [
+      255,
+      155,
+      75,
+      225
+    ]
+  },
+  "fireSoundTwo": "omm_dhafflauncher"
 }

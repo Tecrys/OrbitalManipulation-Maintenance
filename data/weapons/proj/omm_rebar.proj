@@ -2,6 +2,7 @@
 	"id":"omm_rebar",
 	"specClass":"missile",
 	"missileType":"ROCKET",
+    "onHitEffect": "tecrys.data.scripts.weapons.omm_rebar_on_hit",	
 	"sprite":"graphics/missiles/omm_rebar_shot.png",
 			"glowSprite":"graphics/missiles/omm_rebar_shot_glow.png",
 	"size":[20,68],	

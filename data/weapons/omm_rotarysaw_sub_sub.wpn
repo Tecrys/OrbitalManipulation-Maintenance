@@ -32,4 +32,6 @@
     ]},
 	"projectileSpecId":"omm_rotarysaw_sub_sub_shot",  # projectile that will be fired
 	"fireSoundTwo":"needler_fire",
+	"noShieldImpactSounds": true,
+"noNonShieldImpactSounds": true,
 }

@@ -10,18 +10,18 @@ import com.fs.starfarer.api.util.IntervalUtil;
 
 public class omm_laserweb_beam_effect implements BeamEffectPlugin {
 
-    private IntervalUtil DamageInterval = new IntervalUtil(0.1f, 0.3f);
+    private IntervalUtil DamageInterval = new IntervalUtil(0.1f, 0.2f);
     private boolean wasZero = true;
 
 
     public void advance(float amount, CombatEngineAPI engine, BeamAPI beam) {
 
         CombatEntityAPI target = beam.getDamageTarget();
-        if (((target instanceof ShipAPI && ((ShipAPI) target).isFighter())
+        if (((target instanceof ShipAPI)
         || target instanceof MissileAPI)
         ) {         this.DamageInterval.advance(amount);
             if (DamageInterval.intervalElapsed()) {
-                Global.getCombatEngine().applyDamage(target, target.getLocation(), beam.getDamage().getDamage()/1, DamageType.HIGH_EXPLOSIVE, (beam.getDamage().getDamage() / 3f)/1, false, false, beam.getWeapon());
+                Global.getCombatEngine().applyDamage(target, target.getLocation(), beam.getDamage().getDamage()/1, DamageType.ENERGY, (beam.getDamage().getDamage() / 3f)/1, false, false, beam.getWeapon());
             }
         }
 //			Global.getSoundPlayer().playLoop("system_emp_emitter_loop",

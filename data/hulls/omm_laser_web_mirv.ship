@@ -11,6 +11,9 @@
   "shieldCenter": [0, 0],
   "shieldRadius": 15,
   "viewOffset": 0,
+  "builtInMods": [
+
+  ],
   "builtInWeapons": {
     "WS0001": "omm_moddropper",
     "laser_web_slot": "omm_mirvlaser_long",

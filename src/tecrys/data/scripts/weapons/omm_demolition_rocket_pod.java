@@ -2,26 +2,21 @@ package tecrys.data.scripts.weapons;
 
 import com.fs.starfarer.api.Global;
 import com.fs.starfarer.api.combat.*;
-import com.fs.starfarer.api.fleet.FleetMemberAPI;
-import com.fs.starfarer.api.impl.combat.NegativeExplosionVisual;
-import com.fs.starfarer.api.impl.combat.NegativeExplosionVisual.NEParams;
-import com.fs.starfarer.api.impl.combat.RiftCascadeEffect;
 import com.fs.starfarer.api.input.InputEventAPI;
 import com.fs.starfarer.api.loading.FighterWingSpecAPI;
-import com.fs.starfarer.api.loading.MissileSpecAPI;
 import com.fs.starfarer.api.util.Misc;
-import org.lazywizard.lazylib.VectorUtils;
-import org.lazywizard.lazylib.combat.AIUtils;
 import org.lwjgl.util.vector.Vector2f;
 
 import java.awt.*;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Objects;
 
 //original script from Secrets of the Frontier by Inventor Raccoon
 
 public class omm_demolition_rocket_pod implements ProximityExplosionEffect {
+
+    // Configurable parameter to easily adjust the hold fire duration in seconds
+    private static final float HOLD_FIRE_DURATION = 1.0f;
 
     public void onExplosion(DamagingProjectileAPI explosion, DamagingProjectileAPI originalProjectile) {
         ArrayList<ShipAPI> fighters = new ArrayList<ShipAPI>();
@@ -53,7 +48,7 @@ public class omm_demolition_rocket_pod implements ProximityExplosionEffect {
                 // time until drone self-destructs
                 final float max = 30f + ((float) Math.random());
                 // drone begins with 50% damage resistance (from IR smoke), fading over this time
-                final float resistanceTime = 1.5f;
+                final float resistanceTime = 1f;
                 @Override
                 public void advance(float amount, List<InputEventAPI> events) {
                     if (timer <= resistanceTime) {
@@ -65,6 +60,14 @@ public class omm_demolition_rocket_pod implements ProximityExplosionEffect {
                         fighter.getMutableStats().getArmorDamageTakenMult().unmodify("omm_demolition_rocket_pod");
                         fighter.getMutableStats().getShieldDamageTakenMult().unmodify("omm_demolition_rocket_pod");
                     }
+
+                    // Hold fire logic: suppresses all weapon firing during the configured duration
+                    if (timer <= HOLD_FIRE_DURATION) {
+                        for (WeaponAPI weapon : fighter.getAllWeapons()) {
+                            weapon.setForceNoFireOneFrame(true);
+                        }
+                    }
+
                     if (Global.getCombatEngine().isPaused()) return;
                     timer += amount * Global.getCombatEngine().getTimeMult().getModifiedValue();
                     if (timer >= max) {
@@ -76,17 +79,17 @@ public class omm_demolition_rocket_pod implements ProximityExplosionEffect {
         }
 
         // deploy a few decoy flares
-        for (int i = 0; i < 5; i++) {
-            Vector2f flareLoc = Misc.getPointWithinRadius(explosion.getLocation(), 50);
-            Global.getCombatEngine().spawnProjectile(
-                    explosion.getSource(),
-                    null,
-                    "flarelauncher2",
-                    flareLoc,
-                    Misc.getAngleInDegrees(explosion.getLocation(), flareLoc),
-                    null
-            );
-        }
+//        for (int i = 0; i < 5; i++) {
+//            Vector2f flareLoc = Misc.getPointWithinRadius(explosion.getLocation(), 50);
+//            Global.getCombatEngine().spawnProjectile(
+//                    explosion.getSource(),
+//                    null,
+//                    "flarelauncher2",
+//                    flareLoc,
+//                    Misc.getAngleInDegrees(explosion.getLocation(), flareLoc),
+//                    null
+//            );
+//        }
 
         // IR smoke visual
         for (int i = 0; i < 18; i++) {
@@ -98,6 +101,3 @@ public class omm_demolition_rocket_pod implements ProximityExplosionEffect {
         }
     }
 }
-
-
-

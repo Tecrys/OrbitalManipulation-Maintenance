@@ -1,0 +1,29 @@
+{
+  "hullName": "Hard Foam Barrier",
+  "hullId": "omm_foam_drone",
+  "hullSize": "FIGHTER",
+  "spriteName": "graphics/weapons/proj/omm_invisible.png",
+  "style": "HIGH_TECH",
+  "height": 64,
+  "width": 64,
+  "center": [32, 32],
+  "collisionRadius": 16,
+  "shieldCenter": [0, 0],
+  "shieldRadius": 32,
+  "viewOffset": 0,
+  "builtInMods": [
+    "never_detaches"
+  ],
+  "weaponSlots": [],
+  "engineSlots": [],
+  "bounds": [
+    30, 0,
+    21, 21,
+    0, 30,
+    -21, 21,
+    -30, 0,
+    -21, -21,
+    0, -30,
+    21, -21
+  ]
+}

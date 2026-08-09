@@ -59,6 +59,7 @@ public class omm_laser_aimer implements EveryFrameWeaponEffectPlugin {
             //sub.setForceFireOneFrame(true);
             ((omm_laser_mirv_autofire) ship.getWeaponGroupFor(main).getAutofirePlugin(main)).setTarget(p2);
             ((omm_laser_mirv_autofire) ship.getWeaponGroupFor(sub).getAutofirePlugin(sub)).setTarget(p1);
+
         } catch (Exception ex) {
             main.setForceNoFireOneFrame(true);
             sub.setForceNoFireOneFrame(true);

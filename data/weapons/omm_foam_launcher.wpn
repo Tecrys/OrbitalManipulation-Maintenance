@@ -1,0 +1,32 @@
+{
+	"id":"omm_foam_launcher",  # this id must match what's in the spreadsheet
+    "specClass":"projectile",
+	"type":"BALLISTIC",
+	"mountTypeOverride":"HYBRID",	
+	"size":"MEDIUM",
+	"turretSprite":"graphics/weapons/flechette_turret_base.png",
+	"turretGunSprite":"graphics/weapons/flechette_turret_recoil.png",
+	"hardpointSprite":"graphics/weapons/flechette_hardpoint_base.png",
+	"hardpointGunSprite":"graphics/weapons/flechette_hardpoint_recoil.png",
+	"visualRecoil":4.0,
+	"renderHints":[RENDER_BARREL_BELOW],
+	"turretOffsets":[15, 0],
+	"turretAngleOffsets":[0],
+	"hardpointOffsets":[20, 0],
+	"hardpointAngleOffsets":[0],
+	"barrelMode":"ALTERNATING",
+	"animationType":"MUZZLE_FLASH",
+	"muzzleFlashSpec":{"length":20.0,
+					   "spread":6.0,
+					   "particleSizeMin":10.0,
+					   "particleSizeRange":0.0,
+					   "particleCount":8,
+					   "particleDuration":0.12,
+					   "particleColor":[240, 220, 160, 200]
+					},
+	"autocharge":true,					
+	"projectileSpecId":"omm_foam_shot",
+	"noImpactSounds":true,	
+	#"fireSoundSpec":"flak_fire",
+	"everyFrameEffect":"tecrys.data.scripts.weapons.omm_FoamLauncherFireEffect"
+}

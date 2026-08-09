@@ -7,26 +7,39 @@ import com.fs.starfarer.api.combat.CombatEngineAPI;
 import com.fs.starfarer.api.combat.EveryFrameWeaponEffectPlugin;
 import com.fs.starfarer.api.combat.WeaponAPI;
 import com.fs.starfarer.api.util.IntervalUtil;
-import com.thoughtworks.xstream.mapper.Mapper;
-import org.lazywizard.lazylib.CollisionUtils;
-import org.lazywizard.lazylib.VectorUtils;
+import org.lwjgl.util.vector.Vector2f;
 
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 public class omm_plasmacutter_anim implements EveryFrameWeaponEffectPlugin {
-    // Default to 15 frames per second
-    private IntervalUtil ShotInterval = null;
-    private IntervalUtil ReloadWait = new IntervalUtil(0.1f, 0.1f);
+    private IntervalUtil ShotInterval = new IntervalUtil(0.1f, 0.1f);
     private float timeSinceLastFrame, timeBetweenFrames = 1.5f / 60f;
-    private final Map pauseFrames = new HashMap();
+    private final Map<Integer, Integer> pauseFrames = new HashMap<>();
     private int curFrame = 0, pausedFor = 0;
-    private boolean isFiring = false;
     private boolean hasShot = false;
-    private int curFramerewind = 0;
-    private float beamlength = 0;
     private float FireRate;
     private boolean RunOnce = false;
+
+    // State tracking for the 0.7s stop threshold and smooth animation reversal
+    private float notFiringDuration = 0f;
+    private boolean isReversing = false;
+    private static final float REVERSE_DELAY = 0.7f;
+
+    private static class PendingShot {
+        Vector2f from;
+        float angle;
+        float delay;
+        public PendingShot(Vector2f from, float angle, float delay) {
+            this.from = new Vector2f(from);
+            this.angle = angle;
+            this.delay = delay;
+        }
+    }
+    private final List<PendingShot> pendingShots = new ArrayList<>();
+    private static final float SPAWN_DELAY = 0.2f;
 
     protected void setFramesPerSecond(float fps) {
         timeBetweenFrames = 1.0f / fps;
@@ -38,7 +51,7 @@ public class omm_plasmacutter_anim implements EveryFrameWeaponEffectPlugin {
 
     private void incFrame(AnimationAPI anim) {
         if (pauseFrames.containsKey(curFrame)) {
-            if (pausedFor < (Integer) pauseFrames.get(curFrame)) {
+            if (pausedFor < pauseFrames.get(curFrame)) {
                 pausedFor++;
                 return;
             } else {
@@ -47,7 +60,10 @@ public class omm_plasmacutter_anim implements EveryFrameWeaponEffectPlugin {
         }
 
         curFrame = Math.min(curFrame + 1, anim.getNumFrames() - 1);
-        curFramerewind = Math.max(curFrame - 1, 0);
+    }
+
+    private void decFrame(AnimationAPI anim) {
+        curFrame = Math.max(curFrame - 1, 0);
     }
 
     @Override
@@ -56,70 +72,99 @@ public class omm_plasmacutter_anim implements EveryFrameWeaponEffectPlugin {
             return;
         }
 
-        FireRate = 1f/weapon.getAmmoTracker().getAmmoPerSecond();
+        FireRate = 1f / weapon.getAmmoTracker().getAmmoPerSecond();
+
+        if (!RunOnce) {
+            ShotInterval = new IntervalUtil(FireRate, FireRate);
+            RunOnce = true;
+        }
 
         AnimationAPI anim = weapon.getAnimation();
-        anim.setFrame(curFrame);
+
         for (BeamAPI beam : weapon.getBeams()) {
-beam.getDamage().setDamage(0f);
-            if (this.ShotInterval.intervalElapsed() && weapon.getAmmoTracker().getAmmo() > 0) {
-                ;engine.spawnMuzzleFlashOrSmoke(weapon.getShip(),
-                        beam.getFrom(),
+            beam.getDamage().setDamage(0f);
+
+            if (ShotInterval.intervalElapsed() && weapon.getAmmoTracker().getAmmo() > 0) {
+                // Play sound immediately when the interval elapses
+                Global.getSoundPlayer().playSound("omm_plasma_cutter_fire", 1f, 1f, beam.getFrom(), weapon.getShip().getVelocity());
+
+                // Queue the projectile spawn for after the short delay
+                pendingShots.add(new PendingShot(beam.getFrom(), weapon.getCurrAngle(), SPAWN_DELAY));
+            }
+        }
+
+        // Restored original ammo deduction mechanism via hasShot flag
+        if (hasShot) {
+            weapon.getAmmoTracker().deductOneAmmo();
+            hasShot = false;
+        }
+
+        // Process delayed projectile spawns
+        List<PendingShot> finishedShots = new ArrayList<>();
+        for (PendingShot shot : pendingShots) {
+            shot.delay -= amount;
+            if (shot.delay <= 0f) {
+                hasShot = true;
+                engine.spawnMuzzleFlashOrSmoke(weapon.getShip(),
+                        shot.from,
                         Global.getSettings().getWeaponSpec("omm_plasma_cutter_sub"),
-                        weapon.getCurrAngle()
+                        shot.angle
                 );
                 engine.spawnProjectile(
                         weapon.getShip(),
                         weapon,
                         "omm_plasma_cutter_sub",
-                        beam.getFrom(),
-                        weapon.getCurrAngle(),
+                        shot.from,
+                        shot.angle,
                         null);
-//    isReadyToFire = false;
-                hasShot = true;
+                finishedShots.add(shot);
             }
         }
-
-        if (hasShot) {
-
-            weapon.getAmmoTracker().deductOneAmmo();
-            hasShot = false;
-        }
+        pendingShots.removeAll(finishedShots);
 
         if (weapon.getAmmoTracker().getAmmo() < 1) {
             weapon.setForceNoFireOneFrame(true);
         }
-        if (isFiring && weapon.getAmmoTracker().getAmmo() > 0) {
-            timeSinceLastFrame += amount;
 
+        // Animation state machine: forward advance when firing, reverse when out of ammo or stopped > 0.7s
+        boolean isFiringCondition = weapon.isFiring() && weapon.getChargeLevel() >= 0.5f && weapon.getAmmoTracker().getAmmo() > 0;
+
+        if (isFiringCondition) {
+            notFiringDuration = 0f;
+            isReversing = false;
+
+            timeSinceLastFrame += amount;
             while (timeSinceLastFrame >= timeBetweenFrames) {
                 timeSinceLastFrame -= timeBetweenFrames;
                 incFrame(anim);
             }
-
-            anim.setFrame(curFrame);
-            if (curFrame == anim.getNumFrames() - 1) {
-                isFiring = false;
-            }
-        }
-        if (weapon.isFiring()) {
-
-            if (!RunOnce) {
-                this.ShotInterval = new IntervalUtil(FireRate, FireRate);
-                RunOnce = true;
-            }
-            this.ShotInterval.advance(amount);
-
-        }
-        if (weapon.isFiring() && weapon.getChargeLevel() >= 0.5f
-        ) {
-            isFiring = true;
-            incFrame(anim);
-            anim.setFrame(curFrame);
         } else {
-            curFrame = 0;
-            anim.setFrame(curFrame);
+            // Determine if reverse should be triggered
+            if (weapon.getAmmoTracker().getAmmo() < 1) {
+                isReversing = true;
+            } else {
+                notFiringDuration += amount;
+                if (notFiringDuration >= REVERSE_DELAY) {
+                    isReversing = true;
+                }
+            }
+
+            if (isReversing) {
+                timeSinceLastFrame += amount;
+                while (timeSinceLastFrame >= timeBetweenFrames) {
+                    timeSinceLastFrame -= timeBetweenFrames;
+                    decFrame(anim);
+                }
+            } else {
+                // Within the 0.7s grace period after stopping, hold current frame
+                timeSinceLastFrame = 0f;
+            }
         }
 
+        anim.setFrame(curFrame);
+
+        if (weapon.isFiring()) {
+            ShotInterval.advance(amount);
+        }
     }
 }

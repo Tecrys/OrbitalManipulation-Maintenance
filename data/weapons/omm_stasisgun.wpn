@@ -1,9 +1,9 @@
 {
   "id": "omm_stasisgun",
-  "specClass": "projectile",
-  "projectileSpecId": "omm_stasisgun_shot",
+	"specClass":"beam",
   "type": "ENERGY",
   "size": "MEDIUM",
+  	"beamEffect":"tecrys.data.scripts.weapons.omm_stasisBeamEffect",
   "turretSprite": "graphics/weapons/omm_stasisgun_tu_barrel.png",
   "turretGunSprite": "graphics/weapons/omm_stasisgun_tu.png",
   "hardpointSprite": "graphics/weapons/omm_stasisgun_hp_barrel.png",
@@ -28,9 +28,17 @@
   "hardpointAngleOffsets": [
     0
   ],
-  "barrelMode": "LINKED",
-  "animationType": "GLOW",
-  "autocharge": true,
-  		"visualRecoil": -0.5,
- # "fireSoundOne": "svc_chargeup"
+	"fringeColor":[85,25,215,255],
+	"coreColor":[255,255,255,255],
+	"darkCore":false,
+	"width":25.0,
+	"textureType":ROUGH,
+	#"textureType":["graphics/fx/emp_arcs.png","graphics/fx/emp_arcs.png"],
+	"textureScrollSpeed":292.0,
+	"pixelsPerTexel":5.0,
+	"pierceSet":[PROJECTILE_FF,PROJECTILE_NO_FF,PROJECTILE_FIGHTER,MISSILE_FF,MISSILE_NO_FF],
+	#"pierceSet":[PROJECTILE_FF,PROJECTILE_NO_FF,PROJECTILE_FIGHTER,MISSILE_FF,MISSILE_NO_FF,FIGHTER],
+	#"collisionClass":HITS_SHIPS_AND_ASTEROIDS,
+	#"collisionClassByFighter":HITS_SHIPS_AND_ASTEROIDS,
+	"fireSoundTwo":"tachyon_lance_fire",
 }

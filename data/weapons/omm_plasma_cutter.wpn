@@ -74,5 +74,5 @@
     #	"autocharge":true,
   #	"interruptibleBurst":true,
    "beamFireOnlyOnFullCharge": true, 
-  "fireSoundTwo": "ion_beam_loop"
+  "fireSoundOne": "omm_laser_start"
 }

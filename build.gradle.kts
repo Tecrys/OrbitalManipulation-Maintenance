@@ -14,7 +14,7 @@ val modName = "OrbitalManipulationMaintenance"
  * Where your Starsector game is installed to.
  * Note: On Linux, if you installed Starsector into your home directory, you have to write /home/<user>/ instead of ~/
  */
-val starsectorDirectory = if(providers.gradleProperty("starsector.dir").isPresent) providers.gradleProperty("starsector.dir").get() else "C:/Games/Starsector0.97a"
+val starsectorDirectory = if(providers.gradleProperty("starsector.dir").isPresent) providers.gradleProperty("starsector.dir").get() else "C:/Games/Starsector0.98a"
 
 /** Defaults to the name of your mod, with spaces replaced by hyphens. */
 val modFolderName = modName.replace(" ", "-")
@@ -62,7 +62,7 @@ dependencies {
     implementation(fileTree(starsectorCoreDirectory) {
         include(
             "starfarer.api.jar",
-            //"starfarer.api-sources.jar",
+            "starfarer.api-sources.jar",
             "starfarer_obf.jar",
             "fs.common_obf.jar",
             "json.jar",

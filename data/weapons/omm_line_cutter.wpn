@@ -1,0 +1,100 @@
+{
+  "id": "omm_line_cutter",
+  "specClass": "beam",
+  "type": "BALLISTIC",
+  "mountTypeOverride": "HYBRID",
+  "size": "LARGE",
+  "everyFrameEffect": "tecrys.data.scripts.weapons.omm_plasmacutter_anim",
+  "collisionClass": "RAY",
+  "collisionClassByFighter": "RAY_FIGHTER",
+  "turretSprite": "graphics/weapons/omm_line_cutter/omm_line_cutter00.png",
+  "hardpointSprite": "graphics/weapons/omm_line_cutter/omm_line_cutter00.png",
+  "glowColor": [
+    125,
+    215,
+    255,
+    255
+  ],
+  "hitGlowRadius": 5,
+  "renderHints": [
+    RENDER_BARREL_BELOW
+  ],
+  "turretOffsets": [
+    19,
+    34.5,
+    19,
+    -34.5,
+    14,
+    15,
+    14,
+    -15,
+    12,
+    4.5,
+    12,
+    -4.5,
+    14,
+    24,
+    14,
+    -24
+  ],
+  "turretAngleOffsets": [
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0
+  ],
+  "hardpointOffsets": [
+    29.5,
+    34.5,
+    29.5,
+    -34.5,
+    24.5,
+    15,
+    24.5,
+    -15,
+    22.5,
+    4.5,
+    22.5,
+    -4.5,
+    24.5,
+    24,
+    24.5,
+    -24
+  ],
+  "hardpointAngleOffsets": [
+    0,
+    0,
+    0
+  ],
+  "numFrames": 14,
+  "frameRate": 8,
+  "beamFireOnlyOnFullCharge": true,
+  "fringeColor": [
+    39,
+    245,
+    202,
+    55
+  ],
+  "coreColor": [
+    255,
+    255,
+    255,
+    55
+  ],
+  "width": 3,
+  "textureType": LASER,
+  "textureScrollSpeed": 128,
+  "pixelsPerTexel": 5,
+  "pierceSet": [
+    PROJECTILE_FF,
+    PROJECTILE_NO_FF,
+    PROJECTILE_FIGHTER,
+    MISSILE_FF,
+    MISSILE_NO_FF
+  ],
+  "fireSoundOne": "omm_laser_start"
+}

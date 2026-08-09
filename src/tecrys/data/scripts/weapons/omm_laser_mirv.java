@@ -30,6 +30,7 @@ public class omm_laser_mirv implements ProximityExplosionEffect {
 //leader.setDrone(true);
      //   leader.setOriginalOwner(originalProjectile.getWeapon().getShip().getOriginalOwner());
 leader.setHullSize(ShipAPI.HullSize.FIGHTER);
+
         for (ShipAPI drones : leader.getDeployedDrones()) {
           // drones.setOriginalOwner(originalProjectile.getWeapon().getShip().getOriginalOwner());
 
@@ -46,7 +47,10 @@ leader.setHullSize(ShipAPI.HullSize.FIGHTER);
                 final float resistanceTime = 1.5f;
                 @Override
                 public void advance(float amount, List<InputEventAPI> events) {
+
+
                     if (timer <= resistanceTime) {
+
                         leader.getMutableStats().getHullDamageTakenMult().modifyMult("omm_laser_mirv", (timer * (0.5f / resistanceTime)) + 0.5f);
                         leader.getMutableStats().getArmorDamageTakenMult().modifyMult("omm_laser_mirv", (timer * (0.5f / resistanceTime)) + 0.5f);
                         leader.getMutableStats().getShieldDamageTakenMult().modifyMult("omm_laser_mirv", (timer * (0.5f / resistanceTime)) + 0.5f);
@@ -54,6 +58,7 @@ leader.setHullSize(ShipAPI.HullSize.FIGHTER);
                         leader.getMutableStats().getHullDamageTakenMult().unmodify("omm_laser_mirv");
                         leader.getMutableStats().getArmorDamageTakenMult().unmodify("omm_laser_mirv");
                         leader.getMutableStats().getShieldDamageTakenMult().unmodify("omm_laser_mirv");
+
                     }
                     if (Global.getCombatEngine().isPaused()) return;
                     timer += amount * Global.getCombatEngine().getTimeMult().getModifiedValue();

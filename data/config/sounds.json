@@ -18,11 +18,20 @@
 	},
 
 			"omm-klaaa":[{"file":"sounds/omm-klaaa.ogg","pitch":1,"volume":0.1}],
-			"omm_pffft":[{"file":"sounds/omm_pffft.ogg","pitch":1,"volume":0.1}],			
+			"omm_pffft":[{"file":"sounds/omm_pffft.ogg","pitch":1,"volume":0.1}],		
+
+			"omm_saw_armor_loop":[{"file":"sounds/omm_saw_armor.ogg","pitch":1,"volume":0.1}],
+			"omm_saw_shield_loop":[{"file":"sounds/omm_saw_armor_underwater.ogg","pitch":1,"volume":0.1}],
+
+			"omm_laser_start":[{"file":"sounds/omm_laser_start.ogg","pitch":1.5,"volume":0.1}],			
+			"omm_plasma_cutter_fire":[{"file":"sounds/omm_plasma_cutter.ogg","pitch":0.8,"volume":0.3}],
 			
+			"omm_dhafflauncher":[{"file":"sounds/omm_dhafflauncher.ogg","pitch":1,"volume":0.07}],		
+			
+			"omm_nosound":[{"file":"sounds/omm_pffft.ogg","pitch":0,"volume":0}],	
 	"fighter_takeoff":
 	[
-		{"file":"sounds/sfx_wpn_missiles/sabot_srm_fire_01.ogg","pitch":00,"volume":0},
+		{"file":"sounds/omm_pffft.ogg","pitch":00,"volume":0},
 	],
 	
 }

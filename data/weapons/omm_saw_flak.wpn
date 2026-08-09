@@ -31,4 +31,6 @@
     ]},
 	"projectileSpecId":"omm_saw_flak_shot",  # projectile that will be fired	
 	"fireSoundTwo":"flak_fire",
+	"noShieldImpactSounds": true,
+"noNonShieldImpactSounds": true,
 }

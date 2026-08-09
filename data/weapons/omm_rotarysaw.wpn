@@ -35,5 +35,7 @@
     PROJECTILE_NO_FF,
     PROJECTILE_FIGHTER
   ],
-  "fireSoundTwo": "ir_autolance_loop"
+  "fireSoundTwo": "ir_autolance_loop",
+  "noShieldImpactSounds": true,
+"noNonShieldImpactSounds": true,
 }

@@ -5,8 +5,10 @@
   		"designTypeColors":{
 		"Freitag Corporation":[255, 191, 0,255],
 		},
+  
     	"graphics":{
     		"fx":{
+		  "omm_foam": "graphics/weapons/omm_foam.png",
           "FreitagCorporation_shieldsInner256":"graphics/fx/FreitagCorporation_shields256.png",
           "FreitagCorporation_shieldsRing256":"graphics/fx/FreitagCorporation_shields256ring.png",
           "FreitagCorporation_shieldsInner128":"graphics/fx/FreitagCorporation_shields128.png",
@@ -18,10 +20,15 @@
   "FreitagCorporation_DefensePlatformGraphic":"graphics/ships/omm_octocorallia.png",
   "omm_algaepod_graphic":"graphics/ships/Limnopilos/omm_limnopilos_pods_graphic.png",  
   "omm_aiming_laser":"graphics/ships/Fighters/omm_aiming_laser.png",  
-    "omm_rotarysaw":"graphics/missiles/omm_saw_shot.png",  
+  "omm_rotarysaw":"graphics/missiles/omm_saw_shot.png",  
   "omm_stasis":"graphics/fx/omm_stasis.png",  
   "omm_plasma_cutter_hardpoint":"graphics/weapons/omm_plasmacutter_hp_barrel.png",
-   "omm_plasma_cutter_turret":"graphics/weapons/omm_plasmacutter_tu_barrel.png",
+  "omm_plasma_cutter_turret":"graphics/weapons/omm_plasmacutter_tu_barrel.png",
+  "omm_redhot_rebar":"graphics/missiles/omm_rebar_shot_deco.png",   
+  "omm_redhot_rebar_glow":"graphics/missiles/omm_rebar_shot_glow.png",     
 },
+    "weapons": {
+
+    }
         }
 }
