@@ -1,0 +1,54 @@
+{
+    "displayName": "Support",
+    "fluxCapacitors": 30,
+    "fluxVents": 30,
+    "goalVariant": true,
+    "hullId": "omm_octocorallia",
+    "hullMods": [
+        "pointdefenseai",
+        "turretgyros"
+    ],
+    "permaMods": ["pointdefenseai"],
+    "sMods": ["pointdefenseai"],
+    "variantId": "omm_octocorallia_support",
+    "weaponGroups": [
+        {
+            "autofire": true,
+            "mode": "LINKED",
+            "weapons": {"backmedium": "phasecl"}
+        },
+        {
+            "autofire": true,
+            "mode": "ALTERNATING",
+            "weapons": {
+                "frontleftmedium": "omm_rebar_launcher",
+                "frontrightmedium": "omm_rebar_launcher"
+            }
+        },
+        {
+            "autofire": true,
+            "mode": "LINKED",
+            "weapons": {"middlesmall": "gorgon"}
+        },
+        {
+            "autofire": true,
+            "mode": "LINKED",
+            "weapons": {"frontleftsmall": "omm_chaff_launcher"}
+        },
+        {
+            "autofire": true,
+            "mode": "LINKED",
+            "weapons": {"frontrightsmall": "omm_chaff_launcher"}
+        },
+        {
+            "autofire": true,
+            "mode": "LINKED",
+            "weapons": {"backleftsmall": "pdburst"}
+        },
+        {
+            "autofire": true,
+            "mode": "LINKED",
+            "weapons": {"backrightsmall": "pdburst"}
+        }
+    ]
+}

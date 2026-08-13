@@ -2,7 +2,7 @@
   "id": "omm_rotarysaw",
   "specClass": "beam",
   "type": "ENERGY",
-  "mountTypeOverride": "HYBRID",
+  "mountTypeOverride": "UNIVERSAL",
   "size": "MEDIUM",
   "everyFrameEffect": "tecrys.data.scripts.weapons.omm_rotary_saw",
 	"collisionClass":"RAY",

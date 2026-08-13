@@ -11,8 +11,8 @@
   "shieldCenter": [0, 0],
   "shieldRadius": 15,
   "viewOffset": 0,
-  "builtInMods": [
-
+    "builtInMods": [
+"omm_fxdronehm",
   ],
   "builtInWeapons": {
     "WS0001": "omm_moddropper",

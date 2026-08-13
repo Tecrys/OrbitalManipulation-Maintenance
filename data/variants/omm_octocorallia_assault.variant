@@ -1,0 +1,54 @@
+{
+    "displayName": "Assault",
+    "fluxCapacitors": 30,
+    "fluxVents": 30,
+    "goalVariant": true,
+    "hullId": "omm_octocorallia",
+    "hullMods": [
+        "pointdefenseai",
+        "autorepair"
+    ],
+    "permaMods": ["pointdefenseai"],
+    "sMods": ["pointdefenseai"],
+    "variantId": "omm_octocorallia_assault",
+    "weaponGroups": [
+        {
+            "autofire": true,
+            "mode": "LINKED",
+            "weapons": {"frontrightmedium": "omm_plasma_cutter"}
+        },
+        {
+            "autofire": true,
+            "mode": "LINKED",
+            "weapons": {"frontleftmedium": "omm_plasma_cutter"}
+        },
+        {
+            "autofire": true,
+            "mode": "LINKED",
+            "weapons": {
+                "frontleftsmall": "omm_s_rivet",
+                "frontrightsmall": "omm_s_rivet"
+            }
+        },
+        {
+            "autofire": true,
+            "mode": "LINKED",
+            "weapons": {"backmedium": "omm_demolition_rocket_pod_medium"}
+        },
+        {
+            "autofire": true,
+            "mode": "LINKED",
+            "weapons": {"middlesmall": "sabot"}
+        },
+        {
+            "autofire": true,
+            "mode": "LINKED",
+            "weapons": {"backleftsmall": "omm_foam_launcher"}
+        },
+        {
+            "autofire": true,
+            "mode": "LINKED",
+            "weapons": {"backrightsmall": "omm_foam_launcher"}
+        }
+    ]
+}

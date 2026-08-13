@@ -30,7 +30,7 @@ public class omm_laser_mirv implements ProximityExplosionEffect {
 //leader.setDrone(true);
      //   leader.setOriginalOwner(originalProjectile.getWeapon().getShip().getOriginalOwner());
 leader.setHullSize(ShipAPI.HullSize.FIGHTER);
-
+leader.addTag("fx_drone");
         for (ShipAPI drones : leader.getDeployedDrones()) {
           // drones.setOriginalOwner(originalProjectile.getWeapon().getShip().getOriginalOwner());
 

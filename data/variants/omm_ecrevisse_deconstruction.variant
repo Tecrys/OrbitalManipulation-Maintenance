@@ -1,0 +1,32 @@
+{
+    "displayName": "Deconstruction",
+    "fluxCapacitors": 0,
+    "fluxVents": 10,
+    "goalVariant": true,
+    "hullId": "omm_ecrevisse",
+    "hullMods": ["hardenedshieldemitter"],
+    "permaMods": [],
+    "sMods": [],
+    "variantId": "omm_ecrevisse_deconstruction",
+    "weaponGroups": [
+        {
+            "autofire": true,
+            "mode": "LINKED",
+            "weapons": {
+                "lefthook": "omm_rotarysaw",
+                "righthook": "omm_rotarysaw"
+            }
+        },
+        {
+            "autofire": true,
+            "mode": "LINKED",
+            "weapons": {"smlhybridslot": "amblaster"}
+        },
+        {
+            "autofire": true,
+            "mode": "LINKED",
+            "weapons": {"pdslot": "omm_chaff_launcher"}
+        }
+    ],
+    "wings": []
+}

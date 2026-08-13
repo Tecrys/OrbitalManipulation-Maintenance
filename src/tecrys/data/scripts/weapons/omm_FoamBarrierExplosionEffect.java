@@ -51,6 +51,7 @@ public class omm_FoamBarrierExplosionEffect implements ProximityExplosionEffect,
 
         if (drone != null) {
             drone.getVelocity().set(0f, 0f);
+            drone.addTag("fx_drone");
             drone.setCollisionClass(CollisionClass.SHIP);
             drone.setExplosionScale(0f);
             drone.setHulkChanceOverride(0f);

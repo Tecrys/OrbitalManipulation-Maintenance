@@ -1,0 +1,29 @@
+{
+    "displayName": "Assault",
+    "fluxCapacitors": 19,
+    "fluxVents": 20,
+    "goalVariant": true,
+    "hullId": "omm_sandhopper",
+    "hullMods": [
+        "hardenedshieldemitter",
+        "insulatedengine",
+        "hardened_subsystems"
+    ],
+    "modules": [{"moduleslot": "omm_octocorallia_assault"}],
+    "permaMods": [],
+    "sMods": [],
+    "variantId": "omm_sandhopper_assault",
+    "weaponGroups": [
+        {
+            "autofire": false,
+            "mode": "LINKED",
+            "weapons": {"compositeslot": "omm_rebar_launcher"}
+        },
+        {
+            "autofire": false,
+            "mode": "LINKED",
+            "weapons": {"smlmissileslot": "hammer"}
+        }
+    ],
+    "wings": []
+}

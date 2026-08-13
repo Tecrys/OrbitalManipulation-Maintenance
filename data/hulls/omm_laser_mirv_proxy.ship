@@ -4,6 +4,9 @@
   "hullSize": "FRIGATE",
   "spriteName": "",
   "style": "FREITAG_CORP_TECH",
+    "builtInMods": [
+"omm_fxdronehm",
+  ],
   "height": 7,
   "width": 7,
   "center": [10, 6],

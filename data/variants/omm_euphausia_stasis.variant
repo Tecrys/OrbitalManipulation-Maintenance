@@ -1,0 +1,33 @@
+{
+    "displayName": "Stasis",
+    "fluxCapacitors": 24,
+    "fluxVents": 30,
+    "goalVariant": true,
+    "hullId": "omm_euphausia",
+    "hullMods": [
+        "auxiliarythrusters",
+        "fluxdistributor",
+        "hardened_subsystems"
+    ],
+    "permaMods": [],
+    "sMods": [],
+    "variantId": "omm_euphausia_stasis",
+    "weaponGroups": [
+        {
+            "autofire": true,
+            "mode": "LINKED",
+            "weapons": {"synergyslot": "omm_stasisgun"}
+        },
+        {
+            "autofire": true,
+            "mode": "LINKED",
+            "weapons": {"smlmissileslot": "hammer_single"}
+        },
+        {
+            "autofire": true,
+            "mode": "LINKED",
+            "weapons": {"pdslot": "omm_foam_launcher"}
+        }
+    ],
+    "wings": []
+}

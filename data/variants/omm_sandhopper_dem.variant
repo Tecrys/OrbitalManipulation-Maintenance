@@ -1,0 +1,29 @@
+{
+    "displayName": "DEM",
+    "fluxCapacitors": 20,
+    "fluxVents": 20,
+    "goalVariant": true,
+    "hullId": "omm_sandhopper",
+    "hullMods": [
+        "hardenedshieldemitter",
+        "auxiliarythrusters",
+        "insulatedengine"
+    ],
+    "modules": [{"moduleslot": "omm_octocorallia_support"}],
+    "permaMods": [],
+    "sMods": [],
+    "variantId": "omm_sandhopper_dem",
+    "weaponGroups": [
+        {
+            "autofire": false,
+            "mode": "LINKED",
+            "weapons": {"compositeslot": "omm_demolition_rocket_pod_medium"}
+        },
+        {
+            "autofire": false,
+            "mode": "LINKED",
+            "weapons": {"smlmissileslot": "gorgon"}
+        }
+    ],
+    "wings": []
+}

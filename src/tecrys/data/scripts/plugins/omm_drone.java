@@ -160,20 +160,20 @@ public class omm_drone implements EveryFrameCombatPlugin {
 
                 //Weapon Stuff, swapping and such
                 for (FighterWingAPI fighterWing : ship.getAllWings()) {
-                    if (!fighterWing.getWingId().equals("omm_pddrone_wing")
-                            || !fighterWing.getWingId().equals("omm_weaponpod_wing")
-                            || !fighterWing.getWingId().equals("omm_smallpod_wing")
-                            || !fighterWing.getWingId().equals("omm_synergypod_wing")
-                            || !fighterWing.getWingId().equals("omm_missilepod_wing")
-                            || !fighterWing.getWingId().equals("omm_compositepod_wing")
-                            || !fighterWing.getWingId().equals("omm_largepod_wing")
-                            || !fighterWing.getWingId().equals("omm_ballisticpod_wing")) {
-                        ShipAPI fighter = fighterWing.getLeader();
-                        fighter.getMutableStats().getBallisticWeaponRangeBonus().modifyMult(this.getClass().toString(), ship.getMutableStats().getBallisticWeaponRangeBonus().computeEffective(1f));
-                        fighter.getMutableStats().getEnergyWeaponRangeBonus().modifyMult(this.getClass().toString(), ship.getMutableStats().getEnergyWeaponRangeBonus().computeEffective(1f));
-                        fighter.getMutableStats().getBeamWeaponRangeBonus().modifyFlat(this.getClass().toString(), ship.getMutableStats().getBeamWeaponRangeBonus().computeEffective(1f));
-                        continue;
-                    }
+//                    if (!fighterWing.getWingId().equals("omm_pddrone_wing")
+//                            || !fighterWing.getWingId().equals("omm_weaponpod_wing")
+//                            || !fighterWing.getWingId().equals("omm_smallpod_wing")
+//                            || !fighterWing.getWingId().equals("omm_synergypod_wing")
+//                            || !fighterWing.getWingId().equals("omm_missilepod_wing")
+//                            || !fighterWing.getWingId().equals("omm_compositepod_wing")
+//                            || !fighterWing.getWingId().equals("omm_largepod_wing")
+//                            || !fighterWing.getWingId().equals("omm_ballisticpod_wing")) {
+//                        ShipAPI fighter = fighterWing.getLeader();
+//                        fighter.getMutableStats().getBallisticWeaponRangeBonus().modifyMult(this.getClass().toString(), ship.getMutableStats().getBallisticWeaponRangeBonus().computeEffective(1f));
+//                        fighter.getMutableStats().getEnergyWeaponRangeBonus().modifyMult(this.getClass().toString(), ship.getMutableStats().getEnergyWeaponRangeBonus().computeEffective(1f));
+//                        fighter.getMutableStats().getBeamWeaponRangeBonus().modifyFlat(this.getClass().toString(), ship.getMutableStats().getBeamWeaponRangeBonus().computeEffective(1f));
+//                        continue;
+//                    }
 
                     ShipAPI fighter = fighterWing.getLeader();
                     for (WeaponAPI dronewep : fighter.getAllWeapons()) {

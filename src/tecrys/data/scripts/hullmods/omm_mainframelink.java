@@ -91,7 +91,12 @@ public class omm_mainframelink extends BaseHullMod {
                         "You can toggle autofire in combat by pressing %s.", opad, h,
                 "CTRL + Weapon Group Number"
         );
-        tooltip.addSectionHeading("Flux affecting and range increasing hullmods", Alignment.MID, opad);
+        tooltip.addSectionHeading("Drone Loadouts", Alignment.MID, opad);
+        tooltip.addPara(
+                "Drones will take some time to return to the mothership in order to swap their loadout." +
+                        "Depending on how many Freitag ships are on the battlefield this can take longer.", opad
+        );
+        tooltip.addSectionHeading("Offensive hullmods", Alignment.MID, opad);
         tooltip.addSectionHeading("are shared between mothership and drones", Alignment.MID, 0f);
     }
 }

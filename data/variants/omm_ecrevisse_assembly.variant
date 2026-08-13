@@ -1,0 +1,37 @@
+{
+    "displayName": "Assembly",
+    "fluxCapacitors": 0,
+    "fluxVents": 18,
+    "goalVariant": true,
+    "hullId": "omm_ecrevisse",
+    "hullMods": [
+        "militarized_subsystems",
+        "hardenedshieldemitter"
+    ],
+    "permaMods": [],
+    "sMods": [],
+    "variantId": "omm_ecrevisse_assembly",
+    "weaponGroups": [
+        {
+            "autofire": false,
+            "mode": "LINKED",
+            "weapons": {"lefthook": "omm_demolition_rocket_pod_medium"}
+        },
+        {
+            "autofire": true,
+            "mode": "LINKED",
+            "weapons": {"righthook": "omm_rebar_launcher"}
+        },
+        {
+            "autofire": true,
+            "mode": "LINKED",
+            "weapons": {"smlhybridslot": "omm_s_rivet"}
+        },
+        {
+            "autofire": true,
+            "mode": "LINKED",
+            "weapons": {"pdslot": "omm_chaff_launcher"}
+        }
+    ],
+    "wings": []
+}

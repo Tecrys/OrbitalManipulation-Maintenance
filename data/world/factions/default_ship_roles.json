@@ -2,19 +2,26 @@
 	"civilianRandom":{
 		"omm_crevette_Standard":4,
 		"omm_ecrevisse_Standard":4,
+		"omm_ecrevisse_assembly":4,		
+		"omm_ecrevisse_deconstruction":4,
 		"omm_euphausia_Standard":4,
 		"omm_nathantia_Standard":4,
+		"omm_nathantia_defensive":4,
 	    "omm_nathantia_militarized":8,
 		"omm_limnopilos_Standard":6,
 		"omm_sesarma_tanker":5,
 		"omm_sesarma_freighter":5,
 		"omm_sesarma_personnel":5,
+		"omm_sandhopper_dem":6,
 		"omm_sandhopper_Standard":6,
+		"omm_sandhopper_assault":6,		
 		"omm_sandhopper_militarized":8,
 		"omm_sesarma_militarized":6,
 		"omm_ecrevisse_militarized":8,
         "omm_crevette_militarized":8,
-		"omm_euphausia_militarized":8,
+		"omm_euphausia_militarized":6,
+		"omm_euphausia_demolisher":6,	
+		"omm_euphausia_stasis":2,			
 		"omm_macrocheira_standard":3,
 		
 
@@ -23,8 +30,12 @@
 	"combatSmallForSmallFleet":{
 	    "omm_crevette_militarized":8,
 	    "omm_ecrevisse_militarized":8,
-     	"omm_sandhopper_Standard":4,
-		"omm_sandhopper_militarized":8,		
+		"omm_ecrevisse_assembly":4,		
+		"omm_ecrevisse_deconstruction":4,
+		"omm_sandhopper_dem":4,
+		"omm_sandhopper_Standard":4,
+		"omm_sandhopper_assault":4,		
+		"omm_sandhopper_militarized":4,		
 		"omm_limnopilos_Standard":2,
 		"omm_sesarma_freighter":2,
 		"omm_sesarma_tanker":2,
@@ -33,6 +44,10 @@
 	"combatMedium":{
 	"omm_euphausia_militarized":10,
 	"omm_ecrevisse_militarized":10,
+	"omm_ecrevisse_assembly":10,		
+	"omm_ecrevisse_deconstruction":10,	
+	"omm_sandhopper_dem":4,
+	"omm_sandhopper_assault":4,			
 	"omm_sandhopper_Standard":6,
 	"omm_sandhopper_militarized":10,	
 			"fallback":{"combatCapital":1},
@@ -65,7 +80,9 @@
         "omm_crevette_militarized":8,
 		"omm_limnopilos_Standard":2,
 	    "omm_sandhopper_Standard":2,
-	    "omm_sandhopper_militarized":10,			
+	    "omm_sandhopper_militarized":10,
+	    "omm_sandhopper_dem":4,
+	    "omm_sandhopper_assault":4,				
 		},
 	"combatFreighterMedium":{
 
@@ -74,7 +91,7 @@
 
 	"combatCapital":{
 	    "omm_nathantia_militarized":5,
-		"omm_macrocheira_militarized":5,
+		"omm_nathantia_defensive":4,		
 
 		},
 	"tug":{

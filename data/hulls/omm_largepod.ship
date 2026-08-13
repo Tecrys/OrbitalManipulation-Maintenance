@@ -24,7 +24,7 @@
     {
       "id": "largeslot",
       "size": "LARGE",
-      "type": "HYBRID",
+      "type": "UNIVERSAL",
       "mount": "HARDPOINT",
       "arc": 15,
       "angle": 0,

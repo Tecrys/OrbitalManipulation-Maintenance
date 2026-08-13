@@ -1,0 +1,38 @@
+{
+    "displayName": "Defensive",
+    "fluxCapacitors": 50,
+    "fluxVents": 50,
+    "goalVariant": true,
+    "hullId": "omm_nathantia",
+    "hullMods": [
+        "militarized_subsystems",
+        "targetingunit",
+        "assault_package"
+    ],
+    "permaMods": [],
+    "sMods": [],
+    "variantId": "omm_nathantia_defensive",
+    "weaponGroups": [
+        {
+            "autofire": true,
+            "mode": "LINKED",
+            "weapons": {"largeslot": "omm_lasermirv"}
+        },
+        {
+            "autofire": true,
+            "mode": "LINKED",
+            "weapons": {"compositeslot": "omm_demolition_rocket_pod_medium"}
+        },
+        {
+            "autofire": true,
+            "mode": "LINKED",
+            "weapons": {"synergyslot": "omm_m_rivet"}
+        },
+        {
+            "autofire": true,
+            "mode": "LINKED",
+            "weapons": {"pdslot": "omm_foam_launcher"}
+        }
+    ],
+    "wings": []
+}

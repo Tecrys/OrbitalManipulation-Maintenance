@@ -1,0 +1,33 @@
+{
+    "displayName": "Demolisher",
+    "fluxCapacitors": 25,
+    "fluxVents": 30,
+    "goalVariant": true,
+    "hullId": "omm_euphausia",
+    "hullMods": [
+        "militarized_subsystems",
+        "targetingunit",
+        "assault_package"
+    ],
+    "permaMods": [],
+    "sMods": [],
+    "variantId": "omm_euphausia_demolisher",
+    "weaponGroups": [
+        {
+            "autofire": true,
+            "mode": "LINKED",
+            "weapons": {"synergyslot": "omm_rotarysaw"}
+        },
+        {
+            "autofire": false,
+            "mode": "LINKED",
+            "weapons": {"smlmissileslot": "hammer"}
+        },
+        {
+            "autofire": true,
+            "mode": "LINKED",
+            "weapons": {"pdslot": "omm_s_rivet"}
+        }
+    ],
+    "wings": []
+}

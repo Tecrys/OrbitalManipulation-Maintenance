@@ -13,11 +13,12 @@ import java.awt.Color;
 
 public class omm_rotary_saw implements EveryFrameWeaponEffectPlugin {
 
-    // --- CONFIGURABLE IDLE SAW POSITION ---
-    // Forward / Backward offset from the weapon mount when idle (positive = further out down barrel)
+    // --- CONFIGURABLE SAW SETTINGS ---
     private static final float X_OFFSET = 15f;
-    // Left / Right offset across the weapon mount when idle
     private static final float Y_OFFSET = 0f;
+
+    // How many seconds it takes for the saw to fade out once the missile fizzles
+    private static final float FADE_TIME_SECONDS = 4f;
 
     private float sawSpinRate = 3800f; // deg/sec saw spins at
     private static final CombatEngineLayers RENDER_LAYER = CombatEngineLayers.CONTRAILS_LAYER;
@@ -28,7 +29,7 @@ public class omm_rotary_saw implements EveryFrameWeaponEffectPlugin {
     private CombatEntityAPI projectile = null;
     private IntervalUtil Interval = new IntervalUtil(0.0f, 0.1f);
     private Vector2f beamend = new Vector2f();
-    private Vector2f proj2Pos = new Vector2f(); // Smooth interpolation tracker for projectile2
+    private Vector2f proj2Pos = new Vector2f();
     private boolean justSpawnedProj2 = false;
     private float sawangle = 0f;
     private CombatEntityAPI projectile2 = null;
@@ -40,6 +41,11 @@ public class omm_rotary_saw implements EveryFrameWeaponEffectPlugin {
     public void advance(float amount, CombatEngineAPI engine, WeaponAPI weapon) {
         if (engine.isPaused() || weapon == null) return;
         weapon.getSpec().setNoImpactSounds(true);
+
+        // 1. Always spin the saw blade continuously, regardless of firing or ammo state
+        sawangle += amount * sawSpinRate;
+        if (sawangle > 360f) sawangle -= 360f;
+
         // Render the weapon's own sprite on top of the original weapon every frame
         SpriteAPI weaponSprite = weapon.getSprite();
         if (weaponSprite != null) {
@@ -56,49 +62,19 @@ public class omm_rotary_saw implements EveryFrameWeaponEffectPlugin {
 
         boolean hasAmmo = weapon.getAmmoTracker() == null || weapon.getAmmoTracker().getAmmo() > 0;
 
-        // When out of ammo, completely block shooting and weapon saw rendering,
-        // allowing any active flying-away projectile2 to finish its animation cleanly.
+        // 2. Out of ammo block
         if (!hasAmmo) {
             weapon.setForceNoFireOneFrame(true);
             firing = false;
-
-            if (projectile2 != null && !projectile2.isExpired()) {
-                sawangle += amount * sawSpinRate;
-                if (sawangle > 360f) sawangle -= 360f;
-
-                if (justSpawnedProj2) {
-                    proj2Pos.set(beamend);
-                    justSpawnedProj2 = false;
-                } else {
-                    Vector2f targetLoc = projectile2.getLocation();
-                    proj2Pos.x += (targetLoc.x - proj2Pos.x) * 0.7f;
-                    proj2Pos.y += (targetLoc.y - proj2Pos.y) * 0.7f;
-                }
-
-                fade -= (int) amount ^ 2;
-                FADE_COLOR = new Color(255, 255, 255, (int) Math.max(0f, Math.min(255, fade)));
-                MagicRender.singleframe(
-                        sprite,
-                        proj2Pos,
-                        size,
-                        sawangle,
-                        Color.WHITE,
-                        false,
-                        RENDER_LAYER
-                );
-            }
+            // Still render the flying projectile if one was fired right before ammo ran out
+            renderFlyingSaw(amount, engine);
             return;
         }
 
-        // 1. Always spin the saw blade continuously
-        sawangle += amount * sawSpinRate;
-        if (sawangle > 360f) sawangle -= 360f;
-
         this.Interval.advance(amount);
-
         boolean isFiringNow = false;
 
-        // 2. Check for active beams when firing
+        // 3. Check for active beams when firing
         for (BeamAPI beam : weapon.getBeams()) {
             beam.getDamage().setForceHardFlux(true);
             beamend = MathUtils.getPointOnCircumference(beam.getRayEndPrevFrame(), 8f, weapon.getCurrAngle() + 180f);
@@ -135,8 +111,8 @@ public class omm_rotary_saw implements EveryFrameWeaponEffectPlugin {
             );
         }
 
-        // 3. If NOT firing, render the spinning saw in place under the weapon mount position
-        if (!isFiringNow) {
+        // 4. If NOT firing, render the spinning saw in place under the weapon mount position
+        if (!isFiringNow && weapon.getRange() > 0f && weapon.getAmmoTracker().getAmmo() > 0f) {
             Vector2f idleLoc = new Vector2f(weapon.getLocation());
             if (X_OFFSET != 0f || Y_OFFSET != 0f) {
                 Vector2f offsetVec = VectorUtils.rotate(new Vector2f(X_OFFSET, Y_OFFSET), weapon.getCurrAngle());
@@ -157,7 +133,7 @@ public class omm_rotary_saw implements EveryFrameWeaponEffectPlugin {
             firing = false;
         }
 
-        // 4. Trigger release/tap flying-away projectile from the last known beamend position
+        // 5. Trigger release/tap flying-away projectile from the last known beamend position
         if ((!weapon.isFiring() && firing)
                 || (weapon.isFiring() && firing && weapon.getAmmoTracker().getAmmo() < 2 && weapon.getAmmoTracker().getAmmo() > 0)) {
             projectile2 = engine.spawnProjectile(
@@ -172,26 +148,68 @@ public class omm_rotary_saw implements EveryFrameWeaponEffectPlugin {
 
             proj2Pos.set(beamend);
             justSpawnedProj2 = true;
+            fade = 255f; // Ensures the fade tracker is fully reset on a fresh launch
         }
 
-        if (projectile2 != null && !projectile2.isExpired()) {
-            if (justSpawnedProj2) {
-                proj2Pos.set(beamend);
-                justSpawnedProj2 = false;
-            } else {
-                Vector2f targetLoc = projectile2.getLocation();
-                proj2Pos.x += (targetLoc.x - proj2Pos.x) * 0.7f;
-                proj2Pos.y += (targetLoc.y - proj2Pos.y) * 0.7f;
-            }
+        renderFlyingSaw(amount, engine);
+    }
 
-            fade -= (int) amount ^ 2;
+    // HELPER METHOD: Handles drawing the homing missile sprite and fading it when it fizzles
+    private void renderFlyingSaw(float amount, CombatEngineAPI engine) {
+        if (projectile2 == null || projectile2.isExpired() || !engine.isEntityInPlay(projectile2)) {
+            projectile2 = null; // Clean up
+            return;
+        }
+
+        boolean exploded = false;
+        boolean fadingOut = false;
+
+        // Check DamagingProjectile logic
+        if (projectile2 instanceof DamagingProjectileAPI) {
+            DamagingProjectileAPI dp = (DamagingProjectileAPI) projectile2;
+            if (dp.didDamage()) exploded = true;
+            if (dp.isFading()) fadingOut = true;
+        }
+
+        // Check Missile specific logic
+        if (projectile2 instanceof MissileAPI) {
+            MissileAPI missile = (MissileAPI) projectile2;
+            if (missile.getHitpoints() <= 0f) exploded = true;
+            if (missile.isFizzling()) fadingOut = true; // Triggers exactly when engines shut off
+        }
+
+        // If it hit a ship or was shot down by PD, instantly stop rendering the saw
+        if (exploded) {
+            projectile2 = null;
+            return;
+        }
+
+        // Smooth position interpolation
+        if (justSpawnedProj2) {
+            proj2Pos.set(beamend);
+            justSpawnedProj2 = false;
+        } else {
+            Vector2f targetLoc = projectile2.getLocation();
+            proj2Pos.x += (targetLoc.x - proj2Pos.x) * 0.7f;
+            proj2Pos.y += (targetLoc.y - proj2Pos.y) * 0.7f;
+        }
+
+        // If the missile's engine has stopped, begin standard time-based fading
+        if (fadingOut) {
+            fade -= (255f / FADE_TIME_SECONDS) * amount;
+        } else {
+            fade = 255f; // Keep completely solid while flying actively
+        }
+
+        // Only render if it hasn't completely faded out yet
+        if (fade > 0) {
             FADE_COLOR = new Color(255, 255, 255, (int) Math.max(0f, Math.min(255, fade)));
             MagicRender.singleframe(
                     sprite,
                     proj2Pos,
                     size,
                     sawangle,
-                    Color.WHITE,
+                    FADE_COLOR,
                     false,
                     RENDER_LAYER
             );
