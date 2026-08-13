@@ -7,7 +7,6 @@ import com.fs.starfarer.api.input.InputEventAPI;
 import com.fs.starfarer.api.util.Misc;
 import org.lazywizard.lazylib.combat.CombatUtils;
 import org.lwjgl.util.vector.Vector2f;
-import org.magiclib.util.MagicRender;
 
 import java.awt.*;
 import java.util.ArrayList;
@@ -17,10 +16,9 @@ import java.util.List;
 
 public class omm_chaff_flak implements ProximityExplosionEffect {
 
-
-
-    public void onExplosion(DamagingProjectileAPI explosion, DamagingProjectileAPI originalProjectile) {
+    public void onExplosion(final DamagingProjectileAPI explosion, final DamagingProjectileAPI originalProjectile) {
         if (Global.getCombatEngine().isPaused()) return;
+
         // IR smoke visual
         for (int i = 0; i < 18; i++) {
             float dur = 2f + (float) Math.random();
@@ -30,8 +28,65 @@ public class omm_chaff_flak implements ProximityExplosionEffect {
             Global.getCombatEngine().addNebulaParticle(loc, explosion.getVelocity(), s, 1.5f, 0.1f, 0f, dur, new Color(35, 35, 35));
         }
 
-        ArrayList<CombatEntityAPI> TargetsHit = new ArrayList<CombatEntityAPI>();
+        // --- NEW: LINGERING CLOUD AOE PLUGIN ---
+        // Handles the persistent chance to fizzle missiles and overload fighters touching the cloud
+        Global.getCombatEngine().addPlugin(new BaseEveryFrameCombatPlugin() {
+            private float cloudTimer = 0f;
+            private final float cloudMaxDuration = 3.0f; // Represents the visual lifetime of the nebula particles
+            private final Vector2f cloudLoc = new Vector2f(explosion.getLocation());
 
+            @Override
+            public void advance(float amount, List<InputEventAPI> events) {
+                if (Global.getCombatEngine().isPaused()) return;
+
+                float timeMult = Global.getCombatEngine().getTimeMult().getModifiedValue();
+                cloudTimer += amount * timeMult;
+
+                if (cloudTimer >= cloudMaxDuration) {
+                    Global.getCombatEngine().removePlugin(this);
+                    return;
+                }
+
+                // Fizzle hostile missiles (approx 50% chance per second while in the cloud)
+                float fizzleChance = 0.50f * amount * timeMult;
+                for (MissileAPI missile : CombatUtils.getMissilesWithinRange(cloudLoc, 125f)) {
+                    if (missile.getOwner() != originalProjectile.getOwner() && !missile.isFading() && !missile.isFizzling()) {
+                        if (Math.random() < fizzleChance) {
+                            missile.flameOut();
+                        }
+                    }
+                }
+
+                // Overload hostile fighters (approx 50% chance per second while in the cloud)
+                float overloadChance = 0.50f * amount * timeMult;
+                for (ShipAPI ship : CombatUtils.getShipsWithinRange(cloudLoc, 125f)) {
+                    if (ship.getOwner() != originalProjectile.getOwner() && ship.isFighter() && ship.isAlive()) {
+
+                            if (Math.random() < overloadChance) {
+                                ship.getFluxTracker().forceOverload(5f); // Triggers the visual sparks and overload status
+
+                                // Fighters ignore standard flux shutdown mechanics.
+                                // We must apply a massive burst of EMP damage bypassing shields to physically disable their weapons and engines.
+                                Global.getCombatEngine().applyDamage(
+                                        ship,
+                                        ship.getLocation(),
+                                        0f,                  // Hull damage
+                                        DamageType.OTHER,    // Replaced DamageType.EMP with a valid enum
+                                        2000f,               // EMP damage
+                                        true,                // Bypass shields
+                                        false,               // Does not deal soft damage
+                                        explosion            // Source
+                                );
+                            }
+
+                    }
+                }
+            }
+        });
+        // ---------------------------------------
+
+
+        // Instant fragmentation damage and lingering debuffs for targets caught in the initial blast
         List<ShipAPI> Targets = CombatUtils.getShipsWithinRange(explosion.getLocation(), 150f);
         List<MissileAPI> Missiles = CombatUtils.getMissilesWithinRange(explosion.getLocation(), 150f);
 
@@ -41,7 +96,7 @@ public class omm_chaff_flak implements ProximityExplosionEffect {
             }
         }
 
-        for (ShipAPI Target : Targets) {
+        for (final ShipAPI Target : Targets) {
             if (Target.getOriginalOwner() != originalProjectile.getOwner()) {
                 Global.getCombatEngine().applyDamage(Target, Target.getLocation(), 20, DamageType.FRAGMENTATION, 20f, false, false, explosion);
             }
@@ -50,70 +105,54 @@ public class omm_chaff_flak implements ProximityExplosionEffect {
                 float timer = 0;
                 final float max = 5f + ((float) Math.random());
                 final float resistanceTime = 0.05f;
-                private SpriteAPI sprite;
-
-
-
 
                 @Override
                 public void advance(float amount, List<InputEventAPI> events) {
                     if (Global.getCombatEngine().isPaused()) return;
-                    if (timer <= max && Target instanceof ShipAPI && ((ShipAPI) Target).getOriginalOwner() != originalProjectile.getOwner()) {
-                        ((ShipAPI) Target).getMutableStats().getEnergyWeaponDamageMult().modifyMult("omm_chaff_flak", timer * resistanceTime + 0.2f);
-                        ((ShipAPI) Target).getMutableStats().getBeamWeaponDamageMult().modifyMult("omm_chaff_flak", timer * resistanceTime + 0.2f);
-                        ((ShipAPI) Target).getMutableStats().getBeamWeaponRangeBonus().modifyMult("omm_chaff_flak", timer * resistanceTime + 0.2f);
-                        float resttime = max - timer ;
 
-                        for (WeaponAPI wep :Target.getAllWeapons()){
-                            if (wep.isBeam() || wep.getDamageType().equals(DamageType.ENERGY)){
+                    timer += amount * Global.getCombatEngine().getTimeMult().getModifiedValue();
 
+                    // Cleanup state: unmodify stats properly when the timer expires or target dies
+                    if (timer >= max || !Target.isAlive()) {
+                        Target.getMutableStats().getEnergyWeaponDamageMult().unmodify("omm_chaff_flak");
+                        Target.getMutableStats().getBeamWeaponDamageMult().unmodify("omm_chaff_flak");
+                        Target.getMutableStats().getBeamWeaponRangeBonus().unmodify("omm_chaff_flak");
+                        Target.getMutableStats().getBeamDamageTakenMult().unmodify("omm_chaff_flak");
+                        Target.getMutableStats().getEnergyDamageTakenMult().unmodify("omm_chaff_flak");
+                        Target.getMutableStats().getEmpDamageTakenMult().unmodify("omm_chaff_flak");
+
+                        for (WeaponAPI wep : Target.getAllWeapons()) {
+                            wep.setGlowAmount(0f, new Color(0, 0, 0, 0));
+                        }
+
+                        Global.getCombatEngine().removePlugin(this);
+                        return;
+                    }
+
+                    // Active state: apply modifiers
+                    float effectMult = (timer * resistanceTime) + 0.2f;
+
+                    if (Target.getOriginalOwner() != originalProjectile.getOwner()) {
+                        Target.getMutableStats().getEnergyWeaponDamageMult().modifyMult("omm_chaff_flak", effectMult);
+                        Target.getMutableStats().getBeamWeaponDamageMult().modifyMult("omm_chaff_flak", effectMult);
+                        Target.getMutableStats().getBeamWeaponRangeBonus().modifyMult("omm_chaff_flak", effectMult);
+
+                        for (WeaponAPI wep : Target.getAllWeapons()) {
+                            if (wep.isBeam() || wep.getDamageType().equals(DamageType.ENERGY)) {
                                 wep.setGlowAmount(5f, new Color(255, 255, 255, 5));
-
                             }
                         }
-                        //Global.getCombatEngine().addFloatingTextAlways(Target.getLocation(), "Chaff"+ Math.round(resttime),10f, Color.YELLOW, Target, 1f, 1f, 0.01f, 0f, 0f, 1f); //Debugging
-                    }
-                    if (timer <= max && Target instanceof ShipAPI && ((ShipAPI) Target).getOriginalOwner() == originalProjectile.getOwner()) {
-                        ((ShipAPI) Target).getMutableStats().getBeamDamageTakenMult().modifyMult("omm_chaff_flak", timer * resistanceTime + 0.2f);
-                        ((ShipAPI) Target).getMutableStats().getEnergyDamageTakenMult().modifyMult("omm_chaff_flak", timer * resistanceTime + 0.2f);
-                        ((ShipAPI) Target).getMutableStats().getEmpDamageTakenMult().modifyMult("omm_chaff_flak", timer * resistanceTime + 0.2f);
-                        float resttime = max - timer ;
-                      //  Target.setJitter(this, new Color(255, 255, 255, 10), 1f, 25, 0f, 7f);
-                      //  Global.getCombatEngine().addFloatingTextAlways(Target.getLocation(), "Chaff"+ Math.round(resttime),10f, Color.GREEN, Target, 1f, 1f, 0.01f, 0f, 0f, 1f); //Debugging
-                        for (WeaponAPI wep :Target.getAllWeapons()){
-                                             wep.setGlowAmount(5f, new Color(255, 255, 255, 5));
+                    } else {
+                        Target.getMutableStats().getBeamDamageTakenMult().modifyMult("omm_chaff_flak", effectMult);
+                        Target.getMutableStats().getEnergyDamageTakenMult().modifyMult("omm_chaff_flak", effectMult);
+                        Target.getMutableStats().getEmpDamageTakenMult().modifyMult("omm_chaff_flak", effectMult);
+
+                        for (WeaponAPI wep : Target.getAllWeapons()) {
+                            wep.setGlowAmount(5f, new Color(255, 255, 255, 5));
                         }
-                    }
-                    if (timer >= (max-0.1f)){
-
-                        for (WeaponAPI wep :Target.getAllWeapons()){
-
-                            wep.setGlowAmount(0f, new Color(0, 0, 0, 0));
-
-                    }}
-                    else {
-                        if (Target instanceof ShipAPI) {
-                            ((ShipAPI) Target).getMutableStats().getEnergyWeaponDamageMult().unmodify("omm_chaff_flak");
-                            ((ShipAPI) Target).getMutableStats().getBeamWeaponDamageMult().unmodify("omm_chaff_flak");
-                            ((ShipAPI) Target).getMutableStats().getBeamWeaponRangeBonus().unmodify("omm_chaff_flak");
-                            ((ShipAPI) Target).getMutableStats().getBeamDamageTakenMult().unmodify("omm_chaff_flak");
-                            ((ShipAPI) Target).getMutableStats().getEnergyDamageTakenMult().unmodify("omm_chaff_flak");
-                            ((ShipAPI) Target).getMutableStats().getEmpDamageTakenMult().unmodify("omm_chaff_flak");
-
-                        }
-                    }
-                    if (Global.getCombatEngine().isPaused()) return;
-                    timer += amount * Global.getCombatEngine().getTimeMult().getModifiedValue();
-                    if (timer >= max) {
-                        Global.getCombatEngine().removePlugin(this);
                     }
                 }
             });
-    }
-
-
+        }
     }
 }
-
-
-

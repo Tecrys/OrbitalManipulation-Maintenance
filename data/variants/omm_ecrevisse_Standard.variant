@@ -3,8 +3,8 @@
   "hullId": "omm_ecrevisse",
   "displayName": "Standard",
   "goalVariant": true,
-  "fluxCapacitors": 14,
-  "fluxVents": 17,
+  "fluxCapacitors": 20,
+  "fluxVents": 20,
   "quality": 1,
   "permaMods": [],
   "hullMods": [

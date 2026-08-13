@@ -2,15 +2,14 @@
   "variantId": "omm_koura_strike",
   "hullId": "omm_koura",
   "displayName": "Strike",
-  "goalVariant": false,
-  "fluxCapacitors": 7,
-  "fluxVents": 8,
+  "goalVariant": true,
+  "fluxCapacitors": 10,
+  "fluxVents": 10,
   "quality": 1,
   "permaMods": [],
   "hullMods": [
     "adaptive_coils",
-    "fluxcoil",
-    "fluxdistributor"
+"magazines"
   ],
   "weaponGroups": [
                 {
@@ -31,7 +30,7 @@
     {
       "autofire": true,
       "mode": "LINKED",
-      "weapons": {        "synergyslot": "heavymauler"}
+      "weapons": {        "synergyslot": "omm_plasma_cutter"}
     },
     {
       "autofire": false,

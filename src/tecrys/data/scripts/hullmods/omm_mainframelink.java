@@ -42,7 +42,7 @@ public class omm_mainframelink extends BaseHullMod {
 
             if (ship.getFleetMember().isFrigate() || ship.getFleetMember().isDestroyer()) {
                 ship.getAIFlags().setFlag(ShipwideAIFlags.AIFlags.CARRIER_FIGHTER_TARGET);
-                ship.getAIFlags().setFlag(ShipwideAIFlags.AIFlags.ESCORT_OTHER_SHIP);
+//                ship.getAIFlags().setFlag(ShipwideAIFlags.AIFlags.ESCORT_OTHER_SHIP);
             }
 
         }

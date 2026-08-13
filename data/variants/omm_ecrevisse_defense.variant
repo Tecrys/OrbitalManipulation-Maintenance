@@ -1,0 +1,35 @@
+{
+    "displayName": "Defense",
+    "fluxCapacitors": 9,
+    "fluxVents": 20,
+    "goalVariant": true,
+    "hullId": "omm_ecrevisse",
+    "hullMods": [
+        "militarized_subsystems",
+        "missleracks"
+    ],
+    "permaMods": [],
+    "sMods": [],
+    "variantId": "omm_ecrevisse_defense",
+    "weaponGroups": [
+        {
+            "autofire": true,
+            "mode": "ALTERNATING",
+            "weapons": {
+                "lefthook": "salamanderpod",
+                "righthook": "salamanderpod"
+            }
+        },
+        {
+            "autofire": true,
+            "mode": "LINKED",
+            "weapons": {"smlhybridslot": "omm_s_rivet"}
+        },
+        {
+            "autofire": true,
+            "mode": "LINKED",
+            "weapons": {"pdslot": "omm_chaff_launcher"}
+        }
+    ],
+    "wings": []
+}

@@ -5,7 +5,9 @@ import com.fs.starfarer.api.Global;
 import com.fs.starfarer.api.combat.BeamAPI;
 import com.fs.starfarer.api.combat.CombatEngineAPI;
 import com.fs.starfarer.api.combat.EveryFrameWeaponEffectPlugin;
+import com.fs.starfarer.api.combat.StatBonus;
 import com.fs.starfarer.api.combat.WeaponAPI;
+import com.fs.starfarer.api.loading.WeaponSpecAPI;
 import com.fs.starfarer.api.util.IntervalUtil;
 import org.lwjgl.util.vector.Vector2f;
 
@@ -99,28 +101,67 @@ public class omm_plasmacutter_anim implements EveryFrameWeaponEffectPlugin {
             hasShot = false;
         }
 
-        // Process delayed projectile spawns
+        // --- PROJECTILE SPAWNING & RANGE SYNC ---
         List<PendingShot> finishedShots = new ArrayList<>();
+        boolean needsSpawn = false;
+
         for (PendingShot shot : pendingShots) {
             shot.delay -= amount;
             if (shot.delay <= 0f) {
-                hasShot = true;
-                engine.spawnMuzzleFlashOrSmoke(weapon.getShip(),
-                        shot.from,
-                        Global.getSettings().getWeaponSpec("omm_plasma_cutter_sub"),
-                        shot.angle
-                );
-                engine.spawnProjectile(
-                        weapon.getShip(),
-                        weapon,
-                        "omm_plasma_cutter_sub",
-                        shot.from,
-                        shot.angle,
-                        null);
-                finishedShots.add(shot);
+                needsSpawn = true;
+            }
+        }
+
+        if (needsSpawn) {
+            WeaponSpecAPI subSpec = Global.getSettings().getWeaponSpec("omm_plasma_cutter_sub");
+            if (subSpec != null) {
+                float oldRange = subSpec.getMaxRange();
+                try {
+                    // Fetch the correct generic stat bonuses applying to the sub-weapon
+                    StatBonus rangeBonus = null;
+                    if (subSpec.getType() == WeaponAPI.WeaponType.ENERGY) {
+                        rangeBonus = weapon.getShip().getMutableStats().getEnergyWeaponRangeBonus();
+                    } else if (subSpec.getType() == WeaponAPI.WeaponType.BALLISTIC) {
+                        rangeBonus = weapon.getShip().getMutableStats().getBallisticWeaponRangeBonus();
+                    } else if (subSpec.getType() == WeaponAPI.WeaponType.MISSILE) {
+                        rangeBonus = weapon.getShip().getMutableStats().getMissileWeaponRangeBonus();
+                    }
+
+                    // Mathematically calculate the inverse of the engine's flat and mult generic stats
+                    float effectiveAtZero = rangeBonus != null ? rangeBonus.computeEffective(0f) : 0f;
+                    float effectiveAtOne = rangeBonus != null ? rangeBonus.computeEffective(1f) : 1f;
+                    float mult = effectiveAtOne - effectiveAtZero;
+
+                    // Force the base range so that when the engine multiplies it out, it matches the parent beam perfectly
+                    float requiredBaseRange = (weapon.getRange() - effectiveAtZero) / Math.max(0.0001f, mult);
+                    subSpec.setMaxRange(requiredBaseRange);
+
+                    for (PendingShot shot : pendingShots) {
+                        if (shot.delay <= 0f) {
+                            hasShot = true;
+                            engine.spawnMuzzleFlashOrSmoke(weapon.getShip(),
+                                    shot.from,
+                                    subSpec,
+                                    shot.angle
+                            );
+                            engine.spawnProjectile(
+                                    weapon.getShip(),
+                                    weapon,
+                                    "omm_plasma_cutter_sub",
+                                    shot.from,
+                                    shot.angle,
+                                    null);
+                            finishedShots.add(shot);
+                        }
+                    }
+                } finally {
+                    // Always safely revert the global spec to prevent interference with other ships
+                    subSpec.setMaxRange(oldRange);
+                }
             }
         }
         pendingShots.removeAll(finishedShots);
+        // ----------------------------------------
 
         if (weapon.getAmmoTracker().getAmmo() < 1) {
             weapon.setForceNoFireOneFrame(true);

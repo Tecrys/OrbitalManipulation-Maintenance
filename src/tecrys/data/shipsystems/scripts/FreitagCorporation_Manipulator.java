@@ -23,7 +23,7 @@ import org.lwjgl.util.vector.Vector2f;
 public class FreitagCorporation_Manipulator extends BaseShipSystemScript {
 
     private static boolean graphicsLibEnabled = Global.getSettings().getModManager().isModEnabled("shaderLib");
-    private static Map mag = new HashMap();
+    private static Map<ShipAPI.HullSize, Float> mag = new HashMap<>();
 
     static {
         mag.put(ShipAPI.HullSize.FIGHTER, 0.15f);
@@ -36,19 +36,18 @@ public class FreitagCorporation_Manipulator extends BaseShipSystemScript {
 
     public void apply(MutableShipStatsAPI stats, String id, State state, float effectLevel) {
         if (state == ShipSystemStatsScript.State.OUT) {
-            stats.getMaxSpeed().unmodify(id); // to slow down ship to its regular top speed while powering drive down
+            stats.getMaxSpeed().unmodify(id);
         } else {
-            stats.getMaxSpeed().modifyFlat(id, 200f * effectLevel);
+            stats.getMaxSpeed().modifyFlat(id, 400f * effectLevel);
             stats.getAcceleration().modifyFlat(id, 300f * effectLevel);
         }
-        effectLevel = 1f;
 
-        float mult = (Float) mag.get(ShipAPI.HullSize.CRUISER);
+        float mult = mag.get(ShipAPI.HullSize.CRUISER);
         if (stats.getVariant() != null) {
-            mult = (Float) mag.get(stats.getVariant().getHullSize());
+            mult = mag.get(stats.getVariant().getHullSize());
         }
-        stats.getShieldDamageTakenMult().modifyMult(id, 1f - .9f * effectLevel);
-        stats.getShieldAbsorptionMult().modifyMult(id, 1f + mult * effectLevel);
+
+        stats.getShieldDamageTakenMult().modifyMult(id, 1f - (0.9f * effectLevel));
         stats.getShieldArcBonus().modifyFlat(id, 100f * effectLevel);
 
         ShipAPI ship = null;
@@ -63,45 +62,54 @@ public class FreitagCorporation_Manipulator extends BaseShipSystemScript {
         if (player) {
             ShipSystemAPI system = ship.getSystem();
             if (system != null) {
-                float percent = (1f - mult) * effectLevel * 100;
                 Global.getCombatEngine().maintainStatusForPlayerShip(STATUSKEY1,
                         system.getSpecAPI().getIconSpriteName(), system.getDisplayName(),
-                        (int) Math.round(percent) + "% less damage taken", false);
+                        "90% less shield damage taken", false);
             }
         }
         if (ship.getSystem().getCooldownRemaining() < 0.2f) {
             return;
         }
-        //   if (AIUtils.canUseSystemThisFrame(ship)) {
 
-        List<ShipAPI> targetsToRepulse = AIUtils.getNearbyEnemies(ship, 1);
+        List<ShipAPI> targetsToRepulse = AIUtils.getNearbyEnemies(ship, 50f);
         boolean containATrueTarget = false;
         for (ShipAPI target : targetsToRepulse) {
             if (!target.isFighter()) {
-
                 containATrueTarget = true;
                 break;
             }
         }
-        if (containATrueTarget) {
 
-            Vector2f dir = new Vector2f();
+        if (containATrueTarget) {
             Vector2f positionRepulse = MathUtils.getPointOnCircumference(ship.getLocation(), ship.getCollisionRadius(), ship.getFacing());
 
-            SimpleEntity entity = new SimpleEntity(positionRepulse);
             for (ShipAPI target2 : targetsToRepulse) {
+                Vector2f dir = new Vector2f();
                 Vector2f.sub(target2.getLocation(), positionRepulse, dir);
-                 CombatUtils.applyForce(target2, dir, 600f + target2.getMass()/5);
+
+                if (dir.lengthSquared() > 0) {
+                    dir.normalise();
+                } else {
+                    dir.set(1f, 0f);
+                }
+
+                // Repulse target
+                float targetForce = target2.getMass() * 150f;
+                CombatUtils.applyForce(target2, dir, targetForce);
+
+                // Repulse user's ship in the opposite direction
+                Vector2f oppositeDir = new Vector2f(-dir.x, -dir.y);
+                float shipForce = ship.getMass() * 150f;
+                CombatUtils.applyForce(ship, oppositeDir, shipForce);
             }
-            //ship.getVelocity().set(0, 0);
+
             for (int i = 0; i < 5; i++) {
                 Global.getCombatEngine().spawnEmpArcVisual(positionRepulse, null, MathUtils.getRandomPointOnCircumference(positionRepulse, 10), null, 10, Color.cyan, Color.BLUE);
             }
-            if(graphicsLibEnabled) {
+            if (graphicsLibEnabled) {
                 CustomRippleDistortion(positionRepulse, new Vector2f(0, 0), 200, 3f, false, 0f, 360f, 0.5f, 0f, 0.5f, 0.5f, 1f, 0f);
             }
-            if (ship.getSystem().getState().equals(ACTIVE))//ship.getSystem().setCooldownRemaining(0.1f);
-            {
+            if (ship.getSystem().getState().equals(ACTIVE)) {
                 ship.getSystem().deactivate();
             }
         }
@@ -113,7 +121,6 @@ public class FreitagCorporation_Manipulator extends BaseShipSystemScript {
         stats.getTurnAcceleration().unmodify(id);
         stats.getAcceleration().unmodify(id);
         stats.getDeceleration().unmodify(id);
-        stats.getShieldAbsorptionMult().unmodify(id);
         stats.getShieldArcBonus().unmodify(id);
         stats.getShieldDamageTakenMult().unmodify(id);
     }
@@ -129,9 +136,7 @@ public class FreitagCorporation_Manipulator extends BaseShipSystemScript {
     }
 
     public static void CustomRippleDistortion(Vector2f loc, Vector2f vel, float size, float intensity, boolean flip, float angle, float arc, float edgeSmooth, float fadeIn, float last, float fadeOut, float growthTime, float shrinkTime) {
-
         RippleDistortion ripple = new RippleDistortion(loc, vel);
-
         ripple.setIntensity(intensity);
         ripple.setSize(size);
         ripple.setArc(angle - arc / 2, angle + arc / 2);
@@ -154,6 +159,5 @@ public class FreitagCorporation_Manipulator extends BaseShipSystemScript {
         }
         ripple.setFrameRate(60);
         DistortionShader.addDistortion(ripple);
-
     }
 }

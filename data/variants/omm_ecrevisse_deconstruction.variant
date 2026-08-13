@@ -1,7 +1,7 @@
 {
     "displayName": "Deconstruction",
     "fluxCapacitors": 0,
-    "fluxVents": 10,
+    "fluxVents": 20,
     "goalVariant": true,
     "hullId": "omm_ecrevisse",
     "hullMods": ["hardenedshieldemitter"],

@@ -3,97 +3,122 @@ package tecrys.data.scripts.weapons;
 import com.fs.starfarer.api.Global;
 import com.fs.starfarer.api.combat.*;
 import com.fs.starfarer.api.input.InputEventAPI;
-import com.fs.starfarer.api.util.Misc;
-import org.lwjgl.util.vector.Vector2f;
 
-import java.awt.*;
 import java.util.ArrayList;
 import java.util.List;
 
-//original script from Secrets of the Frontier by Inventor Raccoon
+public class omm_laser_mirv implements ProximityExplosionEffect, OnFireEffectPlugin {
 
-public class omm_laser_mirv implements ProximityExplosionEffect {
-
+    @Override
     public void onExplosion(DamagingProjectileAPI explosion, DamagingProjectileAPI originalProjectile) {
-        ArrayList<ShipAPI> leaders = new ArrayList<ShipAPI>();
+        spawnPayload(originalProjectile);
+    }
+
+    @Override
+    public void onFire(final DamagingProjectileAPI projectile, WeaponAPI weapon, final CombatEngineAPI engine) {
+        engine.addPlugin(new BaseEveryFrameCombatPlugin() {
+            @Override
+            public void advance(float amount, List<InputEventAPI> events) {
+                if (engine.isPaused()) return;
+
+                if (projectile.getCustomData().containsKey("omm_payload_spawned")) {
+                    engine.removePlugin(this);
+                    return;
+                }
+
+                if (projectile.isFading()) {
+                    spawnPayload(projectile);
+                    engine.removeEntity(projectile);
+                    engine.removePlugin(this);
+                    return;
+                }
+
+                if (!engine.isEntityInPlay(projectile)) {
+                    engine.removePlugin(this);
+                }
+            }
+        });
+    }
+
+    private void spawnPayload(DamagingProjectileAPI projectile) {
+        CombatEngineAPI engine = Global.getCombatEngine();
+
+        if (projectile.getCustomData().containsKey("omm_payload_spawned")) return;
+        projectile.setCustomData("omm_payload_spawned", true);
 
         String variantId = "omm_laser_mirv_proxy";
-
-        CombatFleetManagerAPI fleetManager = Global.getCombatEngine().getFleetManager(originalProjectile.getOwner());
-        boolean wasSuppressed = fleetManager.isSuppressDeploymentMessages();
-        fleetManager.setSuppressDeploymentMessages(true);
-
-        ShipAPI leader = fleetManager.spawnShipOrWing(variantId,
-                originalProjectile.getLocation(),
-                originalProjectile.getFacing(),
-                0f);
-//leader.setDrone(true);
-     //   leader.setOriginalOwner(originalProjectile.getWeapon().getShip().getOriginalOwner());
-leader.setHullSize(ShipAPI.HullSize.FIGHTER);
-leader.addTag("fx_drone");
-        for (ShipAPI drones : leader.getDeployedDrones()) {
-          // drones.setOriginalOwner(originalProjectile.getWeapon().getShip().getOriginalOwner());
-
+        ShipVariantAPI variant = Global.getSettings().getVariant(variantId);
+        if (variant == null) {
+            variant = Global.getSettings().createEmptyVariant(variantId + "_empty", Global.getSettings().getHullSpec(variantId));
         }
 
-        fleetManager.setSuppressDeploymentMessages(wasSuppressed);
+        // Bypassing Fleet Manager entirely to prevent UI ghosting
+        final ShipAPI leader = engine.createFXDrone(variant);
 
+        if (leader != null) {
+            leader.setLayer(CombatEngineLayers.ABOVE_SHIPS_AND_MISSILES_LAYER);
+            leader.setOwner(projectile.getOwner());
+            leader.getLocation().set(projectile.getLocation());
+            leader.setFacing(projectile.getFacing());
+            leader.setHullSize(ShipAPI.HullSize.FIGHTER);
+            leader.addTag("fx_drone");
 
-            Global.getCombatEngine().addPlugin(new BaseEveryFrameCombatPlugin() {
-                float timer = 0;
-                // time until drone self-destructs
-                final float max = 7f + ((float) Math.random());
-                // drone begins with 50% damage resistance (from IR smoke), fading over this time
-                final float resistanceTime = 1.5f;
-                @Override
-                public void advance(float amount, List<InputEventAPI> events) {
+            if (projectile.getSource() != null) {
+                leader.getAIFlags().setFlag(ShipwideAIFlags.AIFlags.DRONE_MOTHERSHIP, 100000f, projectile.getSource());
+            }
 
+            engine.addEntity(leader);
+        }
 
-                    if (timer <= resistanceTime) {
+        engine.addPlugin(new BaseEveryFrameCombatPlugin() {
+            private float timer = 0f;
+            private final float max = 7f + (float) Math.random();
+            private final float resistanceTime = 1.5f;
+            private boolean cleanedUp = false;
 
-                        leader.getMutableStats().getHullDamageTakenMult().modifyMult("omm_laser_mirv", (timer * (0.5f / resistanceTime)) + 0.5f);
-                        leader.getMutableStats().getArmorDamageTakenMult().modifyMult("omm_laser_mirv", (timer * (0.5f / resistanceTime)) + 0.5f);
-                        leader.getMutableStats().getShieldDamageTakenMult().modifyMult("omm_laser_mirv", (timer * (0.5f / resistanceTime)) + 0.5f);
-                    } else {
-                        leader.getMutableStats().getHullDamageTakenMult().unmodify("omm_laser_mirv");
-                        leader.getMutableStats().getArmorDamageTakenMult().unmodify("omm_laser_mirv");
-                        leader.getMutableStats().getShieldDamageTakenMult().unmodify("omm_laser_mirv");
+            @Override
+            public void advance(float amount, List<InputEventAPI> events) {
+                CombatEngineAPI engine = Global.getCombatEngine();
+                if (engine.isPaused() || leader == null || cleanedUp) return;
 
-                    }
-                    if (Global.getCombatEngine().isPaused()) return;
-                    timer += amount * Global.getCombatEngine().getTimeMult().getModifiedValue();
-                    if (timer >= max) {
-                        Global.getCombatEngine().removeEntity(leader);
+                float timeMult = engine.getTimeMult().getModifiedValue();
+                timer += amount * timeMult;
 
-                        Global.getCombatEngine().removePlugin(this);
-                    }
+                // FX Drones lack standard AI. We must manually force it to activate its drone system.
+                if (leader.getSystem() != null && leader.getSystem().getState() == ShipSystemAPI.SystemState.IDLE) {
+                    leader.useSystem();
                 }
-            });
-       
 
-        // deploy a few decoy flares
-//        for (int i = 0; i < 5; i++) {
-//            Vector2f flareLoc = Misc.getPointWithinRadius(explosion.getLocation(), 50);
-//            Global.getCombatEngine().spawnProjectile(
-//                    explosion.getSource(),
-//                    null,
-//                    "flarelauncher2",
-//                    flareLoc,
-//                    Misc.getAngleInDegrees(explosion.getLocation(), flareLoc),
-//                    null
-//            );
-//        }
-//
-//        // IR smoke visual
-//        for (int i = 0; i < 18; i++) {
-//            float dur = 2f + (float) Math.random();
-//            Vector2f loc = new Vector2f(explosion.getLocation());
-//            loc = Misc.getPointWithinRadius(loc, 100f);
-//            float s = 275f * (0.25f + (float) Math.random() * 0.25f);
-//            Global.getCombatEngine().addNebulaParticle(loc, explosion.getVelocity(), s, 1.5f, 0.1f, 0f, dur, new Color(35, 35, 35));
-//        }
+                if (timer <= resistanceTime) {
+                    float mult = (timer * (0.5f / resistanceTime)) + 0.5f;
+                    MutableShipStatsAPI stats = leader.getMutableStats();
+                    stats.getHullDamageTakenMult().modifyMult("omm_laser_mirv", mult);
+                    stats.getArmorDamageTakenMult().modifyMult("omm_laser_mirv", mult);
+                    stats.getShieldDamageTakenMult().modifyMult("omm_laser_mirv", mult);
+                } else {
+                    MutableShipStatsAPI stats = leader.getMutableStats();
+                    stats.getHullDamageTakenMult().unmodify("omm_laser_mirv");
+                    stats.getArmorDamageTakenMult().unmodify("omm_laser_mirv");
+                    stats.getShieldDamageTakenMult().unmodify("omm_laser_mirv");
+                }
+
+                if (timer >= max || !leader.isAlive()) {
+                    cleanedUp = true;
+
+                    // Clean up child laser drones silently
+                    if (leader.getDeployedDrones() != null) {
+                        for (ShipAPI drone : new ArrayList<>(leader.getDeployedDrones())) {
+                            if (drone != null) {
+                                engine.removeEntity(drone);
+                            }
+                        }
+                    }
+
+                    // Clean FX drone removal without UI ghosting
+                    engine.removeEntity(leader);
+                    engine.removePlugin(this);
+                }
+            }
+        });
     }
 }
-
-
-

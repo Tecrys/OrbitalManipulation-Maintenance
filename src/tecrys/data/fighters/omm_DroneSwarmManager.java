@@ -5,6 +5,7 @@ import com.fs.starfarer.api.combat.*;
 import com.fs.starfarer.api.combat.listeners.AdvanceableListener;
 import com.fs.starfarer.api.combat.listeners.WeaponRangeModifier;
 import com.fs.starfarer.api.loading.HullModSpecAPI;
+import com.fs.starfarer.api.util.IntervalUtil;
 import org.lazywizard.lazylib.MathUtils;
 import org.lazywizard.lazylib.VectorUtils;
 import org.lazywizard.lazylib.combat.AIUtils;
@@ -22,6 +23,13 @@ public class omm_DroneSwarmManager implements AdvanceableListener, WeaponRangeMo
     private boolean firstFrame = true;
 
     private final Map<String, Boolean> wasSelectedLastFrameMap = new HashMap<>();
+
+    // Performance Caches
+    private final Map<String, String> cooldownKeys = new HashMap<>();
+    private final Map<String, String> globalQueueKeys = new HashMap<>();
+    private final List<String> validModsToCopy = new ArrayList<>();
+    private String validModsString = "";
+    private final IntervalUtil refitInterval = new IntervalUtil(0.25f, 0.35f);
 
     public static class PodConfig {
         public final String wingId;
@@ -106,8 +114,12 @@ public class omm_DroneSwarmManager implements AdvanceableListener, WeaponRangeMo
 
     public omm_DroneSwarmManager(ShipAPI mothership) {
         this.mothership = mothership;
+        String msId = mothership.getFleetMember() != null ? mothership.getFleetMember().getId() : mothership.getId();
+
         for (PodConfig config : POD_CONFIGS) {
             wasSelectedLastFrameMap.put(config.slotId, false);
+            cooldownKeys.put(config.slotId, "omm_cooldown_" + msId + "_" + config.slotId);
+            globalQueueKeys.put(config.slotId, config.wingId.equals("omm_pddrone_wing") ? "omm_global_pd_queue" : "omm_global_next_refit_time_" + config.slotId);
         }
     }
 
@@ -204,28 +216,32 @@ public class omm_DroneSwarmManager implements AdvanceableListener, WeaponRangeMo
         CombatEngineAPI engine = Global.getCombatEngine();
         if (!ship.isAlive() || engine == null) return;
 
-        String msId = ship.getFleetMember() != null ? ship.getFleetMember().getId() : ship.getId();
+        if (firstFrame) {
+            List<String> allMothershipMods = new ArrayList<>();
+            allMothershipMods.addAll(ship.getVariant().getNonBuiltInHullmods());
+            allMothershipMods.addAll(ship.getVariant().getSMods());
 
-        List<String> validModsToCopy = new ArrayList<>();
-        List<String> allMothershipMods = new ArrayList<>();
-        allMothershipMods.addAll(ship.getVariant().getNonBuiltInHullmods());
-        allMothershipMods.addAll(ship.getVariant().getSMods());
-
-        for (String mod : allMothershipMods) {
-            HullModSpecAPI modSpec = Global.getSettings().getHullModSpec(mod);
-            if (modSpec != null && !modSpec.isHiddenEverywhere()) {
-                boolean hasExcludedTag = false;
-                for (String tag : EXCLUDED_HULLMOD_TAGS) {
-                    if (modSpec.hasTag(tag)) {
-                        hasExcludedTag = true;
-                        break;
+            for (String mod : allMothershipMods) {
+                HullModSpecAPI modSpec = Global.getSettings().getHullModSpec(mod);
+                if (modSpec != null && !modSpec.isHiddenEverywhere()) {
+                    boolean hasExcludedTag = false;
+                    for (String tag : EXCLUDED_HULLMOD_TAGS) {
+                        if (modSpec.hasTag(tag)) {
+                            hasExcludedTag = true;
+                            break;
+                        }
+                    }
+                    if (!hasExcludedTag) {
+                        validModsToCopy.add(mod);
                     }
                 }
-                if (!hasExcludedTag) {
-                    validModsToCopy.add(mod);
-                }
             }
+            validModsString = validModsToCopy.toString();
+            firstFrame = false;
         }
+
+        refitInterval.advance(amount);
+        boolean runRefitChecks = refitInterval.intervalElapsed();
 
         boolean isPlayerFlagship = (engine.getPlayerShip() == this.mothership);
         boolean isPlayerControlled = isPlayerFlagship && engine.isUIAutopilotOn();
@@ -243,15 +259,14 @@ public class omm_DroneSwarmManager implements AdvanceableListener, WeaponRangeMo
 
             WeaponGroupAPI mothershipGroup = ship.getWeaponGroupFor(mothershipWep);
             boolean isCurrentlySelected = isPlayerFlagship && (this.mothership.getSelectedGroupAPI() == mothershipGroup);
-            boolean wasSelectedLastFrame = wasSelectedLastFrameMap.get(config.slotId);
 
-            if (firstFrame) {
+            if (runRefitChecks) {
                 wasSelectedLastFrameMap.put(config.slotId, isCurrentlySelected);
-                wasSelectedLastFrame = isCurrentlySelected;
             }
 
             String expectedWepId = ship.getVariant().getWeaponId(config.slotId);
             if (expectedWepId == null) expectedWepId = "No weapon";
+            String expectedState = expectedWepId + "_" + validModsString;
 
             List<FighterWingAPI> wings = getRelevantWings(config.wingId);
 
@@ -291,6 +306,10 @@ public class omm_DroneSwarmManager implements AdvanceableListener, WeaponRangeMo
                     ShipAPI fighter = wing.getWingMembers().get(i);
                     if (fighter == null || !fighter.isAlive() || fighter.getAllWeapons().isEmpty()) continue;
 
+                    if (fighter.isLiftingOff() || fighter.isLanding()) {
+                        continue;
+                    }
+
                     WeaponAPI droneWep = null;
                     WeaponAPI laswep = null;
                     for (WeaponAPI w : fighter.getAllWeapons()) {
@@ -300,90 +319,86 @@ public class omm_DroneSwarmManager implements AdvanceableListener, WeaponRangeMo
                         }
                     }
 
-                    String currentWepId = "No weapon";
-                    if (droneWep != null) {
-                        currentWepId = droneWep.getId();
-                    }
+                    if (runRefitChecks) {
+                        String currentState = (String) fighter.getCustomData().get("omm_fighter_state");
 
-                    Collection<String> currentMods = new ArrayList<>(fighter.getVariant().getNonBuiltInHullmods());
-                    boolean hullmodsMatch = currentMods.size() == validModsToCopy.size() && currentMods.containsAll(validModsToCopy);
+                        if (currentState == null) {
+                            String currentWepId = droneWep != null ? droneWep.getId() : "No weapon";
+                            Collection<String> currentMods = new ArrayList<>(fighter.getVariant().getNonBuiltInHullmods());
+                            boolean hullmodsMatch = currentMods.size() == validModsToCopy.size() && currentMods.containsAll(validModsToCopy);
 
-                    if (fighter.isLiftingOff() || fighter.isLanding()) {
-                        continue;
-                    }
-
-                    String expectedState = expectedWepId + "_" + validModsToCopy.toString();
-                    String currentState = (String) fighter.getCustomData().get("omm_fighter_state");
-
-                    if (currentState == null) {
-                        if (currentWepId.equals(expectedWepId) && hullmodsMatch) {
-                            currentState = expectedState;
-                            fighter.getCustomData().put("omm_fighter_state", expectedState);
-                        }
-                    }
-
-                    if (!expectedState.equals(currentState)) {
-                        if (fighter.getCustomData().containsKey("omm_ordered_return")) {
-                            fighter.resetDefaultAI();
-                            continue;
+                            if (currentWepId.equals(expectedWepId) && hullmodsMatch) {
+                                currentState = expectedState;
+                                fighter.getCustomData().put("omm_fighter_state", expectedState);
+                            }
                         }
 
-                        float currentTime = engine.getTotalElapsedTime(false);
-                        String cooldownKey = "omm_cooldown_" + msId + "_" + config.slotId;
-                        Float bayCooldown = (Float) engine.getCustomData().get(cooldownKey);
+                        if (!expectedState.equals(currentState)) {
+                            if (fighter.getCustomData().containsKey("omm_ordered_return")) {
+                                fighter.resetDefaultAI();
+                                continue;
+                            }
 
-                        // Separate global queue string for PD drones
-                        String globalQueueKey = isVanillaPD ? "omm_global_pd_queue" : "omm_global_next_refit_time_" + config.slotId;
-                        Float nextRefitTime = (Float) engine.getCustomData().get(globalQueueKey);
+                            float currentTime = engine.getTotalElapsedTime(false);
+                            String cooldownKey = cooldownKeys.get(config.slotId);
+                            Float bayCooldown = (Float) engine.getCustomData().get(cooldownKey);
 
-                        if (nextRefitTime == null) nextRefitTime = 0f;
+                            String globalQueueKey = globalQueueKeys.get(config.slotId);
+                            Float nextRefitTime = (Float) engine.getCustomData().get(globalQueueKey);
+                            if (nextRefitTime == null) nextRefitTime = 0f;
 
-                        if ((bayCooldown != null && currentTime < bayCooldown) || currentTime < nextRefitTime) {
-                            if (!isVanillaPD) fighter.setShipAI(null);
-                        } else {
-                            fighter.resetDefaultAI();
-
-                            if (isVanillaPD) {
-                                engine.getCustomData().put(globalQueueKey, currentTime + MathUtils.getRandomNumberInRange(3.0f, 6.0f));
-                                engine.getCustomData().put(cooldownKey, currentTime + 4.0f);
+                            if ((bayCooldown != null && currentTime < bayCooldown) || currentTime < nextRefitTime) {
+                                if (!isVanillaPD) fighter.setShipAI(null);
                             } else {
-                                engine.getCustomData().put(globalQueueKey, currentTime + MathUtils.getRandomNumberInRange(3.0f, 6.0f));
-                                engine.getCustomData().put(cooldownKey, currentTime + 4.0f);
+                                fighter.resetDefaultAI();
+
+                                if (isVanillaPD) {
+                                    engine.getCustomData().put(globalQueueKey, currentTime + MathUtils.getRandomNumberInRange(1.0f, 2.5f));
+                                    engine.getCustomData().put(cooldownKey, currentTime + 2.0f);
+                                } else {
+                                    engine.getCustomData().put(globalQueueKey, currentTime + MathUtils.getRandomNumberInRange(3.0f, 6.0f));
+                                    engine.getCustomData().put(cooldownKey, currentTime + 4.0f);
+                                }
+
+                                MutableShipStatsAPI stats = fighter.getMutableStats();
+                                ShipVariantAPI newVariant = stats.getVariant().clone();
+
+                                stats.getVariant().setOriginalVariant(null);
+                                if (fighter.getFleetMember() != null) {
+                                    fighter.getFleetMember().setVariant(newVariant, true, true);
+                                }
+
+                                ship.syncWeaponDecalsWithArmorDamage();
+
+                                stats.getVariant().clearSlot(config.slotId);
+                                if (!expectedWepId.equals("No weapon")) {
+                                    stats.getVariant().addWeapon(config.slotId, expectedWepId);
+                                    stats.getVariant().getWeaponSpec(config.slotId).addTag("FIRE_WHEN_INEFFICIENT");
+                                }
+
+                                for (String existingMod : new ArrayList<>(stats.getVariant().getNonBuiltInHullmods())) {
+                                    stats.getVariant().removeMod(existingMod);
+                                }
+                                for (String mod : validModsToCopy) {
+                                    stats.getVariant().addMod(mod);
+                                }
+
+                                fighter.getCustomData().put("omm_fighter_state", expectedState);
+                                fighter.getCustomData().remove("omm_wep_group_index");
+
+                                wing.orderReturn(fighter);
+                                fighter.getCustomData().put("omm_ordered_return", true);
+
+                                continue;
                             }
-
-                            MutableShipStatsAPI stats = fighter.getMutableStats();
-                            ShipVariantAPI newVariant = stats.getVariant().clone();
-
-                            stats.getVariant().setOriginalVariant(null);
-                            if (fighter.getFleetMember() != null) {
-                                fighter.getFleetMember().setVariant(newVariant, true, true);
-                            }
-
-                            ship.syncWeaponDecalsWithArmorDamage();
-
-                            stats.getVariant().clearSlot(config.slotId);
-                            if (!expectedWepId.equals("No weapon")) {
-                                stats.getVariant().addWeapon(config.slotId, expectedWepId);
-                                stats.getVariant().getWeaponSpec(config.slotId).addTag("FIRE_WHEN_INEFFICIENT");
-                            }
-
-                            for (String existingMod : new ArrayList<>(stats.getVariant().getNonBuiltInHullmods())) {
-                                stats.getVariant().removeMod(existingMod);
-                            }
-                            for (String mod : validModsToCopy) {
-                                stats.getVariant().addMod(mod);
-                            }
-
-                            fighter.getCustomData().put("omm_fighter_state", expectedState);
-
-                            wing.orderReturn(fighter);
-                            fighter.getCustomData().put("omm_ordered_return", true);
-
-                            continue;
+                        } else {
+                            if (!isVanillaPD) fighter.setShipAI(null);
+                            fighter.getCustomData().remove("omm_ordered_return");
                         }
                     } else {
-                        if (!isVanillaPD) fighter.setShipAI(null);
-                        fighter.getCustomData().remove("omm_ordered_return");
+                        if (fighter.getCustomData().containsKey("omm_ordered_return")) {
+                            continue;
+                        }
                     }
 
                     if (isVanillaPD) {
@@ -432,8 +447,13 @@ public class omm_DroneSwarmManager implements AdvanceableListener, WeaponRangeMo
 
                             boolean shouldAutofire = isPlayerControlled ? (mothershipGroup.isAutofiring() && !isCurrentlySelected) : true;
 
+                            Integer groupIndex = (Integer) fighter.getCustomData().get("omm_wep_group_index");
+                            if (groupIndex == null) {
+                                groupIndex = fighter.getWeaponGroupsCopy().indexOf(droneGroup);
+                                fighter.getCustomData().put("omm_wep_group_index", groupIndex);
+                            }
+
                             if (droneGroup.isAutofiring() != shouldAutofire) {
-                                int groupIndex = fighter.getWeaponGroupsCopy().indexOf(droneGroup);
                                 fighter.giveCommand(ShipCommand.TOGGLE_AUTOFIRE, null, groupIndex);
                             }
 
@@ -452,7 +472,7 @@ public class omm_DroneSwarmManager implements AdvanceableListener, WeaponRangeMo
                                 Vector2f mousePos = this.mothership.getMouseTarget();
                                 float angleToMouse = VectorUtils.getAngle(fighter.getLocation(), mousePos);
 
-                                if (laswep != null && !fighter.isLanding() && !fighter.isLiftingOff()) {
+                                if (laswep != null) {
                                     laswep.setForceFireOneFrame(true);
                                     laswep.setCurrAngle(angleToMouse);
                                     laswep.ensureClonedSpec();
@@ -488,7 +508,6 @@ public class omm_DroneSwarmManager implements AdvanceableListener, WeaponRangeMo
                                     }
 
                                     if (shouldFire && !this.mothership.getFluxTracker().isOverloadedOrVenting()) {
-                                        int groupIndex = fighter.getWeaponGroupsCopy().indexOf(droneGroup);
                                         fighter.giveCommand(ShipCommand.FIRE, mousePos, groupIndex);
                                         droneWep.setForceFireOneFrame(true);
                                     }
@@ -510,12 +529,6 @@ public class omm_DroneSwarmManager implements AdvanceableListener, WeaponRangeMo
                     }
                 }
             }
-
-            wasSelectedLastFrameMap.put(config.slotId, isCurrentlySelected);
-        }
-
-        if (firstFrame) {
-            firstFrame = false;
         }
     }
 

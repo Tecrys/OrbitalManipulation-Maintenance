@@ -1,0 +1,38 @@
+{
+    "displayName": "Demolition",
+    "fluxCapacitors": 35,
+    "fluxVents": 48,
+    "goalVariant": true,
+    "hullId": "omm_nathantia",
+    "hullMods": [
+        "targetingunit",
+        "militarized_subsystems",
+        "missleracks"
+    ],
+    "permaMods": [],
+    "sMods": [],
+    "variantId": "omm_nathantia_demolition",
+    "weaponGroups": [
+        {
+            "autofire": true,
+            "mode": "LINKED",
+            "weapons": {"largeslot": "omm_demolition_rocket_pod"}
+        },
+        {
+            "autofire": true,
+            "mode": "LINKED",
+            "weapons": {"compositeslot": "omm_demolition_rocket_pod_medium"}
+        },
+        {
+            "autofire": true,
+            "mode": "LINKED",
+            "weapons": {"synergyslot": "omm_plasma_cutter"}
+        },
+        {
+            "autofire": true,
+            "mode": "LINKED",
+            "weapons": {"pdslot": "omm_s_rivet"}
+        }
+    ],
+    "wings": []
+}

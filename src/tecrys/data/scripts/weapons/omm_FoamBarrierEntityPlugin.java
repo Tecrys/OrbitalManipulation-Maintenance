@@ -38,7 +38,7 @@ public class omm_FoamBarrierEntityPlugin extends BaseCombatLayeredRenderingPlugi
 
     // Nebula particle emission tracking
     private float particleTimer = 0f;
-    private final float particleInterval = 0.25f; // Emits a swirly cloud 4 times per second
+    private final float particleInterval = 0.25f;
 
     // Attachment tracking (Generalized to CombatEntityAPI so it supports ships AND asteroids)
     private CombatEntityAPI attachedTarget = null;
@@ -60,31 +60,21 @@ public class omm_FoamBarrierEntityPlugin extends BaseCombatLayeredRenderingPlugi
         this.spriteIndex = MathUtils.getRandomNumberInRange(0, 15);
 
         // --- ENHANCED PER-ELEMENT SIZE VARIATION ---
-        // Widescale multiplier: 60% to 140% normal size
         this.sizeMultiplier = MathUtils.getRandomNumberInRange(0.6f, 1.4f);
-        // Unique base sprite diameter per element (50px to 68px)
         this.baseDiameter = MathUtils.getRandomNumberInRange(42f, 60f);
-        // Unique pulse intensity per element (3px to 7px amplitude)
         this.pulseAmplitude = MathUtils.getRandomNumberInRange(3f, 7f);
         // -------------------------------------------
 
-        // Randomize pulsing rhythm so pieces expand and contract out of sync
         this.pulseSpeed = MathUtils.getRandomNumberInRange(1.5f, 3.0f);
         this.pulsePhase = MathUtils.getRandomNumberInRange(0f, (float) Math.PI * 2f);
 
-        // Hide UI: Neutral owner (100) removes HP bars and targeting brackets
         this.drone.setOwner(100);
-
-        // HP Buffer Trick: Give massive HP so the engine never triggers a ship death explosion
         this.drone.setMaxHitpoints(bufferHp);
         this.drone.setHitpoints(bufferHp);
-
-        // Intercept incoming damage to track HP manually and suppress floating damage text
         this.drone.addListener(this);
 
         initSprite();
 
-        // Spawn initial burst of swirlies immediately upon creation
         spawnNebulaParticle();
         spawnNebulaParticle();
     }
@@ -102,7 +92,6 @@ public class omm_FoamBarrierEntityPlugin extends BaseCombatLayeredRenderingPlugi
             sprite.setTexY(row * cellSize);
             sprite.setAngle(currentAngle);
 
-            // Tone down blinding white highlights on the base sprite
             sprite.setColor(new Color(210, 200, 180, 255));
         } else {
             Global.getLogger(omm_FoamBarrierEntityPlugin.class).error("Failed to load foam sprite: graphics/weapons/omm_foam.png");
@@ -113,7 +102,6 @@ public class omm_FoamBarrierEntityPlugin extends BaseCombatLayeredRenderingPlugi
     public void advance(float amount) {
         if (Global.getCombatEngine().isPaused()) return;
 
-        // 1. Safety check if entity was cleared by combat engine
         if (drone == null || !Global.getCombatEngine().isEntityInPlay(drone)) {
             Global.getCombatEngine().removeEntity(entity);
             return;
@@ -121,7 +109,6 @@ public class omm_FoamBarrierEntityPlugin extends BaseCombatLayeredRenderingPlugi
 
         elapsed += amount;
 
-        // 2. Scale Calculation: Grow on spawn -> Hold -> Shrink before removal
         float shrinkStartTime = maxLifetime - shrinkDuration;
 
         if (elapsed < growthDuration) {
@@ -136,14 +123,10 @@ public class omm_FoamBarrierEntityPlugin extends BaseCombatLayeredRenderingPlugi
             currentScale = 1.0f;
         }
 
-        // drone.setCollisionRadius(32f * currentScale * sizeMultiplier);
-
-        // 3. Handle adhesion & movement
         if (attachedTarget == null) {
             drone.getVelocity().set(0f, 0f);
             checkForTouch();
         } else {
-            // Check if attached target (ship or asteroid) was destroyed or removed from play
             boolean isAlive = true;
             if (attachedTarget instanceof ShipAPI) {
                 isAlive = ((ShipAPI) attachedTarget).isAlive();
@@ -156,7 +139,6 @@ public class omm_FoamBarrierEntityPlugin extends BaseCombatLayeredRenderingPlugi
             }
         }
 
-        // 4. Emit nebula swirl particles continuously while the foam is alive and visible
         if (currentScale > 0.1f) {
             particleTimer += amount;
             if (particleTimer >= particleInterval) {
@@ -165,10 +147,10 @@ public class omm_FoamBarrierEntityPlugin extends BaseCombatLayeredRenderingPlugi
             }
         }
 
-        // 5. Silent Removal Check: remove only when scale finishes shrinking down to 0 OR if destroyed by damage
         boolean destroyedByDamage = damageTaken >= maxFoamHp;
 
         if (destroyedByDamage || elapsed >= maxLifetime) {
+            // Clean removal without fleet UI ghosting
             Global.getCombatEngine().removeEntity(drone);
             Global.getCombatEngine().removeEntity(entity);
         }
@@ -178,12 +160,10 @@ public class omm_FoamBarrierEntityPlugin extends BaseCombatLayeredRenderingPlugi
         CombatEngineAPI engine = Global.getCombatEngine();
         if (engine == null || drone == null) return;
 
-        // Slightly randomize position around the foam center
         Vector2f loc = new Vector2f(drone.getLocation());
         loc.x += MathUtils.getRandomNumberInRange(-20f, 20f) * currentScale;
         loc.y += MathUtils.getRandomNumberInRange(-20f, 20f) * currentScale;
 
-        // Inherit drone velocity so swirlies move with attached ships, plus a slight random drift
         Vector2f vel = new Vector2f(drone.getVelocity());
         vel.x += MathUtils.getRandomNumberInRange(-18f, 18f);
         vel.y += MathUtils.getRandomNumberInRange(-18f, 18f);
@@ -194,7 +174,6 @@ public class omm_FoamBarrierEntityPlugin extends BaseCombatLayeredRenderingPlugi
         float rampDown = 0.5f;
         float duration = MathUtils.getRandomNumberInRange(1.1f, 1.5f);
 
-        // Deeper, matte amber-tan foam color with reduced opacity to prevent white-out stacking
         Color color = new Color(180, 145, 85, 125);
 
         engine.addNebulaParticle(loc, vel, size, endSizeMult, rampUp, rampDown, duration, color);
@@ -216,7 +195,6 @@ public class omm_FoamBarrierEntityPlugin extends BaseCombatLayeredRenderingPlugi
         CombatEngineAPI engine = Global.getCombatEngine();
         if (engine == null) return;
 
-        // 1. Check Ships and other Foam elements
         for (ShipAPI ship : engine.getShips()) {
             if (ship == drone || !ship.isAlive()) continue;
 
@@ -228,7 +206,6 @@ public class omm_FoamBarrierEntityPlugin extends BaseCombatLayeredRenderingPlugi
             if (tryAttachToEntity(ship, isOtherFoam)) return;
         }
 
-        // 2. Check Asteroids
         for (CombatEntityAPI asteroid : engine.getAsteroids()) {
             if (asteroid == null || !engine.isEntityInPlay(asteroid)) continue;
             if (tryAttachToEntity(asteroid, false)) return;
@@ -267,7 +244,6 @@ public class omm_FoamBarrierEntityPlugin extends BaseCombatLayeredRenderingPlugi
                 dx * sin + dy * cos
         );
 
-        // Switch collision to FIGHTER and zero out mass so it stops repelling/pushing attached ships, asteroids, or foam
         drone.setCollisionClass(CollisionClass.FIGHTER);
         drone.setMass(0.0001f);
     }
@@ -290,10 +266,8 @@ public class omm_FoamBarrierEntityPlugin extends BaseCombatLayeredRenderingPlugi
     public void render(CombatEngineLayers layer, ViewportAPI viewport) {
         if (drone == null || sprite == null) return;
 
-        // Smooth sine wave oscillating between -1.0 and +1.0 over time
         float sinePulse = (float) Math.sin(elapsed * pulseSpeed + pulsePhase);
 
-        // Combines unique baseDiameter, unique pulseAmplitude, and wide sizeMultiplier
         float baseSize = (baseDiameter + sinePulse * pulseAmplitude) * sizeMultiplier;
         float scaledSize = baseSize * currentScale;
 

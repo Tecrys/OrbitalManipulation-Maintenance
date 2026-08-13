@@ -3,11 +3,7 @@ package tecrys.data.scripts.weapons;
 import com.fs.starfarer.api.Global;
 import com.fs.starfarer.api.combat.*;
 import com.fs.starfarer.api.combat.listeners.ApplyDamageResultAPI;
-import com.fs.starfarer.api.impl.combat.dweller.DwellerShroud;
-import com.fs.starfarer.api.impl.combat.dweller.RiftLightningEffect;
-import com.fs.starfarer.api.util.Misc;
 import org.lazywizard.lazylib.MathUtils;
-import org.lwjgl.util.Color;
 import org.lwjgl.util.vector.Vector2f;
 
 public class omm_FoamBarrierExplosionEffect implements ProximityExplosionEffect, OnHitEffectPlugin {
@@ -17,12 +13,7 @@ public class omm_FoamBarrierExplosionEffect implements ProximityExplosionEffect,
     @Override
     public void onExplosion(DamagingProjectileAPI explosion, DamagingProjectileAPI originalProjectile) {
         if (originalProjectile == null) return;
-
-        CombatEngineAPI engine = Global.getCombatEngine();
-        ShipAPI source = originalProjectile.getSource();
-        Vector2f spawnLocation = new Vector2f(originalProjectile.getLocation());
-
-        spawnFoamDrone(engine, source, spawnLocation);
+        spawnFoamDrone(Global.getCombatEngine(), originalProjectile.getSource(), new Vector2f(originalProjectile.getLocation()));
     }
 
     @Override
@@ -30,11 +21,7 @@ public class omm_FoamBarrierExplosionEffect implements ProximityExplosionEffect,
                       Vector2f point, boolean shieldHit, ApplyDamageResultAPI damageResult,
                       CombatEngineAPI engine) {
         if (projectile == null || point == null) return;
-
-        ShipAPI source = projectile.getSource();
-        Vector2f spawnLocation = new Vector2f(point);
-
-        spawnFoamDrone(engine, source, spawnLocation);
+        spawnFoamDrone(engine, projectile.getSource(), new Vector2f(point));
     }
 
     private void spawnFoamDrone(CombatEngineAPI engine, ShipAPI source, Vector2f spawnLocation) {
@@ -42,21 +29,25 @@ public class omm_FoamBarrierExplosionEffect implements ProximityExplosionEffect,
 
         float randomAngle = MathUtils.getRandomNumberInRange(0f, 360f);
 
-        // Spawn the FX drone silently on the firing ship's side
-        CombatFleetManagerAPI fleetManager = engine.getFleetManager(source.getOwner());
-        fleetManager.setSuppressDeploymentMessages(true);
+        ShipHullSpecAPI spec = Global.getSettings().getHullSpec("omm_foam_drone");
+        ShipVariantAPI variant = Global.getSettings().createEmptyVariant("omm_foam_drone_empty", spec);
 
-        ShipAPI drone = fleetManager.spawnShipOrWing("omm_foam_drone", spawnLocation, randomAngle, 0f);
-        fleetManager.setSuppressDeploymentMessages(false);
+        // Bypassing Fleet Manager entirely to prevent UI ghosting
+        ShipAPI drone = engine.createFXDrone(variant);
 
         if (drone != null) {
+            drone.setLayer(CombatEngineLayers.BELOW_SHIPS_LAYER);
+            drone.setOwner(source.getOwner());
+            drone.getLocation().set(spawnLocation);
+            drone.setFacing(randomAngle);
+
             drone.getVelocity().set(0f, 0f);
             drone.addTag("fx_drone");
             drone.setCollisionClass(CollisionClass.SHIP);
             drone.setExplosionScale(0f);
             drone.setHulkChanceOverride(0f);
             drone.setImpactVolumeMult(IMPACT_VOLUME_MULT);
-            drone.getArmorGrid().clearComponentMap(); // no damage to weapons/engines
+            drone.getArmorGrid().clearComponentMap();
             drone.setNoDamagedExplosions(true);
             drone.setSpawnDebris(false);
             drone.setBeingIgnored(true);
@@ -67,14 +58,13 @@ public class omm_FoamBarrierExplosionEffect implements ProximityExplosionEffect,
             drone.getMutableStats().getMaxSpeed().modifyMult("foam_barrier", 0f);
             drone.getMutableStats().getAcceleration().modifyMult("foam_barrier", 0f);
 
-            // --- COMBAT END SAFEGUARDS ---
-            drone.setDrone(true); // Flags entity as an auxiliary drone
-            drone.setShipAI(null); // Prevents AI tactical processing
-            // -----------------------------
+            drone.setDrone(true);
+            drone.setShipAI(null);
+
+            engine.addEntity(drone);
 
             omm_FoamBarrierEntityPlugin visualPlugin = new omm_FoamBarrierEntityPlugin(drone, randomAngle);
             engine.addLayeredRenderingPlugin(visualPlugin);
-
         }
     }
 }

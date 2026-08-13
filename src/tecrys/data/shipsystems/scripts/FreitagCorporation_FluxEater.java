@@ -20,6 +20,9 @@ public class FreitagCorporation_FluxEater extends BaseShipSystemScript {
     protected static float FLUX_RANGE = 1500f;
     public static float FLUX_CONVERTED_TIME = 1f;
 
+    // Defines the flat amount of flux to transfer, replacing the base system cost
+    public static float FLUX_TRANSFER_AMOUNT = 2500f;
+
     protected static float FLUX_MIN_CONVERTED = 0.6f;
     protected static String FLUX_STAT_ID = "FreitagCorporation_FluxEater_Stat";
 
@@ -44,7 +47,7 @@ public class FreitagCorporation_FluxEater extends BaseShipSystemScript {
             if (ally.isFighter() || !ally.isAlive()) {
                 continue;
             }
-            if (ally.getFluxTracker().getCurrFlux() > ship.getSystem().getFluxPerUse() * FLUX_MIN_CONVERTED && ally.getFluxTracker().getCurrFlux() / ally.getFluxTracker().getMaxFlux() > min) {
+            if (ally.getFluxTracker().getCurrFlux() > FLUX_TRANSFER_AMOUNT * FLUX_MIN_CONVERTED && ally.getFluxTracker().getCurrFlux() / ally.getFluxTracker().getMaxFlux() > min) {
                 min = ally.getFluxTracker().getCurrFlux() / ally.getFluxTracker().getMaxFlux();
                 target = ally;
             }
@@ -54,11 +57,8 @@ public class FreitagCorporation_FluxEater extends BaseShipSystemScript {
 
     public void apply(MutableShipStatsAPI stats, String id, ShipSystemStatsScript.State state, float effectLevel) {
         ShipAPI ship = null;
-        boolean player = false;
         if (stats.getEntity() instanceof ShipAPI) {
             ship = (ShipAPI) stats.getEntity();
-            player = ship == Global.getCombatEngine().getPlayerShip();
-
         } else {
             return;
         }
@@ -72,41 +72,40 @@ public class FreitagCorporation_FluxEater extends BaseShipSystemScript {
         ship.setJitterUnder(this, EMP_FRINGE_COLOR, jitterLevel, 11, 0f, 3f + jitterRangeBonus);
         ship.setJitter(this, EMP_COLOR, jitterLevel, 4, 0f, 0 + jitterRangeBonus);
 
+        String firedKey = "omm_flux_eater_fired_" + ship.getId();
+
         if (state == ShipSystemStatsScript.State.IN) {
-        } else if (effectLevel >= 1) {
+            ship.getCustomData().remove(firedKey);
+        } else if (effectLevel >= 1f) {
 
-            ShipAPI target = getAvailableAllyTarget(ship);
+            if (!ship.getCustomData().containsKey(firedKey)) {
+                ship.getCustomData().put(firedKey, true);
 
-            if (target != null) {
-                Global.getSoundPlayer().playSound("mine_teleport", 1f, 1f, ship.getLocation(), ship.getVelocity());
-                //   float fluxRemoved = target.getFluxTracker().getCurrFlux() - ship.getSystem().getFluxPerUse();
-                float fluxRemoved = ship.getSystem().getFluxPerUse();
-                if (fluxRemoved < 0) {
-                    fluxRemoved = 0;
-                }
-                float time = FLUX_CONVERTED_TIME;
+                ShipAPI target = getAvailableAllyTarget(ship);
 
-                // if flux dissipation flat is 5200/s added, the time is 1s. If time is 2, divide per 2 the flux dissi
-                fluxRemoved /= time*140;
+                if (target != null) {
+                    Global.getSoundPlayer().playSound("mine_teleport", 1f, 1f, ship.getLocation(), ship.getVelocity());
 
-                Global.getCombatEngine().addPlugin(createJitterPlugin(target, time / 2, fluxRemoved));
-                //    target.getMutableStats().getFluxDissipation().modifyFlat(FLUX_STAT_ID, fluxRemoved);
-                //target.getFluxTracker().setCurrFlux(val);
-            }
-            if (target != null) {
-                if (state == ShipSystemStatsScript.State.ACTIVE) {
-                    Vector2f shippos = ship.getLocation();
-                    Vector2f EMPtarget = MathUtils.getPointOnCircumference(target.getLocation(), target.getCollisionRadius(), target.getFacing());
-                    Global.getCombatEngine().spawnEmpArcVisual(shippos, null, MathUtils.getRandomPointOnCircumference(EMPtarget, 1), null, 10, EMP_FRINGE_COLOR, EMP_COLOR);
+                    float fluxToRemove = FLUX_TRANSFER_AMOUNT;
+                    if (fluxToRemove < 0) {
+                        fluxToRemove = 0;
+                    }
+
+                    float time = FLUX_CONVERTED_TIME;
+                    float fluxPerSec = fluxToRemove / time;
+
+                    // Passes the caster ship as an argument to process the flux gain
+                    Global.getCombatEngine().addPlugin(createJitterPlugin(ship, target, time / 2f, fluxPerSec));
                 }
             }
         }
     }
 
-    protected EveryFrameCombatPlugin createJitterPlugin(final ShipAPI target, final float timeEffect, final float fluxRemoved) {
+    protected EveryFrameCombatPlugin createJitterPlugin(final ShipAPI ship, final ShipAPI target, final float timeEffect, final float fluxPerSec) {
         return new BaseEveryFrameCombatPlugin() {
             float elapsed = 0f;
             int state = 0;
+            float arcTimer = 0f;
 
             @Override
             public void advance(float amount, List<InputEventAPI> events) {
@@ -114,32 +113,44 @@ public class FreitagCorporation_FluxEater extends BaseShipSystemScript {
                     return;
                 }
                 elapsed += amount;
+                arcTimer += amount;
+
                 if (elapsed > timeEffect) {
                     state++;
                     elapsed -= timeEffect;
                 }
 
-                target.getFluxTracker().decreaseFlux(fluxRemoved * amount);
-                if (state == 2) {
-                    //  Global.getCombatEngine().getCombatUI().addMessage(0, inc+":"+fluxRemoved*amount);
+                float fluxThisFrame = fluxPerSec * amount;
+                target.getFluxTracker().decreaseFlux(fluxThisFrame);
+                ship.getFluxTracker().increaseFlux(fluxThisFrame, false);
+
+                // Spawns multiple arcs evenly over the transfer duration
+                if (arcTimer > 0.1f) {
+                    arcTimer -= 0.1f;
+                    Vector2f shippos = ship.getLocation();
+                    Vector2f EMPtarget = MathUtils.getPointOnCircumference(target.getLocation(), target.getCollisionRadius(), target.getFacing());
+                    Global.getCombatEngine().spawnEmpArcVisual(shippos, null, MathUtils.getRandomPointOnCircumference(EMPtarget, 1f), null, 10f, EMP_FRINGE_COLOR, EMP_COLOR);
+                }
+
+                if (state >= 2) {
                     target.getMutableStats().getFluxDissipation().unmodifyFlat(FLUX_STAT_ID);
                     Global.getCombatEngine().removePlugin(this);
                     return;
                 }
-                float jitterLevel;
 
+                float jitterLevel;
                 if (state == 0) {
                     jitterLevel = elapsed / timeEffect;
                 } else {
                     jitterLevel = (timeEffect - elapsed) / timeEffect;
                     jitterLevel *= jitterLevel;
                 }
+
                 float maxRangeBonus = 25f;
                 float jitterRangeBonus = jitterLevel * maxRangeBonus;
 
                 target.setJitterUnder(target, EMP_FRINGE_COLOR, jitterLevel, 11, 0f, 3f + jitterRangeBonus);
                 target.setJitter(target, EMP_COLOR, jitterLevel, 4, 0f, 0 + jitterRangeBonus);
-
             }
         };
     }
@@ -167,7 +178,5 @@ public class FreitagCorporation_FluxEater extends BaseShipSystemScript {
     @Override
     public boolean isUsable(ShipSystemAPI system, ShipAPI ship) {
         return getAvailableAllyTarget(ship) != null;
-        // return ship.getShipTarget() != null && ship.getShipTarget().isAlly();
     }
-
 }

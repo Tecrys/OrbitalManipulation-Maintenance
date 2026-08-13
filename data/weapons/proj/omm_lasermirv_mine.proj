@@ -14,6 +14,7 @@
 	"noEngineGlowTime":0.05, # time spent without the engine glow being rendered
 	"explosionColor":[255,225,125,255],  # purely visual, will get a white additively blended core on top of this color
 	"explosionRadius":35, # purely visual	
+		#"onFireEffect":"tecrys.data.scripts.weapons.omm_laser_mirv",
 	"engineSpec":{"turnAcc":0,
 				  "turnRate":0,
 				  "acc":500,

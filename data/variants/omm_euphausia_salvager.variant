@@ -1,0 +1,33 @@
+{
+    "displayName": "Salvager",
+    "fluxCapacitors": 27,
+    "fluxVents": 30,
+    "goalVariant": true,
+    "hullId": "omm_euphausia",
+    "hullMods": [
+        "targetingunit",
+        "militarized_subsystems",
+        "magazines"
+    ],
+    "permaMods": [],
+    "sMods": [],
+    "variantId": "omm_euphausia_salvager",
+    "weaponGroups": [
+        {
+            "autofire": true,
+            "mode": "LINKED",
+            "weapons": {"synergyslot": "omm_plasma_cutter"}
+        },
+        {
+            "autofire": false,
+            "mode": "LINKED",
+            "weapons": {"smlmissileslot": "breach"}
+        },
+        {
+            "autofire": true,
+            "mode": "LINKED",
+            "weapons": {"pdslot": "omm_s_rivet"}
+        }
+    ],
+    "wings": []
+}

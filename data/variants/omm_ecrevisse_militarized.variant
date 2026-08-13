@@ -4,7 +4,7 @@
   "displayName": "militarized",
   "goalVariant": true,
   "fluxCapacitors": 10,
-  "fluxVents": 8,
+  "fluxVents": 18,
   "quality": 1,
   "permaMods": [],
   "hullMods": [

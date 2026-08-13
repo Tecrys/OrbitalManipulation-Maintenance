@@ -18,6 +18,7 @@
     "missleracks",
     "fluxbreakers",
     "fluxshunt",
+	#"targetingunit",
     "supercomputer"
   ],
   "builtInWeapons": {
